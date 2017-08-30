@@ -34,10 +34,10 @@ namespace Healthcare_test
             this.sendInput = new System.Windows.Forms.Button();
             this.replyBoxText = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.comPortText = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.baudRateText = new System.Windows.Forms.TextBox();
             this.connectSerial = new System.Windows.Forms.Button();
+            this.comPortText = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // commandInput
@@ -75,13 +75,6 @@ namespace Healthcare_test
             this.label1.TabIndex = 3;
             this.label1.Text = "COM:";
             // 
-            // comPortText
-            // 
-            this.comPortText.Location = new System.Drawing.Point(95, 13);
-            this.comPortText.Name = "comPortText";
-            this.comPortText.Size = new System.Drawing.Size(97, 22);
-            this.comPortText.TabIndex = 4;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -97,6 +90,7 @@ namespace Healthcare_test
             this.baudRateText.Name = "baudRateText";
             this.baudRateText.Size = new System.Drawing.Size(100, 22);
             this.baudRateText.TabIndex = 6;
+            this.baudRateText.Text = "9600";
             // 
             // connectSerial
             // 
@@ -108,15 +102,25 @@ namespace Healthcare_test
             this.connectSerial.UseVisualStyleBackColor = true;
             this.connectSerial.Click += new System.EventHandler(this.connectSerial_Click);
             // 
+            // comPortText
+            // 
+            this.comPortText.FormattingEnabled = true;
+            this.comPortText.Location = new System.Drawing.Point(94, 15);
+            this.comPortText.Name = "comPortText";
+            this.comPortText.Size = new System.Drawing.Size(121, 24);
+            this.comPortText.TabIndex = 8;
+            this.comPortText.Items.Add("Simulator");
+            
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(686, 409);
+            this.Controls.Add(this.comPortText);
             this.Controls.Add(this.connectSerial);
             this.Controls.Add(this.baudRateText);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.comPortText);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.replyBoxText);
             this.Controls.Add(this.sendInput);
@@ -125,6 +129,7 @@ namespace Healthcare_test
             this.Text = "Remote Healthcare";
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion
@@ -133,10 +138,10 @@ namespace Healthcare_test
         private System.Windows.Forms.Button sendInput;
         private System.Windows.Forms.TextBox replyBoxText;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox comPortText;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox baudRateText;
         private System.Windows.Forms.Button connectSerial;
+        private System.Windows.Forms.ComboBox comPortText;
     }
 }
 

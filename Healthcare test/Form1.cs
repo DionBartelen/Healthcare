@@ -11,6 +11,11 @@ namespace Healthcare_test
         public Form1()
         {
             InitializeComponent();
+            string[] ports = SerialPort.GetPortNames();
+            foreach (String s in ports)
+            {
+                comPortText.Items.Add(s);
+            }
         }
 
         private void connectSerial_Click(object sender, EventArgs e)
