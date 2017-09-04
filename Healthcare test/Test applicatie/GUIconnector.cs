@@ -65,8 +65,11 @@ namespace Healthcare_test
             string command = "ST";
             if(ergometer.serialPort.IsOpen)
             {
+                replyBoxText.Clear();
                 ergometer.serialPort.WriteLine(command);
                 ErgometerData ergometerData = ergometer.getData();
+                replyBoxText.Text = ergometerData.toString();
+
             }
 
         }

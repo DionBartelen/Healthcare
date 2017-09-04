@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Healthcare_test
 {
-    class ErgometerData
+    public class ErgometerData
     {
         public int rpm { get; set; }
-        public int speed { get; set; }
+        public double speed { get; set; }
         public double distance { get; set; }
         public int pulse { get; set; }
         public int time { get; set; }
@@ -29,6 +29,11 @@ namespace Healthcare_test
             this.requested_Power = requested_Power;
            
          }
+
+        public String toString()
+        {
+            return "rpm: " + rpm + "/n" + "speed: " + speed + "/n" + "distance: " + distance + "/n" + "pulse: " + pulse + "/n" + "time: " + time + "/n" + "energy: " + energy + "/n" + "actual_Power: " + actual_Power + "/n" + "requested_Power: " + requested_Power + "/n";
+        }
 
     }
 }

@@ -25,7 +25,7 @@ namespace Healthcare_test
             }
             catch (Exception exception)
             {
-                replyBoxText.Text = exception.ToString();
+                Console.WriteLine(exception.StackTrace);
             }
         }
 
@@ -64,6 +64,8 @@ namespace Healthcare_test
         {
             serialPort.WriteLine("PW " + power);
         }
+
+
 
     }
 }

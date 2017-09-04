@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ergometer\ErgometerCOM.cs" />
     <Compile Include="Ergometer\ErgometerData.cs" />
     <Compile Include="Ergometer\Ergometer.cs" />
     <Compile Include="test applicatie\GUIconnector.cs">
