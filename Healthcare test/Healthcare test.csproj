@@ -47,16 +47,16 @@
   <ItemGroup>
     <Compile Include="Ergometer\ErgometerData.cs" />
     <Compile Include="Ergometer\Ergometer.cs" />
-    <Compile Include="test applicatie\Form1.cs">
+    <Compile Include="test applicatie\GUIconnector.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="test applicatie\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="test applicatie\GUIconnector.Designer.cs">
+      <DependentUpon>GUIconnector.cs</DependentUpon>
     </Compile>
     <Compile Include="test applicatie\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="test applicatie\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="test applicatie\GUIconnector.resx">
+      <DependentUpon>GUIconnector.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
