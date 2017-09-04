@@ -26,7 +26,7 @@ namespace Healthcare_test
 
 
 
-                replyBoxText.Text = replyBoxText.Text + "\n" + "Gekozen COM poort: " + comPort + " gekozen baudrate: " + baudRate + "\r\nStatus verbonden: " + serialPort.IsOpen;
+                replyBoxText.Text = replyBoxText.Text + "\n" + "Gekozen COM poort: " + comPort + " gekozen baudrate: " + baudRate;
 
             comPortText.Text = "";
             baudRateText.Text = "";
