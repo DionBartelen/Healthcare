@@ -10,12 +10,8 @@ namespace Healthcare_test
     {
         abstract public ErgometerData getData();
 
-        abstract public void setRpm(int rpm);
-        abstract public void setSpeed(int speed);
         abstract public void setDistance(int distance);
-        abstract public void setPulse(int pulse);
-        abstract public void setTime();
-        abstract public void setEnergy();
-        abstract public void setPower();
+        abstract public void setTime(int time);
+        abstract public void setPower(int power);
     }
 }
