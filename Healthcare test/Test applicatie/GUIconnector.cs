@@ -23,21 +23,7 @@ namespace Healthcare_test
             string comPort = comPortText.Text;
             string baudRate = baudRateText.Text;
 
-            try
-            {
-                serialPort = new SerialPort(comPort);
-                serialPort.BaudRate = Convert.ToInt32(baudRate);
-                serialPort.Parity = Parity.None;
-                serialPort.StopBits = StopBits.One;
-                serialPort.DataBits = 8;
-                serialPort.Handshake = Handshake.None;
-                serialPort.ReadTimeout = 2000;
-                serialPort.WriteTimeout = 500;
-                serialPort.Open();
-            } catch (Exception exception)
-            {
-                replyBoxText.Text = exception.ToString();
-            }
+
 
                 replyBoxText.Text = replyBoxText.Text + "\n" + "Gekozen COM poort: " + comPort + " gekozen baudrate: " + baudRate + "\r\nStatus verbonden: " + serialPort.IsOpen;
 

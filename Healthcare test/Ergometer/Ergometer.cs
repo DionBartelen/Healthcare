@@ -10,7 +10,7 @@ namespace Healthcare_test
     {
         abstract public ErgometerData getData();
 
-        abstract public void setDistance(int distance);
+        abstract public void setDistance(double distance);
         abstract public void setTime(int time);
         abstract public void setPower(int power);
     }
