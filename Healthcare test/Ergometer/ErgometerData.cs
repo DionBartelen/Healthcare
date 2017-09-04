@@ -14,9 +14,10 @@ namespace Healthcare_test
         public int pulse { get; set; }
         public int time { get; set; }
         public int energy { get; set; }
-        public int power { get; set; }
+        public int actual_Power { get; set; }
+        public int requested_Power { get; set; }
 
-        public ErgometerData(int rpm, int speed, double distance,int pulse, int time, int energy, int power)
+        public ErgometerData(int pulse, int rpm, double speed, double distance, int time, int energy, int actual_Power, int requested_Power)
             {
             this.rpm = rpm;
             this.speed = speed;
@@ -24,8 +25,9 @@ namespace Healthcare_test
             this.pulse = pulse;
             this.time = time;
             this.energy = energy;
-            this.power = power;
-
+            this.actual_Power = actual_Power;
+            this.requested_Power = requested_Power;
+           
          }
 
     }

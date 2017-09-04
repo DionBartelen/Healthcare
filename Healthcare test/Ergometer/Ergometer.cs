@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Healthcare_test
 {
-    abstract class Ergometer
+    public abstract class Ergometer
     {
         abstract public ErgometerData getData();
 

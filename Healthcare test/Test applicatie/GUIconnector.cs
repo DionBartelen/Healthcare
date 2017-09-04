@@ -6,7 +6,7 @@ namespace Healthcare_test
 {
     public partial class Form1 : Form
     {
-        SerialPort serialPort = null;
+        public ErgometerCOM ergometer;
 
         public Form1()
         {
@@ -22,6 +22,7 @@ namespace Healthcare_test
         {
             string comPort = comPortText.Text;
             string baudRate = baudRateText.Text;
+            ErgometerCOM ergometer = new ErgometerCOM(comPort, baudRate);
 
 
 
@@ -35,11 +36,11 @@ namespace Healthcare_test
         {
             string command = commandInput.Text;
 
-            if(serialPort.IsOpen)
+            if(ergometer.serialPort.IsOpen)
             {
-                serialPort.WriteLine(command);
+                ergometer.serialPort.WriteLine(command);
                 replyBoxText.Text = "Verzonden command: " + command;
-                string reply = serialPort.ReadLine();
+                string reply = ergometer.serialPort.ReadLine();
                 replyBoxText.Text += "\r\nReply: " + reply;
             } else
             {
@@ -48,5 +49,28 @@ namespace Healthcare_test
 
             commandInput.Text = "";
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string command = "ST";
+            if(ergometer.serialPort.IsOpen)
+            {
+                ergometer.serialPort.WriteLine(command);
+                ErgometerData ergometerData = ergometer.getData();
+            }
+
+        }
+
+        
     }
 }
