@@ -56,6 +56,13 @@
     </Compile>
     <Compile Include="test applicatie\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="test applicatie\Simulation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="test applicatie\Simulation.Designer.cs">
+      <DependentUpon>Simulation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="test applicatie\Time.cs" />
     <EmbeddedResource Include="test applicatie\GUIconnector.resx">
       <DependentUpon>GUIconnector.cs</DependentUpon>
     </EmbeddedResource>
@@ -68,6 +75,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="test applicatie\Simulation.resx">
+      <DependentUpon>Simulation.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

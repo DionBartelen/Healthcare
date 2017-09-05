@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Healthcare_test;
+using Healthcare_test.test_applicatie;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +18,7 @@ namespace Healthcare_test
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new Simulation());
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Healthcare_test
         {
             string comPort = comPortText.Text;
             string baudRate = baudRateText.Text;
-            ErgometerCOM ergometer = new ErgometerCOM(comPort, baudRate);
+            ergometer = new ErgometerCOM(comPort, baudRate);
 
 
 
