@@ -45,16 +45,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="ErgometerFolder\ErgometerSimulatie.cs" />
+    <Compile Include="ErgometerFolder\ErgometerCOM.cs" />
+    <Compile Include="ErgometerFolder\ErgometerData.cs" />
+    <Compile Include="ErgometerFolder\Ergometer.cs" />
+    <Compile Include="test applicatie\GUIconnector.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="test applicatie\GUIconnector.Designer.cs">
+      <DependentUpon>GUIconnector.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="test applicatie\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="test applicatie\Simulation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="test applicatie\Simulation.Designer.cs">
+      <DependentUpon>Simulation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="test applicatie\Time.cs" />
+    <EmbeddedResource Include="test applicatie\GUIconnector.resx">
+      <DependentUpon>GUIconnector.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -65,6 +76,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="test applicatie\Simulation.resx">
+      <DependentUpon>Simulation.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
