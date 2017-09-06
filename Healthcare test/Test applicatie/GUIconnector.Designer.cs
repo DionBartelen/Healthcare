@@ -38,7 +38,7 @@ namespace Healthcare_test
             this.baudRateText = new System.Windows.Forms.TextBox();
             this.connectSerial = new System.Windows.Forms.Button();
             this.comPortText = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.data_Collector = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // commandInput
@@ -118,16 +118,17 @@ namespace Healthcare_test
             this.comPortText.Size = new System.Drawing.Size(121, 24);
             this.comPortText.TabIndex = 8;
             // 
-            // button1
+            // data_Collector
             // 
-            this.button1.ForeColor = System.Drawing.Color.DarkBlue;
-            this.button1.Location = new System.Drawing.Point(565, 83);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(94, 28);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "current data ";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.data_Collector.Enabled = false;
+            this.data_Collector.ForeColor = System.Drawing.Color.DarkBlue;
+            this.data_Collector.Location = new System.Drawing.Point(565, 83);
+            this.data_Collector.Name = "data_Collector";
+            this.data_Collector.Size = new System.Drawing.Size(94, 28);
+            this.data_Collector.TabIndex = 9;
+            this.data_Collector.Text = "current data ";
+            this.data_Collector.UseVisualStyleBackColor = true;
+            this.data_Collector.Click += new System.EventHandler(this.data_Collector_Click);
             // 
             // Form1
             // 
@@ -135,7 +136,7 @@ namespace Healthcare_test
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(686, 409);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.data_Collector);
             this.Controls.Add(this.comPortText);
             this.Controls.Add(this.connectSerial);
             this.Controls.Add(this.baudRateText);
@@ -163,7 +164,7 @@ namespace Healthcare_test
         private System.Windows.Forms.TextBox baudRateText;
         private System.Windows.Forms.Button connectSerial;
         private System.Windows.Forms.ComboBox comPortText;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button data_Collector;
     }
 }
 

@@ -23,8 +23,10 @@ namespace Healthcare_test
             string comPort = comPortText.Text;
             string baudRate = baudRateText.Text;
             ergometer = new ErgometerCOM(comPort, baudRate);
-
-
+            if (ergometer.serialPort.IsOpen)
+                data_Collector.Enabled = true;
+            else
+                data_Collector.Enabled = false;
 
                 replyBoxText.Text = replyBoxText.Text + "\n" + "Gekozen COM poort: " + comPort + " gekozen baudrate: " + baudRate;
 
@@ -60,7 +62,7 @@ namespace Healthcare_test
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void data_Collector_Click(object sender, EventArgs e)
         {
             string command = "ST";
             if(ergometer.serialPort.IsOpen)
