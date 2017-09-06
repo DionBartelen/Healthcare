@@ -13,50 +13,105 @@ namespace Healthcare_test.test_applicatie
 {
     public partial class Simulation : Form
     {
-        private Time time;
-        private float speed;
-        private int power;
-        private float distance;
+        public Time CurrentTime { get; set; }
+        public float Distance { get; set; }
+        public float Speed { get; set; }
+        public int Power { get; set; }
+        public int Pulse { get; set; }
+        public double RPM { get; set; }
+        public int Actual_Energy { get; set; }
+        public int Requested_Energy { get; set; }
+        private Thread CountThread;
+        private Boolean ShouldCount = true;
+        private Boolean IsRunning = true;
 
         public Simulation()
         {
             InitializeComponent();
-            time = new Time(0, 0, 0);
-            new Thread(new ThreadStart(Count)).Start();
+            CurrentTime = new Time(0, 0, 0);
+            Distance = 0;
+            Speed = 0;
+            Power = 0;
+            Pulse = 0;
+            RPM = 0;
+            Actual_Energy = 0;
+            Requested_Energy = 0;
+            CountThread = new Thread(new ThreadStart(Count));
+            CountThread.Start();
         }
 
         private void PowerTrackbar_Scroll(object sender, EventArgs e)
         {
-            power = ((TrackBar)sender).Value;
-            Powerlabel.Text = power + "";
+            Power = ((TrackBar)sender).Value;
+            PowerLabel.Text = Power + "";
         }
 
         private void trackBar2_Scroll(object sender, EventArgs e)
         {
-            speed = ((TrackBar)sender).Value;
-            SpeedLabel.Text = speed + "";
+            Speed = ((TrackBar)sender).Value;
+            SpeedLabel.Text = Speed + "";
         }
 
         private void Count()
         {
-            while (true)
+            while (ShouldCount)
             {
-                time.timer();
-                TimeLabel.Invoke(new Action(() => TimeLabel.Text = time.ToString()));
+                try
+                {
+                    CurrentTime.timer();
+                    TimeLabel.Invoke(new Action(() => TimeLabel.Text = CurrentTime.ToString()));
 
-                distance += (speed / 60);
-                distanceLAbel.Invoke(new Action(() => distanceLAbel.Text = $"{distance:f2}"));
+                    Distance += (Speed / 60);
+                    distanceLAbel.Invoke(new Action(() => distanceLAbel.Text = $"{Distance:f2}"));
 
-                Thread.Sleep(5);
+                    RPM = Speed * 2.8;
+                    RpmLabel.Invoke(new Action(() => RpmLabel.Text = RPM.ToString()));
+
+                    Pulse = 90 + (int)((Power/6) * (Speed/20));
+                    PulseLabel.Invoke(new Action(() => PulseLabel.Text = Pulse.ToString()));
+
+                }
+                catch (Exception e)
+                {
+                    
+                }
+
+                Thread.Sleep(1000);
             }
         }
 
-        private void RPM()
+        private void ResetButton_Click(object sender, EventArgs e)
         {
-
+            CurrentTime = new Time(0, 0, 0);
+            Distance = 0;
+            Speed = 0;
+            Power = 0;
+            Pulse = 0;
+            RPM = 0;
+            Actual_Energy = 0;
+            Requested_Energy = 0;
+            SpeedTrackbar.Value = SpeedTrackbar.Minimum;
+            PowerTrackbar.Value = PowerTrackbar.Minimum;
+            SpeedLabel.Text = 0 + "";
+            PowerLabel.Text = 0 + "";
         }
 
-      
+        private void PauseButton_Click(object sender, EventArgs e)
+        {
+            if (IsRunning)
+            {
+                IsRunning = false;
+                CountThread.Suspend();
+            }
+        }
+
+        private void StartButton_Click(object sender, EventArgs e)
+        {
+            if (!IsRunning)
+            {
+                IsRunning = true;
+                CountThread.Resume();
+            }
+        }
     }
-       
 }

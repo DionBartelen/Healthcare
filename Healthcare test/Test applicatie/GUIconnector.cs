@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Healthcare_test;
+using Healthcare_test.test_applicatie;
+using System;
 using System.IO.Ports;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Healthcare_test
@@ -16,20 +19,24 @@ namespace Healthcare_test
             {
                 comPortText.Items.Add(s);
             }
+            comPortText.SelectedItem = comPortText.Items[0];
         }
 
         private void connectSerial_Click(object sender, EventArgs e)
         {
-            string comPort = comPortText.Text;
-            string baudRate = baudRateText.Text;
-            ergometer = new ErgometerCOM(comPort, baudRate);
-
-
-
+            if (comPortText.Text == "Simulator")
+            {
+                new ErgometerSimulatie();
+            }
+            else
+            {
+                string comPort = comPortText.Text;
+                string baudRate = baudRateText.Text;
+                ergometer = new ErgometerCOM(comPort, baudRate);
                 replyBoxText.Text = replyBoxText.Text + "\n" + "Gekozen COM poort: " + comPort + " gekozen baudrate: " + baudRate;
-
-            comPortText.Text = "";
-            baudRateText.Text = "";
+                comPortText.Text = "";
+                baudRateText.Text = "";
+            }
         }
 
         private void sendInput_Click(object sender, EventArgs e)
