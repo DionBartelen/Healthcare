@@ -29,83 +29,84 @@
         private void InitializeComponent()
         {
             this.PowerTrackbar = new System.Windows.Forms.TrackBar();
-            this.SeedLabel = new System.Windows.Forms.TrackBar();
-            this.label1 = new System.Windows.Forms.Label();
-            this.Power = new System.Windows.Forms.Label();
-            this.Speed = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.SpeedTrackbar = new System.Windows.Forms.TrackBar();
+            this.RPMtext = new System.Windows.Forms.Label();
+            this.PowerText = new System.Windows.Forms.Label();
+            this.SpeedText = new System.Windows.Forms.Label();
+            this.DistanceText = new System.Windows.Forms.Label();
             this.RpmLabel = new System.Windows.Forms.Label();
             this.distanceLAbel = new System.Windows.Forms.Label();
             this.ResetButton = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.PulseText = new System.Windows.Forms.Label();
             this.PulseLabel = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.TimeText = new System.Windows.Forms.Label();
             this.TimeLabel = new System.Windows.Forms.Label();
-            this.Powerlabel = new System.Windows.Forms.Label();
+            this.PowerLabel = new System.Windows.Forms.Label();
             this.SpeedLabel = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.ApplyButton = new System.Windows.Forms.Button();
+            this.PauseButton = new System.Windows.Forms.Button();
+            this.StartButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PowerTrackbar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SeedLabel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpeedTrackbar)).BeginInit();
             this.SuspendLayout();
             // 
             // PowerTrackbar
             // 
             this.PowerTrackbar.Location = new System.Drawing.Point(24, 57);
-            this.PowerTrackbar.Maximum = 500;
-            this.PowerTrackbar.Minimum = 35;
+            this.PowerTrackbar.Maximum = 400;
+            this.PowerTrackbar.Minimum = 25;
             this.PowerTrackbar.Name = "PowerTrackbar";
             this.PowerTrackbar.Size = new System.Drawing.Size(324, 56);
             this.PowerTrackbar.TabIndex = 0;
-            this.PowerTrackbar.TickFrequency = 50;
-            this.PowerTrackbar.Value = 35;
+            this.PowerTrackbar.TickFrequency = 25;
+            this.PowerTrackbar.Value = 25;
             this.PowerTrackbar.Scroll += new System.EventHandler(this.PowerTrackbar_Scroll);
             // 
-            // SeedLabel
+            // SpeedTrackbar
             // 
-            this.SeedLabel.Location = new System.Drawing.Point(24, 146);
-            this.SeedLabel.Maximum = 80;
-            this.SeedLabel.Name = "SeedLabel";
-            this.SeedLabel.Size = new System.Drawing.Size(324, 56);
-            this.SeedLabel.TabIndex = 1;
-            this.SeedLabel.TickFrequency = 5;
-            this.SeedLabel.Scroll += new System.EventHandler(this.trackBar2_Scroll);
+            this.SpeedTrackbar.Location = new System.Drawing.Point(24, 146);
+            this.SpeedTrackbar.Maximum = 80;
+            this.SpeedTrackbar.Name = "SpeedTrackbar";
+            this.SpeedTrackbar.Size = new System.Drawing.Size(324, 56);
+            this.SpeedTrackbar.TabIndex = 1;
+            this.SpeedTrackbar.TickFrequency = 5;
+            this.SpeedTrackbar.Scroll += new System.EventHandler(this.trackBar2_Scroll);
             // 
-            // label1
+            // RPMtext
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(40, 267);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 17);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "RPM";
+            this.RPMtext.AutoSize = true;
+            this.RPMtext.Location = new System.Drawing.Point(40, 267);
+            this.RPMtext.Name = "RPMtext";
+            this.RPMtext.Size = new System.Drawing.Size(38, 17);
+            this.RPMtext.TabIndex = 2;
+            this.RPMtext.Text = "RPM";
             // 
-            // Power
+            // PowerText
             // 
-            this.Power.AutoSize = true;
-            this.Power.Location = new System.Drawing.Point(40, 34);
-            this.Power.Name = "Power";
-            this.Power.Size = new System.Drawing.Size(60, 17);
-            this.Power.TabIndex = 3;
-            this.Power.Text = "POWER";
+            this.PowerText.AutoSize = true;
+            this.PowerText.Location = new System.Drawing.Point(40, 34);
+            this.PowerText.Name = "PowerText";
+            this.PowerText.Size = new System.Drawing.Size(60, 17);
+            this.PowerText.TabIndex = 3;
+            this.PowerText.Text = "POWER";
             // 
-            // Speed
+            // SpeedText
             // 
-            this.Speed.AutoSize = true;
-            this.Speed.Location = new System.Drawing.Point(40, 116);
-            this.Speed.Name = "Speed";
-            this.Speed.Size = new System.Drawing.Size(109, 17);
-            this.Speed.TabIndex = 4;
-            this.Speed.Text = "SPEED IN KM/H";
+            this.SpeedText.AutoSize = true;
+            this.SpeedText.Location = new System.Drawing.Point(40, 116);
+            this.SpeedText.Name = "SpeedText";
+            this.SpeedText.Size = new System.Drawing.Size(109, 17);
+            this.SpeedText.TabIndex = 4;
+            this.SpeedText.Text = "SPEED IN KM/H";
             // 
-            // label4
+            // DistanceText
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(40, 299);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(76, 17);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "DISTANCE";
+            this.DistanceText.AutoSize = true;
+            this.DistanceText.Location = new System.Drawing.Point(40, 299);
+            this.DistanceText.Name = "DistanceText";
+            this.DistanceText.Size = new System.Drawing.Size(76, 17);
+            this.DistanceText.TabIndex = 5;
+            this.DistanceText.Text = "DISTANCE";
             // 
             // RpmLabel
             // 
@@ -130,19 +131,20 @@
             this.ResetButton.ForeColor = System.Drawing.Color.Crimson;
             this.ResetButton.Location = new System.Drawing.Point(209, 394);
             this.ResetButton.Name = "ResetButton";
-            this.ResetButton.Size = new System.Drawing.Size(107, 53);
+            this.ResetButton.Size = new System.Drawing.Size(124, 62);
             this.ResetButton.TabIndex = 9;
             this.ResetButton.Text = "RESET";
             this.ResetButton.UseVisualStyleBackColor = true;
+            this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
             // 
-            // label2
+            // PulseText
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(40, 332);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 17);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "PULSE";
+            this.PulseText.AutoSize = true;
+            this.PulseText.Location = new System.Drawing.Point(40, 332);
+            this.PulseText.Name = "PulseText";
+            this.PulseText.Size = new System.Drawing.Size(53, 17);
+            this.PulseText.TabIndex = 10;
+            this.PulseText.Text = "PULSE";
             // 
             // PulseLabel
             // 
@@ -153,14 +155,14 @@
             this.PulseLabel.TabIndex = 11;
             this.PulseLabel.Text = "0.0";
             // 
-            // label3
+            // TimeText
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(40, 235);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(40, 17);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "TIME";
+            this.TimeText.AutoSize = true;
+            this.TimeText.Location = new System.Drawing.Point(40, 235);
+            this.TimeText.Name = "TimeText";
+            this.TimeText.Size = new System.Drawing.Size(40, 17);
+            this.TimeText.TabIndex = 12;
+            this.TimeText.Text = "TIME";
             // 
             // TimeLabel
             // 
@@ -171,14 +173,14 @@
             this.TimeLabel.TabIndex = 13;
             this.TimeLabel.Text = "00:00:00";
             // 
-            // Powerlabel
+            // PowerLabel
             // 
-            this.Powerlabel.AutoSize = true;
-            this.Powerlabel.Location = new System.Drawing.Point(305, 34);
-            this.Powerlabel.Name = "Powerlabel";
-            this.Powerlabel.Size = new System.Drawing.Size(16, 17);
-            this.Powerlabel.TabIndex = 14;
-            this.Powerlabel.Text = "0";
+            this.PowerLabel.AutoSize = true;
+            this.PowerLabel.Location = new System.Drawing.Point(305, 34);
+            this.PowerLabel.Name = "PowerLabel";
+            this.PowerLabel.Size = new System.Drawing.Size(16, 17);
+            this.PowerLabel.TabIndex = 14;
+            this.PowerLabel.Text = "0";
             // 
             // SpeedLabel
             // 
@@ -198,42 +200,55 @@
             this.label6.TabIndex = 17;
             this.label6.Text = "KM";
             // 
-            // ApplyButton
+            // PauseButton
             // 
-            this.ApplyButton.Location = new System.Drawing.Point(43, 394);
-            this.ApplyButton.Name = "ApplyButton";
-            this.ApplyButton.Size = new System.Drawing.Size(99, 53);
-            this.ApplyButton.TabIndex = 8;
-            this.ApplyButton.Text = "APPLY";
-            this.ApplyButton.UseVisualStyleBackColor = true;
+            this.PauseButton.ForeColor = System.Drawing.Color.ForestGreen;
+            this.PauseButton.Location = new System.Drawing.Point(43, 394);
+            this.PauseButton.Name = "PauseButton";
+            this.PauseButton.Size = new System.Drawing.Size(120, 28);
+            this.PauseButton.TabIndex = 18;
+            this.PauseButton.Text = "PAUSE";
+            this.PauseButton.UseVisualStyleBackColor = true;
+            this.PauseButton.Click += new System.EventHandler(this.PauseButton_Click);
+            // 
+            // StartButton
+            // 
+            this.StartButton.Location = new System.Drawing.Point(41, 428);
+            this.StartButton.Name = "StartButton";
+            this.StartButton.Size = new System.Drawing.Size(122, 28);
+            this.StartButton.TabIndex = 19;
+            this.StartButton.Text = "START";
+            this.StartButton.UseVisualStyleBackColor = true;
+            this.StartButton.Click += new System.EventHandler(this.StartButton_Click);
             // 
             // Simulation
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(376, 483);
+            this.Controls.Add(this.StartButton);
+            this.Controls.Add(this.PauseButton);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.SpeedLabel);
-            this.Controls.Add(this.Powerlabel);
+            this.Controls.Add(this.PowerLabel);
             this.Controls.Add(this.TimeLabel);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.TimeText);
             this.Controls.Add(this.PulseLabel);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.PulseText);
             this.Controls.Add(this.ResetButton);
-            this.Controls.Add(this.ApplyButton);
             this.Controls.Add(this.distanceLAbel);
             this.Controls.Add(this.RpmLabel);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.Speed);
-            this.Controls.Add(this.Power);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.SeedLabel);
+            this.Controls.Add(this.DistanceText);
+            this.Controls.Add(this.SpeedText);
+            this.Controls.Add(this.PowerText);
+            this.Controls.Add(this.RPMtext);
+            this.Controls.Add(this.SpeedTrackbar);
             this.Controls.Add(this.PowerTrackbar);
             this.ForeColor = System.Drawing.Color.DarkBlue;
             this.Name = "Simulation";
             this.Text = "Simulation";
             ((System.ComponentModel.ISupportInitialize)(this.PowerTrackbar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SeedLabel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpeedTrackbar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -242,21 +257,22 @@
         #endregion
 
         private System.Windows.Forms.TrackBar PowerTrackbar;
-        private System.Windows.Forms.TrackBar SeedLabel;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label Power;
-        private System.Windows.Forms.Label Speed;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TrackBar SpeedTrackbar;
+        private System.Windows.Forms.Label RPMtext;
+        private System.Windows.Forms.Label PowerText;
+        private System.Windows.Forms.Label SpeedText;
+        private System.Windows.Forms.Label DistanceText;
         private System.Windows.Forms.Label RpmLabel;
         private System.Windows.Forms.Label distanceLAbel;
         private System.Windows.Forms.Button ResetButton;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label PulseText;
         private System.Windows.Forms.Label PulseLabel;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label TimeText;
         private System.Windows.Forms.Label TimeLabel;
-        private System.Windows.Forms.Label Powerlabel;
+        private System.Windows.Forms.Label PowerLabel;
         private System.Windows.Forms.Label SpeedLabel;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button ApplyButton;
+        private System.Windows.Forms.Button PauseButton;
+        private System.Windows.Forms.Button StartButton;
     }
 }

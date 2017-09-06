@@ -45,9 +45,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Ergometer\ErgometerCOM.cs" />
-    <Compile Include="Ergometer\ErgometerData.cs" />
-    <Compile Include="Ergometer\Ergometer.cs" />
+    <Compile Include="ErgometerFolder\ErgometerSimulatie.cs" />
+    <Compile Include="ErgometerFolder\ErgometerCOM.cs" />
+    <Compile Include="ErgometerFolder\ErgometerData.cs" />
+    <Compile Include="ErgometerFolder\Ergometer.cs" />
     <Compile Include="test applicatie\GUIconnector.cs">
       <SubType>Form</SubType>
     </Compile>

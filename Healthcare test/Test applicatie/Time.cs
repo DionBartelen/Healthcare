@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Healthcare_test.test_applicatie
 {
-    class Time
+    public class Time
     {
         public int Second { get; set; }
         public int Minute { get; set; }
