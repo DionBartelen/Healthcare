@@ -7,11 +7,11 @@ using System.Windows.Forms;
 
 namespace Healthcare_test
 {
-    public partial class Form1 : Form
+    public partial class GUIconnector : Form
     {
         public Ergometer ergometer;
 
-        public Form1()
+        public GUIconnector()
         {
             InitializeComponent();
             string[] ports = SerialPort.GetPortNames();

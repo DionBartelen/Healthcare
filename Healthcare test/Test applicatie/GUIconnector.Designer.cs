@@ -2,7 +2,7 @@
 
 namespace Healthcare_test
 {
-    partial class Form1
+    partial class GUIconnector
     {
         /// <summary>
         /// Required designer variable.
@@ -129,7 +129,7 @@ namespace Healthcare_test
             this.Data_Collector.UseVisualStyleBackColor = true;
             this.Data_Collector.Click += new System.EventHandler(this.Data_Collector_Click);
             // 
-            // Form1
+            // GUIconnector
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -145,7 +145,7 @@ namespace Healthcare_test
             this.Controls.Add(this.SendInput);
             this.Controls.Add(this.CommandInput);
             this.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.Name = "Form1";
+            this.Name = "GUIconnector";
             this.Text = "Remote Healthcare";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.ResumeLayout(false);
