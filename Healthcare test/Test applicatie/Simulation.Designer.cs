@@ -36,7 +36,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.RpmLabel = new System.Windows.Forms.Label();
             this.distanceLAbel = new System.Windows.Forms.Label();
-            this.ApplyButton = new System.Windows.Forms.Button();
             this.ResetButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.PulseLabel = new System.Windows.Forms.Label();
@@ -44,6 +43,8 @@
             this.TimeLabel = new System.Windows.Forms.Label();
             this.Powerlabel = new System.Windows.Forms.Label();
             this.SpeedLabel = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.ApplyButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PowerTrackbar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SeedLabel)).BeginInit();
             this.SuspendLayout();
@@ -109,7 +110,7 @@
             // RpmLabel
             // 
             this.RpmLabel.AutoSize = true;
-            this.RpmLabel.Location = new System.Drawing.Point(223, 266);
+            this.RpmLabel.Location = new System.Drawing.Point(206, 267);
             this.RpmLabel.Name = "RpmLabel";
             this.RpmLabel.Size = new System.Drawing.Size(28, 17);
             this.RpmLabel.TabIndex = 6;
@@ -118,25 +119,16 @@
             // distanceLAbel
             // 
             this.distanceLAbel.AutoSize = true;
-            this.distanceLAbel.Location = new System.Drawing.Point(223, 299);
+            this.distanceLAbel.Location = new System.Drawing.Point(206, 299);
             this.distanceLAbel.Name = "distanceLAbel";
             this.distanceLAbel.Size = new System.Drawing.Size(28, 17);
             this.distanceLAbel.TabIndex = 7;
             this.distanceLAbel.Text = "0.0";
             // 
-            // ApplyButton
-            // 
-            this.ApplyButton.Location = new System.Drawing.Point(43, 394);
-            this.ApplyButton.Name = "ApplyButton";
-            this.ApplyButton.Size = new System.Drawing.Size(99, 53);
-            this.ApplyButton.TabIndex = 8;
-            this.ApplyButton.Text = "APPLY";
-            this.ApplyButton.UseVisualStyleBackColor = true;
-            // 
             // ResetButton
             // 
             this.ResetButton.ForeColor = System.Drawing.Color.Crimson;
-            this.ResetButton.Location = new System.Drawing.Point(226, 394);
+            this.ResetButton.Location = new System.Drawing.Point(209, 394);
             this.ResetButton.Name = "ResetButton";
             this.ResetButton.Size = new System.Drawing.Size(107, 53);
             this.ResetButton.TabIndex = 9;
@@ -155,7 +147,7 @@
             // PulseLabel
             // 
             this.PulseLabel.AutoSize = true;
-            this.PulseLabel.Location = new System.Drawing.Point(226, 332);
+            this.PulseLabel.Location = new System.Drawing.Point(206, 332);
             this.PulseLabel.Name = "PulseLabel";
             this.PulseLabel.Size = new System.Drawing.Size(28, 17);
             this.PulseLabel.TabIndex = 11;
@@ -173,35 +165,54 @@
             // TimeLabel
             // 
             this.TimeLabel.AutoSize = true;
-            this.TimeLabel.Location = new System.Drawing.Point(223, 235);
+            this.TimeLabel.Location = new System.Drawing.Point(206, 235);
             this.TimeLabel.Name = "TimeLabel";
-            this.TimeLabel.Size = new System.Drawing.Size(36, 17);
+            this.TimeLabel.Size = new System.Drawing.Size(64, 17);
             this.TimeLabel.TabIndex = 13;
-            this.TimeLabel.Text = "0:00";
+            this.TimeLabel.Text = "00:00:00";
             // 
             // Powerlabel
             // 
             this.Powerlabel.AutoSize = true;
             this.Powerlabel.Location = new System.Drawing.Point(305, 34);
             this.Powerlabel.Name = "Powerlabel";
-            this.Powerlabel.Size = new System.Drawing.Size(28, 17);
+            this.Powerlabel.Size = new System.Drawing.Size(16, 17);
             this.Powerlabel.TabIndex = 14;
-            this.Powerlabel.Text = "0.0";
+            this.Powerlabel.Text = "0";
             // 
             // SpeedLabel
             // 
-            this.SpeedLabel.Location = new System.Drawing.Point(305, 116);
+            this.SpeedLabel.Location = new System.Drawing.Point(293, 116);
             this.SpeedLabel.Name = "SpeedLabel";
             this.SpeedLabel.Size = new System.Drawing.Size(28, 17);
             this.SpeedLabel.TabIndex = 15;
-            this.SpeedLabel.Text = "0.0";
+            this.SpeedLabel.Text = "0";
             this.SpeedLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(305, 299);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(28, 17);
+            this.label6.TabIndex = 17;
+            this.label6.Text = "KM";
+            // 
+            // ApplyButton
+            // 
+            this.ApplyButton.Location = new System.Drawing.Point(43, 394);
+            this.ApplyButton.Name = "ApplyButton";
+            this.ApplyButton.Size = new System.Drawing.Size(99, 53);
+            this.ApplyButton.TabIndex = 8;
+            this.ApplyButton.Text = "APPLY";
+            this.ApplyButton.UseVisualStyleBackColor = true;
             // 
             // Simulation
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(376, 483);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.SpeedLabel);
             this.Controls.Add(this.Powerlabel);
             this.Controls.Add(this.TimeLabel);
@@ -238,7 +249,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label RpmLabel;
         private System.Windows.Forms.Label distanceLAbel;
-        private System.Windows.Forms.Button ApplyButton;
         private System.Windows.Forms.Button ResetButton;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label PulseLabel;
@@ -246,5 +256,7 @@
         private System.Windows.Forms.Label TimeLabel;
         private System.Windows.Forms.Label Powerlabel;
         private System.Windows.Forms.Label SpeedLabel;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button ApplyButton;
     }
 }

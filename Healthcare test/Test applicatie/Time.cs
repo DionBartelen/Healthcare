@@ -10,11 +10,14 @@ namespace Healthcare_test.test_applicatie
     {
         public int Second { get; set; }
         public int Minute { get; set; }
+        public int Hour { get; set; }
 
-        public Time(int ss, int mm)
+        public Time(int ss, int mm, int hh)
         {
             this.Second = ss;
             this.Minute = mm;
+            this.Hour = hh;
+
         }
 
         public void timer ()
@@ -26,12 +29,18 @@ namespace Healthcare_test.test_applicatie
                 Minute++;
             }
 
+            if (Minute == 60)
+            {
+                Minute = 0;
+                Hour++;
+            }
+
         }
 
 
         public override String ToString()
         {
-            return $"{Minute:D2}:{Second:D2}";                     // string interpolatie
+            return $"{Hour:D2}:{Minute:D2}:{Second:D2}";                     // string interpolatie
         }
     }
 }

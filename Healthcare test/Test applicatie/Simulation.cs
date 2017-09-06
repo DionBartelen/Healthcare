@@ -21,7 +21,7 @@ namespace Healthcare_test.test_applicatie
         public Simulation()
         {
             InitializeComponent();
-            time = new Time(0, 0);
+            time = new Time(0, 0, 0);
             new Thread(new ThreadStart(Count)).Start();
         }
 
@@ -47,7 +47,7 @@ namespace Healthcare_test.test_applicatie
                 distance += (speed / 60);
                 distanceLAbel.Invoke(new Action(() => distanceLAbel.Text = $"{distance:f2}"));
 
-                Thread.Sleep(1000);
+                Thread.Sleep(5);
             }
         }
 
@@ -56,6 +56,7 @@ namespace Healthcare_test.test_applicatie
 
         }
 
+      
     }
        
 }

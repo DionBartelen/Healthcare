@@ -50,6 +50,7 @@ namespace Healthcare_test
             // 
             // sendInput
             // 
+            this.sendInput.ForeColor = System.Drawing.Color.DarkBlue;
             this.sendInput.Location = new System.Drawing.Point(565, 351);
             this.sendInput.Name = "sendInput";
             this.sendInput.Size = new System.Drawing.Size(75, 23);
@@ -70,7 +71,8 @@ namespace Healthcare_test
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(42, 18);
+            this.label1.ForeColor = System.Drawing.Color.DarkBlue;
+            this.label1.Location = new System.Drawing.Point(42, 25);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(43, 17);
             this.label1.TabIndex = 3;
@@ -80,15 +82,16 @@ namespace Healthcare_test
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(227, 20);
+            this.label2.ForeColor = System.Drawing.Color.DarkBlue;
+            this.label2.Location = new System.Drawing.Point(239, 20);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 17);
+            this.label2.Size = new System.Drawing.Size(50, 17);
             this.label2.TabIndex = 5;
-            this.label2.Text = "Baud:";
+            this.label2.Text = "BAUD:";
             // 
             // baudRateText
             // 
-            this.baudRateText.Location = new System.Drawing.Point(278, 17);
+            this.baudRateText.Location = new System.Drawing.Point(295, 20);
             this.baudRateText.Name = "baudRateText";
             this.baudRateText.Size = new System.Drawing.Size(100, 22);
             this.baudRateText.TabIndex = 6;
@@ -96,11 +99,12 @@ namespace Healthcare_test
             // 
             // connectSerial
             // 
+            this.connectSerial.ForeColor = System.Drawing.Color.DarkBlue;
             this.connectSerial.Location = new System.Drawing.Point(441, 16);
             this.connectSerial.Name = "connectSerial";
-            this.connectSerial.Size = new System.Drawing.Size(75, 23);
+            this.connectSerial.Size = new System.Drawing.Size(90, 31);
             this.connectSerial.TabIndex = 7;
-            this.connectSerial.Text = "Connect";
+            this.connectSerial.Text = "CONNECT";
             this.connectSerial.UseVisualStyleBackColor = true;
             this.connectSerial.Click += new System.EventHandler(this.connectSerial_Click);
             // 
@@ -109,13 +113,14 @@ namespace Healthcare_test
             this.comPortText.FormattingEnabled = true;
             this.comPortText.Items.AddRange(new object[] {
             "Simulator"});
-            this.comPortText.Location = new System.Drawing.Point(100, 18);
+            this.comPortText.Location = new System.Drawing.Point(91, 17);
             this.comPortText.Name = "comPortText";
             this.comPortText.Size = new System.Drawing.Size(121, 24);
             this.comPortText.TabIndex = 8;
             // 
             // button1
             // 
+            this.button1.ForeColor = System.Drawing.Color.DarkBlue;
             this.button1.Location = new System.Drawing.Point(565, 83);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(94, 28);
@@ -128,6 +133,7 @@ namespace Healthcare_test
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(686, 409);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.comPortText);
@@ -138,6 +144,7 @@ namespace Healthcare_test
             this.Controls.Add(this.replyBoxText);
             this.Controls.Add(this.sendInput);
             this.Controls.Add(this.commandInput);
+            this.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.Name = "Form1";
             this.Text = "Remote Healthcare";
             this.Load += new System.EventHandler(this.Form1_Load);
