@@ -30,34 +30,34 @@ namespace Healthcare_test
         /// </summary>
         private void InitializeComponent()
         {
-            this.commandInput = new System.Windows.Forms.TextBox();
-            this.sendInput = new System.Windows.Forms.Button();
+            this.CommandInput = new System.Windows.Forms.TextBox();
+            this.SendInput = new System.Windows.Forms.Button();
             this.replyBoxText = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.baudRateText = new System.Windows.Forms.TextBox();
-            this.connectSerial = new System.Windows.Forms.Button();
-            this.comPortText = new System.Windows.Forms.ComboBox();
-            this.data_Collector = new System.Windows.Forms.Button();
+            this.BaudRateText = new System.Windows.Forms.TextBox();
+            this.ConnectSerial = new System.Windows.Forms.Button();
+            this.ComPortText = new System.Windows.Forms.ComboBox();
+            this.Data_Collector = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // commandInput
+            // CommandInput
             // 
-            this.commandInput.Location = new System.Drawing.Point(45, 351);
-            this.commandInput.Name = "commandInput";
-            this.commandInput.Size = new System.Drawing.Size(486, 22);
-            this.commandInput.TabIndex = 0;
+            this.CommandInput.Location = new System.Drawing.Point(45, 351);
+            this.CommandInput.Name = "CommandInput";
+            this.CommandInput.Size = new System.Drawing.Size(486, 22);
+            this.CommandInput.TabIndex = 0;
             // 
-            // sendInput
+            // SendInput
             // 
-            this.sendInput.ForeColor = System.Drawing.Color.DarkBlue;
-            this.sendInput.Location = new System.Drawing.Point(565, 351);
-            this.sendInput.Name = "sendInput";
-            this.sendInput.Size = new System.Drawing.Size(75, 23);
-            this.sendInput.TabIndex = 1;
-            this.sendInput.Text = "Send";
-            this.sendInput.UseVisualStyleBackColor = true;
-            this.sendInput.Click += new System.EventHandler(this.sendInput_Click);
+            this.SendInput.ForeColor = System.Drawing.Color.DarkBlue;
+            this.SendInput.Location = new System.Drawing.Point(565, 351);
+            this.SendInput.Name = "SendInput";
+            this.SendInput.Size = new System.Drawing.Size(75, 23);
+            this.SendInput.TabIndex = 1;
+            this.SendInput.Text = "Send";
+            this.SendInput.UseVisualStyleBackColor = true;
+            this.SendInput.Click += new System.EventHandler(this.SendInput_Click);
             // 
             // replyBoxText
             // 
@@ -77,7 +77,6 @@ namespace Healthcare_test
             this.label1.Size = new System.Drawing.Size(43, 17);
             this.label1.TabIndex = 3;
             this.label1.Text = "COM:";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -89,46 +88,46 @@ namespace Healthcare_test
             this.label2.TabIndex = 5;
             this.label2.Text = "BAUD:";
             // 
-            // baudRateText
+            // BaudRateText
             // 
-            this.baudRateText.Location = new System.Drawing.Point(295, 20);
-            this.baudRateText.Name = "baudRateText";
-            this.baudRateText.Size = new System.Drawing.Size(100, 22);
-            this.baudRateText.TabIndex = 6;
-            this.baudRateText.Text = "9600";
+            this.BaudRateText.Location = new System.Drawing.Point(295, 20);
+            this.BaudRateText.Name = "BaudRateText";
+            this.BaudRateText.Size = new System.Drawing.Size(100, 22);
+            this.BaudRateText.TabIndex = 6;
+            this.BaudRateText.Text = "9600";
             // 
-            // connectSerial
+            // ConnectSerial
             // 
-            this.connectSerial.ForeColor = System.Drawing.Color.DarkBlue;
-            this.connectSerial.Location = new System.Drawing.Point(441, 16);
-            this.connectSerial.Name = "connectSerial";
-            this.connectSerial.Size = new System.Drawing.Size(90, 31);
-            this.connectSerial.TabIndex = 7;
-            this.connectSerial.Text = "CONNECT";
-            this.connectSerial.UseVisualStyleBackColor = true;
-            this.connectSerial.Click += new System.EventHandler(this.connectSerial_Click);
+            this.ConnectSerial.ForeColor = System.Drawing.Color.DarkBlue;
+            this.ConnectSerial.Location = new System.Drawing.Point(441, 16);
+            this.ConnectSerial.Name = "ConnectSerial";
+            this.ConnectSerial.Size = new System.Drawing.Size(90, 31);
+            this.ConnectSerial.TabIndex = 7;
+            this.ConnectSerial.Text = "CONNECT";
+            this.ConnectSerial.UseVisualStyleBackColor = true;
+            this.ConnectSerial.Click += new System.EventHandler(this.ConnectSerial_Click);
             // 
-            // comPortText
+            // ComPortText
             // 
-            this.comPortText.FormattingEnabled = true;
-            this.comPortText.Items.AddRange(new object[] {
+            this.ComPortText.FormattingEnabled = true;
+            this.ComPortText.Items.AddRange(new object[] {
             "Simulator"});
-            this.comPortText.Location = new System.Drawing.Point(91, 17);
-            this.comPortText.Name = "comPortText";
-            this.comPortText.Size = new System.Drawing.Size(121, 24);
-            this.comPortText.TabIndex = 8;
+            this.ComPortText.Location = new System.Drawing.Point(91, 17);
+            this.ComPortText.Name = "ComPortText";
+            this.ComPortText.Size = new System.Drawing.Size(121, 24);
+            this.ComPortText.TabIndex = 8;
             // 
-            // data_Collector
+            // Data_Collector
             // 
-            this.data_Collector.Enabled = false;
-            this.data_Collector.ForeColor = System.Drawing.Color.DarkBlue;
-            this.data_Collector.Location = new System.Drawing.Point(565, 83);
-            this.data_Collector.Name = "data_Collector";
-            this.data_Collector.Size = new System.Drawing.Size(94, 28);
-            this.data_Collector.TabIndex = 9;
-            this.data_Collector.Text = "current data ";
-            this.data_Collector.UseVisualStyleBackColor = true;
-            this.data_Collector.Click += new System.EventHandler(this.data_Collector_Click);
+            this.Data_Collector.Enabled = false;
+            this.Data_Collector.ForeColor = System.Drawing.Color.DarkBlue;
+            this.Data_Collector.Location = new System.Drawing.Point(565, 83);
+            this.Data_Collector.Name = "Data_Collector";
+            this.Data_Collector.Size = new System.Drawing.Size(94, 28);
+            this.Data_Collector.TabIndex = 9;
+            this.Data_Collector.Text = "current data ";
+            this.Data_Collector.UseVisualStyleBackColor = true;
+            this.Data_Collector.Click += new System.EventHandler(this.Data_Collector_Click);
             // 
             // Form1
             // 
@@ -136,19 +135,19 @@ namespace Healthcare_test
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(686, 409);
-            this.Controls.Add(this.data_Collector);
-            this.Controls.Add(this.comPortText);
-            this.Controls.Add(this.connectSerial);
-            this.Controls.Add(this.baudRateText);
+            this.Controls.Add(this.Data_Collector);
+            this.Controls.Add(this.ComPortText);
+            this.Controls.Add(this.ConnectSerial);
+            this.Controls.Add(this.BaudRateText);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.replyBoxText);
-            this.Controls.Add(this.sendInput);
-            this.Controls.Add(this.commandInput);
+            this.Controls.Add(this.SendInput);
+            this.Controls.Add(this.CommandInput);
             this.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.Name = "Form1";
             this.Text = "Remote Healthcare";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -156,15 +155,15 @@ namespace Healthcare_test
 
         #endregion
 
-        private System.Windows.Forms.TextBox commandInput;
-        private System.Windows.Forms.Button sendInput;
+        private System.Windows.Forms.TextBox CommandInput;
+        private System.Windows.Forms.Button SendInput;
         private System.Windows.Forms.TextBox replyBoxText;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox baudRateText;
-        private System.Windows.Forms.Button connectSerial;
-        private System.Windows.Forms.ComboBox comPortText;
-        private System.Windows.Forms.Button data_Collector;
+        private System.Windows.Forms.TextBox BaudRateText;
+        private System.Windows.Forms.Button ConnectSerial;
+        private System.Windows.Forms.ComboBox ComPortText;
+        private System.Windows.Forms.Button Data_Collector;
     }
 }
 

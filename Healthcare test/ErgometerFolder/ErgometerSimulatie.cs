@@ -17,23 +17,38 @@ namespace Healthcare_test
             s.Show();
         }
 
-        public override ErgometerData getData()
+        public override void Close()
         {
-            // 0-en moeten nog ingevoerd worden!!!
-            return new ErgometerData(s.Pulse, (int)s.RPM, s.Distance, s.Speed,  s.CurrentTime.Minute + s.CurrentTime.Second, 0, s.Power, 0);
+            s.CountThread.Abort();
+            s.Close();
         }
 
-        public override void setDistance(double distance)
+        public override void ErgometerCommandMode()
+        {   
+        }
+
+        public override ErgometerData GetData()
+        {
+            // 0-en moeten nog ingevoerd worden!!!
+            return new ErgometerData(s.Pulse, (int)s.RPM, s.Speed, s.Distance,  (s.CurrentTime.Minute * 100) + s.CurrentTime.Second, 0, s.Power, 0);
+        }
+
+        public override bool IsConnected()
+        {
+            return true;
+        }
+
+        public override void SetDistance(double distance)
         {
             s.Distance = (float)distance;
         }
 
-        public override void setPower(int power)
+        public override void SetPower(int power)
         {
             s.Power = power;
         }
 
-        public override void setTime(int time)
+        public override void SetTime(int time)
         {
             s.CurrentTime.Minute = time / 100;
             s.CurrentTime.Second = time % 100;

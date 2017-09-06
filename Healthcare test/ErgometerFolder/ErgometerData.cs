@@ -8,31 +8,33 @@ namespace Healthcare_test
 {
     public class ErgometerData
     {
-        public int rpm { get; set; }
-        public double speed { get; set; }
-        public double distance { get; set; }
-        public int pulse { get; set; }
-        public int time { get; set; }
-        public int energy { get; set; }
-        public int actual_Power { get; set; }
-        public int requested_Power { get; set; }
+        public int RPM { get; set; }
+        public double Speed { get; set; }
+        public double Distance { get; set; }
+        public int Pulse { get; set; }
+        public int Time { get; set; }
+        public int Energy { get; set; }
+        public int Actual_Power { get; set; }
+        public int Requested_Power { get; set; }
 
         public ErgometerData(int pulse, int rpm, double speed, double distance, int time, int energy, int actual_Power, int requested_Power)
             {
-            this.rpm = rpm;
-            this.speed = speed;
-            this.distance = distance;
-            this.pulse = pulse;
-            this.time = time;
-            this.energy = energy;
-            this.actual_Power = actual_Power;
-            this.requested_Power = requested_Power;
+            this.RPM = rpm;
+            this.Speed = speed;
+            this.Distance = distance;
+            this.Pulse = pulse;
+            this.Time = time;
+            this.Energy = energy;
+            this.Actual_Power = actual_Power;
+            this.Requested_Power = requested_Power;
            
          }
 
-        public String toString()
+        public String ToString()
         {
-            return "rpm: " + rpm + "\r\n" + "speed: " + speed + "\r\n" + "distance: " + distance + "\r\n" + "pulse: " + pulse + "\r\n" + "time: " + time + "\r\n" + "energy: " + energy + "\r\n" + "actual_Power: " + actual_Power + "\r\n" + "requested_Power: " + requested_Power + "\r\n";
+            return $"RPM: {RPM}\r\nSpeed: {Speed}\r\nDistance: {Distance:F2}\r\nPulse: {Pulse}\r\nTime: {Time}\r\nEnergy: {Energy}\r\nActual_Power: {Actual_Power}\r\nRequested_Power: {Requested_Power}\r\n";
+
+                
         }
 
     }

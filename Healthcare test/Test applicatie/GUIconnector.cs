@@ -1,15 +1,15 @@
 ﻿using Healthcare_test;
 using Healthcare_test.test_applicatie;
+
 using System;
 using System.IO.Ports;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace Healthcare_test
 {
     public partial class Form1 : Form
     {
-        public ErgometerCOM ergometer;
+        public Ergometer ergometer;
 
         public Form1()
         {
@@ -17,81 +17,94 @@ namespace Healthcare_test
             string[] ports = SerialPort.GetPortNames();
             foreach (String s in ports)
             {
-                comPortText.Items.Add(s);
+                ComPortText.Items.Add(s);
             }
-            comPortText.SelectedItem = comPortText.Items[0];
+            ComPortText.SelectedItem = ComPortText.Items[0];
         }
 
-        private void connectSerial_Click(object sender, EventArgs e)
+        private void ConnectSerial_Click(object sender, EventArgs e)
         {
-<<<<<<< HEAD
-            string comPort = comPortText.Text;
-            string baudRate = baudRateText.Text;
-            ergometer = new ErgometerCOM(comPort, baudRate);
-            if (ergometer.serialPort.IsOpen)
-                data_Collector.Enabled = true;
-            else
-                data_Collector.Enabled = false;
-
-=======
-            if (comPortText.Text == "Simulator")
+            if(ergometer != null)
             {
-                new ErgometerSimulatie();
+                ergometer.Close();
+            }
+            if (ComPortText.Text == "Simulator")
+            {
+                ergometer = new ErgometerSimulatie();
+                Data_Collector.Enabled = true;
             }
             else
             {
-                string comPort = comPortText.Text;
-                string baudRate = baudRateText.Text;
+                string comPort = ComPortText.Text;
+                string baudRate = BaudRateText.Text;
                 ergometer = new ErgometerCOM(comPort, baudRate);
->>>>>>> GUILinkToSimulation
-                replyBoxText.Text = replyBoxText.Text + "\n" + "Gekozen COM poort: " + comPort + " gekozen baudrate: " + baudRate;
-                comPortText.Text = "";
-                baudRateText.Text = "";
+                if (ergometer.IsConnected())
+                    Data_Collector.Enabled = true;
+                else
+                    Data_Collector.Enabled = false;
+
+                replyBoxText.Clear();
+                replyBoxText.Text = replyBoxText.Text + "\n" + "Gekozen COM poort: " + comPort + " gekozen baudrate: " + baudRate + " verbonden: " + ergometer.IsConnected();
             }
         }
 
-        private void sendInput_Click(object sender, EventArgs e)
+        private void SendInput_Click(object sender, EventArgs e)
         {
-            string command = commandInput.Text;
+            string command = CommandInput.Text;
+            ProcessCommand(command);
+            CommandInput.Text = "";
+        }
 
-            if(ergometer.serialPort.IsOpen)
+        private void ProcessCommand(string command)
+        {
+            if(command.Length < 3)
             {
-                ergometer.serialPort.WriteLine(command);
-                replyBoxText.Text = "Verzonden command: " + command;
-                string reply = ergometer.serialPort.ReadLine();
-                replyBoxText.Text += "\r\nReply: " + reply;
-            } else
-            {
-                replyBoxText.Text = "COM poort is niet open";
+                return;
             }
-
-            commandInput.Text = "";
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void data_Collector_Click(object sender, EventArgs e)
-        {
-            string command = "ST";
-            if(ergometer.serialPort.IsOpen)
+            if(command.Substring(0, 2) == "ST")
             {
                 replyBoxText.Clear();
-                ergometer.serialPort.WriteLine(command);
-                ErgometerData ergometerData = ergometer.getData();
-                replyBoxText.Text = ergometerData.toString();
-
+                ErgometerData ergometerData = ergometer.GetData();
+                replyBoxText.Text = ergometerData.ToString();
+            } else if(command.Substring(0, 2) == "PW")
+            {
+                ergometer.SetPower(Convert.ToInt32(command.Substring(2)));
+            }
+            else if (command.Substring(0, 2) == "PD")
+            {
+                ergometer.SetDistance(Convert.ToInt32(command.Substring(2)));
+            }
+            else if (command.Substring(0, 2) == "PT")
+            {
+                ergometer.SetTime(Convert.ToInt32(command.Substring(2)));
+            }
+            else if (command.Substring(0, 2) == "CM")
+            {
+                ergometer.ErgometerCommandMode();
             }
 
         }
 
-        
+        private void Data_Collector_Click(object sender, EventArgs e)
+        {
+            if(ergometer.IsConnected())
+            {
+                replyBoxText.Clear();
+                ErgometerData ergometerData = ergometer.GetData();
+                if (ergometerData != null)
+                {
+                    replyBoxText.Text = ergometerData.ToString();
+                }
+
+            }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (ergometer != null)
+            {
+                ergometer.Close();
+            }
+        }
     }
 }

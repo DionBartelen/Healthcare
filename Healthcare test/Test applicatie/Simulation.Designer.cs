@@ -35,7 +35,7 @@
             this.SpeedText = new System.Windows.Forms.Label();
             this.DistanceText = new System.Windows.Forms.Label();
             this.RpmLabel = new System.Windows.Forms.Label();
-            this.distanceLAbel = new System.Windows.Forms.Label();
+            this.DistanceLabel = new System.Windows.Forms.Label();
             this.ResetButton = new System.Windows.Forms.Button();
             this.PulseText = new System.Windows.Forms.Label();
             this.PulseLabel = new System.Windows.Forms.Label();
@@ -70,7 +70,7 @@
             this.SpeedTrackbar.Size = new System.Drawing.Size(324, 56);
             this.SpeedTrackbar.TabIndex = 1;
             this.SpeedTrackbar.TickFrequency = 5;
-            this.SpeedTrackbar.Scroll += new System.EventHandler(this.trackBar2_Scroll);
+            this.SpeedTrackbar.Scroll += new System.EventHandler(this.TrackBar2_Scroll);
             // 
             // RPMtext
             // 
@@ -117,14 +117,14 @@
             this.RpmLabel.TabIndex = 6;
             this.RpmLabel.Text = "0.0";
             // 
-            // distanceLAbel
+            // DistanceLabel
             // 
-            this.distanceLAbel.AutoSize = true;
-            this.distanceLAbel.Location = new System.Drawing.Point(206, 299);
-            this.distanceLAbel.Name = "distanceLAbel";
-            this.distanceLAbel.Size = new System.Drawing.Size(28, 17);
-            this.distanceLAbel.TabIndex = 7;
-            this.distanceLAbel.Text = "0.0";
+            this.DistanceLabel.AutoSize = true;
+            this.DistanceLabel.Location = new System.Drawing.Point(206, 299);
+            this.DistanceLabel.Name = "DistanceLabel";
+            this.DistanceLabel.Size = new System.Drawing.Size(28, 17);
+            this.DistanceLabel.TabIndex = 7;
+            this.DistanceLabel.Text = "0.0";
             // 
             // ResetButton
             // 
@@ -236,7 +236,7 @@
             this.Controls.Add(this.PulseLabel);
             this.Controls.Add(this.PulseText);
             this.Controls.Add(this.ResetButton);
-            this.Controls.Add(this.distanceLAbel);
+            this.Controls.Add(this.DistanceLabel);
             this.Controls.Add(this.RpmLabel);
             this.Controls.Add(this.DistanceText);
             this.Controls.Add(this.SpeedText);
@@ -263,7 +263,7 @@
         private System.Windows.Forms.Label SpeedText;
         private System.Windows.Forms.Label DistanceText;
         private System.Windows.Forms.Label RpmLabel;
-        private System.Windows.Forms.Label distanceLAbel;
+        private System.Windows.Forms.Label DistanceLabel;
         private System.Windows.Forms.Button ResetButton;
         private System.Windows.Forms.Label PulseText;
         private System.Windows.Forms.Label PulseLabel;

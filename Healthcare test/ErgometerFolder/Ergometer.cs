@@ -8,10 +8,12 @@ namespace Healthcare_test
 {
     public abstract class Ergometer
     {
-        abstract public ErgometerData getData();
-
-        abstract public void setDistance(double distance);
-        abstract public void setTime(int time);
-        abstract public void setPower(int power);
+        abstract public ErgometerData GetData();
+        abstract public void ErgometerCommandMode();
+        abstract public Boolean IsConnected();
+        abstract public void SetDistance(double distance);
+        abstract public void SetTime(int time);
+        abstract public void SetPower(int power);
+        abstract public void Close();
     }
 }

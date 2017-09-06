@@ -21,7 +21,7 @@ namespace Healthcare_test.test_applicatie
         public double RPM { get; set; }
         public int Actual_Energy { get; set; }
         public int Requested_Energy { get; set; }
-        private Thread CountThread;
+        public Thread CountThread;
         private Boolean ShouldCount = true;
         private Boolean IsRunning = true;
 
@@ -31,7 +31,7 @@ namespace Healthcare_test.test_applicatie
             CurrentTime = new Time(0, 0, 0);
             Distance = 0;
             Speed = 0;
-            Power = 0;
+            Power = PowerTrackbar.Minimum;
             Pulse = 0;
             RPM = 0;
             Actual_Energy = 0;
@@ -42,24 +42,14 @@ namespace Healthcare_test.test_applicatie
 
         private void PowerTrackbar_Scroll(object sender, EventArgs e)
         {
-<<<<<<< HEAD
-            power = ((TrackBar)sender).Value;
-            Powerlabel.Text = power + " Watt";
-=======
             Power = ((TrackBar)sender).Value;
             PowerLabel.Text = Power + "";
->>>>>>> GUILinkToSimulation
         }
 
-        private void trackBar2_Scroll(object sender, EventArgs e)
+        private void TrackBar2_Scroll(object sender, EventArgs e)
         {
-<<<<<<< HEAD
-            speed = ((TrackBar)sender).Value;
-            SpeedLabel.Text = speed + " Km/h";
-=======
             Speed = ((TrackBar)sender).Value;
             SpeedLabel.Text = Speed + "";
->>>>>>> GUILinkToSimulation
         }
 
         private void Count()
@@ -68,16 +58,11 @@ namespace Healthcare_test.test_applicatie
             {
                 try
                 {
-                    CurrentTime.timer();
+                    CurrentTime.Timer();
                     TimeLabel.Invoke(new Action(() => TimeLabel.Text = CurrentTime.ToString()));
 
-<<<<<<< HEAD
-                distance += (speed / 60);
-                distanceLAbel.Invoke(new Action(() => distanceLAbel.Text = $"{distance:f2}" + " KM"));
-=======
                     Distance += (Speed / 60);
-                    distanceLAbel.Invoke(new Action(() => distanceLAbel.Text = $"{Distance:f2}"));
->>>>>>> GUILinkToSimulation
+                    DistanceLabel.Invoke(new Action(() => DistanceLabel.Text = $"{Distance:f2}"));
 
                     RPM = Speed * 2.8;
                     RpmLabel.Invoke(new Action(() => RpmLabel.Text = RPM.ToString()));
@@ -85,6 +70,11 @@ namespace Healthcare_test.test_applicatie
                     Pulse = 90 + (int)((Power/6) * (Speed/20));
                     PulseLabel.Invoke(new Action(() => PulseLabel.Text = Pulse.ToString()));
 
+                    
+                    SpeedTrackbar.Invoke(new Action(() => SpeedTrackbar.Value = (int)Speed));
+                    SpeedLabel.Invoke(new Action(() => SpeedLabel.Text = Speed.ToString()));
+                    PowerTrackbar.Invoke(new Action(() => PowerTrackbar.Value = (int)Power));
+                    PowerLabel.Invoke(new Action(() => PowerLabel.Text = Power.ToString()));
                 }
                 catch (Exception e)
                 {
@@ -100,7 +90,7 @@ namespace Healthcare_test.test_applicatie
             CurrentTime = new Time(0, 0, 0);
             Distance = 0;
             Speed = 0;
-            Power = 0;
+            Power = PowerTrackbar.Minimum;
             Pulse = 0;
             RPM = 0;
             Actual_Energy = 0;
@@ -108,7 +98,7 @@ namespace Healthcare_test.test_applicatie
             SpeedTrackbar.Value = SpeedTrackbar.Minimum;
             PowerTrackbar.Value = PowerTrackbar.Minimum;
             SpeedLabel.Text = 0 + "";
-            PowerLabel.Text = 0 + "";
+            PowerLabel.Text = PowerTrackbar.Minimum + "";
         }
 
         private void PauseButton_Click(object sender, EventArgs e)

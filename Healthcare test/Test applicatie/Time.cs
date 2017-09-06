@@ -20,7 +20,7 @@ namespace Healthcare_test.test_applicatie
 
         }
 
-        public void timer ()
+        public void Timer ()
         {
             Second++;
             if (Second == 60)
