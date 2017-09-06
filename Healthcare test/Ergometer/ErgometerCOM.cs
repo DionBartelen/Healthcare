@@ -32,19 +32,27 @@ namespace Healthcare_test
         override
         public ErgometerData getData()
         {
-           
+
             serialPort.WriteLine("ST");
             String response = serialPort.ReadLine();
-            String[] data = response.Split(' ');
-            int pulse = Convert.ToInt32(data[0]);
-            int rpm = Convert.ToInt32(data[1]);
-            double speed = Convert.ToDouble(data[2]);
-            double distance = Convert.ToDouble(data[3]);
-            int requested_Power = Convert.ToInt32(data[4]);
-            int energy = Convert.ToInt32(data[5]);
-            int time = Convert.ToInt32(data[6]);
-            int actual_Power = Convert.ToInt32(data[7]);
-            return  new ErgometerData(pulse, rpm, speed, distance, time, energy, actual_Power, requested_Power);
+            response = serialPort.ReadLine();
+            String[] data = response.Split('\t');
+            int pulse, rpm, time, energy, actual_Power, requested_Power;
+            double speed, distance;
+            foreach(String datas in data)
+            {
+                System.Diagnostics.Debug.WriteLine(datas);
+            }
+            Int32.TryParse(data[0], out pulse);
+            Int32.TryParse(data[1], out rpm);
+            Double.TryParse(data[2], out speed);
+            Double.TryParse(data[3], out distance);
+            Int32.TryParse(data[4], out time);
+            Int32.TryParse(data[5], out energy);
+            Int32.TryParse(data[6], out actual_Power);
+            Int32.TryParse(data[7], out requested_Power);
+           return  new ErgometerData(pulse, rpm, speed, distance, time, energy, actual_Power, requested_Power);
+
         }
 
         override

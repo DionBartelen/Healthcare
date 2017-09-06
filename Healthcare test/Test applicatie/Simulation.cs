@@ -28,13 +28,13 @@ namespace Healthcare_test.test_applicatie
         private void PowerTrackbar_Scroll(object sender, EventArgs e)
         {
             power = ((TrackBar)sender).Value;
-            Powerlabel.Text = power + "";
+            Powerlabel.Text = power + " Watt";
         }
 
         private void trackBar2_Scroll(object sender, EventArgs e)
         {
             speed = ((TrackBar)sender).Value;
-            SpeedLabel.Text = speed + "";
+            SpeedLabel.Text = speed + " Km/h";
         }
 
         private void Count()
@@ -45,7 +45,7 @@ namespace Healthcare_test.test_applicatie
                 TimeLabel.Invoke(new Action(() => TimeLabel.Text = time.ToString()));
 
                 distance += (speed / 60);
-                distanceLAbel.Invoke(new Action(() => distanceLAbel.Text = $"{distance:f2}"));
+                distanceLAbel.Invoke(new Action(() => distanceLAbel.Text = $"{distance:f2}" + " KM"));
 
                 Thread.Sleep(5);
             }

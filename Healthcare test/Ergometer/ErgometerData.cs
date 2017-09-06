@@ -32,7 +32,7 @@ namespace Healthcare_test
 
         public String toString()
         {
-            return "rpm: " + rpm + "/n" + "speed: " + speed + "/n" + "distance: " + distance + "/n" + "pulse: " + pulse + "/n" + "time: " + time + "/n" + "energy: " + energy + "/n" + "actual_Power: " + actual_Power + "/n" + "requested_Power: " + requested_Power + "/n";
+            return "rpm: " + rpm + "\r\n" + "speed: " + speed + "\r\n" + "distance: " + distance + "\r\n" + "pulse: " + pulse + "\r\n" + "time: " + time + "\r\n" + "energy: " + energy + "\r\n" + "actual_Power: " + actual_Power + "\r\n" + "requested_Power: " + requested_Power + "\r\n";
         }
 
     }
