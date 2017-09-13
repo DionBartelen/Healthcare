@@ -38,6 +38,11 @@ namespace Healthcare_test
             return true;
         }
 
+        public override void Reset()
+        {
+            s.Reset();
+        }
+
         public override void SetDistance(double distance)
         {
             s.Distance = (float)distance;

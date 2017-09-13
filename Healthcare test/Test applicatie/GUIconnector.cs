@@ -82,6 +82,10 @@ namespace Healthcare_test
             {
                 ergometer.ErgometerCommandMode();
             }
+            else if(command.Substring(0,2) == "RS")
+            {
+                ergometer.Reset();
+            }
 
         }
 

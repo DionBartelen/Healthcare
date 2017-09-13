@@ -85,7 +85,7 @@ namespace Healthcare_test.test_applicatie
             }
         }
 
-        private void ResetButton_Click(object sender, EventArgs e)
+        public void Reset()
         {
             CurrentTime = new Time(0, 0, 0);
             Distance = 0;
@@ -99,6 +99,11 @@ namespace Healthcare_test.test_applicatie
             PowerTrackbar.Value = PowerTrackbar.Minimum;
             SpeedLabel.Text = 0 + "";
             PowerLabel.Text = PowerTrackbar.Minimum + "";
+        }
+
+        public void ResetButton_Click(object sender, EventArgs e)
+        {
+            Reset();
         }
 
         private void PauseButton_Click(object sender, EventArgs e)
