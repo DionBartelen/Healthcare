@@ -135,13 +135,7 @@ namespace Healthcare_test.VR
             }
         }
 
-        private void Objectbutton_Click(object sender, EventArgs e)
-        {
-            session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel)));
-        }
 
-<<<<<<< HEAD
-=======
         private void set_Ground_Terrain_256_256_Click(object sender, EventArgs e)
         {
             session.Send(JsonConvert.SerializeObject(Commands.CreateGroundTerrain(tunnel)));
@@ -151,6 +145,10 @@ namespace Healthcare_test.VR
         {
             session.Send(JsonConvert.SerializeObject(Commands.RemoveTerrain(tunnel)));
         }
->>>>>>> VR_Terrain_Editor
+
+        private void Buttonobject_Click(object sender, EventArgs e)
+        {
+            session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel)));
+        }
     }
 }

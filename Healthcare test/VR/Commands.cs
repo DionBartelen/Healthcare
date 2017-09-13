@@ -9,8 +9,6 @@ namespace Healthcare_test.VR
 {
     class Commands
     {
-
-        //public static string tree1 = @"C:\Avans\Jaar 2\A\Proftaak\Week 3\NetworkEngine\data\NetworkEngine\models\trees\fantasy\tree1.obj";
         public static string tree1 = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\trees\fantasy\tree1.obj");
         public static string tree2 = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\trees\fantasy\tree2.obj");
         public static string tree3 = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\trees\fantasy\tree3.obj");
@@ -78,7 +76,7 @@ namespace Healthcare_test.VR
             return Commands.SendTunnel(tunnel, timeRequest);
         }
 
-<<<<<<< HEAD
+
         public static dynamic AddObject(string tunnel)
         {
             int[] aPosition = new int[3] { 0, 0, 0 };
@@ -129,7 +127,8 @@ namespace Healthcare_test.VR
                 }
             };
             return Commands.SendTunnel(tunnel, request);
-=======
+        }
+
         public static dynamic CreateGroundTerrain(string tunnel)
         {
             dynamic groundTerrain = new
@@ -139,9 +138,9 @@ namespace Healthcare_test.VR
                 {
                     size = new[] { 256, 256 },
                     heights = Enumerable.Repeat(0, (256 * 256)).ToArray()
-        }
+                }
 
-    };
+            };
             return Commands.SendTunnel(tunnel, groundTerrain);
 
         }
@@ -158,7 +157,6 @@ namespace Healthcare_test.VR
 
             };
             return Commands.SendTunnel(tunnel, removeTerrain);
->>>>>>> VR_Terrain_Editor
         }
     }
 }
