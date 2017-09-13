@@ -93,13 +93,51 @@ namespace Healthcare_test.VR
 
         private void ChangeTerain_Click(object sender, EventArgs e)
         {
-            session.Send(JsonConvert.SerializeObject(Commands.SetTime(tunnel, 23)));
+            try
+            {
+                double receiving = Convert.ToDouble(((textBox1.Text)));
+                session.Send(JsonConvert.SerializeObject(Commands.SetTime(tunnel, receiving)));
+            }
+            catch(Exception x)
+            {
+                System.Windows.Forms.MessageBox.Show("Not a valid number" + x.Message);
+            }
         }
 
         private void RefreshClients_Click(object sender, EventArgs e)
         {
             sessions.Items.Clear();
             session.Send(JsonConvert.SerializeObject(Commands.SessionList()));
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //    if(receiving > 24)
+            //    {
+            //        return;
+            //    }
+            System.Diagnostics.Debug.WriteLine("test");
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+                (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

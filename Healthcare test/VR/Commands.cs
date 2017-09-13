@@ -46,7 +46,7 @@ namespace Healthcare_test.VR
             return request;
         }
 
-        public static dynamic SetTime(string tunnel, int timeToSet)
+        public static dynamic SetTime(string tunnel, double timeToSet)
         {
             dynamic timeRequest = new
             {
