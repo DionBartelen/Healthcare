@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Healthcare_test.VR
 {
-    class Terrain
+    public class Terrain
     {
         public int[] size;
         public int[] heights;
@@ -19,7 +19,18 @@ namespace Healthcare_test.VR
             this.size = size;
             this.heights = heights;
             nodes = new List<Node>();
+            road = new List<Road>();
+            route = new List<Route>();
         }
 
+        public override string ToString()
+        {
+            return route.Count() + "";
+        }
+
+        public void RouteNameRecieved(string name)
+        {
+            ((Route)route.Last()).id = name;
+        }
     }
 }

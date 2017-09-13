@@ -13,7 +13,7 @@ namespace Healthcare_test.VR
         VRgui gui;
         TcpClient client;
         NetworkStream stream;
-        Terrain terrain;
+        public Terrain terrain;
 
         public Session(string ip, int port, VRgui gui)
         {
@@ -42,68 +42,70 @@ namespace Healthcare_test.VR
         public void Save(string message)
         {
             dynamic jsonData = JsonConvert.DeserializeObject(message);
-            
-            if (jsonData.id == "scene/node/add")
+            if (jsonData.id == "tunnel/send")
             {
-                int[] aPosition = new int[3];
-                int i = 0;
-
-                int[] aRotation = new int[3];
-                int j = 0;
-
-                foreach (var item in jsonData.data.components.position)
-                {
-                    aPosition[i] = jsonData.data.components.position[i];
-                    i++;
-                }
-
-                foreach (var item in jsonData.data.components.rotation)
-                {
-                    aRotation[j] = jsonData.data.components.rotation[j];
-                    j++;
-                }
-                terrain.nodes.Add(new Node((string)jsonData.data.name, 
-                    null,
-                    aPosition,
-                    (int)jsonData.data.components.transform.scale,
-                    aRotation));
-            }
-            else if (jsonData.id == "scene/road/add")
-            {
-                terrain.road.Add(new Road((string)jsonData.data.route,
-                    (float)jsonData.data.heightoffset));
-            }
-            else if (jsonData.id == "scene/route/add")
-            {
-                List<Node> nodes = new List<Node>();
-                foreach (var item in jsonData.data.components.position)
+                if (jsonData.data.data.id == "scene/node/add")
                 {
                     int[] aPosition = new int[3];
                     int i = 0;
 
                     int[] aRotation = new int[3];
                     int j = 0;
-                    foreach (var pos in jsonData.data.components.position)
+
+                    foreach (var item in jsonData.data.data.data.components.position)
                     {
-                        aPosition[i] = jsonData.data.components.position[i];
+                        aPosition[i] = jsonData.data.data.data.components.position[i];
                         i++;
                     }
 
-                    foreach (var rot in jsonData.data.components.rotation)
+                    foreach (var item in jsonData.data.data.data.components.rotation)
                     {
-                        aRotation[j] = jsonData.data.components.rotation[j];
+                        aRotation[j] = jsonData.data.data.data.components.rotation[j];
                         j++;
                     }
-
-                    nodes.Add(new Node((string)jsonData.data.name,
-                    null,
-                    aPosition,
-                    (int)jsonData.data.components.transform.scale,
-                    aRotation));
+                    terrain.nodes.Add(new Node((string)jsonData.data.data.data.name,
+                        null,
+                        aPosition,
+                        (int)jsonData.data.data.data.components.transform.scale,
+                        aRotation));
                 }
-                terrain.route.Add(new Route("", nodes));
+                else if (jsonData.data.data.id == "scene/road/add")
+                {
+                    terrain.road.Add(new Road((string)jsonData.data.data.data.route,
+                        (float)jsonData.data.data.data.heightoffset));
+                }
+                else if (jsonData.data.data.id == "route/add")
+                {
+                    List<Node> nodes = new List<Node>();
+                    foreach (dynamic item in jsonData.data.data.data.nodes)
+                    {
+                        int[] aPosition = new int[3];
+                        int i = 0;
+
+                        int[] aRotation = new int[3];
+                        int j = 0;
+                        foreach (dynamic coordinate  in item.pos)
+                        {
+                            aPosition[i] = coordinate;
+                            i++;
+                        }
+
+                        foreach (var rot in item.dir)
+                        {
+                            aRotation[j] = rot;
+                            j++;
+                        }
+
+                        nodes.Add(new Node("",
+                        null,
+                        aPosition,
+                        0,
+                        aRotation));
+                    }
+                    terrain.route.Add(new Route("", nodes));
+                }
+                System.Diagnostics.Debug.WriteLine(terrain.ToString());
             }
-            System.Diagnostics.Debug.WriteLine(terrain.ToString());
         }
 
         public void Read()
@@ -163,7 +165,10 @@ namespace Healthcare_test.VR
                 ProcessTunnelCreate(jsonData.data);
             } else if(jsonData.id == "tunnel/send")
             {
-
+                if(jsonData.data.data.id == "route/add")
+                {
+                    terrain.RouteNameRecieved((string)jsonData.data.data.data.uuid);
+                }
             } else if(jsonData.id == "packetid")
             {
 

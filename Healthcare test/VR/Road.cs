@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Healthcare_test.VR
 {
-    class Road
+    public class Road
     {
         public string id;
         public float heightoffset;

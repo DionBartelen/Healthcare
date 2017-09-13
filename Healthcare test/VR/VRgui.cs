@@ -150,5 +150,15 @@ namespace Healthcare_test.VR
         {
             session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel)));
         }
+
+        private void Routebutton_Click(object sender, EventArgs e)
+        {
+            session.Send(JsonConvert.SerializeObject(Commands.AddRoute(tunnel)));
+        }
+
+        private void Showroutebutton_Click(object sender, EventArgs e)
+        {
+            session.Send(JsonConvert.SerializeObject(Commands.AddRoad(tunnel, session.terrain.route.Last().id)));
+        }
     }
 }

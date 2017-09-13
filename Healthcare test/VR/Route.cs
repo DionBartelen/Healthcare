@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Healthcare_test.VR
 {
-    class Route
+    public class Route
     {
         public string id;
         public List<Node> nodes;

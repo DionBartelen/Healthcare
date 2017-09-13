@@ -43,6 +43,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.Buttonobject = new System.Windows.Forms.Button();
+            this.Routebutton = new System.Windows.Forms.Button();
+            this.Showroutebutton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // connect_Button
@@ -188,11 +190,33 @@
             this.Buttonobject.UseVisualStyleBackColor = true;
             this.Buttonobject.Click += new System.EventHandler(this.Buttonobject_Click);
             // 
+            // Routebutton
+            // 
+            this.Routebutton.Location = new System.Drawing.Point(604, 136);
+            this.Routebutton.Name = "Routebutton";
+            this.Routebutton.Size = new System.Drawing.Size(75, 23);
+            this.Routebutton.TabIndex = 18;
+            this.Routebutton.Text = "Route";
+            this.Routebutton.UseVisualStyleBackColor = true;
+            this.Routebutton.Click += new System.EventHandler(this.Routebutton_Click);
+            // 
+            // Showroutebutton
+            // 
+            this.Showroutebutton.Location = new System.Drawing.Point(604, 166);
+            this.Showroutebutton.Name = "Showroutebutton";
+            this.Showroutebutton.Size = new System.Drawing.Size(75, 23);
+            this.Showroutebutton.TabIndex = 19;
+            this.Showroutebutton.Text = "Show Route";
+            this.Showroutebutton.UseVisualStyleBackColor = true;
+            this.Showroutebutton.Click += new System.EventHandler(this.Showroutebutton_Click);
+            // 
             // VRgui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(708, 384);
+            this.Controls.Add(this.Showroutebutton);
+            this.Controls.Add(this.Routebutton);
             this.Controls.Add(this.Buttonobject);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -237,5 +261,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button Buttonobject;
+        private System.Windows.Forms.Button Routebutton;
+        private System.Windows.Forms.Button Showroutebutton;
     }
 }

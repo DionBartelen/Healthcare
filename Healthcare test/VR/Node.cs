@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Healthcare_test.VR
 {
-    class Node
+    public class Node
     {
         public string name;
         public Node parent;
