@@ -135,9 +135,10 @@ namespace Healthcare_test.VR
             }
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void Objectbutton_Click(object sender, EventArgs e)
         {
-
+            session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel)));
         }
+
     }
 }

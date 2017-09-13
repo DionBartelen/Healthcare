@@ -35,7 +35,7 @@
             this.ChangeTerain = new System.Windows.Forms.Button();
             this.RefreshClients = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.Objectbutton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // connect_Button
@@ -80,12 +80,12 @@
             // 
             // ChangeTerain
             // 
-            this.ChangeTerain.Location = new System.Drawing.Point(171, 240);
+            this.ChangeTerain.Location = new System.Drawing.Point(92, 216);
             this.ChangeTerain.Margin = new System.Windows.Forms.Padding(2);
             this.ChangeTerain.Name = "ChangeTerain";
-            this.ChangeTerain.Size = new System.Drawing.Size(56, 19);
+            this.ChangeTerain.Size = new System.Drawing.Size(69, 19);
             this.ChangeTerain.TabIndex = 7;
-            this.ChangeTerain.Text = "Time";
+            this.ChangeTerain.Text = "Set Time";
             this.ChangeTerain.UseVisualStyleBackColor = true;
             this.ChangeTerain.Click += new System.EventHandler(this.ChangeTerain_Click);
             // 
@@ -102,7 +102,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(66, 239);
+            this.textBox1.Location = new System.Drawing.Point(12, 216);
             this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(76, 20);
@@ -110,23 +110,23 @@
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
-            // label2
+            // Objectbutton
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 239);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(30, 13);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "Time";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            this.Objectbutton.Location = new System.Drawing.Point(92, 130);
+            this.Objectbutton.Margin = new System.Windows.Forms.Padding(2);
+            this.Objectbutton.Name = "Objectbutton";
+            this.Objectbutton.Size = new System.Drawing.Size(69, 19);
+            this.Objectbutton.TabIndex = 9;
+            this.Objectbutton.Text = "3Dobject";
+            this.Objectbutton.UseVisualStyleBackColor = true;
+            this.Objectbutton.Click += new System.EventHandler(this.Objectbutton_Click);
             // 
             // VRgui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(531, 312);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.Objectbutton);
             this.Controls.Add(this.RefreshClients);
             this.Controls.Add(this.ChangeTerain);
             this.Controls.Add(this.TunnelStatus);
@@ -155,5 +155,6 @@
         private System.Windows.Forms.Button RefreshClients;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button Objectbutton;
     }
 }
