@@ -13,9 +13,12 @@ namespace Healthcare_test.VR
         VRgui gui;
         TcpClient client;
         NetworkStream stream;
+        Terrain terrain;
 
         public Session(string ip, int port, VRgui gui)
         {
+            //dit moet nog in de methode gezet worden
+            terrain = new Terrain(new int[0], new int[0]);
             client = new TcpClient();
             client.ReceiveTimeout = 20000;
             client.SendTimeout = 20000;
@@ -33,6 +36,74 @@ namespace Healthcare_test.VR
             prefixArray.CopyTo(buffer, 0);
             requestArray.CopyTo(buffer, prefixArray.Length);
             stream.Write(buffer, 0, buffer.Length);
+            Save(message);
+        }
+
+        public void Save(string message)
+        {
+            dynamic jsonData = JsonConvert.DeserializeObject(message);
+            
+            if (jsonData.id == "scene/node/add")
+            {
+                int[] aPosition = new int[3];
+                int i = 0;
+
+                int[] aRotation = new int[3];
+                int j = 0;
+
+                foreach (var item in jsonData.data.components.position)
+                {
+                    aPosition[i] = jsonData.data.components.position[i];
+                    i++;
+                }
+
+                foreach (var item in jsonData.data.components.rotation)
+                {
+                    aRotation[j] = jsonData.data.components.rotation[j];
+                    j++;
+                }
+                terrain.nodes.Add(new Node((string)jsonData.data.name, 
+                    null,
+                    aPosition,
+                    (int)jsonData.data.components.transform.scale,
+                    aRotation));
+            }
+            else if (jsonData.id == "scene/road/add")
+            {
+                terrain.road.Add(new Road((string)jsonData.data.route,
+                    (float)jsonData.data.heightoffset));
+            }
+            else if (jsonData.id == "scene/route/add")
+            {
+                List<Node> nodes = new List<Node>();
+                foreach (var item in jsonData.data.components.position)
+                {
+                    int[] aPosition = new int[3];
+                    int i = 0;
+
+                    int[] aRotation = new int[3];
+                    int j = 0;
+                    foreach (var pos in jsonData.data.components.position)
+                    {
+                        aPosition[i] = jsonData.data.components.position[i];
+                        i++;
+                    }
+
+                    foreach (var rot in jsonData.data.components.rotation)
+                    {
+                        aRotation[j] = jsonData.data.components.rotation[j];
+                        j++;
+                    }
+
+                    nodes.Add(new Node((string)jsonData.data.name,
+                    null,
+                    aPosition,
+                    (int)jsonData.data.components.transform.scale,
+                    aRotation));
+                }
+                terrain.route.Add(new Route("", nodes));
+            }
+            System.Diagnostics.Debug.WriteLine(terrain.ToString());
         }
 
         public void Read()
@@ -96,10 +167,15 @@ namespace Healthcare_test.VR
             } else if(jsonData.id == "packetid")
             {
 
-            } else
+            } else if(jsonData.id == "route/add")
+            {
+
+            }
+            else
             {
                 System.Diagnostics.Debug.WriteLine("Else: \r\n" + information);
             }
+            
         }
 
         public void ProcessSessionList(dynamic information)

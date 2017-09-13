@@ -84,7 +84,11 @@
     <Compile Include="test applicatie\Time.cs" />
     <Compile Include="VR\ClientInfo.cs" />
     <Compile Include="VR\Commands.cs" />
+    <Compile Include="VR\Node.cs" />
+    <Compile Include="VR\Road.cs" />
+    <Compile Include="VR\Route.cs" />
     <Compile Include="VR\Session.cs" />
+    <Compile Include="VR\Terrain.cs" />
     <Compile Include="VR\VRgui.cs">
       <SubType>Form</SubType>
     </Compile>
