@@ -116,6 +116,7 @@ namespace Healthcare_test
             this.ComPortText.Name = "ComPortText";
             this.ComPortText.Size = new System.Drawing.Size(121, 24);
             this.ComPortText.TabIndex = 8;
+            this.ComPortText.SelectedIndexChanged += new System.EventHandler(this.ComPortText_SelectedIndexChanged);
             // 
             // Data_Collector
             // 
@@ -148,6 +149,7 @@ namespace Healthcare_test
             this.Name = "GUIconnector";
             this.Text = "Remote Healthcare";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.Load += new System.EventHandler(this.GUIconnector_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

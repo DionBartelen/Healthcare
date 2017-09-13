@@ -1,5 +1,6 @@
 ﻿using Healthcare_test;
 using Healthcare_test.test_applicatie;
+using Healthcare_test.VR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,8 @@ namespace Healthcare_test
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new GUIconnector());
+            //Application.Run(new GUIconnector());
+            Application.Run(new VRgui());
         }
     }
 }

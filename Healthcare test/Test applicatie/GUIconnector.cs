@@ -106,5 +106,15 @@ namespace Healthcare_test
                 ergometer.Close();
             }
         }
+
+        private void ComPortText_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void GUIconnector_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
