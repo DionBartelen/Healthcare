@@ -57,7 +57,7 @@ namespace Healthcare_test
 
         private void ProcessCommand(string command)
         {
-            if(command.Length < 3)
+            if(command.Length < 2)
             {
                 return;
             }
