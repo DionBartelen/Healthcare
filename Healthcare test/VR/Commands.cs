@@ -78,6 +78,7 @@ namespace Healthcare_test.VR
             return Commands.SendTunnel(tunnel, timeRequest);
         }
 
+<<<<<<< HEAD
         public static dynamic AddObject(string tunnel)
         {
             int[] aPosition = new int[3] { 0, 0, 0 };
@@ -128,6 +129,36 @@ namespace Healthcare_test.VR
                 }
             };
             return Commands.SendTunnel(tunnel, request);
+=======
+        public static dynamic CreateGroundTerrain(string tunnel)
+        {
+            dynamic groundTerrain = new
+            {
+                id = "scene/terrain/add",
+                data = new
+                {
+                    size = new[] { 256, 256 },
+                    heights = Enumerable.Repeat(0, (256 * 256)).ToArray()
+        }
+
+    };
+            return Commands.SendTunnel(tunnel, groundTerrain);
+
+        }
+
+        public static dynamic RemoveTerrain(String tunnel)
+        {
+            dynamic removeTerrain = new
+            {
+                id = "scene/terrain/delete",
+                data = new
+                {
+
+                }
+
+            };
+            return Commands.SendTunnel(tunnel, removeTerrain);
+>>>>>>> VR_Terrain_Editor
         }
     }
 }
