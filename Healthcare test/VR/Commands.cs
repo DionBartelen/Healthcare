@@ -107,11 +107,11 @@ namespace Healthcare_test.VR
                             cullbackfaces = true,
                             animated = false,
                             animation = "animationname",
-                        }//,
-                        //terrain = new
-                        //{
-                        //    smoothnormals = true
-                        //},
+                        },
+                        terrain = new
+                        {
+                            smoothnormals = true
+                        },
                         //panel = new
                         //{
                         //    size = aPanelSize,
@@ -144,79 +144,46 @@ namespace Healthcare_test.VR
             return Commands.SendTunnel(tunnel, groundTerrain);
 
         }
-
-        public static dynamic RemoveTerrain(String tunnel)
+        public static dynamic CreateGroundTerrainWithHeights(string tunnel)
         {
-            dynamic removeTerrain = new
+            Random r = new Random();
+            double[] heightsGround = new double[256 * 256];
+            
+            for(int Terrainx = 0; Terrainx < 256; Terrainx++)
             {
-                id = "scene/terrain/delete",
-                data = new
+                for (int Terrainz = 0; Terrainz < 256; Terrainz++)
                 {
 
+                    //heightsGround[Terrainx + Terrainz] = (r.NextDouble() * 3);
+                    heightsGround[(Terrainx * 256) +  Terrainz] = ((double)Terrainz / 8);
+                }
+            }
+            dynamic groundTerrain = new
+            {
+                id = "scene/terrain/add",
+                data = new
+                {
+                    size = new[] { 256, 256 },
+                    heights = heightsGround
                 }
 
             };
-            return Commands.SendTunnel(tunnel, removeTerrain);
+            return Commands.SendTunnel(tunnel, groundTerrain);
+
         }
 
-        public static dynamic AddRoute(string tunnel)
-        {
-            int[] pos1 = new int[3] { 0, 0, 0 };
-            int[] pos2 = new int[3] { 50, 0, 0 };
-            int[] pos3 = new int[3] { 50, 0, 50 };
-            int[] pos4 = new int[3] { 0, 0, 50 };
+        //public static dynamic RemoveTerrain(String tunnel)
+        //{
+        //    dynamic removeTerrain = new
+        //    {
+        //        id = "scene/terrain/delete",
+        //        data = new
+        //        {
 
-            int[] dir1 = new int[3] { 5, 0, -5 };
-            int[] dir2 = new int[3] { 5, 0, 5 };
-            int[] dir3 = new int[3] { -5, 0, 5 };
-            int[] dir4 = new int[3] { -5, 0, -5 };
-            dynamic node1 = new
-            {
-                pos = pos1,
-                dir = dir1
-            };
-            dynamic node2 = new
-            {
-                pos = pos2,
-                dir = dir2
-            };
-            dynamic node3 = new
-            {
-                pos = pos3,
-                dir = dir3
-            };
-            dynamic node4 = new
-            {
-                pos = pos4,
-                dir = dir4
-            };
+        //        }
 
-            dynamic[] routeNodes = new dynamic[4] { node1, node2, node3, node4 };
-
-            dynamic request = new
-            {
-                id = "route/add",
-                data = new
-                {
-                    nodes = routeNodes
-                }
-            };
-
-            return Commands.SendTunnel(tunnel, request);
-        }
-
-        public static dynamic AddRoad(string tunnel, string uuid)
-        {
-            dynamic request = new
-            {
-                id = "scene/road/add",
-                data = new
-                {
-                    route = uuid,
-                    heightoffset = 0.01
-                }
-            };
-            return Commands.SendTunnel(tunnel, request);
-        }
+        //    };
+        //    return Commands.SendTunnel(tunnel, removeTerrain);
+        //}
     }
 }
