@@ -111,5 +111,11 @@ namespace Healthcare_test
         {
             serialPort.Close();
         }
+
+        public override void Reset()
+        {
+            serialPort.WriteLine("RS");
+            serialPort.ReadLine();
+        }
     }
 }

@@ -57,7 +57,7 @@ namespace Healthcare_test
 
         private void ProcessCommand(string command)
         {
-            if(command.Length < 3)
+            if(command.Length < 2)
             {
                 return;
             }
@@ -81,6 +81,10 @@ namespace Healthcare_test
             else if (command.Substring(0, 2) == "CM")
             {
                 ergometer.ErgometerCommandMode();
+            }
+            else if(command.Substring(0,2) == "RS")
+            {
+                ergometer.Reset();
             }
 
         }

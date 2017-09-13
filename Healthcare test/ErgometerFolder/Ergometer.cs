@@ -15,5 +15,6 @@ namespace Healthcare_test
         abstract public void SetTime(int time);
         abstract public void SetPower(int power);
         abstract public void Close();
+        abstract public void Reset();
     }
 }
