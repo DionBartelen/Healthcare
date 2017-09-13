@@ -43,6 +43,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.Buttonobject = new System.Windows.Forms.Button();
+            this.terrainWH = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // connect_Button
@@ -188,11 +189,22 @@
             this.Buttonobject.UseVisualStyleBackColor = true;
             this.Buttonobject.Click += new System.EventHandler(this.Buttonobject_Click);
             // 
+            // terrainWH
+            // 
+            this.terrainWH.Location = new System.Drawing.Point(366, 249);
+            this.terrainWH.Name = "terrainWH";
+            this.terrainWH.Size = new System.Drawing.Size(88, 24);
+            this.terrainWH.TabIndex = 18;
+            this.terrainWH.Text = "terrainWH";
+            this.terrainWH.UseVisualStyleBackColor = true;
+            this.terrainWH.Click += new System.EventHandler(this.terrainWH_Click);
+            // 
             // VRgui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(708, 384);
+            this.Controls.Add(this.terrainWH);
             this.Controls.Add(this.Buttonobject);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -237,5 +249,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button Buttonobject;
+        private System.Windows.Forms.Button terrainWH;
     }
 }

@@ -107,11 +107,11 @@ namespace Healthcare_test.VR
                             cullbackfaces = true,
                             animated = false,
                             animation = "animationname",
-                        }//,
-                        //terrain = new
-                        //{
-                        //    smoothnormals = true
-                        //},
+                        },
+                        terrain = new
+                        {
+                            smoothnormals = true
+                        },
                         //panel = new
                         //{
                         //    size = aPanelSize,
@@ -144,19 +144,46 @@ namespace Healthcare_test.VR
             return Commands.SendTunnel(tunnel, groundTerrain);
 
         }
-
-        public static dynamic RemoveTerrain(String tunnel)
+        public static dynamic CreateGroundTerrainWithHeights(string tunnel)
         {
-            dynamic removeTerrain = new
+            Random r = new Random();
+            double[] heightsGround = new double[256 * 256];
+            
+            for(int Terrainx = 0; Terrainx < 256; Terrainx++)
             {
-                id = "scene/terrain/delete",
-                data = new
+                for (int Terrainz = 0; Terrainz < 256; Terrainz++)
                 {
 
+                    //heightsGround[Terrainx + Terrainz] = (r.NextDouble() * 3);
+                    heightsGround[(Terrainx * 256) +  Terrainz] = ((double)Terrainz / 8);
+                }
+            }
+            dynamic groundTerrain = new
+            {
+                id = "scene/terrain/add",
+                data = new
+                {
+                    size = new[] { 256, 256 },
+                    heights = heightsGround
                 }
 
             };
-            return Commands.SendTunnel(tunnel, removeTerrain);
+            return Commands.SendTunnel(tunnel, groundTerrain);
+
         }
+
+        //public static dynamic RemoveTerrain(String tunnel)
+        //{
+        //    dynamic removeTerrain = new
+        //    {
+        //        id = "scene/terrain/delete",
+        //        data = new
+        //        {
+
+        //        }
+
+        //    };
+        //    return Commands.SendTunnel(tunnel, removeTerrain);
+        //}
     }
 }
