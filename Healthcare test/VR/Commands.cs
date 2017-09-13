@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Healthcare_test.VR
 {
-    class Commands
+    public class Commands
     {
         public static string tree1 = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\trees\fantasy\tree1.obj");
         public static string tree2 = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\trees\fantasy\tree2.obj");
@@ -142,8 +142,8 @@ namespace Healthcare_test.VR
 
             };
             return Commands.SendTunnel(tunnel, groundTerrain);
-
         }
+
         public static dynamic CreateGroundTerrainWithHeights(string tunnel)
         {
             Random r = new Random();
@@ -172,18 +172,78 @@ namespace Healthcare_test.VR
 
         }
 
-        //public static dynamic RemoveTerrain(String tunnel)
-        //{
-        //    dynamic removeTerrain = new
-        //    {
-        //        id = "scene/terrain/delete",
-        //        data = new
-        //        {
+        public static dynamic AddRoute(string tunnel)
+        {
+            int[] pos1 = new int[3] { 0, 0, 0 };
+            int[] pos2 = new int[3] { 50, 0, 0 };
+            int[] pos3 = new int[3] { 50, 0, 50 };
+            int[] pos4 = new int[3] { 0, 0, 50 };
 
-        //        }
+            int[] dir1 = new int[3] { 5, 0, -5 };
+            int[] dir2 = new int[3] { 5, 0, 5 };
+            int[] dir3 = new int[3] { -5, 0, 5 };
+            int[] dir4 = new int[3] { -5, 0, -5 };
+            dynamic node1 = new
+            {
+                pos = pos1,
+                dir = dir1
+            };
+            dynamic node2 = new
+            {
+                pos = pos2,
+                dir = dir2
+            };
+            dynamic node3 = new
+            {
+                pos = pos3,
+                dir = dir3
+            };
+            dynamic node4 = new
+            {
+                pos = pos4,
+                dir = dir4
+            };
 
-        //    };
-        //    return Commands.SendTunnel(tunnel, removeTerrain);
-        //}
+            dynamic[] routeNodes = new dynamic[4] { node1, node2, node3, node4 };
+
+            dynamic request = new
+            {
+                id = "route/add",
+                data = new
+                {
+                    nodes = routeNodes
+                }
+            };
+
+            return Commands.SendTunnel(tunnel, request);
+        }
+
+        public static dynamic AddRoad(string tunnel, string uuid)
+        {
+            dynamic request = new
+            {
+                id = "scene/road/add",
+                data = new
+                {
+                    route = uuid,
+                    heightoffset = 0.01
+                }
+            };
+            return Commands.SendTunnel(tunnel, request);
+        }
+
+        public static dynamic RemoveTerrain(String tunnel)
+        {
+            dynamic removeTerrain = new
+            {
+                id = "scene/terrain/delete",
+                data = new
+                {
+
+                }
+
+            };
+            return Commands.SendTunnel(tunnel, removeTerrain);
+        }
     }
 }

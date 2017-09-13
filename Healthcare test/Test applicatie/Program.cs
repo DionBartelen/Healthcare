@@ -19,8 +19,8 @@ namespace Healthcare_test
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new GUIconnector());
-            //Application.Run(new VRgui());
+            //Application.Run(new GUIconnector());
+            Application.Run(new VRgui());
         }
     }
 }

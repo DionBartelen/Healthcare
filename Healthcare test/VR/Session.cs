@@ -84,7 +84,7 @@ namespace Healthcare_test.VR
 
                         int[] aRotation = new int[3];
                         int j = 0;
-                        foreach (dynamic coordinate  in item.pos)
+                        foreach (dynamic coordinate in item.pos)
                         {
                             aPosition[i] = coordinate;
                             i++;
