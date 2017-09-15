@@ -165,5 +165,10 @@ namespace Healthcare_test.VR
         {
             session.Send(JsonConvert.SerializeObject(Commands.AddRoad(tunnel, session.terrain.route.Last().id)));
         }
+
+        private void TerrainFromPicture_Click(object sender, EventArgs e)
+        {
+            Commands.CreateGroundTerrainWithHeights(tunnel);
+        }
     }
 }

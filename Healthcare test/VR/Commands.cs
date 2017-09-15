@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -149,15 +150,17 @@ namespace Healthcare_test.VR
             Random r = new Random();
             double[] heightsGround = new double[256 * 256];
             
-            for(int Terrainx = 0; Terrainx < 256; Terrainx++)
-            {
-                for (int Terrainz = 0; Terrainz < 256; Terrainz++)
-                {
+            //for(int Terrainx = 0; Terrainx < 256; Terrainx++)
+            //{
+            //    for (int Terrainz = 0; Terrainz < 256; Terrainz++)
+            //    {
 
-                    //heightsGround[Terrainx + Terrainz] = (r.NextDouble() * 3);
-                    heightsGround[(Terrainx * 256) +  Terrainz] = ((double)Terrainz / 8);
-                }
-            }
+            //        //heightsGround[Terrainx + Terrainz] = (r.NextDouble() * 3);
+            //        heightsGround[(Terrainx * 256) +  Terrainz] = ((double)Terrainz / 8);
+            //    }
+            //}
+
+            heightsGround = GenerateTerrainFromPicture();
             dynamic groundTerrain = new
             {
                 id = "scene/terrain/add",
@@ -244,6 +247,22 @@ namespace Healthcare_test.VR
 
             };
             return Commands.SendTunnel(tunnel, removeTerrain);
+        }
+
+        public static double[] GenerateTerrainFromPicture()
+        {
+            Bitmap terrainBitmap = (Bitmap)Bitmap.FromFile(Path.Combine(Directory.GetCurrentDirectory(), "terrain2.jpg"));
+            double[] toReturn = new double[terrainBitmap.Width * terrainBitmap.Height];
+            for (int x = 0; x < terrainBitmap.Width; x++)
+            {
+                for(int y = 0; y < terrainBitmap.Height; y++)
+                {
+                    toReturn[(x * 256) + y] = (768 - (terrainBitmap.GetPixel(x, y).R + terrainBitmap.GetPixel(x, y).G + terrainBitmap.GetPixel(x, y).B))/30;
+                }
+            }
+
+
+            return toReturn;
         }
     }
 }

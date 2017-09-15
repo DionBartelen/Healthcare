@@ -46,6 +46,7 @@
             this.terrainWH = new System.Windows.Forms.Button();
             this.Routebutton = new System.Windows.Forms.Button();
             this.Showroutebutton = new System.Windows.Forms.Button();
+            this.TerrainFromPicture = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // connect_Button
@@ -221,11 +222,22 @@
             this.Showroutebutton.UseVisualStyleBackColor = true;
             this.Showroutebutton.Click += new System.EventHandler(this.Showroutebutton_Click);
             // 
+            // TerrainFromPicture
+            // 
+            this.TerrainFromPicture.Location = new System.Drawing.Point(480, 249);
+            this.TerrainFromPicture.Name = "TerrainFromPicture";
+            this.TerrainFromPicture.Size = new System.Drawing.Size(112, 24);
+            this.TerrainFromPicture.TabIndex = 21;
+            this.TerrainFromPicture.Text = "Terrain Picture";
+            this.TerrainFromPicture.UseVisualStyleBackColor = true;
+            this.TerrainFromPicture.Click += new System.EventHandler(this.TerrainFromPicture_Click);
+            // 
             // VRgui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(708, 384);
+            this.Controls.Add(this.TerrainFromPicture);
             this.Controls.Add(this.Showroutebutton);
             this.Controls.Add(this.Routebutton);
             this.Controls.Add(this.terrainWH);
@@ -276,5 +288,6 @@
         private System.Windows.Forms.Button terrainWH;
         private System.Windows.Forms.Button Routebutton;
         private System.Windows.Forms.Button Showroutebutton;
+        private System.Windows.Forms.Button TerrainFromPicture;
     }
 }
