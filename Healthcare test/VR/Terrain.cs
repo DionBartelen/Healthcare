@@ -25,7 +25,7 @@ namespace Healthcare_test.VR
 
         public override string ToString()
         {
-            return route.Count() + "";
+            return "Nodes: " + nodes.Count + "\r\nRoads: " + road.Count() + "\r\nRoutes: " + route.Count();
         }
 
         public void RouteNameRecieved(string name)

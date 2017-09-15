@@ -103,7 +103,7 @@ namespace Healthcare_test.VR
                         },
                         model = new
                         {
-                            file = bike,
+                            file = tree1,
                             cullbackfaces = true,
                             animated = false,
                             animation = "animationname",

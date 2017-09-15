@@ -52,15 +52,15 @@ namespace Healthcare_test.VR
                     int[] aRotation = new int[3];
                     int j = 0;
 
-                    foreach (var item in jsonData.data.data.data.components.position)
+                    foreach (var item in jsonData.data.data.data.components.transform.position)
                     {
-                        aPosition[i] = jsonData.data.data.data.components.position[i];
+                        aPosition[i] = jsonData.data.data.data.components.transform.position[i];
                         i++;
                     }
 
-                    foreach (var item in jsonData.data.data.data.components.rotation)
+                    foreach (var item in jsonData.data.data.data.components.transform.rotation)
                     {
-                        aRotation[j] = jsonData.data.data.data.components.rotation[j];
+                        aRotation[j] = jsonData.data.data.data.components.transform.rotation[j];
                         j++;
                     }
                     terrain.nodes.Add(new Node((string)jsonData.data.data.data.name,
