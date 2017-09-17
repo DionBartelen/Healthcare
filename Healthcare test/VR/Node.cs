@@ -9,6 +9,7 @@ namespace Healthcare_test.VR
     public class Node
     {
         public string name;
+        public string uuid;
         public Node parent;
         public int[] aPosition;
         public int scale;

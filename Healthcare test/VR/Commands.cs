@@ -23,8 +23,6 @@ namespace Healthcare_test.VR
         public static string carcartoon2 = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\cars\cartoon\Pony_cartoon2.obj");
         public static string house1 = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\houses\set1\house1.obj");
 
-
-
         public static dynamic SessionList()
         {
             dynamic request = new
@@ -139,7 +137,6 @@ namespace Healthcare_test.VR
                     size = new[] { 256, 256 },
                     heights = Enumerable.Repeat(0, (256 * 256)).ToArray()
                 }
-
             };
             return Commands.SendTunnel(tunnel, groundTerrain);
         }
@@ -166,10 +163,8 @@ namespace Healthcare_test.VR
                     size = new[] { 256, 256 },
                     heights = heightsGround
                 }
-
             };
             return Commands.SendTunnel(tunnel, groundTerrain);
-
         }
 
         public static dynamic AddRoute(string tunnel)
@@ -241,7 +236,6 @@ namespace Healthcare_test.VR
                 {
 
                 }
-
             };
             return Commands.SendTunnel(tunnel, removeTerrain);
         }
@@ -260,10 +254,8 @@ namespace Healthcare_test.VR
                     rotate = "XZ",
                     followHeight = false,
                     rotateOffset = new double[] { 0, 0, 0 },
-		            positionOffset = new double[] { 0, 0, 0 }
-
-    }
-
+                    positionOffset = new double[] { 0, 0, 0 }
+                }
             };
             return Commands.SendTunnel(tunnel, moveObject); 
         }
@@ -277,8 +269,6 @@ namespace Healthcare_test.VR
 	            {
                     id = id, 
                 }
-
-
         };
             return Commands.SendTunnel(tunnel, updateTerrain);
             }

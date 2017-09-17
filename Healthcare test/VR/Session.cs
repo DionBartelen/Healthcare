@@ -162,22 +162,32 @@ namespace Healthcare_test.VR
         public void ProcessAnswer(string information)
         {
             dynamic jsonData = JsonConvert.DeserializeObject(information);
-            if(jsonData.id == "session/list")
+            if (jsonData.id == "session/list")
             {
                 ProcessSessionList(jsonData.data);
-            } else if(jsonData.id == "tunnel/create")
+            }
+            else if (jsonData.id == "tunnel/create")
             {
                 ProcessTunnelCreate(jsonData.data);
-            } else if(jsonData.id == "tunnel/send")
+            }
+            else if (jsonData.id == "tunnel/send")
             {
-                if(jsonData.data.data.id == "route/add")
+                if (jsonData.data.data.id == "route/add")
                 {
-                    terrain.RouteNameRecieved((string)jsonData.data.data.data.uuid);
+                    terrain.RouteNameReceived((string)jsonData.data.data.data.uuid);
                 }
-            } else if(jsonData.id == "packetid")
+                System.Diagnostics.Debug.WriteLine((string)jsonData.data.data.id);
+
+                if (jsonData.data.data.id == "scene/node/add")
+                {
+                    terrain.NodeNameReceived((string)jsonData.data.data.data.uuid);
+                }
+            }
+            else if (jsonData.id == "packetid")
             {
 
-            } else if(jsonData.id == "route/add")
+            }
+            else if (jsonData.id == "route/add")
             {
 
             }

@@ -28,9 +28,14 @@ namespace Healthcare_test.VR
             return "Nodes: " + nodes.Count + "\r\nRoads: " + road.Count() + "\r\nRoutes: " + route.Count();
         }
 
-        public void RouteNameRecieved(string name)
+        public void RouteNameReceived(string name)
         {
-            ((Route)route.Last()).id = name;
+            route.Last().id = name;
+        }
+
+        public void NodeNameReceived(string uuid)
+        {
+            nodes.Last().uuid = uuid;
         }
     }
 }
