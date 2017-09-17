@@ -42,6 +42,7 @@ namespace Healthcare_test.VR
         public void Save(string message)
         {
             dynamic jsonData = JsonConvert.DeserializeObject(message);
+            Console.WriteLine(message);
             if (jsonData.id == "tunnel/send")
             {
                 if (jsonData.data.data.id == "scene/node/add")
@@ -103,6 +104,10 @@ namespace Healthcare_test.VR
                         aRotation));
                     }
                     terrain.route.Add(new Route("", nodes));
+                }
+                else if(jsonData.data.data.id == "route/follow")
+                {
+                   
                 }
                 System.Diagnostics.Debug.WriteLine(terrain.ToString());
             }
@@ -206,5 +211,7 @@ namespace Healthcare_test.VR
             stream.Close();
             client.Close();
         }
+        
+        
     }
 }

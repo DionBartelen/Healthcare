@@ -111,7 +111,7 @@ namespace Healthcare_test.test_applicatie
             if (IsRunning)
             {
                 IsRunning = false;
-                CountThread.Suspend();
+                 CountThread.Suspend();
             }
         }
 

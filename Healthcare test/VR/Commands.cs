@@ -103,15 +103,15 @@ namespace Healthcare_test.VR
                         },
                         model = new
                         {
-                            file = tree1,
+                            file = bike,
                             cullbackfaces = true,
                             animated = false,
                             animation = "animationname",
                         },
-                        terrain = new
-                        {
-                            smoothnormals = true
-                        },
+                        // terrain = new
+                        //{
+                        //     smoothnormals = true
+                        // },
                         //panel = new
                         //{
                         //    size = aPanelSize,
@@ -245,5 +245,42 @@ namespace Healthcare_test.VR
             };
             return Commands.SendTunnel(tunnel, removeTerrain);
         }
+
+        public static dynamic MoveObject(String tunnel, String id, String road)
+        {
+            dynamic moveObject = new
+            {
+                id = "route/follow",
+                data = new
+                {
+                    route =  road, 
+                    node = id,
+                    speed = 1.0,
+                    offset = 0.0,
+                    rotate = "XZ",
+                    followHeight = false,
+                    rotateOffset = new double[] { 0, 0, 0 },
+		            positionOffset = new double[] { 0, 0, 0 }
+
+    }
+
+            };
+            return Commands.SendTunnel(tunnel, moveObject); 
+        }
+
+        public static dynamic UpdateNode(String tunnel, String id)
+        {
+            dynamic updateTerrain = new
+            {
+                id = "scene/node/update",
+            	data = new
+	            {
+                    id = id, 
+                }
+
+
+        };
+            return Commands.SendTunnel(tunnel, updateTerrain);
+            }
     }
 }
