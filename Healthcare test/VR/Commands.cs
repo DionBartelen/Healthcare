@@ -106,10 +106,10 @@ namespace Healthcare_test.VR
                             animated = false,
                             animation = "animationname",
                         },
-                        // terrain = new
-                        //{
-                        //     smoothnormals = true
-                        // },
+                        terrain = new
+                        {
+                            smoothnormals = true
+                        }//,
                         //panel = new
                         //{
                         //    size = aPanelSize,
@@ -145,14 +145,14 @@ namespace Healthcare_test.VR
         {
             Random r = new Random();
             double[] heightsGround = new double[256 * 256];
-            
-            for(int Terrainx = 0; Terrainx < 256; Terrainx++)
+
+            for (int Terrainx = 0; Terrainx < 256; Terrainx++)
             {
                 for (int Terrainz = 0; Terrainz < 256; Terrainz++)
                 {
 
                     //heightsGround[Terrainx + Terrainz] = (r.NextDouble() * 3);
-                    heightsGround[(Terrainx * 256) +  Terrainz] = ((double)Terrainz / 8);
+                    heightsGround[(Terrainx * 256) + Terrainz] = ((double)Terrainz / 8);
                 }
             }
             dynamic groundTerrain = new
@@ -247,7 +247,7 @@ namespace Healthcare_test.VR
                 id = "route/follow",
                 data = new
                 {
-                    route =  road, 
+                    route = road,
                     node = id,
                     speed = 1.0,
                     offset = 0.0,
@@ -257,7 +257,7 @@ namespace Healthcare_test.VR
                     positionOffset = new double[] { 0, 0, 0 }
                 }
             };
-            return Commands.SendTunnel(tunnel, moveObject); 
+            return Commands.SendTunnel(tunnel, moveObject);
         }
 
         public static dynamic UpdateNode(String tunnel, String id)
@@ -265,12 +265,12 @@ namespace Healthcare_test.VR
             dynamic updateTerrain = new
             {
                 id = "scene/node/update",
-            	data = new
-	            {
-                    id = id, 
+                data = new
+                {
+                    id = id,
                 }
-        };
+            };
             return Commands.SendTunnel(tunnel, updateTerrain);
-            }
+        }
     }
 }
