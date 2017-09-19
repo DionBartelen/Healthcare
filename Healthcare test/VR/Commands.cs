@@ -128,6 +128,35 @@ namespace Healthcare_test.VR
             return Commands.SendTunnel(tunnel, request);
         }
 
+        public static dynamic GetGroundPlane(string tunnel)
+        {
+            dynamic FindGroundPlane = new
+            {
+                id = "scene/node/find",
+                data = new
+                {
+                    name = "GroundPlane"
+                }
+            };
+            return Commands.SendTunnel(tunnel, FindGroundPlane);
+        }
+
+        public static dynamic DeleteNode(string tunnel, string uuid)
+        {
+            dynamic NodeToDelete = new
+            {
+                id = "scene/node/delete",
+                data = new
+                {
+                    id = uuid
+                }
+            };
+           // System.Diagnostics.Debug.WriteLine(uuid + " test " + tunnel);
+            return Commands.SendTunnel(tunnel, NodeToDelete);
+        }
+
+
+
         public static dynamic CreateGroundTerrain(string tunnel)
         {
             dynamic groundTerrain = new

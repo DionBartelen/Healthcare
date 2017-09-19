@@ -143,7 +143,7 @@ namespace Healthcare_test.VR
 
         private void remove_Terrain_Button_Click(object sender, EventArgs e)
         {
-            session.Send(JsonConvert.SerializeObject(Commands.RemoveTerrain(tunnel)));
+            session.Send(JsonConvert.SerializeObject(Commands.GetGroundPlane(tunnel)));
         }
 
         private void Buttonobject_Click(object sender, EventArgs e)

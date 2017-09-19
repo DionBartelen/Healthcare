@@ -105,9 +105,9 @@ namespace Healthcare_test.VR
                     }
                     terrain.route.Add(new Route("", nodes));
                 }
-                else if(jsonData.data.data.id == "route/follow")
+                else if (jsonData.data.data.id == "route/follow")
                 {
-                   
+
                 }
                 System.Diagnostics.Debug.WriteLine(terrain.ToString());
             }
@@ -147,7 +147,7 @@ namespace Healthcare_test.VR
                         }
                     }
                     while (!messagereceived);
-                stream.Flush();
+                    stream.Flush();
                     string toReturn = response.ToString().Substring(4);
                     System.Diagnostics.Debug.WriteLine("Received: \r\n" + toReturn);
                     ProcessAnswer(toReturn);
@@ -162,6 +162,10 @@ namespace Healthcare_test.VR
         public void ProcessAnswer(string information)
         {
             dynamic jsonData = JsonConvert.DeserializeObject(information);
+            System.Diagnostics.Debug.WriteLine("ID: " + (string)jsonData.id);
+
+
+
             if (jsonData.id == "session/list")
             {
                 ProcessSessionList(jsonData.data);
@@ -182,20 +186,29 @@ namespace Healthcare_test.VR
                 {
                     terrain.NodeNameReceived((string)jsonData.data.data.data.uuid);
                 }
-            }
-            else if (jsonData.id == "packetid")
-            {
 
-            }
-            else if (jsonData.id == "route/add")
-            {
+                else if (jsonData.id == "packetid")
+                {
 
+                }
+                else if (jsonData.id == "route/add")
+                {
+
+                }
+                if (jsonData.data.data.id == "scene/node/find")
+                {
+                    string uuid = jsonData.data.data.data[0].uuid;
+                    System.Diagnostics.Debug.WriteLine(uuid + " test");
+                    Send(JsonConvert.SerializeObject(Commands.DeleteNode(gui.tunnel, uuid)));
+                }
+                else
+                {
+
+                    System.Diagnostics.Debug.WriteLine("Else: \r\n" + information);
+                }
             }
-            else
-            {
-                System.Diagnostics.Debug.WriteLine("Else: \r\n" + information);
-            }
-            
+
+
         }
 
         public void ProcessSessionList(dynamic information)
@@ -216,12 +229,13 @@ namespace Healthcare_test.VR
             gui.tunnel = information.id;
         }
 
+
         public void Close()
         {
             stream.Close();
             client.Close();
         }
-        
-        
+
+
     }
 }
