@@ -51,10 +51,10 @@ namespace Healthcare_test
             }
             String[] data = response.Split('\t');
             int time;
-            foreach (String datas in data)
-            {
-                System.Diagnostics.Debug.WriteLine(datas);
-            }
+           // foreach (String datas in data)
+           // {
+           //     System.Diagnostics.Debug.WriteLine(datas);
+           // }
             if (data.Length == 8)
             {
                 Int32.TryParse(data[0], out int pulse);
@@ -65,7 +65,7 @@ namespace Healthcare_test
                 Int32.TryParse(data[5], out int energy);
                 time = Convert.ToInt32(data[6].Substring(0, 2) + data[6].Substring(3, 2));
                 Int32.TryParse(data[7], out int actual_Power);
-                return new ErgometerData(pulse, rpm, speed/10.0, distance/10.0, time, energy, actual_Power, requested_Power);
+                return new ErgometerData(pulse, rpm, speed/10.0, distance/10.00, time, energy, actual_Power, requested_Power);
             }
             else
             {
