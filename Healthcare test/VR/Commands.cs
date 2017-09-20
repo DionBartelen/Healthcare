@@ -270,6 +270,21 @@ namespace Healthcare_test.VR
             return Commands.SendTunnel(tunnel, moveObject);
         }
 
+        public static dynamic setSpeed(String tunnel, String id, double speed)
+        {
+            dynamic setSpeed = new
+            {
+                id = "route/follow/speed",
+                data = new
+                {
+                    node = id,
+                    speed = speed
+                }
+            };
+            return Commands.SendTunnel(tunnel, setSpeed);
+
+        }
+
         public static dynamic UpdateNode(String tunnel, String id)
         {
             dynamic updateTerrain = new

@@ -48,6 +48,8 @@
             this.Moving_3D_Ojbect = new System.Windows.Forms.Button();
             this.objects = new System.Windows.Forms.ComboBox();
             this.selectbutton = new System.Windows.Forms.Button();
+            this.speedButton = new System.Windows.Forms.Button();
+            this.speedBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // connect_Button
@@ -259,11 +261,33 @@
             this.selectbutton.UseVisualStyleBackColor = true;
             this.selectbutton.Click += new System.EventHandler(this.selectbutton_Click);
             // 
+            // speedButton
+            // 
+            this.speedButton.Location = new System.Drawing.Point(79, 88);
+            this.speedButton.Margin = new System.Windows.Forms.Padding(2);
+            this.speedButton.Name = "speedButton";
+            this.speedButton.Size = new System.Drawing.Size(69, 21);
+            this.speedButton.TabIndex = 24;
+            this.speedButton.Text = "Set speed";
+            this.speedButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.speedButton.UseVisualStyleBackColor = true;
+            this.speedButton.Click += new System.EventHandler(this.speedButton_Click);
+            // 
+            // speedBox
+            // 
+            this.speedBox.Location = new System.Drawing.Point(14, 88);
+            this.speedBox.Margin = new System.Windows.Forms.Padding(2);
+            this.speedBox.Name = "speedBox";
+            this.speedBox.Size = new System.Drawing.Size(61, 20);
+            this.speedBox.TabIndex = 25;
+            // 
             // VRgui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(526, 276);
+            this.Controls.Add(this.speedBox);
+            this.Controls.Add(this.speedButton);
             this.Controls.Add(this.selectbutton);
             this.Controls.Add(this.objects);
             this.Controls.Add(this.Moving_3D_Ojbect);
@@ -318,5 +342,7 @@
         private System.Windows.Forms.Button Moving_3D_Ojbect;
         private System.Windows.Forms.ComboBox objects;
         private System.Windows.Forms.Button selectbutton;
+        private System.Windows.Forms.Button speedButton;
+        private System.Windows.Forms.TextBox speedBox;
     }
 }

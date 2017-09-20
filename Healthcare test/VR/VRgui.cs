@@ -203,5 +203,11 @@ namespace Healthcare_test.VR
         {
 
         }
+
+        private void speedButton_Click(object sender, EventArgs e)
+        {
+            double receiving = Convert.ToDouble(((speedBox.Text)));
+            session.Send(JsonConvert.SerializeObject(Commands.setSpeed(tunnel, session.terrain.nodes.Last().uuid, receiving)));
+        }
     }
 }
