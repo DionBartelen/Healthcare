@@ -221,8 +221,8 @@ namespace Healthcare_test.VR
                 data = new
                 {
                     id = uuid,
-                    diffuse = @"C:\Users\Aaron Israels\Desktop\NetworkEngine\data\NetworkEngine\textures\terrain\" + normal,
-                    normal = @"C:\Users\Aaron Israels\Desktop\NetworkEngine\data\NetworkEngine\textures\terrain\" + normal,
+                    diffuse = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\textures\" + normal),
+                    normal = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\textures\" + normal),
                     minHeight = min,
                     maxHeight = max,
                     fadeDist = fade
