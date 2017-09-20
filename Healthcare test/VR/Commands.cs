@@ -18,11 +18,11 @@ namespace Healthcare_test.VR
         public static string tree6 = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\trees\fantasy\tree6.obj");
         public static string tree7 = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\trees\fantasy\tree7.obj");
         public static string tree10 = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\trees\fantasy\tree10.obj");
-
         public static string bike = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\bike\bike.fbx");
         public static string carcartoon = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\cars\cartoon\Pony_cartoon.obj");
         public static string carcartoon2 = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\cars\cartoon\Pony_cartoon2.obj");
         public static string house1 = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\houses\set1\house1.obj");
+        
 
         public static dynamic SessionList()
         {
@@ -76,7 +76,7 @@ namespace Healthcare_test.VR
         }
 
 
-        public static dynamic AddObject(string tunnel)
+        public static dynamic AddObject(string tunnel, string selectedpath)
         {
             int[] aPosition = new int[3] { 0, 0, 0 };
             int[] aRotation = new int[3] { 0, 0, 0 };
@@ -84,6 +84,9 @@ namespace Healthcare_test.VR
             int[] aResolution = new int[2] { 512, 512 };
             int[] aBackground = new int[4] { 1, 1, 1, 1 };
             int[] aWaterSize = new int[2] { 20, 20 };
+
+
+            System.Diagnostics.Debug.WriteLine("path = " + selectedpath);
 
             dynamic request = new
             {
@@ -102,7 +105,7 @@ namespace Healthcare_test.VR
                         },
                         model = new
                         {
-                            file = bike,
+                            file = selectedpath,
                             cullbackfaces = true,
                             animated = false,
                             animation = "animationname",
@@ -291,8 +294,6 @@ namespace Healthcare_test.VR
                     toReturn[(x * 256) + y] = (768 - (terrainBitmap.GetPixel(x, y).R + terrainBitmap.GetPixel(x, y).G + terrainBitmap.GetPixel(x, y).B)) / 30;
                 }
             }
-
-
             return toReturn;
         }
 

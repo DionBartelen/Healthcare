@@ -16,6 +16,8 @@ namespace Healthcare_test.VR
     {
         Session session;
         List<ClientInfo> clients;
+        List<Node> nodes;
+        Node currentNode;
         ClientInfo currentClient;
         public string tunnel { get; set; }
         Thread Reading;
@@ -32,7 +34,28 @@ namespace Healthcare_test.VR
 
         private void VRgui_Load(object sender, EventArgs e)
         {
+            String[] items = new String[] { Commands.tree1,
+                                            Commands.tree2,
+                                            Commands.tree3,
+                                            Commands.tree4,
+                                            Commands.tree5,
+                                            Commands.tree6,
+                                            Commands.tree7,
+                                            Commands.tree10,
+                                            Commands.bike,
+                                            Commands.carcartoon,
+                                            Commands.carcartoon2,
+                                            Commands.house1,
+            };
 
+            foreach(string s in items)
+            {
+                //string[] ss = s.Split('\\');
+                //objects.Items.Add(ss[ss.Length - 1]);
+
+                objects.Items.Add(s);
+
+            }
         }
 
         public void GetClientList()
@@ -148,7 +171,7 @@ namespace Healthcare_test.VR
 
         private void Buttonobject_Click(object sender, EventArgs e)
         {
-            session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel)));
+            //session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel)));
         }
 
         private void terrainWH_Click(object sender, EventArgs e)
@@ -169,6 +192,16 @@ namespace Healthcare_test.VR
         private void Moving_3D_Ojbect_Click(object sender, EventArgs e)
         {
             session.Send(JsonConvert.SerializeObject(Commands.MoveObject(tunnel, session.terrain.nodes.Last().uuid, session.terrain.road.Last().id)));
+        }
+
+        private void selectbutton_Click(object sender, EventArgs e)
+        {
+            session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel, objects.Text)));
+        }
+
+        private void objects_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -26,6 +26,7 @@ namespace Healthcare_test.VR
             stream = client.GetStream();
             this.gui = gui;
         }
+        
 
         public void Send(string message)
         {
