@@ -47,6 +47,8 @@
             this.Routebutton = new System.Windows.Forms.Button();
             this.Showroutebutton = new System.Windows.Forms.Button();
             this.Moving_3D_Ojbect = new System.Windows.Forms.Button();
+            this.GetTerrainButton = new System.Windows.Forms.Button();
+            this.Texture = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // connect_Button
@@ -232,11 +234,33 @@
             this.Moving_3D_Ojbect.UseVisualStyleBackColor = true;
             this.Moving_3D_Ojbect.Click += new System.EventHandler(this.Moving_3D_Ojbect_Click);
             // 
+            // GetTerrainButton
+            // 
+            this.GetTerrainButton.Location = new System.Drawing.Point(604, 349);
+            this.GetTerrainButton.Name = "GetTerrainButton";
+            this.GetTerrainButton.Size = new System.Drawing.Size(92, 23);
+            this.GetTerrainButton.TabIndex = 22;
+            this.GetTerrainButton.Text = "GetTerrain";
+            this.GetTerrainButton.UseVisualStyleBackColor = true;
+            this.GetTerrainButton.Click += new System.EventHandler(this.GetTerrainButton_Click);
+            // 
+            // Texture
+            // 
+            this.Texture.Location = new System.Drawing.Point(519, 249);
+            this.Texture.Name = "Texture";
+            this.Texture.Size = new System.Drawing.Size(75, 23);
+            this.Texture.TabIndex = 23;
+            this.Texture.Text = "Texture";
+            this.Texture.UseVisualStyleBackColor = true;
+            this.Texture.Click += new System.EventHandler(this.Texture_Click);
+            // 
             // VRgui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(708, 384);
+            this.Controls.Add(this.Texture);
+            this.Controls.Add(this.GetTerrainButton);
             this.Controls.Add(this.Moving_3D_Ojbect);
             this.Controls.Add(this.Showroutebutton);
             this.Controls.Add(this.Routebutton);
@@ -289,5 +313,7 @@
         private System.Windows.Forms.Button Routebutton;
         private System.Windows.Forms.Button Showroutebutton;
         private System.Windows.Forms.Button Moving_3D_Ojbect;
+        private System.Windows.Forms.Button GetTerrainButton;
+        private System.Windows.Forms.Button Texture;
     }
 }

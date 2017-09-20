@@ -23,6 +23,8 @@ namespace Healthcare_test.VR
         public static string carcartoon = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\cars\cartoon\Pony_cartoon.obj");
         public static string carcartoon2 = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\cars\cartoon\Pony_cartoon2.obj");
         public static string house1 = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\houses\set1\house1.obj");
+        public static string diffuse = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\textures\grass_diffuse.png");
+        
 
         public static dynamic SessionList()
         {
@@ -128,18 +130,28 @@ namespace Healthcare_test.VR
             return Commands.SendTunnel(tunnel, request);
         }
 
-        public static dynamic GetGroundPlane(string tunnel)
+        public static dynamic GetNodeByName(string tunnel, string NameToFind)
         {
-            dynamic FindGroundPlane = new
+            dynamic FindNode = new
             {
                 id = "scene/node/find",
                 data = new
                 {
-                    name = "GroundPlane"
+                    name = NameToFind
                 }
             };
-            return Commands.SendTunnel(tunnel, FindGroundPlane);
+            return Commands.SendTunnel(tunnel, FindNode);
         }
+
+        public static dynamic GetScene(string tunnel)
+        {
+            dynamic GetTerrain = new
+            {
+                id = "scene/get",
+            };
+            return Commands.SendTunnel(tunnel, GetTerrain);
+        }
+
 
         public static dynamic DeleteNode(string tunnel, string uuid)
         {
@@ -151,7 +163,7 @@ namespace Healthcare_test.VR
                     id = uuid
                 }
             };
-           // System.Diagnostics.Debug.WriteLine(uuid + " test " + tunnel);
+            // System.Diagnostics.Debug.WriteLine(uuid + " test " + tunnel);
             return Commands.SendTunnel(tunnel, NodeToDelete);
         }
 
@@ -173,7 +185,7 @@ namespace Healthcare_test.VR
 
         public static dynamic CreateGroundTerrainWithHeights(string tunnel)
         {
-            Random r = new Random();
+
             double[] heightsGround = new double[256 * 256];
             try
             {
@@ -185,8 +197,6 @@ namespace Healthcare_test.VR
                 {
                     for (int Terrainz = 0; Terrainz < 256; Terrainz++)
                     {
-
-                        //heightsGround[Terrainx + Terrainz] = (r.NextDouble() * 3);
                         heightsGround[(Terrainx * 256) + Terrainz] = ((double)Terrainz / 8);
                     }
                 }
@@ -202,6 +212,27 @@ namespace Healthcare_test.VR
             };
             return Commands.SendTunnel(tunnel, groundTerrain);
         }
+
+        public static dynamic addTextureTerrain(string tunnel, string uuid, string normal, int min, int max, int fade)
+        {
+            dynamic Texture = new
+            {
+                id = "scene/node/addlayer",
+                data = new
+                {
+                    id = uuid,
+                    diffuse = @"C:\Users\Aaron Israels\Desktop\NetworkEngine\data\NetworkEngine\textures\terrain\" + normal,
+                    normal = @"C:\Users\Aaron Israels\Desktop\NetworkEngine\data\NetworkEngine\textures\terrain\" + normal,
+                    minHeight = min,
+                    maxHeight = max,
+                    fadeDist = fade
+
+                }
+            };
+
+            return Commands.SendTunnel(tunnel, Texture);
+        }
+
 
         public static dynamic AddRoute(string tunnel)
         {
@@ -311,13 +342,19 @@ namespace Healthcare_test.VR
 
         public static double[] GenerateTerrainFromPicture()
         {
-            Bitmap terrainBitmap = (Bitmap)Bitmap.FromFile(Path.Combine(Directory.GetCurrentDirectory(), "terrain2.jpg"));
+            Bitmap terrainBitmap = (Bitmap)Bitmap.FromFile(Path.Combine(Directory.GetCurrentDirectory(), "HeightmapBW4.jpg"));
             double[] toReturn = new double[terrainBitmap.Width * terrainBitmap.Height];
             for (int x = 0; x < terrainBitmap.Width; x++)
             {
                 for (int y = 0; y < terrainBitmap.Height; y++)
                 {
-                    toReturn[(x * 256) + y] = (768 - (terrainBitmap.GetPixel(x, y).R + terrainBitmap.GetPixel(x, y).G + terrainBitmap.GetPixel(x, y).B)) / 30;
+                    double r = Convert.ToDouble(terrainBitmap.GetPixel(x, y).R);
+                    double g = Convert.ToDouble(terrainBitmap.GetPixel(x, y).G);
+                    double b = Convert.ToDouble(terrainBitmap.GetPixel(x, y).B);
+
+
+
+                    toReturn[(x * 256) + y] =  ((768 - (r + g + b)) / 15);
                 }
             }
 

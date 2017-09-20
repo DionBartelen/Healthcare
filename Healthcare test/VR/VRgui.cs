@@ -143,17 +143,19 @@ namespace Healthcare_test.VR
 
         private void remove_Terrain_Button_Click(object sender, EventArgs e)
         {
-            session.Send(JsonConvert.SerializeObject(Commands.GetGroundPlane(tunnel)));
+            session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel,"GroundPlane")));
         }
 
         private void Buttonobject_Click(object sender, EventArgs e)
         {
             session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel)));
+            
         }
 
         private void terrainWH_Click(object sender, EventArgs e)
         {
             session.Send(JsonConvert.SerializeObject(Commands.CreateGroundTerrainWithHeights(tunnel)));
+            
         }
 
         private void Routebutton_Click(object sender, EventArgs e)
@@ -169,6 +171,16 @@ namespace Healthcare_test.VR
         private void Moving_3D_Ojbect_Click(object sender, EventArgs e)
         {
             session.Send(JsonConvert.SerializeObject(Commands.MoveObject(tunnel, session.terrain.nodes.Last().uuid, session.terrain.road.Last().id)));
+        }
+
+        private void GetTerrainButton_Click(object sender, EventArgs e)
+        {
+            session.Send(JsonConvert.SerializeObject(Commands.GetScene(tunnel)));
+        }
+
+        private void Texture_Click(object sender, EventArgs e)
+        {
+            session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "name")));
         }
     }
 }
