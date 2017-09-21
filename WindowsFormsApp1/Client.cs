@@ -28,7 +28,7 @@ namespace WindowsFormsApp1
         public Client(String username)
         {
             System.Diagnostics.Debug.WriteLine("what up ");
-            bool ipIsOk = IPAddress.TryParse("192.168.137.12", out localhost);
+            bool ipIsOk = IPAddress.TryParse("127.0.0.1", out localhost);
              if (!ipIsOk) { Console.WriteLine("ip adres kan niet geparsed worden."); Environment.Exit(1); }
             client = new TcpClient(localhost.ToString(), port);
               stream = client.GetStream();
