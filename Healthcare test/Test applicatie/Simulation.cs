@@ -52,7 +52,7 @@ namespace Healthcare_test.test_applicatie
             SpeedLabel.Text = Speed + "";
         }
 
-        private void Count()
+        public void Count()
         {
             while (ShouldCount)
             {

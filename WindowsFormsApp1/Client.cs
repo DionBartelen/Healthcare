@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Healthcare_test.test_applicatie;
+using Healthcare_test;
 
 namespace WindowsFormsApp1
 {
@@ -23,10 +25,12 @@ namespace WindowsFormsApp1
         Thread read;
         Thread getData;
         Boolean isConnected;
+        ErgometerSimulatie simulation;
 
 
-        public Client(String username)
+        public Client(String username, ErgometerSimulatie simulation)
         {
+            this.simulation = simulation;
             System.Diagnostics.Debug.WriteLine("what up ");
             bool ipIsOk = IPAddress.TryParse("127.0.0.1", out localhost);
              if (!ipIsOk) { Console.WriteLine("ip adres kan niet geparsed worden."); Environment.Exit(1); }
@@ -108,9 +112,11 @@ namespace WindowsFormsApp1
             {
                 System.Diagnostics.Debug.WriteLine("its ye boi");
                 isConnected = false;
+                simulation.Close();
                 stream.Close();
                 client.Close();
                 ergometerCOM.Close();
+                
             }
 
         }
@@ -136,26 +142,54 @@ namespace WindowsFormsApp1
             }
             while (isConnected)
             {
-                System.Diagnostics.Debug.WriteLine(isConnected);
-                Healthcare_test.ErgometerData ergometerData = ergometerCOM.GetData();
-                //String ergometerData2 = ergometerData.ToString();
-                //System.Diagnostics.Debug.WriteLine(ergometerData2);
-                dynamic ergometerdata = new
+                if (simulation == null)
                 {
-                    id = "data",
-                    session = sessionID,
-                    data = new
+                    System.Diagnostics.Debug.WriteLine(isConnected);
+                    Healthcare_test.ErgometerData ergometerData = ergometerCOM.GetData();
+                    //String ergometerData2 = ergometerData.ToString();
+                    //System.Diagnostics.Debug.WriteLine(ergometerData2);
+                    dynamic ergometerdata = new
                     {
-                        power = ergometerData.Actual_Power,
-                        speed = ergometerData.Speed,
-                        time = ergometerData.Time,
-                        RPM = ergometerData.RPM,
-                        distance = ergometerData.Distance,
-                        pulse = ergometerData.Pulse
-                    }
+                        id = "data",
+                        session = sessionID,
+                        data = new
+                        {
+                            power = ergometerData.Actual_Power,
+                            speed = ergometerData.Speed,
+                            time = ergometerData.Time,
+                            RPM = ergometerData.RPM,
+                            distance = ergometerData.Distance,
+                            pulse = ergometerData.Pulse
+                        }
 
-                };
-                Send(JsonConvert.SerializeObject(ergometerdata));
+                    };
+                    Send(JsonConvert.SerializeObject(ergometerdata));
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine(isConnected);
+                    Healthcare_test.ErgometerData ergometerData2 = simulation.GetData(); 
+                    //String ergometerData2 = ergometerData.ToString();
+                    //System.Diagnostics.Debug.WriteLine(ergometerData2);
+                    dynamic ergometerdata2 = new
+                    {
+                        id = "data",
+                        session = sessionID,
+                        data = new
+                        {
+                            power = ergometerData2.Actual_Power,
+                            speed = ergometerData2.Speed,
+                            time = ergometerData2.Time,
+                            RPM = ergometerData2.RPM,
+                            distance = ergometerData2.Distance,
+                            pulse = ergometerData2.Pulse
+                        }
+
+                    };
+                    Send(JsonConvert.SerializeObject(ergometerdata2));
+
+
+                }
                 Thread.Sleep(1000);
             }
 

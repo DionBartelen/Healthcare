@@ -7,9 +7,9 @@ using Healthcare_test.test_applicatie;
 
 namespace Healthcare_test
 {
-    class ErgometerSimulatie : Ergometer
+    public class ErgometerSimulatie : Ergometer
     {
-        Simulation s;
+        public Simulation s;
 
         public ErgometerSimulatie()
         {

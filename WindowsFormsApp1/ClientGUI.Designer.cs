@@ -34,6 +34,8 @@
             this.passwordLbl = new System.Windows.Forms.Label();
             this.sign_in_Btn = new System.Windows.Forms.Button();
             this.response = new System.Windows.Forms.Label();
+            this.comportLbl = new System.Windows.Forms.Label();
+            this.comportCombo = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // usernameTxt
@@ -87,11 +89,31 @@
             this.response.TabIndex = 5;
             this.response.Text = "notConected";
             // 
+            // comportLbl
+            // 
+            this.comportLbl.AutoSize = true;
+            this.comportLbl.Location = new System.Drawing.Point(20, 117);
+            this.comportLbl.Name = "comportLbl";
+            this.comportLbl.Size = new System.Drawing.Size(59, 17);
+            this.comportLbl.TabIndex = 6;
+            this.comportLbl.Text = "comport";
+            // 
+            // comportCombo
+            // 
+            this.comportCombo.FormattingEnabled = true;
+            this.comportCombo.Location = new System.Drawing.Point(204, 117);
+            this.comportCombo.Name = "comportCombo";
+            this.comportCombo.Size = new System.Drawing.Size(150, 24);
+            this.comportCombo.TabIndex = 7;
+            this.comportCombo.SelectedIndexChanged += new System.EventHandler(this.comportCombo_SelectedIndexChanged);
+            // 
             // ClientGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(556, 406);
+            this.Controls.Add(this.comportCombo);
+            this.Controls.Add(this.comportLbl);
             this.Controls.Add(this.response);
             this.Controls.Add(this.sign_in_Btn);
             this.Controls.Add(this.passwordLbl);
@@ -113,6 +135,8 @@
         private System.Windows.Forms.Label passwordLbl;
         private System.Windows.Forms.Button sign_in_Btn;
         private System.Windows.Forms.Label response;
+        private System.Windows.Forms.Label comportLbl;
+        private System.Windows.Forms.ComboBox comportCombo;
     }
 }
 

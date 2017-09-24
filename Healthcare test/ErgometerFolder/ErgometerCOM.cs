@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Healthcare_test.test_applicatie;
+using System;
 using System.IO.Ports;
 
 namespace Healthcare_test
@@ -7,6 +8,7 @@ namespace Healthcare_test
     public class ErgometerCOM : Ergometer
     {
         public SerialPort serialPort;
+   
 
         public ErgometerCOM(string comport, string baudRate)
         {
@@ -45,16 +47,18 @@ namespace Healthcare_test
                     response = serialPort.ReadLine();
                 }
             }
+
+
             catch (Exception e)
             {
 
             }
             String[] data = response.Split('\t');
             int time;
-           // foreach (String datas in data)
-           // {
-           //     System.Diagnostics.Debug.WriteLine(datas);
-           // }
+            // foreach (String datas in data)
+            // {
+            //     System.Diagnostics.Debug.WriteLine(datas);
+            // }
             if (data.Length == 8)
             {
                 Int32.TryParse(data[0], out int pulse);
@@ -65,15 +69,17 @@ namespace Healthcare_test
                 Int32.TryParse(data[5], out int energy);
                 time = Convert.ToInt32(data[6].Substring(0, 2) + data[6].Substring(3, 2));
                 Int32.TryParse(data[7], out int actual_Power);
-                return new ErgometerData(pulse, rpm, speed/10.0, distance/10.00, time, energy, actual_Power, requested_Power);
+                return new ErgometerData(pulse, rpm, speed / 10.0, distance / 10.00, time, energy, actual_Power, requested_Power);
             }
             else
             {
                 System.Windows.Forms.MessageBox.Show(response);
                 return null;
             }
-
         }
+            
+
+        
 
         override
         public void SetDistance(double distance)

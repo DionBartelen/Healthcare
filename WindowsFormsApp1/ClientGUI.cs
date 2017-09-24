@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Healthcare_test;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,7 @@ namespace WindowsFormsApp1
 {
     public partial class ClientGUI : Form
     {
+        public Ergometer ergometer;
         List<ClientData> client_data_list;
         public TextBox username { get; set; }
         public TextBox password { get; set; }
@@ -27,6 +30,13 @@ namespace WindowsFormsApp1
             ClientData client2 = new ClientData("test1", "test2");
             client_data_list.Add(client1);
             client_data_list.Add(client2);
+            string[] ports = SerialPort.GetPortNames();
+            foreach (String s in ports)
+            {
+                comportCombo.Items.Add(s);
+            }
+            comportCombo.Items.Add("Simulator");
+            comportCombo.SelectedItem = comportCombo.Items[0];
 
 
         }
@@ -47,10 +57,29 @@ namespace WindowsFormsApp1
             if (foundInList)
             { 
                 response.Text = "connected";
-                Client client = new Client(username.Text);
-                SessionGUI sessionGUI = new SessionGUI(client);
-                sessionGUI.Show();
-                       }
+                
+
+                if (ergometer != null)
+                {
+                    ergometer.Close();
+                }
+                if (comportCombo.SelectedItem.ToString() == "Simulator")
+                {
+                    ErgometerSimulatie ergometersimulatie = new ErgometerSimulatie();
+                    Client client = new Client(username.Text, ergometersimulatie);
+                    SessionGUI sessionGUI = new SessionGUI(client);
+                    sessionGUI.Show();
+
+                }
+                else
+                {
+                    Client client = new Client(username.Text , null);
+                    SessionGUI sessionGUI = new SessionGUI(client);
+                    sessionGUI.Show();
+                    string comPort = comportCombo.SelectedIndex.ToString();
+                    ergometer = new ErgometerCOM(comPort, "9600");
+                }
+            }
             else
             {
                 response.Text = "Not found";
@@ -58,8 +87,16 @@ namespace WindowsFormsApp1
                 password.Text = "";
             }
 
+        }
+
+
+        private void comportCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
-        }
     }
+
+
+    }
+  
 

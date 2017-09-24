@@ -43,8 +43,7 @@ namespace Healthcare_test
                 else
                     Data_Collector.Enabled = false;
 
-                replyBoxText.Clear();
-                replyBoxText.Text = replyBoxText.Text + "\n" + "Gekozen COM poort: " + comPort + " gekozen baudrate: " + baudRate + " verbonden: " + ergometer.IsConnected();
+               
             }
         }
 
