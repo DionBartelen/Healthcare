@@ -50,6 +50,8 @@
             this.selectbutton = new System.Windows.Forms.Button();
             this.speedButton = new System.Windows.Forms.Button();
             this.speedBox = new System.Windows.Forms.TextBox();
+            this.sceneButton = new System.Windows.Forms.Button();
+            this.resetButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // connect_Button
@@ -281,11 +283,37 @@
             this.speedBox.Size = new System.Drawing.Size(61, 20);
             this.speedBox.TabIndex = 25;
             // 
+            // sceneButton
+            // 
+            this.sceneButton.Location = new System.Drawing.Point(171, 110);
+            this.sceneButton.Margin = new System.Windows.Forms.Padding(2);
+            this.sceneButton.Name = "sceneButton";
+            this.sceneButton.Size = new System.Drawing.Size(64, 38);
+            this.sceneButton.TabIndex = 26;
+            this.sceneButton.Text = "Scene info";
+            this.sceneButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.sceneButton.UseVisualStyleBackColor = true;
+            this.sceneButton.Click += new System.EventHandler(this.sceneButton_Click);
+            // 
+            // resetButton
+            // 
+            this.resetButton.Location = new System.Drawing.Point(239, 110);
+            this.resetButton.Margin = new System.Windows.Forms.Padding(2);
+            this.resetButton.Name = "resetButton";
+            this.resetButton.Size = new System.Drawing.Size(56, 38);
+            this.resetButton.TabIndex = 27;
+            this.resetButton.Text = "Reset scene";
+            this.resetButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.resetButton.UseVisualStyleBackColor = true;
+            this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
+            // 
             // VRgui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(526, 276);
+            this.Controls.Add(this.resetButton);
+            this.Controls.Add(this.sceneButton);
             this.Controls.Add(this.speedBox);
             this.Controls.Add(this.speedButton);
             this.Controls.Add(this.selectbutton);
@@ -344,5 +372,7 @@
         private System.Windows.Forms.Button selectbutton;
         private System.Windows.Forms.Button speedButton;
         private System.Windows.Forms.TextBox speedBox;
+        private System.Windows.Forms.Button sceneButton;
+        private System.Windows.Forms.Button resetButton;
     }
 }

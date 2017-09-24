@@ -110,7 +110,7 @@ namespace Healthcare_test.VR
                 {
                    
                 }
-                System.Diagnostics.Debug.WriteLine(terrain.ToString());
+                //System.Diagnostics.Debug.WriteLine(terrain.ToString());
             }
         }
 

@@ -22,7 +22,7 @@ namespace Healthcare_test.VR
         public static string carcartoon = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\cars\cartoon\Pony_cartoon.obj");
         public static string carcartoon2 = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\cars\cartoon\Pony_cartoon2.obj");
         public static string house1 = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\houses\set1\house1.obj");
-        
+
 
         public static dynamic SessionList()
         {
@@ -298,6 +298,24 @@ namespace Healthcare_test.VR
             return Commands.SendTunnel(tunnel, updateTerrain);
         }
 
+        public static dynamic GetScene(String tunnel)
+        {
+            dynamic sceneget = new
+            {
+                id = "scene/get"
+            };
+            return Commands.SendTunnel(tunnel, sceneget);
+        }
+
+        public static dynamic ResetScene(String tunnel)
+        {
+            dynamic sceneReset = new
+            {
+                id = "scene/reset"
+            };
+            return Commands.SendTunnel(tunnel, sceneReset);
+        }
+
         public static double[] GenerateTerrainFromPicture()
         {
             Bitmap terrainBitmap = (Bitmap)Bitmap.FromFile(Path.Combine(Directory.GetCurrentDirectory(), "terrain2.jpg"));
@@ -311,6 +329,5 @@ namespace Healthcare_test.VR
             }
             return toReturn;
         }
-
     }
 }

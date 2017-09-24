@@ -209,5 +209,15 @@ namespace Healthcare_test.VR
             double receiving = Convert.ToDouble(((speedBox.Text)));
             session.Send(JsonConvert.SerializeObject(Commands.setSpeed(tunnel, session.terrain.nodes.Last().uuid, receiving)));
         }
+
+        private void sceneButton_Click(object sender, EventArgs e)
+        {
+            session.Send(JsonConvert.SerializeObject(Commands.GetScene(tunnel)));
+        }
+
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            session.Send(JsonConvert.SerializeObject(Commands.ResetScene(tunnel)));
+        }
     }
 }
