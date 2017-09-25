@@ -13,6 +13,7 @@ namespace Healthcare_test.VR
         public List<Node> nodes;
         public List<Road> road;
         public List<Route> route;
+        Boolean textureLoaded = false;
 
         public Terrain(int[] size, int[] heights)
         {

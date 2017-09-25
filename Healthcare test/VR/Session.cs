@@ -156,7 +156,7 @@ namespace Healthcare_test.VR
                 }
                 catch (Exception e)
                 {
-                    System.Diagnostics.Debug.WriteLine(e.Message);
+                    System.Diagnostics.Debug.WriteLine(e.Message + "\r\n" + e.StackTrace);
                 }
             }
         }
@@ -211,7 +211,7 @@ namespace Healthcare_test.VR
                     }
                     if (jsonData.data.data.data[0].name == "terrain")
                     {
-                        //System.Diagnostics.Debug.WriteLine("texture proberen toe te voegen");
+                        System.Diagnostics.Debug.WriteLine("texture proberen toe te voegen");
                         SetupTexturesTerrain(uuid);
                         
                     }
