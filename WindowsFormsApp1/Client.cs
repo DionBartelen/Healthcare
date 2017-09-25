@@ -28,7 +28,7 @@ namespace WindowsFormsApp1
         ErgometerSimulatie simulation;
 
 
-        public Client(String username, ErgometerSimulatie simulation)
+        public Client(String username, ErgometerSimulatie simulation, string comport)
         {
             this.simulation = simulation;
             System.Diagnostics.Debug.WriteLine("what up ");
@@ -38,7 +38,7 @@ namespace WindowsFormsApp1
               stream = client.GetStream();
             isConnected = true;
               Send(startSession(username));
-              ergometerCOM = new Healthcare_test.ErgometerCOM("COM8", "9600");
+              ergometerCOM = new Healthcare_test.ErgometerCOM(comport, "9600");
            read = new Thread(Read);
            read.Start();
 
