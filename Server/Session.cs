@@ -5,6 +5,8 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using System.Net;
+using System.Threading;
 
 namespace Server
 {
@@ -12,6 +14,45 @@ namespace Server
     {
         TcpClient client;
         NetworkStream stream;
+        static int port = 1234;
+
+        public static void ListenToNewConnections(object o)
+        {
+            IPAddress localhost;
+            if (IPAddress.TryParse("127.0.0.1", out localhost))
+            {
+                TcpListener listener = new TcpListener(localhost, port);
+                listener.Start();
+                Console.WriteLine("Klaar voor verbindingen...");
+                Database.ReadSavedData();
+                while (true)
+                {
+                    TcpClient client = listener.AcceptTcpClient();
+                    Thread thread = new Thread(HandleNewClient);
+                    thread.Start(client);
+                    Console.WriteLine("Verbonden met client: " + client.Client.AddressFamily.ToString());
+                }
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("Error:\r\nKan het IP-adres niet parsen.");
+            }
+        }
+
+        public static void HandleNewClient(object client)
+        {
+            if (client == null)
+            {
+                return;
+            }
+            else if (!typeof(TcpClient).IsInstanceOfType(client))
+            {
+                return;
+            }
+            TcpClient clientTcp = (TcpClient)client;
+            Session session = new Session(clientTcp);
+            session.Read();
+        }
 
         public Session(TcpClient client)
         {
