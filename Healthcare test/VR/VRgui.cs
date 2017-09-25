@@ -121,7 +121,6 @@ namespace Healthcare_test.VR
             //    {
             //        return;
             //    }
-            System.Diagnostics.Debug.WriteLine("test");
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
                 (e.KeyChar != '.'))
             {
@@ -157,11 +156,13 @@ namespace Healthcare_test.VR
         {
             //session.Send(JsonConvert.SerializeObject(Commands.addSkyBox(tunnel)));
             session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "GroundPlane")));
+            //Task.Delay(100);
             session.Send(JsonConvert.SerializeObject(Commands.CreateGroundTerrainWithHeights(tunnel)));
+            //Task.Delay(100);
             session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel, -105, -4, -128,"terrain",true)));
-            Task.Delay(2000).Wait();
+            //Task.Delay(1000).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "terrain")));
-            Task.Delay(2000).Wait();
+            //Task.Delay(1000).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel, 0, 0, 0, "MainBike", false)));
 
 

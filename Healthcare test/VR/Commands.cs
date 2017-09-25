@@ -114,7 +114,7 @@ namespace Healthcare_test.VR
                 return Commands.SendTunnel(tunnel, request);
             }
             else
-                System.Diagnostics.Debug.WriteLine("else in gegeaan");
+                //System.Diagnostics.Debug.WriteLine("else in gegeaan");
             {
                 dynamic request = new
                 {
@@ -258,8 +258,10 @@ namespace Healthcare_test.VR
                     data = new
                     {
                         id = uuid,
-                        diffuse = @"C:\Users\Aaron\Desktop\NetworkEngine\data\NetworkEngine\textures\terrain\" + normal,
-                        normal = @"C:\Users\Aaron\Desktop\NetworkEngine\data\NetworkEngine\textures\terrain\" + normal,
+                        diffuse = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\textures\" + normal),
+                        normal = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\textures\" + normal),
+                        //diffuse = @"C:\Users\Aaron\Desktop\NetworkEngine\data\NetworkEngine\textures\terrain\" + normal,
+                        //normal = @"C:\Users\Aaron\Desktop\NetworkEngine\data\NetworkEngine\textures\terrain\" + normal,
                         minHeight = min,
                         maxHeight = max,
                         fadeDist = fade
@@ -282,12 +284,18 @@ namespace Healthcare_test.VR
                     type = "static",
                     files = new
                     {
-                        xpos = @"C:\Users\Aaron Israels\Desktop\NetworkEngine\data\NetworkEngine\textures\SkyBoxes\interstellar\interstellar_rt.png",
-                        xneg = @"C:\Users\Aaron Israels\Desktop\NetworkEngine\data\NetworkEngine\textures\SkyBoxes\interstellar\interstellar_lf.png",
-                        ypos = @"C:\Users\Aaron Israels\Desktop\NetworkEngine\data\NetworkEngine\textures\SkyBoxes\interstellar\interstellar_up.png",
-                        yneg = @"C:\Users\Aaron Israels\Desktop\NetworkEngine\data\NetworkEngine\textures\SkyBoxes\interstellar\interstellar_dn.png",
-                        zpos = @"C:\Users\Aaron Israels\Desktop\NetworkEngine\data\NetworkEngine\textures\SkyBoxes\interstellar\interstellar_bk.png",
-                        zneg = @"C:\Users\Aaron Israels\Desktop\NetworkEngine\data\NetworkEngine\textures\SkyBoxes\interstellar\interstellar_ft.png"
+                        xpos = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\textures\SkyBoxes\interstellar\interstellar_rt.png"),
+                        xneg = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\textures\SkyBoxes\interstellar\interstellar_lf.png"),
+                        ypos = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\textures\SkyBoxes\interstellar\interstellar_up.png"),
+                        yneg = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\textures\SkyBoxes\interstellar\interstellar_dn.png"),
+                        zpos = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\textures\SkyBoxes\interstellar\interstellar_bk.png"),
+                        zneg = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\textures\SkyBoxes\interstellar\interstellar_ft.png")
+                        //xpos = @"C:\Users\Aaron Israels\Desktop\NetworkEngine\data\NetworkEngine\textures\SkyBoxes\interstellar\interstellar_rt.png",
+                        //xneg = @"C:\Users\Aaron Israels\Desktop\NetworkEngine\data\NetworkEngine\textures\SkyBoxes\interstellar\interstellar_lf.png",
+                        //ypos = @"C:\Users\Aaron Israels\Desktop\NetworkEngine\data\NetworkEngine\textures\SkyBoxes\interstellar\interstellar_up.png",
+                        //yneg = @"C:\Users\Aaron Israels\Desktop\NetworkEngine\data\NetworkEngine\textures\SkyBoxes\interstellar\interstellar_dn.png",
+                        //zpos = @"C:\Users\Aaron Israels\Desktop\NetworkEngine\data\NetworkEngine\textures\SkyBoxes\interstellar\interstellar_bk.png",
+                        //zneg = @"C:\Users\Aaron Israels\Desktop\NetworkEngine\data\NetworkEngine\textures\SkyBoxes\interstellar\interstellar_ft.png"
 
                     }
                 }
@@ -310,27 +318,29 @@ namespace Healthcare_test.VR
         {
             int[] pos1 = new int[3] { 0, 0, 0 };
             int[] pos2 = new int[3] { 30, 0, 30 };
-            int[] pos3 = new int[3] { 110, 0, 65 };
+            int[] pos3 = new int[3] { 105, 0, 60 };
             int[] pos4 = new int[3] { 120, 0, 15 };
             int[] pos5 = new int[3] { 115, 0, -40 };
-            int[] pos6 = new int[3] { 40, 0, 5 };
-            int[] pos7 = new int[3] { 120, 0, 15 };
-            int[] pos8 = new int[3] { 120, 0, 15 };
-            int[] pos9 = new int[3] { 120, 0, 15 };
-            int[] pos10 = new int[3] { 120, 0, 15 };
+            int[] pos6 = new int[3] { 15, 0, -65 };
+            int[] pos7 = new int[3] { -30, 0, -85 };
+            int[] pos8 = new int[3] { -60, 0, -60 };
+            int[] pos9 = new int[3] { -75, 0, 65 };
+            int[] pos10 = new int[3] { -60, 0, 80 };
+            int[] pos11 = new int[3] { -20, 0, 40 };
 
 
 
             int[] dir1 = new int[3] { 5, 0, -5 };
             int[] dir2 = new int[3] { 5, 0, 5 };
-            int[] dir3 = new int[3] { -5, 0, 5 };
+            int[] dir3 = new int[3] { 5, 0, 5 };
             int[] dir4 = new int[3] { -5, 0, -5 };
             int[] dir5 = new int[3] { -5, 0, -5 };
-            int[] dir6 = new int[3] { -5, 0, -5 };
+            int[] dir6 = new int[3] { 0, 0, 0 };
             int[] dir7 = new int[3] { -5, 0, -5 };
-            int[] dir8 = new int[3] { -5, 0, -5 };
-            int[] dir9 = new int[3] { -5, 0, -5 };
-            int[] dir10 = new int[3] { -5, 0, -5 };
+            int[] dir8 = new int[3] { 0, 0, 0 };
+            int[] dir9 = new int[3] { 0, 0, 0 };
+            int[] dir10 = new int[3] { 5, 0, 5 };
+            int[] dir11 = new int[3] { 0, 0, 0 };
             dynamic node1 = new
             {
                 pos = pos1,
@@ -381,8 +391,13 @@ namespace Healthcare_test.VR
                 pos = pos10,
                 dir = dir10
             };
+            dynamic node11 = new
+            {
+                pos = pos11,
+                dir = dir11
+            };
 
-            dynamic[] routeNodes = new dynamic[10] { node1, node2, node3, node4, node5, node6, node7, node8, node9, node10 };
+            dynamic[] routeNodes = new dynamic[11] { node1, node2, node3, node4, node5, node6, node7, node8, node9, node10, node11 };
 
             dynamic request = new
             {
@@ -467,14 +482,9 @@ namespace Healthcare_test.VR
                     double r = Convert.ToDouble(terrainBitmap.GetPixel(x, y).R);
                     double g = Convert.ToDouble(terrainBitmap.GetPixel(x, y).G);
                     double b = Convert.ToDouble(terrainBitmap.GetPixel(x, y).B);
-
-
-
                     toReturn[(x * 256) + y] = ((768 - (r + g + b)) / 15);
                 }
             }
-
-
             return toReturn;
         }
 

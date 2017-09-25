@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Healthcare_test.VR
@@ -18,10 +20,10 @@ namespace Healthcare_test.VR
         public Session(string ip, int port, VRgui gui)
         {
             //dit moet nog in de methode gezet worden
-            terrain = new Terrain(new int[0], new int[0]);
+            terrain = new Terrain(new int[256], new int[256]);
             client = new TcpClient();
-            client.ReceiveTimeout = 20000;
-            client.SendTimeout = 20000;
+            client.ReceiveTimeout = 1000;
+            client.SendTimeout = 1000;
             client.Connect(ip, port);
             stream = client.GetStream();
             this.gui = gui;
@@ -109,7 +111,7 @@ namespace Healthcare_test.VR
                 {
 
                 }
-                System.Diagnostics.Debug.WriteLine(terrain.ToString());
+                //System.Diagnostics.Debug.WriteLine(terrain.ToString());
             }
         }
 
@@ -162,7 +164,7 @@ namespace Healthcare_test.VR
         public void ProcessAnswer(string information)
         {
             dynamic jsonData = JsonConvert.DeserializeObject(information);
-            System.Diagnostics.Debug.WriteLine("ID: " + (string)jsonData.id);
+            //System.Diagnostics.Debug.WriteLine("ID: " + (string)jsonData.id);
 
 
 
@@ -180,7 +182,7 @@ namespace Healthcare_test.VR
                 {
                     terrain.RouteNameReceived((string)jsonData.data.data.data.uuid);
                 }
-                System.Diagnostics.Debug.WriteLine((string)jsonData.data.data.id);
+                //System.Diagnostics.Debug.WriteLine((string)jsonData.data.data.id);
 
                 if (jsonData.data.data.id == "scene/node/add")
                 {
@@ -200,16 +202,16 @@ namespace Healthcare_test.VR
                     //System.Diagnostics.Debug.WriteLine(information);
                     string uuid = jsonData.data.data.data[0].uuid;
                     //System.Diagnostics.Debug.WriteLine(uuid + " test");
-                    System.Diagnostics.Debug.WriteLine(information);
+                    //System.Diagnostics.Debug.WriteLine(information);
                     //System.Diagnostics.Debug.WriteLine("naam is " + (string)jsonData.data.data.data[0].name);
                     if (jsonData.data.data.data[0].name == "GroundPlane")
                     {
-                        System.Diagnostics.Debug.WriteLine("dit is de groundplane");
+                        //System.Diagnostics.Debug.WriteLine("dit is de groundplane");
                         Send(JsonConvert.SerializeObject(Commands.DeleteNode(gui.tunnel, uuid)));
                     }
                     if (jsonData.data.data.data[0].name == "terrain")
                     {
-                        System.Diagnostics.Debug.WriteLine("texture proberen toe te voegen");
+                        //System.Diagnostics.Debug.WriteLine("texture proberen toe te voegen");
                         SetupTexturesTerrain(uuid);
                         
                     }
@@ -217,7 +219,7 @@ namespace Healthcare_test.VR
                 }
                 else
                 {
-                     System.Diagnostics.Debug.WriteLine("Else: \r\n" + information);
+                     //System.Diagnostics.Debug.WriteLine("Else: \r\n" + information);
                 }
             }
 
@@ -227,12 +229,19 @@ namespace Healthcare_test.VR
         private void SetupTexturesTerrain(string uuid)
         {
             //desert_wet_n.jpg = og water texture
-            Send(JsonConvert.SerializeObject(Commands.addTextureTerrain(gui.tunnel, uuid, "water.jpg",0,1,1 ))); 
+            //Task.Delay(1000);
+            Send(JsonConvert.SerializeObject(Commands.addTextureTerrain(gui.tunnel, uuid, "water.jpg",0,1,1 )));
+            //Task.Delay(1000);
             Send(JsonConvert.SerializeObject(Commands.addTextureTerrain(gui.tunnel, uuid, "grass_ground2y_d.jpg", 1, 5, 0)));
+            //Task.Delay(1000);
             Send(JsonConvert.SerializeObject(Commands.addTextureTerrain(gui.tunnel, uuid, "snow_mud_d.jpg", 5, 15, 0)));
+            //Task.Delay(1000);
             Send(JsonConvert.SerializeObject(Commands.addTextureTerrain(gui.tunnel, uuid, "mntn_x2_d.jpg", 15, 28, 0)));
+            //Task.Delay(1000);
             Send(JsonConvert.SerializeObject(Commands.addTextureTerrain(gui.tunnel, uuid, "snow_rough_s.jpg", 28, 40, 0)));
+            //Task.Delay(1000);
             Send(JsonConvert.SerializeObject(Commands.addTextureTerrain(gui.tunnel, uuid, "snow2ice_d.jpg", 40, 100, 0)));
+            //Task.Delay(1000);
         }
 
         public void ProcessSessionList(dynamic information)
