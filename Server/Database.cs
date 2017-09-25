@@ -19,35 +19,32 @@ namespace Server
         {
             try
             {
-                string path = Path.Combine(Directory.GetCurrentDirectory(), @"Database\Database.txt");
-                List<string> lines = File.ReadAllLines(path).ToList();
+                string path = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, @"Healthcare-app\Server\Database\Database.txt");
+                string AllText = File.ReadAllText(path);
+                List<string> lines = AllText.Split('&').ToList();
                 Dictionary<string, List<TrainSession>> dictionary = new Dictionary<string, List<TrainSession>>();
                 foreach (string s in lines)
                 {
                     dynamic jsonObject = JsonConvert.DeserializeObject(s);
-                    string username = jsonObject.username;
-                    List<TrainSession> sessions = new List<TrainSession>();
-                    foreach (dynamic training in jsonObject.TrainingSessions)
+                    if (jsonObject != null)
                     {
-                        List<ErgometerData> ergoData = new List<ErgometerData>();
-                        foreach (dynamic ergometerData in training)
+                        string username = jsonObject.username;
+                        List<TrainSession> sessions = new List<TrainSession>();
+                        foreach (dynamic training in jsonObject.data.Trainingsession)
                         {
-                            ergoData.Add(new ErgometerData(ergometerData.pulse, ergometerData.rpm, ergometerData.speed, ergometerData.distance, ergometerData.time, 0, 0, ergometerData.power));
-                        }
-                        TrainSession trainingsession = new TrainSession();
-                        trainingsession.SetData(ergoData);
-                        if (dictionary.ContainsKey(username))
-                        {
-                            dictionary[username].Add(trainingsession);
-                        }
-                        else
-                        {
-                            List<TrainSession> trainingList = new List<TrainSession>();
+                            List<ErgometerData> ergoData = new List<ErgometerData>();
+                            foreach (dynamic ergometerData in training.data)
+                            {
+                                ergoData.Add(new ErgometerData((int)ergometerData.Pulse, (int)ergometerData.RPM, (double)ergometerData.Speed, (double)ergometerData.Distance, (int)ergometerData.Time, 0, 0, (int)ergometerData.Requested_Power));
+                            }
+                            TrainSession trainingsession = new TrainSession();
+                            trainingsession.SetData(ergoData);
                             sessions.Add(trainingsession);
-                            dictionary.Add(username, trainingList);
                         }
+                        dictionary.Add(username, sessions);
                     }
                 }
+                TrainSessions = dictionary;
             }
             catch (Exception e)
             {
@@ -89,14 +86,13 @@ namespace Server
                 trainList.Add(sessionToClose);
                 TrainSessions.Add(username, trainList);
             }
-
         }
 
         public static void Close()
         {
             try
             {
-                String path = Path.Combine(Directory.GetCurrentDirectory(), @"Database\Database.txt");
+                string path = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, @"Healthcare-app\Server\Database\Database.txt");
                 string toWrite = "";
                 foreach (KeyValuePair<string, List<TrainSession>> entry in TrainSessions)
                 {
@@ -109,10 +105,11 @@ namespace Server
                             Trainingsession = entry.Value
                         }
                     };
-                    toWrite += JsonConvert.SerializeObject(keyValuePair) + "\r\n";
+                    toWrite += JsonConvert.SerializeObject(keyValuePair) + "&";
                 }
                 File.WriteAllText(path, toWrite);
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine("Error while saving:(\r\n" + e.Message);
             }
