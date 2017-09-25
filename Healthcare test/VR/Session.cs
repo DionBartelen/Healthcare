@@ -242,6 +242,7 @@ namespace Healthcare_test.VR
             //Task.Delay(1000);
             Send(JsonConvert.SerializeObject(Commands.addTextureTerrain(gui.tunnel, uuid, "snow2ice_d.jpg", 40, 100, 0)));
             //Task.Delay(1000);
+            terrain.textureLoaded = true;
         }
 
         public void ProcessSessionList(dynamic information)

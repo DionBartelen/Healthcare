@@ -156,13 +156,17 @@ namespace Healthcare_test.VR
         {
             //session.Send(JsonConvert.SerializeObject(Commands.addSkyBox(tunnel)));
             session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "GroundPlane")));
-            //Task.Delay(100);
+            Task.Delay(100);
             session.Send(JsonConvert.SerializeObject(Commands.CreateGroundTerrainWithHeights(tunnel)));
-            //Task.Delay(100);
+            Task.Delay(100);
             session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel, -105, -4, -128,"terrain",true)));
-            //Task.Delay(1000).Wait();
+            Task.Delay(1000).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "terrain")));
-            //Task.Delay(1000).Wait();
+            Task.Delay(1000).Wait();
+            while(!session.terrain.textureLoaded)
+            {
+                Thread.Sleep(100);
+            }
             session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel, 0, 0, 0, "MainBike", false)));
 
 

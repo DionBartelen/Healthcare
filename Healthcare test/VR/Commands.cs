@@ -10,6 +10,8 @@ namespace Healthcare_test.VR
 {
     public class Commands
     {
+        static int terainOffSet = 0;
+
         public static string tree1 = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\trees\fantasy\tree1.obj");
         public static string tree2 = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\trees\fantasy\tree2.obj");
         public static string tree3 = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\trees\fantasy\tree3.obj");
@@ -316,31 +318,31 @@ namespace Healthcare_test.VR
 
         public static dynamic AddRoute(string tunnel)
         {
-            int[] pos1 = new int[3] { 0, 0, 0 };
-            int[] pos2 = new int[3] { 30, 0, 30 };
-            int[] pos3 = new int[3] { 105, 0, 60 };
-            int[] pos4 = new int[3] { 120, 0, 15 };
-            int[] pos5 = new int[3] { 115, 0, -40 };
-            int[] pos6 = new int[3] { 15, 0, -65 };
-            int[] pos7 = new int[3] { -30, 0, -85 };
-            int[] pos8 = new int[3] { -60, 0, -60 };
-            int[] pos9 = new int[3] { -75, 0, 65 };
-            int[] pos10 = new int[3] { -60, 0, 80 };
-            int[] pos11 = new int[3] { -20, 0, 40 };
+            int[] pos1 = new int[3] { 0, terainOffSet, 0 };
+            int[] pos2 = new int[3] { 30, terainOffSet, 30 };
+            int[] pos3 = new int[3] { 105, terainOffSet, 60 };
+            int[] pos4 = new int[3] { 120, terainOffSet, 15 };
+            int[] pos5 = new int[3] { 115, terainOffSet, -40 };
+            int[] pos6 = new int[3] { 15, terainOffSet, -65 };
+            int[] pos7 = new int[3] { -30, terainOffSet, -85 };
+            int[] pos8 = new int[3] { -60, terainOffSet, -60 };
+            int[] pos9 = new int[3] { -75, terainOffSet, 65 };
+            int[] pos10 = new int[3] { -60, terainOffSet, 80 };
+            int[] pos11 = new int[3] { -20, terainOffSet, 40 };
 
 
 
-            int[] dir1 = new int[3] { 5, 0, -5 };
-            int[] dir2 = new int[3] { 5, 0, 5 };
-            int[] dir3 = new int[3] { 5, 0, 5 };
-            int[] dir4 = new int[3] { -5, 0, -5 };
-            int[] dir5 = new int[3] { -5, 0, -5 };
-            int[] dir6 = new int[3] { 0, 0, 0 };
-            int[] dir7 = new int[3] { -5, 0, -5 };
-            int[] dir8 = new int[3] { 0, 0, 0 };
-            int[] dir9 = new int[3] { 0, 0, 0 };
-            int[] dir10 = new int[3] { 5, 0, 5 };
-            int[] dir11 = new int[3] { 0, 0, 0 };
+            int[] dir1 = new int[3] { 5, terainOffSet, -5 };
+            int[] dir2 = new int[3] { 5, terainOffSet, 5 };
+            int[] dir3 = new int[3] { 5, terainOffSet, 5 };
+            int[] dir4 = new int[3] { -5, terainOffSet, -5 };
+            int[] dir5 = new int[3] { -5, terainOffSet, -5 };
+            int[] dir6 = new int[3] { 0, terainOffSet, 0 };
+            int[] dir7 = new int[3] { -5, terainOffSet, -5 };
+            int[] dir8 = new int[3] { 0, terainOffSet, 0 };
+            int[] dir9 = new int[3] { 0, terainOffSet, 0 };
+            int[] dir10 = new int[3] { 5, terainOffSet, 5 };
+            int[] dir11 = new int[3] { 0, terainOffSet, 0 };
             dynamic node1 = new
             {
                 pos = pos1,
