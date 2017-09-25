@@ -229,7 +229,7 @@
             // 
             this.Moving_3D_Ojbect.Location = new System.Drawing.Point(357, 128);
             this.Moving_3D_Ojbect.Name = "Moving_3D_Ojbect";
-            this.Moving_3D_Ojbect.Size = new System.Drawing.Size(109, 32);
+            this.Moving_3D_Ojbect.Size = new System.Drawing.Size(156, 32);
             this.Moving_3D_Ojbect.TabIndex = 21;
             this.Moving_3D_Ojbect.Text = "Object moving";
             this.Moving_3D_Ojbect.UseVisualStyleBackColor = true;
