@@ -66,18 +66,18 @@ namespace WindowsFormsApp1
                 if (comportCombo.SelectedItem.ToString() == "Simulator")
                 {
                     ErgometerSimulatie ergometersimulatie = new ErgometerSimulatie();
-                    Client client = new Client(username.Text, ergometersimulatie);
+                    Client client = new Client(username.Text, ergometersimulatie, null);
                     SessionGUI sessionGUI = new SessionGUI(client);
                     sessionGUI.Show();
 
                 }
                 else
                 {
-                    Client client = new Client(username.Text , null);
+                    string comPort = comportCombo.SelectedItem.ToString();
+                    Client client = new Client(username.Text , null, comPort);
                     SessionGUI sessionGUI = new SessionGUI(client);
                     sessionGUI.Show();
-                    string comPort = comportCombo.SelectedIndex.ToString();
-                    ergometer = new ErgometerCOM(comPort, "9600");
+                   
                 }
             }
             else
