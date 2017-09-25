@@ -14,8 +14,8 @@ namespace Server
         
         static void Main(string[] args)
         {
-            Thread thread = new Thread(Session.ListenToNewConnections);
-            thread.Start();
+            Thread ClientListenThread = new Thread(Session.ListenToNewConnections);
+            ClientListenThread.Start();
         }
     }
 }

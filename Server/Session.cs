@@ -15,6 +15,7 @@ namespace Server
         TcpClient client;
         NetworkStream stream;
         static int port = 1234;
+        Boolean IsDoctor = false;
 
         public static void ListenToNewConnections(object o)
         {
@@ -23,13 +24,14 @@ namespace Server
             {
                 TcpListener listener = new TcpListener(localhost, port);
                 listener.Start();
-                Console.WriteLine("Klaar voor verbindingen...");
+                Console.WriteLine("Client server klaar voor verbindingen...");
                 Database.ReadSavedData();
+                Database.ReadSavedCredentials();
                 while (true)
                 {
                     TcpClient client = listener.AcceptTcpClient();
-                    Thread thread = new Thread(HandleNewClient);
-                    thread.Start(client);
+                    Thread thread = new Thread(() => { HandleNewClient(client); });
+                    thread.Start();
                     Console.WriteLine("Verbonden met client: " + client.Client.AddressFamily.ToString());
                 }
             }
@@ -39,18 +41,9 @@ namespace Server
             }
         }
 
-        public static void HandleNewClient(object client)
+        public static void HandleNewClient(TcpClient client)
         {
-            if (client == null)
-            {
-                return;
-            }
-            else if (!typeof(TcpClient).IsInstanceOfType(client))
-            {
-                return;
-            }
-            TcpClient clientTcp = (TcpClient)client;
-            Session session = new Session(clientTcp);
+            Session session = new Session(client);
             session.Read();
         }
 
@@ -97,7 +90,7 @@ namespace Server
                                 Byte[] lengthMessageArray = new Byte[4];
                                 Array.Copy(receiveBuffer, 0, lengthMessageArray, 0, 3);
                                 lengthMessage = BitConverter.ToInt32(lengthMessageArray, 0);
-                                if((totalBytesreceived - 4) == lengthMessage)
+                                if ((totalBytesreceived - 4) == lengthMessage)
                                 {
                                     messagereceived = true;
                                 }
@@ -126,7 +119,10 @@ namespace Server
             dynamic jsonObject = JsonConvert.DeserializeObject(answer);
             try
             {
-                if (jsonObject.id == "session/start")
+                if(jsonObject.id == "log in")
+                {
+                    CheckCredentials(jsonObject.data.username, jsonObject.data.password);
+                } else if (jsonObject.id == "session/start")
                 {
                     Console.WriteLine("New session: " + jsonObject.data.username);
                     CreateNewSession(jsonObject);
@@ -149,6 +145,10 @@ namespace Server
                     Console.WriteLine("Session ended with client");
                     CloseSession(jsonObject);
                 }
+                else if (jsonObject.id == "session/data/historic")
+                {
+                    GetDataFromUser(jsonObject);
+                }
             }
             catch (Exception e)
             {
@@ -159,6 +159,34 @@ namespace Server
                     error = e.Message
                 };
                 Send(JsonConvert.SerializeObject(error));
+            }
+        }
+
+        public void CheckCredentials(string username, string password)
+        {
+            if(Database.CheckCredentials(username, password))
+            {
+                IsDoctor = Database.IsDoctor(username);
+                dynamic response = new
+                {
+                    id = "log in",
+                    data = new
+                    {
+                        status = "ok"
+                    }
+                };
+                Send(JsonConvert.SerializeObject(response));
+            } else
+            {
+                dynamic response = new
+                {
+                    id = "log in",
+                    data = new
+                    {
+                        status = "error"
+                    }
+                };
+                Send(JsonConvert.SerializeObject(response));
             }
         }
 
@@ -285,6 +313,30 @@ namespace Server
                 Send(JsonConvert.SerializeObject(answer));
                 stream.Close();
                 client.Close();
+            }
+        }
+
+        public void GetDataFromUser(dynamic jsonObject)
+        {
+            if (IsDoctor)
+            {
+                string DataFromUser = Database.GetDataFromUser(jsonObject.data.client);
+                dynamic response = new
+                {
+                    id = "session/data/historic",
+                    data = DataFromUser
+                };
+                Send(JsonConvert.SerializeObject(response));
+            }
+            else
+            {
+                dynamic answer = new
+                {
+                    id = "session/end",
+                    status = "Error",
+                    error = "You do not have permission for this action"
+                };
+                Send(JsonConvert.SerializeObject(answer));
             }
         }
     }
