@@ -23,8 +23,8 @@ namespace Healthcare_test.VR
         public static string carcartoon = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\cars\cartoon\Pony_cartoon.obj");
         public static string carcartoon2 = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\cars\cartoon\Pony_cartoon2.obj");
         public static string house1 = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\houses\set1\house1.obj");
-        public static string diffuse = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\textures\grass_diffuse.png");
-        
+
+
 
         public static dynamic SessionList()
         {
@@ -78,56 +78,79 @@ namespace Healthcare_test.VR
         }
 
 
-        public static dynamic AddObject(string tunnel)
-        {
-            int[] aPosition = new int[3] { 0, 0, 0 };
+        public static dynamic AddObject(string tunnel, int xPos, int yPos, int zPos, string nameNode, bool needTerrain)
+        { 
+            int[] aPosition = new int[3] { xPos, yPos, zPos };
             int[] aRotation = new int[3] { 0, 0, 0 };
             int[] aPanelSize = new int[2] { 1, 1 };
             int[] aResolution = new int[2] { 512, 512 };
             int[] aBackground = new int[4] { 1, 1, 1, 1 };
             int[] aWaterSize = new int[2] { 20, 20 };
 
-            dynamic request = new
+            if (needTerrain)
             {
-                id = "scene/node/add",
-                data = new
+                dynamic request = new
                 {
-                    name = "name",
-                    //parent = "guid",
-                    components = new
+                    id = "scene/node/add",
+                    data = new
                     {
-                        transform = new
+                        name = nameNode,
+                        //parent = "guid",
+                        components = new
                         {
-                            position = aPosition,
-                            scale = 1,
-                            rotation = aRotation
-                        },
-                        model = new
-                        {
-                            file = bike,
-                            cullbackfaces = true,
-                            animated = false,
-                            animation = "animationname",
-                        },
-                        terrain = new
-                        {
-                            smoothnormals = true
-                        }//,
-                        //panel = new
-                        //{
-                        //    size = aPanelSize,
-                        //    resolution =  aResolution,
-                        //    background = aBackground,
-                        //},
-                        //water = new
-                        //{
-                        //    size = aWaterSize,
-                        //    resolution = 0.1f
-                        //}
+                            transform = new
+                            {
+                                position = aPosition,
+                                scale = 1,
+                                rotation = aRotation
+                            },
+                            model = new
+                            {
+                                file = bike,
+                                cullbackfaces = true,
+                                animated = false,
+                                animation = "animationname",
+                            },
+                            terrain = new
+                            {
+                                smoothnormals = true
+                            }
+                        }
                     }
-                }
-            };
-            return Commands.SendTunnel(tunnel, request);
+                };
+                return Commands.SendTunnel(tunnel, request);
+            }
+            else
+                System.Diagnostics.Debug.WriteLine("else in gegeaan");
+            {
+                dynamic request = new
+                {
+                    id = "scene/node/add",
+                    data = new
+                    {
+                        name = nameNode,
+                        //parent = "guid",
+                        components = new
+                        {
+                            transform = new
+                            {
+                                position = aPosition,
+                                scale = 1,
+                                rotation = aRotation
+                            },
+                            model = new
+                            {
+                                file = bike,
+                                cullbackfaces = true,
+                                animated = false,
+                                animation = "animationname",
+                            }
+                        }
+                    }
+                };
+                return Commands.SendTunnel(tunnel, request);
+            }
+            
         }
 
         public static dynamic GetNodeByName(string tunnel, string NameToFind)
@@ -213,154 +236,209 @@ namespace Healthcare_test.VR
             return Commands.SendTunnel(tunnel, groundTerrain);
         }
 
-        public static dynamic addTextureTerrain(string tunnel, string uuid, string normal, int min, int max, int fade)
+        public static dynamic addTextureTerrain(string tunnel, string uuid, string normal, double min, double max, int fade)
         {
-            dynamic Texture = new
+            Boolean FilesOnThisPc = true;
+            if (FilesOnThisPc)
             {
-                id = "scene/node/addlayer",
-                data = new
+                dynamic Texture = new
                 {
-                    id = uuid,
-                    diffuse = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\textures\" + normal),
-                    normal = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\textures\" + normal),
-                    minHeight = min,
-                    maxHeight = max,
-                    fadeDist = fade
+                    id = "scene/node/addlayer",
+                    data = new
+                    {
+                        id = uuid,
+                        diffuse = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\textures\" + normal),
+                        normal = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\textures\" + normal),
+                        minHeight = min,
+                        maxHeight = max,
+                        fadeDist = fade
 
-                }
-            };
-
-            return Commands.SendTunnel(tunnel, Texture);
-        }
-
-
-        public static dynamic AddRoute(string tunnel)
-        {
-            int[] pos1 = new int[3] { 0, 0, 0 };
-            int[] pos2 = new int[3] { 50, 0, 0 };
-            int[] pos3 = new int[3] { 50, 0, 50 };
-            int[] pos4 = new int[3] { 0, 0, 50 };
-
-            int[] dir1 = new int[3] { 5, 0, -5 };
-            int[] dir2 = new int[3] { 5, 0, 5 };
-            int[] dir3 = new int[3] { -5, 0, 5 };
-            int[] dir4 = new int[3] { -5, 0, -5 };
-            dynamic node1 = new
+                    }
+                };
+                return Commands.SendTunnel(tunnel, Texture);
+            }
+            else
             {
-                pos = pos1,
-                dir = dir1
-            };
-            dynamic node2 = new
-            {
-                pos = pos2,
-                dir = dir2
-            };
-            dynamic node3 = new
-            {
-                pos = pos3,
-                dir = dir3
-            };
-            dynamic node4 = new
-            {
-                pos = pos4,
-                dir = dir4
-            };
-
-            dynamic[] routeNodes = new dynamic[4] { node1, node2, node3, node4 };
-
-            dynamic request = new
-            {
-                id = "route/add",
-                data = new
+                dynamic Texture = new
                 {
-                    nodes = routeNodes
-                }
-            };
+                    id = "scene/node/addlayer",
+                    data = new
+                    {
+                        id = uuid,
+                        diffuse = @"C:\Users\Aaron\Desktop\NetworkEngine\data\NetworkEngine\textures\terrain\" + normal,
+                        normal = @"C:\Users\Aaron\Desktop\NetworkEngine\data\NetworkEngine\textures\terrain\" + normal,
+                        minHeight = min,
+                        maxHeight = max,
+                        fadeDist = fade
 
-            return Commands.SendTunnel(tunnel, request);
-        }
-
-        public static dynamic AddRoad(string tunnel, string uuid)
-        {
-            dynamic request = new
-            {
-                id = "scene/road/add",
-                data = new
-                {
-                    route = uuid,
-                    heightoffset = 0.01
-                }
-            };
-            return Commands.SendTunnel(tunnel, request);
-        }
-
-        public static dynamic RemoveTerrain(String tunnel)
-        {
-            dynamic removeTerrain = new
-            {
-                id = "scene/terrain/delete",
-                data = new
-                {
-
-                }
-            };
-            return Commands.SendTunnel(tunnel, removeTerrain);
-        }
-
-        public static dynamic MoveObject(String tunnel, String id, String road)
-        {
-            dynamic moveObject = new
-            {
-                id = "route/follow",
-                data = new
-                {
-                    route = road,
-                    node = id,
-                    speed = 1.0,
-                    offset = 0.0,
-                    rotate = "XZ",
-                    followHeight = false,
-                    rotateOffset = new double[] { 0, 0, 0 },
-                    positionOffset = new double[] { 0, 0, 0 }
-                }
-            };
-            return Commands.SendTunnel(tunnel, moveObject);
-        }
-
-        public static dynamic UpdateNode(String tunnel, String id)
-        {
-            dynamic updateTerrain = new
-            {
-                id = "scene/node/update",
-                data = new
-                {
-                    id = id,
-                }
-            };
-            return Commands.SendTunnel(tunnel, updateTerrain);
-        }
-
-        public static double[] GenerateTerrainFromPicture()
-        {
-            Bitmap terrainBitmap = (Bitmap)Bitmap.FromFile(Path.Combine(Directory.GetCurrentDirectory(), "HeightmapBW4.jpg"));
-            double[] toReturn = new double[terrainBitmap.Width * terrainBitmap.Height];
-            for (int x = 0; x < terrainBitmap.Width; x++)
-            {
-                for (int y = 0; y < terrainBitmap.Height; y++)
-                {
-                    double r = Convert.ToDouble(terrainBitmap.GetPixel(x, y).R);
-                    double g = Convert.ToDouble(terrainBitmap.GetPixel(x, y).G);
-                    double b = Convert.ToDouble(terrainBitmap.GetPixel(x, y).B);
-
-
-
-                    toReturn[(x * 256) + y] =  ((768 - (r + g + b)) / 15);
-                }
+                    }
+                };
+                return Commands.SendTunnel(tunnel, Texture);
             }
 
 
-            return toReturn;
         }
+
+        public static dynamic addSkyBox(string tunnel){
+            dynamic skybox = new
+            {
+                id = "scene/skybox/update",
+                data = new
+                {
+                    type = "static",
+                    files = new
+                    {
+                        xpos = @"C:\Users\Aaron Israels\Desktop\NetworkEngine\data\NetworkEngine\textures\SkyBoxes\interstellar\interstellar_rt.png",
+                        xneg = @"C:\Users\Aaron Israels\Desktop\NetworkEngine\data\NetworkEngine\textures\SkyBoxes\interstellar\interstellar_lf.png",
+                        ypos = @"C:\Users\Aaron Israels\Desktop\NetworkEngine\data\NetworkEngine\textures\SkyBoxes\interstellar\interstellar_up.png",
+                        yneg = @"C:\Users\Aaron Israels\Desktop\NetworkEngine\data\NetworkEngine\textures\SkyBoxes\interstellar\interstellar_dn.png",
+                        zpos = @"C:\Users\Aaron Israels\Desktop\NetworkEngine\data\NetworkEngine\textures\SkyBoxes\interstellar\interstellar_bk.png",
+                        zneg = @"C:\Users\Aaron Israels\Desktop\NetworkEngine\data\NetworkEngine\textures\SkyBoxes\interstellar\interstellar_ft.png"
+
+                    }
+                }
+            };
+            return Commands.SendTunnel(tunnel, skybox);
+
+        }
+       
+        public static dynamic ResetScene(String tunnel)
+        {
+            dynamic sceneReset = new
+            {
+                id = "scene/reset"
+            };
+            return Commands.SendTunnel(tunnel, sceneReset);
+        }
+
+
+public static dynamic AddRoute(string tunnel)
+{
+    int[] pos1 = new int[3] { 0, 0, 0 };
+    int[] pos2 = new int[3] { 50, 0, 0 };
+    int[] pos3 = new int[3] { 50, 0, 50 };
+    int[] pos4 = new int[3] { 0, 0, 50 };
+
+    int[] dir1 = new int[3] { 5, 0, -5 };
+    int[] dir2 = new int[3] { 5, 0, 5 };
+    int[] dir3 = new int[3] { -5, 0, 5 };
+    int[] dir4 = new int[3] { -5, 0, -5 };
+    dynamic node1 = new
+    {
+        pos = pos1,
+        dir = dir1
+    };
+    dynamic node2 = new
+    {
+        pos = pos2,
+        dir = dir2
+    };
+    dynamic node3 = new
+    {
+        pos = pos3,
+        dir = dir3
+    };
+    dynamic node4 = new
+    {
+        pos = pos4,
+        dir = dir4
+    };
+
+    dynamic[] routeNodes = new dynamic[4] { node1, node2, node3, node4 };
+
+    dynamic request = new
+    {
+        id = "route/add",
+        data = new
+        {
+            nodes = routeNodes
+        }
+    };
+
+    return Commands.SendTunnel(tunnel, request);
+}
+
+public static dynamic AddRoad(string tunnel, string uuid)
+{
+    dynamic request = new
+    {
+        id = "scene/road/add",
+        data = new
+        {
+            route = uuid,
+            heightoffset = 0.01
+        }
+    };
+    return Commands.SendTunnel(tunnel, request);
+}
+
+public static dynamic RemoveTerrain(String tunnel)
+{
+    dynamic removeTerrain = new
+    {
+        id = "scene/terrain/delete",
+        data = new
+        {
+
+        }
+    };
+    return Commands.SendTunnel(tunnel, removeTerrain);
+}
+
+public static dynamic MoveObject(String tunnel, String id, String road)
+{
+    dynamic moveObject = new
+    {
+        id = "route/follow",
+        data = new
+        {
+            route = road,
+            node = id,
+            speed = 1.0,
+            offset = 0.0,
+            rotate = "XZ",
+            followHeight = false,
+            rotateOffset = new double[] { 0, 0, 0 },
+            positionOffset = new double[] { 0, 0, 0 }
+        }
+    };
+    return Commands.SendTunnel(tunnel, moveObject);
+}
+
+public static dynamic UpdateNode(String tunnel, String id)
+{
+    dynamic updateTerrain = new
+    {
+        id = "scene/node/update",
+        data = new
+        {
+            id = id,
+        }
+    };
+    return Commands.SendTunnel(tunnel, updateTerrain);
+}
+
+public static double[] GenerateTerrainFromPicture()
+{
+    Bitmap terrainBitmap = (Bitmap)Bitmap.FromFile(Path.Combine(Directory.GetCurrentDirectory(), "HeightmapBW4.jpg"));
+    double[] toReturn = new double[terrainBitmap.Width * terrainBitmap.Height];
+    for (int x = 0; x < terrainBitmap.Width; x++)
+    {
+        for (int y = 0; y < terrainBitmap.Height; y++)
+        {
+            double r = Convert.ToDouble(terrainBitmap.GetPixel(x, y).R);
+            double g = Convert.ToDouble(terrainBitmap.GetPixel(x, y).G);
+            double b = Convert.ToDouble(terrainBitmap.GetPixel(x, y).B);
+
+
+
+            toReturn[(x * 256) + y] = ((768 - (r + g + b)) / 15);
+        }
+    }
+
+
+    return toReturn;
+}
 
     }
 }

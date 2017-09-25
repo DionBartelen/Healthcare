@@ -199,15 +199,15 @@ namespace Healthcare_test.VR
                 {
                     //System.Diagnostics.Debug.WriteLine(information);
                     string uuid = jsonData.data.data.data[0].uuid;
-                    System.Diagnostics.Debug.WriteLine(uuid + " test");
+                    //System.Diagnostics.Debug.WriteLine(uuid + " test");
                     System.Diagnostics.Debug.WriteLine(information);
-                    System.Diagnostics.Debug.WriteLine("naam is " + (string)jsonData.data.data.data[0].name);
+                    //System.Diagnostics.Debug.WriteLine("naam is " + (string)jsonData.data.data.data[0].name);
                     if (jsonData.data.data.data[0].name == "GroundPlane")
                     {
                         System.Diagnostics.Debug.WriteLine("dit is de groundplane");
                         Send(JsonConvert.SerializeObject(Commands.DeleteNode(gui.tunnel, uuid)));
                     }
-                    if (jsonData.data.data.data[0].name == "name")
+                    if (jsonData.data.data.data[0].name == "terrain")
                     {
                         System.Diagnostics.Debug.WriteLine("texture proberen toe te voegen");
                         SetupTexturesTerrain(uuid);
@@ -226,8 +226,9 @@ namespace Healthcare_test.VR
 
         private void SetupTexturesTerrain(string uuid)
         {
-            Send(JsonConvert.SerializeObject(Commands.addTextureTerrain(gui.tunnel, uuid, "desert_wet_n.jpg",0,2,1 ))); 
-            Send(JsonConvert.SerializeObject(Commands.addTextureTerrain(gui.tunnel, uuid, "grass_ground2y_d.jpg", 2, 5, 0)));
+            //desert_wet_n.jpg = og water texture
+            Send(JsonConvert.SerializeObject(Commands.addTextureTerrain(gui.tunnel, uuid, "water.jpg",0,1,1 ))); 
+            Send(JsonConvert.SerializeObject(Commands.addTextureTerrain(gui.tunnel, uuid, "grass_ground2y_d.jpg", 1, 5, 0)));
             Send(JsonConvert.SerializeObject(Commands.addTextureTerrain(gui.tunnel, uuid, "snow_mud_d.jpg", 5, 15, 0)));
             Send(JsonConvert.SerializeObject(Commands.addTextureTerrain(gui.tunnel, uuid, "mntn_x2_d.jpg", 15, 28, 0)));
             Send(JsonConvert.SerializeObject(Commands.addTextureTerrain(gui.tunnel, uuid, "snow_rough_s.jpg", 28, 40, 0)));

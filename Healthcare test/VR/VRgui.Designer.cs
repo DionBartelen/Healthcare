@@ -49,6 +49,7 @@
             this.Moving_3D_Ojbect = new System.Windows.Forms.Button();
             this.GetTerrainButton = new System.Windows.Forms.Button();
             this.Texture = new System.Windows.Forms.Button();
+            this.Resetbutton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // connect_Button
@@ -198,9 +199,9 @@
             // 
             this.terrainWH.Location = new System.Drawing.Point(366, 249);
             this.terrainWH.Name = "terrainWH";
-            this.terrainWH.Size = new System.Drawing.Size(88, 24);
+            this.terrainWH.Size = new System.Drawing.Size(100, 24);
             this.terrainWH.TabIndex = 18;
-            this.terrainWH.Text = "terrainWH";
+            this.terrainWH.Text = "setupTerrain";
             this.terrainWH.UseVisualStyleBackColor = true;
             this.terrainWH.Click += new System.EventHandler(this.terrainWH_Click);
             // 
@@ -254,11 +255,22 @@
             this.Texture.UseVisualStyleBackColor = true;
             this.Texture.Click += new System.EventHandler(this.Texture_Click);
             // 
+            // Resetbutton
+            // 
+            this.Resetbutton.Location = new System.Drawing.Point(115, 128);
+            this.Resetbutton.Name = "Resetbutton";
+            this.Resetbutton.Size = new System.Drawing.Size(85, 32);
+            this.Resetbutton.TabIndex = 24;
+            this.Resetbutton.Text = "Reset ";
+            this.Resetbutton.UseVisualStyleBackColor = true;
+            this.Resetbutton.Click += new System.EventHandler(this.Resetbutton_Click);
+            // 
             // VRgui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(708, 384);
+            this.Controls.Add(this.Resetbutton);
             this.Controls.Add(this.Texture);
             this.Controls.Add(this.GetTerrainButton);
             this.Controls.Add(this.Moving_3D_Ojbect);
@@ -315,5 +327,6 @@
         private System.Windows.Forms.Button Moving_3D_Ojbect;
         private System.Windows.Forms.Button GetTerrainButton;
         private System.Windows.Forms.Button Texture;
+        private System.Windows.Forms.Button Resetbutton;
     }
 }

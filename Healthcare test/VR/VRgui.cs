@@ -148,14 +148,25 @@ namespace Healthcare_test.VR
 
         private void Buttonobject_Click(object sender, EventArgs e)
         {
-            session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel)));
-            
+            session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel, -105, -4, -128,"terrain",true)));
+            //
+
         }
 
         private void terrainWH_Click(object sender, EventArgs e)
         {
+            //session.Send(JsonConvert.SerializeObject(Commands.addSkyBox(tunnel)));
+            session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "GroundPlane")));
             session.Send(JsonConvert.SerializeObject(Commands.CreateGroundTerrainWithHeights(tunnel)));
-            
+            session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel, -105, -4, -128,"terrain",true)));
+            Task.Delay(2000).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "terrain")));
+            Task.Delay(2000).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel, 0, 0, 0, "MainBike", false)));
+
+
+
+
         }
 
         private void Routebutton_Click(object sender, EventArgs e)
@@ -181,6 +192,11 @@ namespace Healthcare_test.VR
         private void Texture_Click(object sender, EventArgs e)
         {
             session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "name")));
+        }
+
+        private void Resetbutton_Click(object sender, EventArgs e)
+        {
+            session.Send(JsonConvert.SerializeObject(Commands.ResetScene(tunnel)));
         }
     }
 }
