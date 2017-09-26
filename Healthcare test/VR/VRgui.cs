@@ -158,29 +158,43 @@ namespace Healthcare_test.VR
             Task.Delay(100).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.CreateGroundTerrainWithHeights(tunnel)));
             Task.Delay(100).Wait();
-            session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel, -105, -4, -128,0,"terrain",true)));
-            Task.Delay(1000).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel, -105, -4, -128,0,"terrain",true,false)));
+            Task.Delay(2000).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "terrain")));
-            Task.Delay(1000).Wait();
+            Task.Delay(2000).Wait();
             while(!session.terrain.textureLoaded)
             {
                 Thread.Sleep(100);
             }
             
-            Task.Delay(2000).Wait();
-            session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "Head")));
+            //Task.Delay(2000).Wait();
+            // session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "Head")));
             Task.Delay(1000).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "Camera")));
             Task.Delay(1000).Wait();
-            session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel, 0, 0, 0, 270, "MainBike", false)));
+            session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel, 0, 0, 0, 0, "MainBike", false,false)));
             Task.Delay(1000).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "MainBike")));
             Task.Delay(1000).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.UpdateNodeWithParent(tunnel, session.terrain.UuidMainBike, session.terrain.UuidCamera)));
             Task.Delay(500).Wait();
-            session.Send(JsonConvert.SerializeObject(Commands.UpdateNode(tunnel, session.terrain.UuidMainBike,0,270)));
+            session.Send(JsonConvert.SerializeObject(Commands.UpdateNode(tunnel, session.terrain.UuidMainBike,0,0,270,0)));
+            Task.Delay(500).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel, 10, 0, 0, 0, "BikePanel", false, true)));
+            Task.Delay(500).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "BikePanel")));
+            Task.Delay(500).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.UpdateNodeWithParent(tunnel, session.terrain.UuidPanel, session.terrain.UuidCamera)));
+            Task.Delay(500).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.UpdateNode(tunnel, session.terrain.UuidPanel, 1, -0.75, 0, -30)));
+            Task.Delay(500).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.addTextPanel(tunnel, session.terrain.UuidPanel, "Speed: 5")));
+            Task.Delay(500).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.SwapPanel(tunnel, session.terrain.UuidPanel)));
 
-            //session.Send(JsonConvert.SerializeObject(Commands.addSkyBox(tunnel)));
+
+
+            // session.Send(JsonConvert.SerializeObject(Commands.addSkyBox(tunnel)));
 
 
 
@@ -207,6 +221,7 @@ namespace Healthcare_test.VR
         {
             session.Send(JsonConvert.SerializeObject(Commands.MoveObject(tunnel, session.terrain.UuidCamera, session.terrain.road.Last().id)));
             Task.Delay(500);
+            session.Send(JsonConvert.SerializeObject(Commands.UpdateSpeed(tunnel, session.terrain.UuidCamera,5)));
             // session.Send(JsonConvert.SerializeObject(Commands.MoveObject(tunnel, session.terrain.nodes.Last().uuid, session.terrain.road.Last().id)));
             //session.Send(JsonConvert.SerializeObject(Commands.UpdateNode(tunnel, session.terrain.UuidMainBike, 0, 90)));
         }
@@ -224,6 +239,14 @@ namespace Healthcare_test.VR
         private void Resetbutton_Click(object sender, EventArgs e)
         {
             session.Send(JsonConvert.SerializeObject(Commands.ResetScene(tunnel)));
+        }
+
+        private void SpeedSlider_Scroll(object sender, EventArgs e)
+        {
+            session.Send(JsonConvert.SerializeObject(Commands.UpdateSpeed(tunnel, session.terrain.UuidCamera, SpeedSlider.Value)));
+            session.Send(JsonConvert.SerializeObject(Commands.clearPanel(tunnel, session.terrain.UuidPanel)));
+            session.Send(JsonConvert.SerializeObject(Commands.addTextPanel(tunnel, session.terrain.UuidPanel, "Speed: " + SpeedSlider.Value)));
+            session.Send(JsonConvert.SerializeObject(Commands.SwapPanel(tunnel, session.terrain.UuidPanel)));
         }
     }
 }

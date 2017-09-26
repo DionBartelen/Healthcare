@@ -220,30 +220,26 @@ namespace Healthcare_test.VR
                     else if (jsonData.data.data.data[0].name == "Road")
                     {
 
-                        Send(JsonConvert.SerializeObject(Commands.UpdateNode(gui.tunnel, uuid, -3.99,0)));
+                        Send(JsonConvert.SerializeObject(Commands.UpdateNode(gui.tunnel, uuid, -3.99,0,0,0)));
 
                     }
                     else if (jsonData.data.data.data[0].name == "MainBike")
                     { 
                         terrain.UuidMainBike = uuid;   
-                        //Send(JsonConvert.SerializeObject(Commands.MoveObject(gui.tunnel, uuid, terrain.road.Last().id)));
+                       
 
                     }
                     else if (jsonData.data.data.data[0].name == "Head")
-                    {
-
-                        // Send(JsonConvert.SerializeObject(Commands.MoveObject(gui.tunnel, uuid, terrain.road.Last().id)));
+                        { 
                         terrain.UuidHead = uuid;
-                        //Send(JsonConvert.SerializeObject(Commands.AddObject(gui.tunnel, uuid, 0, 0, 0, 180, "MainBike", false)));
-
                     }
                     else if (jsonData.data.data.data[0].name == "Camera")
                     {
-
-                        // Send(JsonConvert.SerializeObject(Commands.MoveObject(gui.tunnel, uuid, terrain.road.Last().id)));
-                        terrain.UuidCamera = uuid;
-                        //Send(JsonConvert.SerializeObject(Commands.AddObject(gui.tunnel, uuid, 0, 0, 0, 180, "MainBike", false)));
-
+                            terrain.UuidCamera = uuid;
+                    }
+                    else if (jsonData.data.data.data[0].name == "BikePanel")
+                    {
+                        terrain.UuidPanel = uuid;
                     }
 
                 }

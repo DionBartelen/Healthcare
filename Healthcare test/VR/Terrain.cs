@@ -17,6 +17,7 @@ namespace Healthcare_test.VR
         public String UuidHead;
         public String UuidMainBike;
         public String UuidCamera;
+        public String UuidPanel;
 
         public Terrain(int[] size, int[] heights)
         {

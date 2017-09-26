@@ -50,6 +50,8 @@
             this.GetTerrainButton = new System.Windows.Forms.Button();
             this.Texture = new System.Windows.Forms.Button();
             this.Resetbutton = new System.Windows.Forms.Button();
+            this.SpeedSlider = new System.Windows.Forms.TrackBar();
+            ((System.ComponentModel.ISupportInitialize)(this.SpeedSlider)).BeginInit();
             this.SuspendLayout();
             // 
             // connect_Button
@@ -265,11 +267,22 @@
             this.Resetbutton.UseVisualStyleBackColor = true;
             this.Resetbutton.Click += new System.EventHandler(this.Resetbutton_Click);
             // 
+            // SpeedSlider
+            // 
+            this.SpeedSlider.Location = new System.Drawing.Point(357, 294);
+            this.SpeedSlider.Maximum = 100;
+            this.SpeedSlider.Name = "SpeedSlider";
+            this.SpeedSlider.Size = new System.Drawing.Size(220, 56);
+            this.SpeedSlider.TabIndex = 26;
+            this.SpeedSlider.Value = 5;
+            this.SpeedSlider.Scroll += new System.EventHandler(this.SpeedSlider_Scroll);
+            // 
             // VRgui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(708, 384);
+            this.Controls.Add(this.SpeedSlider);
             this.Controls.Add(this.Resetbutton);
             this.Controls.Add(this.Texture);
             this.Controls.Add(this.GetTerrainButton);
@@ -298,6 +311,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.VRgui_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.VRgui_FormClosed);
             this.Load += new System.EventHandler(this.VRgui_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.SpeedSlider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -328,5 +342,6 @@
         private System.Windows.Forms.Button GetTerrainButton;
         private System.Windows.Forms.Button Texture;
         private System.Windows.Forms.Button Resetbutton;
+        private System.Windows.Forms.TrackBar SpeedSlider;
     }
 }

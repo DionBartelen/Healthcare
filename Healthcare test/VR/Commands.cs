@@ -22,6 +22,7 @@ namespace Healthcare_test.VR
         public static string tree10 = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\trees\fantasy\tree10.obj");
 
         public static string bike = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\bike\bike.fbx");
+        public static string bikeAnim = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\bike\bike_anim.fbx");
         public static string carcartoon = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\cars\cartoon\Pony_cartoon.obj");
         public static string carcartoon2 = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\cars\cartoon\Pony_cartoon2.obj");
         public static string house1 = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\houses\set1\house1.obj");
@@ -80,7 +81,7 @@ namespace Healthcare_test.VR
         }
 
 
-        public static dynamic AddObject(string tunnel, int xPos, int yPos, int zPos, int rotY, string nameNode, bool needTerrain)
+        public static dynamic AddObject(string tunnel, int xPos, int yPos, int zPos, int rotY, string nameNode, bool needTerrain, bool needPanel)
         {
             int[] aPosition = new int[3] { xPos, yPos, zPos };
             int[] aRotation = new int[3] { 0, rotY, 0 };
@@ -113,6 +114,34 @@ namespace Healthcare_test.VR
                     }
                 };
                 return Commands.SendTunnel(tunnel, request);
+
+            }
+            else if (needPanel)
+            {
+                dynamic request = new
+                {
+                    id = "scene/node/add",
+                    data = new
+                    {
+                        name = nameNode,
+                        components = new
+                        {
+                            transform = new
+                            {
+                                position = aPosition,
+                                scale = 1,
+                                rotation = aRotation
+                            },
+                            panel = new
+                            {
+                                size = new double[2] {0.5,0.5},
+                                resolution = new int[2] {512,512},
+                                background = new double[4] {1,1,1,0}
+                            }
+                        }
+                    }
+                };
+                return Commands.SendTunnel(tunnel, request);
             }
             else
             {
@@ -135,14 +164,14 @@ namespace Healthcare_test.VR
                                 file = bike,
                                 cullbackfaces = true,
                                 animated = false,
-                                animation = "animationname",
+                                animation = bikeAnim,
                             }
                         }
                     }
                 };
                 return Commands.SendTunnel(tunnel, request);
             }
-            
+
 
         }
 
@@ -273,8 +302,53 @@ namespace Healthcare_test.VR
 
 
         }
+        public static dynamic SwapPanel(string tunnel, string uuidPanel)
+        {
+            dynamic swapPanel = new
+            {
+                id = "scene/panel/swap",
+                data = new
+                {
+                    id = uuidPanel,
+                   
+                }
+            };
+            return Commands.SendTunnel(tunnel, swapPanel);
+        }
 
-        public static dynamic UpdateNode(string tunnel, string uuid, double transformheight, int RotateY) 
+        public static dynamic clearPanel(string tunnel, string uuidPanel)
+        {
+            dynamic ClearPanel = new
+            {
+                id = "scene/panel/clear",
+                data = new
+                {
+                    id = uuidPanel,
+
+                }
+            };
+            return Commands.SendTunnel(tunnel, ClearPanel);
+        }
+
+        public static dynamic addTextPanel(string tunnel, string uuidPanel, string Text)
+        {
+            dynamic TextOnPanel = new
+            {
+                id = "scene/panel/drawtext",
+                data = new
+                {
+                    id = uuidPanel,
+                    text = Text,
+                    position = new int[2] { 100, 100 },
+                    size = 128,
+                    color = new int[4] { 1, 1, 1, 1 },
+                    font = "segoeui"
+                }
+            };
+            return Commands.SendTunnel(tunnel, TextOnPanel);
+        }
+
+        public static dynamic UpdateNode(string tunnel, string uuid, double transformY, double transformZ, int RotateY, int RotateX)
         {
             dynamic Update = new
             {
@@ -284,9 +358,9 @@ namespace Healthcare_test.VR
                     id = uuid,
                     transform = new
                     {
-                        position = new double[3] { 0, transformheight, 0 },
+                        position = new double[3] { 0, transformY, transformZ },
                         scale = 1,
-                        rotation = new int[3] { 0, RotateY, 0 },
+                        rotation = new double[3] { RotateX, RotateY, 0 }
 
                     }
 
@@ -464,17 +538,19 @@ namespace Healthcare_test.VR
             return Commands.SendTunnel(tunnel, request);
         }
 
-        public static dynamic RemoveTerrain(String tunnel)
+        public static dynamic UpdateSpeed(String tunnel, String uuid, int speed)
         {
-            dynamic removeTerrain = new
+            dynamic Speed = new
             {
-                id = "scene/terrain/delete",
+                id = "route/follow/speed",
                 data = new
                 {
+                    node = uuid,
+                    speed = speed
 
                 }
             };
-            return Commands.SendTunnel(tunnel, removeTerrain);
+            return Commands.SendTunnel(tunnel, Speed);
         }
 
         public static dynamic MoveObject(String tunnel, String id, String road)
