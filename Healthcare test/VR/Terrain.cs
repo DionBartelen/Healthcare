@@ -14,6 +14,9 @@ namespace Healthcare_test.VR
         public List<Road> road;
         public List<Route> route;
         public Boolean textureLoaded = false;
+        public String UuidHead;
+        public String UuidMainBike;
+        public String UuidCamera;
 
         public Terrain(int[] size, int[] heights)
         {

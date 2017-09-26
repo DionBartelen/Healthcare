@@ -16,6 +16,8 @@ namespace Healthcare_test.VR
         TcpClient client;
         NetworkStream stream;
         public Terrain terrain;
+        
+
 
         public Session(string ip, int port, VRgui gui)
         {
@@ -156,7 +158,7 @@ namespace Healthcare_test.VR
                 }
                 catch (Exception e)
                 {
-                    System.Diagnostics.Debug.WriteLine(e.Message + "\r\n" + e.StackTrace);
+                   // System.Diagnostics.Debug.WriteLine(e.Message + "\r\n" + e.StackTrace);
                 }
             }
         }
@@ -209,17 +211,45 @@ namespace Healthcare_test.VR
                         //System.Diagnostics.Debug.WriteLine("dit is de groundplane");
                         Send(JsonConvert.SerializeObject(Commands.DeleteNode(gui.tunnel, uuid)));
                     }
-                    if (jsonData.data.data.data[0].name == "terrain")
+                    else if (jsonData.data.data.data[0].name == "terrain")
                     {
-                        System.Diagnostics.Debug.WriteLine("texture proberen toe te voegen");
+
                         SetupTexturesTerrain(uuid);
-                        
+
+                    }
+                    else if (jsonData.data.data.data[0].name == "Road")
+                    {
+
+                        Send(JsonConvert.SerializeObject(Commands.UpdateNode(gui.tunnel, uuid, -3.99,0)));
+
+                    }
+                    else if (jsonData.data.data.data[0].name == "MainBike")
+                    { 
+                        terrain.UuidMainBike = uuid;   
+                        //Send(JsonConvert.SerializeObject(Commands.MoveObject(gui.tunnel, uuid, terrain.road.Last().id)));
+
+                    }
+                    else if (jsonData.data.data.data[0].name == "Head")
+                    {
+
+                        // Send(JsonConvert.SerializeObject(Commands.MoveObject(gui.tunnel, uuid, terrain.road.Last().id)));
+                        terrain.UuidHead = uuid;
+                        //Send(JsonConvert.SerializeObject(Commands.AddObject(gui.tunnel, uuid, 0, 0, 0, 180, "MainBike", false)));
+
+                    }
+                    else if (jsonData.data.data.data[0].name == "Camera")
+                    {
+
+                        // Send(JsonConvert.SerializeObject(Commands.MoveObject(gui.tunnel, uuid, terrain.road.Last().id)));
+                        terrain.UuidCamera = uuid;
+                        //Send(JsonConvert.SerializeObject(Commands.AddObject(gui.tunnel, uuid, 0, 0, 0, 180, "MainBike", false)));
+
                     }
 
                 }
                 else
                 {
-                     //System.Diagnostics.Debug.WriteLine("Else: \r\n" + information);
+                     System.Diagnostics.Debug.WriteLine("Else: \r\n" + information);
                 }
             }
 

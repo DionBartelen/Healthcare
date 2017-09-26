@@ -80,10 +80,10 @@ namespace Healthcare_test.VR
         }
 
 
-        public static dynamic AddObject(string tunnel, int xPos, int yPos, int zPos, string nameNode, bool needTerrain)
+        public static dynamic AddObject(string tunnel, int xPos, int yPos, int zPos, int rotY, string nameNode, bool needTerrain)
         {
             int[] aPosition = new int[3] { xPos, yPos, zPos };
-            int[] aRotation = new int[3] { 0, 0, 0 };
+            int[] aRotation = new int[3] { 0, rotY, 0 };
             int[] aPanelSize = new int[2] { 1, 1 };
             int[] aResolution = new int[2] { 512, 512 };
             int[] aBackground = new int[4] { 1, 1, 1, 1 };
@@ -97,7 +97,6 @@ namespace Healthcare_test.VR
                     data = new
                     {
                         name = nameNode,
-                        //parent = "guid",
                         components = new
                         {
                             transform = new
@@ -116,7 +115,6 @@ namespace Healthcare_test.VR
                 return Commands.SendTunnel(tunnel, request);
             }
             else
-                //System.Diagnostics.Debug.WriteLine("else in gegeaan");
             {
                 dynamic request = new
                 {
@@ -124,7 +122,6 @@ namespace Healthcare_test.VR
                     data = new
                     {
                         name = nameNode,
-                        //parent = "guid",
                         components = new
                         {
                             transform = new
@@ -145,6 +142,7 @@ namespace Healthcare_test.VR
                 };
                 return Commands.SendTunnel(tunnel, request);
             }
+            
 
         }
 
@@ -276,6 +274,50 @@ namespace Healthcare_test.VR
 
         }
 
+        public static dynamic UpdateNode(string tunnel, string uuid, double transformheight, int RotateY) 
+        {
+            dynamic Update = new
+            {
+                id = "scene/node/update",
+                data = new
+                {
+                    id = uuid,
+                    transform = new
+                    {
+                        position = new double[3] { 0, transformheight, 0 },
+                        scale = 1,
+                        rotation = new int[3] { 0, RotateY, 0 },
+
+                    }
+
+                }
+            };
+            return Commands.SendTunnel(tunnel, Update);
+
+        }
+
+        public static dynamic UpdateNodeWithParent(string tunnel, string uuid, string parentID)
+        {
+            dynamic Update = new
+            {
+                id = "scene/node/update",
+                data = new
+                {
+                    id = uuid,
+                    parent = parentID,
+                    transform = new
+                    {
+                        position = new double[3] { 0, 0, 0 },
+                        scale = 1,
+                        rotation = new int[3] { 0, 0, 0 },
+
+                    }
+                }
+            };
+            return Commands.SendTunnel(tunnel, Update);
+
+        }
+
         public static dynamic addSkyBox(string tunnel)
         {
             dynamic skybox = new
@@ -292,12 +334,7 @@ namespace Healthcare_test.VR
                         yneg = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\textures\SkyBoxes\interstellar\interstellar_dn.png"),
                         zpos = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\textures\SkyBoxes\interstellar\interstellar_bk.png"),
                         zneg = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\textures\SkyBoxes\interstellar\interstellar_ft.png")
-                        //xpos = @"C:\Users\Aaron Israels\Desktop\NetworkEngine\data\NetworkEngine\textures\SkyBoxes\interstellar\interstellar_rt.png",
-                        //xneg = @"C:\Users\Aaron Israels\Desktop\NetworkEngine\data\NetworkEngine\textures\SkyBoxes\interstellar\interstellar_lf.png",
-                        //ypos = @"C:\Users\Aaron Israels\Desktop\NetworkEngine\data\NetworkEngine\textures\SkyBoxes\interstellar\interstellar_up.png",
-                        //yneg = @"C:\Users\Aaron Israels\Desktop\NetworkEngine\data\NetworkEngine\textures\SkyBoxes\interstellar\interstellar_dn.png",
-                        //zpos = @"C:\Users\Aaron Israels\Desktop\NetworkEngine\data\NetworkEngine\textures\SkyBoxes\interstellar\interstellar_bk.png",
-                        //zneg = @"C:\Users\Aaron Israels\Desktop\NetworkEngine\data\NetworkEngine\textures\SkyBoxes\interstellar\interstellar_ft.png"
+
 
                     }
                 }
@@ -451,26 +488,13 @@ namespace Healthcare_test.VR
                     node = id,
                     speed = 1.0,
                     offset = 0.0,
-                    rotate = "XZ",
+                    rotate = "XYZ",
                     followHeight = false,
                     rotateOffset = new double[] { 0, 0, 0 },
                     positionOffset = new double[] { 0, 0, 0 }
                 }
             };
             return Commands.SendTunnel(tunnel, moveObject);
-        }
-
-        public static dynamic UpdateNode(String tunnel, String id)
-        {
-            dynamic updateTerrain = new
-            {
-                id = "scene/node/update",
-                data = new
-                {
-                    id = id,
-                }
-            };
-            return Commands.SendTunnel(tunnel, updateTerrain);
         }
 
         public static double[] GenerateTerrainFromPicture()

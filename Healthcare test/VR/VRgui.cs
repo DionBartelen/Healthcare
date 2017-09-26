@@ -147,19 +147,18 @@ namespace Healthcare_test.VR
 
         private void Buttonobject_Click(object sender, EventArgs e)
         {
-            session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel, -105, -4, -128,"terrain",true)));
+            //session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel, -105, -4, -128,0,"terrain",true)));
             //
 
         }
 
         private void terrainWH_Click(object sender, EventArgs e)
         {
-            //session.Send(JsonConvert.SerializeObject(Commands.addSkyBox(tunnel)));
             session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "GroundPlane")));
-            Task.Delay(100);
+            Task.Delay(100).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.CreateGroundTerrainWithHeights(tunnel)));
-            Task.Delay(100);
-            session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel, -105, -4, -128,"terrain",true)));
+            Task.Delay(100).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel, -105, -4, -128,0,"terrain",true)));
             Task.Delay(1000).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "terrain")));
             Task.Delay(1000).Wait();
@@ -167,7 +166,22 @@ namespace Healthcare_test.VR
             {
                 Thread.Sleep(100);
             }
-            session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel, 0, 0, 0, "MainBike", false)));
+            
+            Task.Delay(2000).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "Head")));
+            Task.Delay(1000).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "Camera")));
+            Task.Delay(1000).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel, 0, 0, 0, 270, "MainBike", false)));
+            Task.Delay(1000).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "MainBike")));
+            Task.Delay(1000).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.UpdateNodeWithParent(tunnel, session.terrain.UuidMainBike, session.terrain.UuidCamera)));
+            Task.Delay(500).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.UpdateNode(tunnel, session.terrain.UuidMainBike,0,270)));
+
+            //session.Send(JsonConvert.SerializeObject(Commands.addSkyBox(tunnel)));
+
 
 
 
@@ -182,11 +196,19 @@ namespace Healthcare_test.VR
         private void Showroutebutton_Click(object sender, EventArgs e)
         {
             session.Send(JsonConvert.SerializeObject(Commands.AddRoad(tunnel, session.terrain.route.Last().id)));
+            Task.Delay(1000);
+           session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "Road")));
+                
+               
+
         }
 
         private void Moving_3D_Ojbect_Click(object sender, EventArgs e)
         {
-            session.Send(JsonConvert.SerializeObject(Commands.MoveObject(tunnel, session.terrain.nodes.Last().uuid, session.terrain.road.Last().id)));
+            session.Send(JsonConvert.SerializeObject(Commands.MoveObject(tunnel, session.terrain.UuidCamera, session.terrain.road.Last().id)));
+            Task.Delay(500);
+            // session.Send(JsonConvert.SerializeObject(Commands.MoveObject(tunnel, session.terrain.nodes.Last().uuid, session.terrain.road.Last().id)));
+            //session.Send(JsonConvert.SerializeObject(Commands.UpdateNode(tunnel, session.terrain.UuidMainBike, 0, 90)));
         }
 
         private void GetTerrainButton_Click(object sender, EventArgs e)
@@ -196,7 +218,7 @@ namespace Healthcare_test.VR
 
         private void Texture_Click(object sender, EventArgs e)
         {
-            session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "name")));
+            session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "terrain")));
         }
 
         private void Resetbutton_Click(object sender, EventArgs e)
