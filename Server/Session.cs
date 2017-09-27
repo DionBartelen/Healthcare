@@ -164,6 +164,7 @@ namespace Server
                             }
                         };
                         Send(JsonConvert.SerializeObject(response));
+                        Database.Close();
                     }
                 }
                 else if (jsonObject.id == "doctor/message/toClient")

@@ -32,7 +32,10 @@ namespace DoctorApplicatie
 
         private void startBtn_Click(object sender, EventArgs e)
         {
-            connection.startTraining(ConectedSessionsListCombo.SelectedItem.ToString());
+            if (ConectedSessionsListCombo.SelectedItem != null)
+            {
+                connection.startTraining(ConectedSessionsListCombo.SelectedItem.ToString());
+            }
         }
 
         private void StopBtn_Click(object sender, EventArgs e)
@@ -62,6 +65,11 @@ namespace DoctorApplicatie
 
         public void UpdateComboBox(List<String> new_Connected_Sessions)
         {
+            this.BeginInvoke(new MethodInvoker(delegate
+            {
+                ConectedSessionsListCombo.Items.Clear();
+            }));
+
             foreach (string c in new_Connected_Sessions)
             {
                 if (c != null)
@@ -76,6 +84,7 @@ namespace DoctorApplicatie
 
         private void RefreshConnectedButton_Click(object sender, EventArgs e)
         {
+            ConectedSessionsListCombo.Text = "";
             connection.getSessions();
         }
     }
