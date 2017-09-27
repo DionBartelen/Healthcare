@@ -136,7 +136,7 @@ namespace Server
             dynamic jsonObject = JsonConvert.DeserializeObject(AllText);
             foreach (dynamic combination in jsonObject.combinations)
             {
-                CredentialsClient.Add(combination.username, combination.password);
+                CredentialsClient.Add((string)combination.username, (string)combination.password);
             }
 
             string path2 = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, @"Healthcare-app\Server\Database\LoginDoctor.txt");
@@ -144,7 +144,7 @@ namespace Server
             dynamic jsonObject2 = JsonConvert.DeserializeObject(AllText);
             foreach (dynamic combination2 in jsonObject2.combinations)
             {
-                CredentialsDoctor.Add(combination2.username, combination2.password);
+                CredentialsDoctor.Add((string)combination2.username, (string)combination2.password);
             }
         }
 
@@ -153,14 +153,20 @@ namespace Server
             if (CredentialsClient.ContainsKey(username))
             {
                 return CredentialsClient[username] == password;
-            } else if(CredentialsDoctor.ContainsKey(username))
+            }
+            return false;
+        }
+
+        public static Boolean CheckDoctorCredentials(string username, string password)
+        {
+            if (CredentialsDoctor.ContainsKey(username))
             {
                 return CredentialsDoctor[username] == password;
             }
             return false;
         }
 
-        public static Boolean IsDoctor(string username)
+            public static Boolean IsDoctor(string username)
         {
             return CredentialsDoctor.ContainsKey(username);
         }

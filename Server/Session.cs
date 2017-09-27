@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
-using System.Net;
-using System.Threading;
+using System.Collections.Generic;
 
 namespace Server
 {
@@ -14,38 +10,8 @@ namespace Server
     {
         TcpClient client;
         NetworkStream stream;
-        static int port = 1234;
-        Boolean IsDoctor = false;
-
-        public static void ListenToNewConnections(object o)
-        {
-            IPAddress localhost;
-            if (IPAddress.TryParse("127.0.0.1", out localhost))
-            {
-                TcpListener listener = new TcpListener(localhost, port);
-                listener.Start();
-                Console.WriteLine("Client server klaar voor verbindingen...");
-                Database.ReadSavedData();
-                Database.ReadSavedCredentials();
-                while (true)
-                {
-                    TcpClient client = listener.AcceptTcpClient();
-                    Thread thread = new Thread(() => { HandleNewClient(client); });
-                    thread.Start();
-                    Console.WriteLine("Verbonden met client: " + client.Client.AddressFamily.ToString());
-                }
-            }
-            else
-            {
-                System.Diagnostics.Debug.WriteLine("Error:\r\nKan het IP-adres niet parsen.");
-            }
-        }
-
-        public static void HandleNewClient(TcpClient client)
-        {
-            Session session = new Session(client);
-            session.Read();
-        }
+        public Boolean IsDoctor = false;
+        public string username;
 
         public Session(TcpClient client)
         {
@@ -53,6 +19,8 @@ namespace Server
             stream = client.GetStream();
         }
 
+        //Send to networkstream
+        #region
         public void Send(string message)
         {
             System.Diagnostics.Debug.WriteLine("Send: \r\n" + message);
@@ -63,7 +31,10 @@ namespace Server
             requestArray.CopyTo(buffer, prefixArray.Length);
             stream.Write(buffer, 0, buffer.Length);
         }
+        #endregion
 
+        //Read from networkstream
+        #region
         public void Read()
         {
             while (true)
@@ -113,19 +84,24 @@ namespace Server
                 }
             }
         }
+        #endregion
 
+        //Process answer
+        #region
         public void ProcesAnswer(dynamic answer)
         {
             dynamic jsonObject = JsonConvert.DeserializeObject(answer);
             try
             {
-                if(jsonObject.id == "log in")
+                if (jsonObject.id == "log in")
                 {
                     CheckCredentials(jsonObject.data.username, jsonObject.data.password);
-                } else if (jsonObject.id == "session/start")
+                }
+                else if (jsonObject.id == "session/start")
                 {
-                    Console.WriteLine("New session: " + jsonObject.data.username);
-                    CreateNewSession(jsonObject);
+                    NoPermission("session/start");
+                    //Console.WriteLine("New session: " + jsonObject.data.username);
+                    //CreateNewSession(jsonObject);
                 }
                 else if (jsonObject.id == "data")
                 {
@@ -142,98 +118,199 @@ namespace Server
                 }
                 else if (jsonObject.id == "session/end")
                 {
-                    Console.WriteLine("Session ended with client");
-                    CloseSession(jsonObject);
+                    NoPermission("session/end");
+                    //Console.WriteLine("Session ended with client");
+                    //CloseSession(jsonObject);
+                }
+                else if (jsonObject.id == "doctor/login")
+                {
+                    CheckDoctorCredentials(jsonObject.data.username, jsonObject.data.password);
+                }
+                else if (jsonObject.id == "doctor/sessions")
+                {
+                    SessionList();
                 }
                 else if (jsonObject.id == "session/data/historic")
                 {
                     GetDataFromUser(jsonObject);
+                }
+                else if (jsonObject.id == "doctor/training/start")
+                {
+                    string patient = jsonObject.data.patientId;
+                    if (CreateNewSession(patient))
+                    {
+                        dynamic response = new
+                        {
+                            id = "doctor/training/start",
+                            data = new
+                            {
+                                status = "ok"
+                            }
+                        };
+                        Send(JsonConvert.SerializeObject(response));
+                    }
+                }
+                else if (jsonObject.id == "doctor/training/stop")
+                {
+                    string patient = jsonObject.data.patientId;
+                    if (CloseSession(patient))
+                    {
+                        dynamic response = new
+                        {
+                            id = "doctor/training/stop",
+                            data = new
+                            {
+                                status = "ok"
+                            }
+                        };
+                        Send(JsonConvert.SerializeObject(response));
+                    }
+                }
+                else if (jsonObject.id == "doctor/message/toClient")
+                {
+
+                }
+                else if (jsonObject.id == "doctor/message/toAll")
+                {
+
+                }
+                else if (jsonObject.id == "doctor/setPower")
+                {
+                    if (SetPowerFromClient(jsonObject))
+                    {
+                        dynamic response = new
+                        {
+                            id = "doctor/setPower",
+                            data = new
+                            {
+                                status = "ok",
+                            }
+                        };
+                        Send(response);
+                    }
                 }
             }
             catch (Exception e)
             {
                 dynamic error = new
                 {
-                    id = "session/start",
+                    id = "command",
                     status = "Error",
                     error = e.Message
                 };
                 Send(JsonConvert.SerializeObject(error));
             }
         }
+        #endregion
 
+        //Login normal and doctor.
+        #region
         public void CheckCredentials(string username, string password)
         {
-            if(Database.CheckCredentials(username, password))
+            if (Database.CheckCredentials(username, password))
             {
-                IsDoctor = Database.IsDoctor(username);
-                dynamic response = new
-                {
-                    id = "log in",
-                    data = new
-                    {
-                        status = "ok"
-                    }
-                };
-                Send(JsonConvert.SerializeObject(response));
-            } else
+                this.username = username;
+                Send(JsonConvert.SerializeObject(Commands.LoginResponse("ok")));
+            }
+            else
             {
-                dynamic response = new
-                {
-                    id = "log in",
-                    data = new
-                    {
-                        status = "error"
-                    }
-                };
-                Send(JsonConvert.SerializeObject(response));
+                Send(JsonConvert.SerializeObject(Commands.LoginResponse("error")));
             }
         }
 
-        public void CreateNewSession(dynamic jsonObject)
+        public void CheckDoctorCredentials(string username, string password)
         {
-            try
+            if (Database.CheckDoctorCredentials(username, password))
             {
-                string username = jsonObject.data.username;
-                if (Database.AddActiveSession(username))
-                {
-                    dynamic answer = new
-                    {
-                        id = "session/start",
-                        data = new
-                        {
-                            status = "OK",
-                            sessionID = username
-                        }
-                    };
-                    Send(JsonConvert.SerializeObject(answer));
-                }
-                else
-                {
-                    dynamic answer = new
-                    {
-                        id = "session/start",
-                        data = new
-                        {
-                            status = "ERROR",
-                            error = "Username is al actief. Sluit eerst de andere sessie voor u een nieuwe opent."
-                        }
-                    };
-                    Send(JsonConvert.SerializeObject(answer));
-                }
+                this.username = username;
+                Send(JsonConvert.SerializeObject(Commands.DoctorLoginResponse("ok")));
             }
-            catch (Exception e)
+            else
             {
-                dynamic answer = new
-                {
-                    id = "session/start",
-                    status = "Error",
-                    error = e.Message
-                };
-                Send(JsonConvert.SerializeObject(answer));
+                Send(JsonConvert.SerializeObject(Commands.DoctorLoginResponse("error")));
             }
         }
+        #endregion
 
+        //Create new session.
+        #region
+        public Boolean CreateNewSession(string username)
+        {
+            if (!IsDoctor)
+            {
+                NoPermission("doctor/training/start");
+                return false;
+            }
+            else
+            {
+                Session client = Program.GetSessionWithUsername(username);
+                if (client == null)
+                {
+                    Send(JsonConvert.SerializeObject(Commands.DoctorTrainingStartError("No client active with given username.")));
+                    return false;
+                }
+                try
+                {
+                    if (Database.AddActiveSession(username))
+                    {
+                        dynamic answer = new
+                        {
+                            id = "session/start",
+                            data = new
+                            {
+                                status = "OK",
+                                sessionID = username
+                            }
+                        };
+                        client.Send(JsonConvert.SerializeObject(answer));
+                        return true;
+                    }
+                    else
+                    {
+                        Send(JsonConvert.SerializeObject(Commands.DoctorTrainingStartError("Username already active. Other session has to be stopped first before starting a new one.")));
+                        return false;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Send(JsonConvert.SerializeObject(Commands.DoctorTrainingStartError(e.Message)));
+                    return false;
+                }
+            }
+        }
+        #endregion
+
+        //Return list with active sessions to doctor
+        #region
+        public void SessionList()
+        {
+            if (!IsDoctor)
+            {
+                NoPermission("doctor/sessions");
+            }
+            else
+            {
+                List<Session> sessions = Program.GetAllPatients();
+                List<string> sessionNames = new List<string>();
+                foreach (Session s in sessions)
+                {
+                    sessionNames.Add(s.username);
+                }
+                dynamic response = new
+                {
+                    id = "doctor/sessions",
+                    data = new
+                    {
+                        sessions = sessionNames.ToArray()
+                    }
+                };
+                Send(JsonConvert.SerializeObject(response));
+            }
+        }
+        #endregion
+
+        //Recieved data from patient
+        #region
         public void DataRecieved(dynamic jsonObject)
         {
             try
@@ -284,38 +361,51 @@ namespace Server
                 Send(JsonConvert.SerializeObject(answer));
             }
         }
+        #endregion
 
-        public void CloseSession(dynamic jsonObject)
+        //Close session
+        #region
+        public Boolean CloseSession(string sessionID)
         {
-            try
+            if (!IsDoctor)
             {
-                string sessionID = jsonObject.data.session;
-                Database.CloseActiveSession(sessionID);
-                dynamic answer = new
-                {
-                    id = "session/end",
-                    data = new
-                    {
-                        status = "OK"
-                    }
-                };
-                Send(JsonConvert.SerializeObject(answer));
-                Database.Close();
+                NoPermission("doctor/training/stop");
+                return false;
             }
-            catch (Exception e)
+            else
             {
-                dynamic answer = new
+                Session client = Program.GetSessionWithUsername(username);
+                if (client == null)
                 {
-                    id = "session/end",
-                    status = "Error",
-                    error = e.Message
-                };
-                Send(JsonConvert.SerializeObject(answer));
-                stream.Close();
-                client.Close();
+                    Send(JsonConvert.SerializeObject(Commands.DoctorTrianingStopError("No client active with given username.")));
+                    return false;
+                }
+                try
+                {
+                    Database.CloseActiveSession(sessionID);
+                    dynamic answer = new
+                    {
+                        id = "session/end",
+                        data = new
+                        {
+                            status = "OK"
+                        }
+                    };
+                    client.Send(JsonConvert.SerializeObject(answer));
+                    Program.sessions.Remove(client);
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    Send(JsonConvert.SerializeObject(Commands.DoctorTrianingStopError(e.Message)));
+                    return false;
+                }
             }
         }
+        #endregion
 
+        //Historic data
+        #region
         public void GetDataFromUser(dynamic jsonObject)
         {
             if (IsDoctor)
@@ -330,14 +420,58 @@ namespace Server
             }
             else
             {
-                dynamic answer = new
-                {
-                    id = "session/end",
-                    status = "Error",
-                    error = "You do not have permission for this action"
-                };
-                Send(JsonConvert.SerializeObject(answer));
+                NoPermission("session/data/historic");
             }
         }
+        #endregion
+
+        //Set power from client
+        #region
+        public Boolean SetPowerFromClient(dynamic jsonObject)
+        {
+            if (!IsDoctor)
+            {
+                NoPermission("doctor/setPower");
+                return false;
+            }
+            else
+            {
+                string patientID = jsonObject.data.patientID;
+                Session client = Program.GetSessionWithUsername(patientID);
+                if (client == null)
+                {
+                    Send(JsonConvert.SerializeObject(Commands.SetPowerError("No client active with given username.")));
+                    return false;
+                }
+                else
+                {
+                    dynamic power = new
+                    {
+                        id = "client/SetPower",
+                        data = new
+                        {
+                            power = jsonObject.data.power
+                        }
+                    };
+                    client.Send(JsonConvert.SerializeObject(power));
+                    return true;
+                }
+            }
+        }
+        #endregion
+
+        //NoPermission
+        #region
+        public void NoPermission(string id)
+        {
+            dynamic answer = new
+            {
+                id = id,
+                status = "Error",
+                error = "You do not have permission for this action"
+            };
+            Send(JsonConvert.SerializeObject(answer));
+        }
+        #endregion
     }
 }
