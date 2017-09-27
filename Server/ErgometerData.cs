@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Server
 {
-    [Serializable]
     class ErgometerData
     {
         public int RPM { get; set; }
@@ -31,11 +30,10 @@ namespace Server
 
         }
 
+        override
         public String ToString()
         {
             return $"RPM: {RPM}\r\nSpeed: {Speed}\r\nDistance: {Distance:F2}\r\nPulse: {Pulse}\r\nTime: {Time}\r\nEnergy: {Energy}\r\nActual_Power: {Actual_Power}\r\nRequested_Power: {Requested_Power}\r\n";
-
-
         }
     }
 }

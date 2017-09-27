@@ -12,6 +12,8 @@ namespace Server
 {
     class Database
     {
+        static Dictionary<string, string> CredentialsDoctor = new Dictionary<string, string>();
+        static Dictionary<string, string> CredentialsClient = new Dictionary<string, string>();
         static Dictionary<string, List<TrainSession>> TrainSessions = new Dictionary<string, List<TrainSession>>();
         static Dictionary<string, TrainSession> ActiveTrainSessions = new Dictionary<string, TrainSession>();
 
@@ -113,6 +115,60 @@ namespace Server
             {
                 System.Diagnostics.Debug.WriteLine("Error while saving:(\r\n" + e.Message);
             }
+        }
+
+        public static string GetDataFromUser(string username)
+        {
+            if (TrainSessions.ContainsKey(username))
+            {
+                return JsonConvert.SerializeObject(TrainSessions[username]);
+            }
+            else
+            {
+                return "";
+            }
+        }
+
+        public static void ReadSavedCredentials()
+        {
+            string path = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, @"Healthcare-app\Server\Database\Login.txt");
+            string AllText = File.ReadAllText(path);
+            dynamic jsonObject = JsonConvert.DeserializeObject(AllText);
+            foreach (dynamic combination in jsonObject.combinations)
+            {
+                CredentialsClient.Add((string)combination.username, (string)combination.password);
+            }
+
+            string path2 = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, @"Healthcare-app\Server\Database\LoginDoctor.txt");
+            string AllText2 = File.ReadAllText(path);
+            dynamic jsonObject2 = JsonConvert.DeserializeObject(AllText);
+            foreach (dynamic combination2 in jsonObject2.combinations)
+            {
+                CredentialsDoctor.Add((string)combination2.username, (string)combination2.password);
+            }
+        }
+
+        public static Boolean CheckCredentials(string username, string password)
+        {
+            if (CredentialsClient.ContainsKey(username))
+            {
+                return CredentialsClient[username] == password;
+            }
+            return false;
+        }
+
+        public static Boolean CheckDoctorCredentials(string username, string password)
+        {
+            if (CredentialsDoctor.ContainsKey(username))
+            {
+                return CredentialsDoctor[username] == password;
+            }
+            return false;
+        }
+
+            public static Boolean IsDoctor(string username)
+        {
+            return CredentialsDoctor.ContainsKey(username);
         }
     }
 }
