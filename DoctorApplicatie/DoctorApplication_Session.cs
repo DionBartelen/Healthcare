@@ -15,17 +15,12 @@ namespace DoctorApplicatie
     public partial class DoctorApplication_Session : Form
     {
         DoctorApplication_Connection connection;
-        public DoctorApplication_Session(DoctorApplication_Connection connection, List<Client> connected_clients)
+        List<String> connected_clients;
+        public DoctorApplication_Session(DoctorApplication_Connection connection, List<String> connected_clients)
         {
             InitializeComponent();
             this.connection = connection;
-            foreach(Client c in connected_clients)
-            {
-                ConectedSessionsListCombo.Items.Add(c);
-            }
-
-
-
+            UpdateComboBox(connected_clients);
         }
 
         private void TrainingLbl_Click(object sender, EventArgs e)
@@ -35,17 +30,17 @@ namespace DoctorApplicatie
 
         private void startBtn_Click(object sender, EventArgs e)
         {
-            connection.startTraining();
+            connection.startTraining(ConectedSessionsListCombo.SelectedItem.ToString());
         }
 
         private void StopBtn_Click(object sender, EventArgs e)
         {
-            connection.stopTraining();
+            connection.stopTraining(ConectedSessionsListCombo.SelectedItem.ToString());
         }
 
         private void sendToClientBtn_Click(object sender, EventArgs e)
         {
-            connection.sendMessageToClient(messageTxt.Text);
+            connection.sendMessageToClient(messageTxt.Text, ConectedSessionsListCombo.SelectedItem.ToString());
         }
 
         private void toAllBtn_Click(object sender, EventArgs e)
@@ -55,12 +50,20 @@ namespace DoctorApplicatie
 
         private void setPowerBtn_Click(object sender, EventArgs e)
         {
-            connection.setPower(setPowerTxt.Text);
+            connection.setPower(setPowerTxt.Text, ConectedSessionsListCombo.SelectedItem.ToString());
         }
 
         private void getPastDataBtn_Click(object sender, EventArgs e)
         {
 
+        }
+
+        public void UpdateComboBox(List<String> new_Connected_Sessions)
+        {
+            foreach (String c in connected_clients)
+            {
+                ConectedSessionsListCombo.Items.Add(c);
+            }
         }
     }
 }

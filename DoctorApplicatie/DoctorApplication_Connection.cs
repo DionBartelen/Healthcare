@@ -17,8 +17,8 @@ namespace DoctorApplicatie
         int port = 1234;
         TcpClient client;
         IPAddress localhost;
-        SerialPort serialPort;
         Boolean isConnected;
+        DoctorApplication_Session doctorApplication_Session;
         public DoctorApplication_Connection(string username, string password)
         {
             bool ipIsOk = IPAddress.TryParse("127.0.0.1", out localhost);
@@ -29,6 +29,7 @@ namespace DoctorApplicatie
             Thread read = new Thread(Read);
             read.Start();
             sendLogin(username, password);
+            getSessions();
         }
 
         public void Read()
@@ -86,8 +87,17 @@ namespace DoctorApplicatie
             dynamic jsonData = JsonConvert.DeserializeObject(information);
             if(jsonData.id == "doctor/login")
             {
-                new DoctorApplication_Session(this, null); 
-
+                if(jsonData.status == "ok")                
+                doctorApplication_Session = new DoctorApplication_Session(this, null);
+                else
+                {
+                    
+                }
+            }
+            else if (jsonData.id == "doctor/sessions")
+            {
+                List<String> connected_Sessions = jsonData.sessions;
+                doctorApplication_Session.UpdateComboBox(connected_Sessions);
             }
 
         }
@@ -121,14 +131,14 @@ namespace DoctorApplicatie
             Send(JsonConvert.SerializeObject(sendLogin));
         }
 
-        public void startTraining()
+        public void startTraining(String patientID)
         {
             dynamic startTraining = new
             {
                 id = "doctor/training/start",
                 data = new
                 {
-                    
+                  patientId = patientID
                 }
 
             };
@@ -137,14 +147,14 @@ namespace DoctorApplicatie
 
         }
 
-        public void stopTraining()
+        public void stopTraining(String patientID)
         {
             dynamic stopTraining = new
             {
                 id = "doctor/training/stop",
                 data = new
                 {
-
+                    patientId = patientID
 
                 }
 
@@ -155,7 +165,7 @@ namespace DoctorApplicatie
 
         }
 
-        public void sendMessageToClient(String message)
+        public void sendMessageToClient(String message, String patientID)
         {
             dynamic sendMessageToClient = new
             {
@@ -163,6 +173,8 @@ namespace DoctorApplicatie
                 data = new
                 {
                     messageId = message,
+                    patientiD = patientID
+
 
                 }
 
@@ -188,7 +200,7 @@ namespace DoctorApplicatie
 
         }
 
-        public void setPower(string power)
+        public void setPower(string power, String patientID)
         {
             dynamic setPower = new
             {
@@ -196,12 +208,28 @@ namespace DoctorApplicatie
                data = new
                {
                    power = power,
+                   patientId = patientID
                }
 
             };
 
             Send(JsonConvert.SerializeObject(setPower));
 
+        }
+        public void getSessions()
+        {
+            dynamic getSessions = new
+            {
+                id = "docotor/sessions"
+
+            };
+            Send(JsonConvert.SerializeObject(getSessions));
+        }
+
+        public void close()
+        {
+            stream.Close();
+            client.Close();
         }
 
         public void getOlderData()
