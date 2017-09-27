@@ -21,7 +21,7 @@ namespace WindowsFormsApp1
 
         private void stop_Click(object sender, EventArgs e)
         {
-            client.closeSession();
+            client.close();
             this.Close();
         }
     }

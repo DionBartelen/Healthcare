@@ -26,10 +26,6 @@ namespace WindowsFormsApp1
             client_data_list = new List<ClientData>();
             username = usernameTxt;
             password = passwordTxt;
-            ClientData client1 = new ClientData("", "");
-            ClientData client2 = new ClientData("test1", "test2");
-            client_data_list.Add(client1);
-            client_data_list.Add(client2);
             string[] ports = SerialPort.GetPortNames();
             foreach (String s in ports)
             {
@@ -37,8 +33,6 @@ namespace WindowsFormsApp1
             }
             comportCombo.Items.Add("Simulator");
             comportCombo.SelectedItem = comportCombo.Items[0];
-
-
         }
 
         private void sign_in_Btn_Click(object sender, EventArgs e)
@@ -46,18 +40,10 @@ namespace WindowsFormsApp1
             ClientData currentClient = new ClientData(username.Text, password.Text);
             Boolean foundInList = false;
 
-            foreach (ClientData client in client_data_list)
-            {
-                if (currentClient.password == client.password && currentClient.username == client.username)
-                {
-                    foundInList = true;
-
-                }
-            }
+            
             if (foundInList)
             { 
                 response.Text = "connected";
-                
 
                 if (ergometer != null)
                 {
@@ -66,7 +52,7 @@ namespace WindowsFormsApp1
                 if (comportCombo.SelectedItem.ToString() == "Simulator")
                 {
                     ErgometerSimulatie ergometersimulatie = new ErgometerSimulatie();
-                    Client client = new Client(username.Text, ergometersimulatie, null);
+                    Client client = new Client(currentClient, ergometersimulatie, null);
                     SessionGUI sessionGUI = new SessionGUI(client);
                     sessionGUI.Show();
 
@@ -74,7 +60,7 @@ namespace WindowsFormsApp1
                 else
                 {
                     string comPort = comportCombo.SelectedItem.ToString();
-                    Client client = new Client(username.Text , null, comPort);
+                    Client client = new Client(currentClient, null, comPort);
                     SessionGUI sessionGUI = new SessionGUI(client);
                     sessionGUI.Show();
                    
@@ -82,16 +68,10 @@ namespace WindowsFormsApp1
             }
             else
             {
-                response.Text = "Not found";
+                responseww.Text = "User not found";
                 username.Text = "";
                 password.Text = "";
             }
-
-        }
-
-
-        private void comportCombo_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
         }
     }

@@ -28,25 +28,24 @@ namespace WindowsFormsApp1
         ErgometerSimulatie simulation;
 
 
-        public Client(String username, ErgometerSimulatie simulation, string comport)
+        public Client(ClientData clientdata, ErgometerSimulatie simulation, string comport)
         {
             this.simulation = simulation;
-            System.Diagnostics.Debug.WriteLine("what up ");
             bool ipIsOk = IPAddress.TryParse("127.0.0.1", out localhost);
-             if (!ipIsOk) { Console.WriteLine("ip adres kan niet geparsed worden."); Environment.Exit(1); }
+            if (!ipIsOk)
+            {
+                Console.WriteLine("ip adres kan niet geparsed worden."); Environment.Exit(1);
+            }
+
             client = new TcpClient(localhost.ToString(), port);
               stream = client.GetStream();
             isConnected = true;
-              Send(startSession(username));
               ergometerCOM = new Healthcare_test.ErgometerCOM(comport, "9600");
-           read = new Thread(Read);
-           read.Start();
 
-            getData = new Thread(GetData);
-            getData.Start();
+            Send(JsonConvert.SerializeObject(sendlogin(clientdata.username, clientdata.password)));
 
-
-
+            read = new Thread(Read);
+            read.Start();
 
         }
 
@@ -107,16 +106,20 @@ namespace WindowsFormsApp1
             {
                 sessionID = (String)jsonData.data.sessionID;
                 System.Diagnostics.Debug.WriteLine("sessionID: " + sessionID);
+                getData = new Thread(GetData);
+                getData.Start();
             }
             if (jsonData.id == "session/end")
             {
-                System.Diagnostics.Debug.WriteLine("its ye boi");
                 isConnected = false;
-                simulation.Close();
-                stream.Close();
-                client.Close();
-                ergometerCOM.Close();
-                
+                close();
+            }
+            if(jsonData.id == "log in")
+            {
+                if(jsonData.status != "ok")
+                {
+                    close();
+                }
             }
 
         }
@@ -196,48 +199,55 @@ namespace WindowsFormsApp1
 
         }
 
-        // public dynamic sendLogin()
-        //{ 
-        //   dynamic sendLogin = new
-        //  {
-        //   id = "log in",
-        //   data = new 
+        public dynamic sendlogin(String username, String password)
+        {
+            dynamic sendlogin = new
+            {
+                id = "log in",
+                data = new
+                {
+                    username = username,
+                    password = password
+                }
+            };
+            return null;
+          }
+
+        //public dynamic startSession(String usernameid)
+        //{
+        //    dynamic startSession = new
         //    {
+        //        id = "session/start",
+        //        data = new
+        //        {
+        //            username = usernameid
+        //        }
 
-        //    }
+        //    };
+        //    return JsonConvert.SerializeObject(startSession);
+        //}
 
-        //  }
+        //public void closesession()
+        //{
+        //    dynamic closesession = new
+        //    {
+        //        id = "session/end",
+        //        data = new
+        //        {
+        //            session = sessionid
+        //        }
 
-        public dynamic startSession(String usernameid)
+        //    };
+        //    send(jsonconvert.serializeobject(closesession));
+        //}
+
+
+        public void close()
         {
-            dynamic startSession = new
-            {
-                id = "session/start",
-                data = new
-                {
-                    username = usernameid
-                }
-
-            };
-            return JsonConvert.SerializeObject(startSession);
-
-
+            stream.Close();
+            client.Close();
+            ergometerCOM.Close();
         }
-
-        public void closeSession()
-        {
-            dynamic closeSession = new
-            {
-                id = "session/end",
-                data = new
-                {
-                    session = sessionID
-                }
-
-            };
-            Send(JsonConvert.SerializeObject(closeSession));
-        }
-
     }
 }
 
