@@ -162,7 +162,7 @@ namespace Healthcare_test.VR
                             },
                             model = new
                             {
-                                file = pony,
+                                file = bike,
                                 cullbackfaces = true,
                                 animated = false,
                                 animation = bikeAnim,
