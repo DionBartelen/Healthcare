@@ -80,6 +80,7 @@ namespace DoctorApplicatie
                 }
                 catch (Exception e)
                 {
+                    System.Diagnostics.Debug.WriteLine(e.StackTrace);
                     System.Diagnostics.Debug.WriteLine(e.Message);
                 }
             }

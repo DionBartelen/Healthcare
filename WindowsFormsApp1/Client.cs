@@ -92,7 +92,7 @@ namespace WindowsFormsApp1
                     while (!messagereceived);
                     stream.Flush();
                     string toReturn = response.ToString().Substring(4);
-                    System.Diagnostics.Debug.WriteLine("Received: \r\n" + toReturn);
+                    System.Diagnostics.Debug.WriteLine("Received client: \r\n" + toReturn);
                     ProcessAnswer(toReturn);
          
                 }
@@ -114,6 +114,7 @@ namespace WindowsFormsApp1
             }
             if (jsonData.id == "session/end")
             {
+                System.Diagnostics.Debug.WriteLine("Closing...");
                 isConnected = false;
                 close();
             }
@@ -249,7 +250,16 @@ namespace WindowsFormsApp1
         {
             stream.Close();
             client.Close();
-            ergometerCOM.Close();
+            if (ergometerCOM != null)
+            {
+                ergometerCOM.Close();
+            }
+            if(simulation != null)
+            {
+                simulation.Close();
+            }
+            read.Abort();
+            getData.Abort();
         }
     }
 }

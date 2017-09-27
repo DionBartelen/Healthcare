@@ -23,7 +23,7 @@ namespace Server
         #region
         public void Send(string message)
         {
-            System.Diagnostics.Debug.WriteLine("Send: \r\n" + message);
+            System.Diagnostics.Debug.WriteLine("Send from server: \r\n" + message);
             byte[] prefixArray = BitConverter.GetBytes(message.Length);
             byte[] requestArray = Encoding.Default.GetBytes(message);
             byte[] buffer = new Byte[prefixArray.Length + message.Length];
@@ -75,7 +75,7 @@ namespace Server
                     while (!messagereceived);
                     stream.Flush();
                     string toReturn = response.ToString().Substring(4);
-                    System.Diagnostics.Debug.WriteLine("Received: \r\n" + toReturn);
+                    System.Diagnostics.Debug.WriteLine("Received at server: \r\n" + toReturn);
                     ProcesAnswer(toReturn);
                 }
                 catch (Exception e)
@@ -377,7 +377,7 @@ namespace Server
             }
             else
             {
-                Session client = Program.GetSessionWithUsername(username);
+                Session client = Program.GetSessionWithUsername(sessionID);
                 if (client == null)
                 {
                     Send(JsonConvert.SerializeObject(Commands.DoctorTrianingStopError("No client active with given username.")));

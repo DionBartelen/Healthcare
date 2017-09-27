@@ -62,13 +62,15 @@ namespace DoctorApplicatie
 
         public void UpdateComboBox(List<String> new_Connected_Sessions)
         {
-            foreach (String c in new_Connected_Sessions)
+            foreach (string c in new_Connected_Sessions)
             {
-                this.BeginInvoke(new MethodInvoker(delegate
+                if (c != null)
                 {
-                    ConectedSessionsListCombo.Items.Add(c);
-                }));
-                
+                    this.BeginInvoke(new MethodInvoker(delegate
+                    {
+                        ConectedSessionsListCombo.Items.Add(c);
+                    }));
+                }                
             }
         }
 
