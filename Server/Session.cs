@@ -95,7 +95,7 @@ namespace Server
             {
                 if (jsonObject.id == "log in")
                 {
-                    CheckCredentials(jsonObject.data.username, jsonObject.data.password);
+                    CheckCredentials((string)jsonObject.data.username, (string)jsonObject.data.password);
                 }
                 else if (jsonObject.id == "session/start")
                 {
@@ -124,7 +124,7 @@ namespace Server
                 }
                 else if (jsonObject.id == "doctor/login")
                 {
-                    CheckDoctorCredentials(jsonObject.data.username, jsonObject.data.password);
+                    CheckDoctorCredentials((string)jsonObject.data.username, (string)jsonObject.data.password);
                 }
                 else if (jsonObject.id == "doctor/sessions")
                 {
@@ -222,6 +222,7 @@ namespace Server
         {
             if (Database.CheckDoctorCredentials(username, password))
             {
+                IsDoctor = true;
                 this.username = username;
                 Send(JsonConvert.SerializeObject(Commands.DoctorLoginResponse("ok")));
             }
@@ -286,6 +287,7 @@ namespace Server
         {
             if (!IsDoctor)
             {
+                Console.WriteLine("No permission");
                 NoPermission("doctor/sessions");
             }
             else
@@ -304,6 +306,7 @@ namespace Server
                         sessions = sessionNames.ToArray()
                     }
                 };
+                Console.WriteLine(JsonConvert.SerializeObject(response));
                 Send(JsonConvert.SerializeObject(response));
             }
         }

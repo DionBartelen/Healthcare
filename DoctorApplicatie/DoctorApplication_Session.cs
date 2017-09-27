@@ -16,11 +16,13 @@ namespace DoctorApplicatie
     {
         DoctorApplication_Connection connection;
         List<String> connected_clients;
-        public DoctorApplication_Session(DoctorApplication_Connection connection, List<String> connected_clients)
+
+        public DoctorApplication_Session(DoctorApplication_Connection connection)
         {
             InitializeComponent();
             this.connection = connection;
-            UpdateComboBox(connected_clients);
+            connected_clients = new List<string>();
+            
         }
 
         private void TrainingLbl_Click(object sender, EventArgs e)
@@ -60,10 +62,19 @@ namespace DoctorApplicatie
 
         public void UpdateComboBox(List<String> new_Connected_Sessions)
         {
-            foreach (String c in connected_clients)
+            foreach (String c in new_Connected_Sessions)
             {
-                ConectedSessionsListCombo.Items.Add(c);
+                this.BeginInvoke(new MethodInvoker(delegate
+                {
+                    ConectedSessionsListCombo.Items.Add(c);
+                }));
+                
             }
+        }
+
+        private void RefreshConnectedButton_Click(object sender, EventArgs e)
+        {
+            connection.getSessions();
         }
     }
 }

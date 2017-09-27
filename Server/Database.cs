@@ -140,8 +140,8 @@ namespace Server
             }
 
             string path2 = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, @"Healthcare-app\Server\Database\LoginDoctor.txt");
-            string AllText2 = File.ReadAllText(path);
-            dynamic jsonObject2 = JsonConvert.DeserializeObject(AllText);
+            string AllText2 = File.ReadAllText(path2);
+            dynamic jsonObject2 = JsonConvert.DeserializeObject(AllText2);
             foreach (dynamic combination2 in jsonObject2.combinations)
             {
                 CredentialsDoctor.Add((string)combination2.username, (string)combination2.password);

@@ -43,6 +43,7 @@
             this.getPastSessions = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.getPastDataBtn = new System.Windows.Forms.Button();
+            this.RefreshConnectedButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ConectedSessionsListCombo
@@ -187,12 +188,23 @@
             this.getPastDataBtn.UseVisualStyleBackColor = false;
             this.getPastDataBtn.Click += new System.EventHandler(this.getPastDataBtn_Click);
             // 
+            // RefreshConnectedButton
+            // 
+            this.RefreshConnectedButton.Location = new System.Drawing.Point(364, 31);
+            this.RefreshConnectedButton.Name = "RefreshConnectedButton";
+            this.RefreshConnectedButton.Size = new System.Drawing.Size(75, 23);
+            this.RefreshConnectedButton.TabIndex = 15;
+            this.RefreshConnectedButton.Text = "Refresh";
+            this.RefreshConnectedButton.UseVisualStyleBackColor = true;
+            this.RefreshConnectedButton.Click += new System.EventHandler(this.RefreshConnectedButton_Click);
+            // 
             // DoctorApplication_Session
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(347, 479);
+            this.ClientSize = new System.Drawing.Size(511, 479);
+            this.Controls.Add(this.RefreshConnectedButton);
             this.Controls.Add(this.getPastDataBtn);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.getPastSessions);
@@ -233,5 +245,6 @@
         private System.Windows.Forms.Label getPastSessions;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button getPastDataBtn;
+        private System.Windows.Forms.Button RefreshConnectedButton;
     }
 }

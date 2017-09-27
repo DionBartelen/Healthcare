@@ -26,8 +26,15 @@ namespace DoctorApplicatie
         {
             username_doctor = usernameTxt.Text;
             password_doctor = passwordTxt.Text;
-            new DoctorApplication_Connection(username_doctor, password_doctor);
+            new DoctorApplication_Connection(username_doctor, password_doctor, this);
+        }
 
+        public void RunSessionForm(DoctorApplication_Session session)
+        {
+            this.BeginInvoke(new MethodInvoker(delegate
+            {
+                session.Show();
+            }));
         }
     }
 }

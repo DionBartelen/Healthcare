@@ -38,45 +38,33 @@ namespace WindowsFormsApp1
         private void sign_in_Btn_Click(object sender, EventArgs e)
         {
             ClientData currentClient = new ClientData(username.Text, password.Text);
-            Boolean foundInList = false;
 
-            
-            if (foundInList)
-            { 
-                response.Text = "connected";
 
-                if (ergometer != null)
-                {
-                    ergometer.Close();
-                }
-                if (comportCombo.SelectedItem.ToString() == "Simulator")
-                {
-                    ErgometerSimulatie ergometersimulatie = new ErgometerSimulatie();
-                    Client client = new Client(currentClient, ergometersimulatie, null);
-                    SessionGUI sessionGUI = new SessionGUI(client);
-                    sessionGUI.Show();
+            response.Text = "connected";
 
-                }
-                else
-                {
-                    string comPort = comportCombo.SelectedItem.ToString();
-                    Client client = new Client(currentClient, null, comPort);
-                    SessionGUI sessionGUI = new SessionGUI(client);
-                    sessionGUI.Show();
-                   
-                }
+            if (ergometer != null)
+            {
+                ergometer.Close();
+            }
+            if (comportCombo.SelectedItem.ToString() == "Simulator")
+            {
+                ErgometerSimulatie ergometersimulatie = new ErgometerSimulatie();
+                Client client = new Client(currentClient, ergometersimulatie, null);
+                SessionGUI sessionGUI = new SessionGUI(client);
+                sessionGUI.Show();
+
             }
             else
             {
-                responseww.Text = "User not found";
-                username.Text = "";
-                password.Text = "";
+                string comPort = comportCombo.SelectedItem.ToString();
+                Client client = new Client(currentClient, null, comPort);
+                SessionGUI sessionGUI = new SessionGUI(client);
+                sessionGUI.Show();
+
             }
-
         }
-    }
-
 
     }
+}
   
 

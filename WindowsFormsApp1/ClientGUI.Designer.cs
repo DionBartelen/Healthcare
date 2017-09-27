@@ -145,7 +145,7 @@
             this.Controls.Add(this.passwordTxt);
             this.Controls.Add(this.usernameTxt);
             this.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "ClientGUI";
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

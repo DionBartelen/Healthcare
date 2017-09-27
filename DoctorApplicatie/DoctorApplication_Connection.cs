@@ -8,6 +8,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace DoctorApplicatie
 {
@@ -19,8 +20,10 @@ namespace DoctorApplicatie
         IPAddress localhost;
         Boolean isConnected;
         DoctorApplication_Session doctorApplication_Session;
-        public DoctorApplication_Connection(string username, string password)
+        DoctorAplicatie application;
+        public DoctorApplication_Connection(string username, string password, DoctorAplicatie application)
         {
+            this.application = application;
             bool ipIsOk = IPAddress.TryParse("127.0.0.1", out localhost);
             if (!ipIsOk) { Console.WriteLine("ip adres kan niet geparsed worden."); Environment.Exit(1); }
             client = new TcpClient(localhost.ToString(), port);
@@ -29,7 +32,6 @@ namespace DoctorApplicatie
             Thread read = new Thread(Read);
             read.Start();
             sendLogin(username, password);
-            getSessions();
         }
 
         public void Read()
@@ -85,18 +87,21 @@ namespace DoctorApplicatie
         public void ProcessAnswer(string information)
         {
             dynamic jsonData = JsonConvert.DeserializeObject(information);
-            if(jsonData.id == "doctor/login")
+            if (jsonData.id == "doctor/login")
             {
-                if(jsonData.status == "ok")                
-                doctorApplication_Session = new DoctorApplication_Session(this, null);
-                else
+                if (jsonData.data.status == "ok")
                 {
-                    
+                    doctorApplication_Session = new DoctorApplication_Session(this);
+                    application.RunSessionForm(doctorApplication_Session);
                 }
             }
             else if (jsonData.id == "doctor/sessions")
             {
-                List<String> connected_Sessions = jsonData.sessions;
+                List<String> connected_Sessions = new List<string>();
+                foreach (dynamic d in jsonData.data.sessions)
+                {
+                    connected_Sessions.Add((string)d);
+                }
                 doctorApplication_Session.UpdateComboBox(connected_Sessions);
             }
 
@@ -138,7 +143,7 @@ namespace DoctorApplicatie
                 id = "doctor/training/start",
                 data = new
                 {
-                  patientId = patientID
+                    patientId = patientID
                 }
 
             };
@@ -205,11 +210,11 @@ namespace DoctorApplicatie
             dynamic setPower = new
             {
                 id = "doctor/setPower",
-               data = new
-               {
-                   power = power,
-                   patientId = patientID
-               }
+                data = new
+                {
+                    power = power,
+                    patientId = patientID
+                }
 
             };
 
@@ -220,7 +225,7 @@ namespace DoctorApplicatie
         {
             dynamic getSessions = new
             {
-                id = "docotor/sessions"
+                id = "doctor/sessions"
 
             };
             Send(JsonConvert.SerializeObject(getSessions));
@@ -234,7 +239,7 @@ namespace DoctorApplicatie
 
         public void getOlderData()
         {
-            
+
         }
     }
 

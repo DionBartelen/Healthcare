@@ -38,14 +38,17 @@ namespace WindowsFormsApp1
             }
 
             client = new TcpClient(localhost.ToString(), port);
-              stream = client.GetStream();
+            stream = client.GetStream();
             isConnected = true;
-              ergometerCOM = new Healthcare_test.ErgometerCOM(comport, "9600");
-
-            Send(JsonConvert.SerializeObject(sendlogin(clientdata.username, clientdata.password)));
+            if (comport != null)
+            {
+                ergometerCOM = new Healthcare_test.ErgometerCOM(comport, "9600");
+            }
 
             read = new Thread(Read);
             read.Start();
+
+            sendlogin(clientdata.username, clientdata.password);
 
         }
 
@@ -116,7 +119,7 @@ namespace WindowsFormsApp1
             }
             if(jsonData.id == "log in")
             {
-                if(jsonData.status != "ok")
+                if(jsonData.data.status != "ok")
                 {
                     close();
                 }
@@ -145,7 +148,7 @@ namespace WindowsFormsApp1
             }
             while (isConnected)
             {
-                if (simulation == null)
+                if (simulation == null && ergometerCOM != null)
                 {
                     System.Diagnostics.Debug.WriteLine(isConnected);
                     Healthcare_test.ErgometerData ergometerData = ergometerCOM.GetData();
@@ -168,7 +171,7 @@ namespace WindowsFormsApp1
                     };
                     Send(JsonConvert.SerializeObject(ergometerdata));
                 }
-                else
+                else if(simulation!= null)
                 {
                     System.Diagnostics.Debug.WriteLine(isConnected);
                     Healthcare_test.ErgometerData ergometerData2 = simulation.GetData(); 
@@ -199,7 +202,7 @@ namespace WindowsFormsApp1
 
         }
 
-        public dynamic sendlogin(String username, String password)
+        public void sendlogin(String username, String password)
         {
             dynamic sendlogin = new
             {
@@ -210,7 +213,7 @@ namespace WindowsFormsApp1
                     password = password
                 }
             };
-            return null;
+            Send(JsonConvert.SerializeObject(sendlogin));
           }
 
         //public dynamic startSession(String usernameid)
