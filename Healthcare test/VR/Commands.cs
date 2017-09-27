@@ -21,6 +21,7 @@ namespace Healthcare_test.VR
         public static string tree7 = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\trees\fantasy\tree7.obj");
         public static string tree10 = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\trees\fantasy\tree10.obj");
 
+        public static string pony = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\pony.obj");
         public static string bike = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\bike\bike.fbx");
         public static string bikeAnim = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\bike\bike_anim.fbx");
         public static string carcartoon = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\cars\cartoon\Pony_cartoon.obj");
@@ -161,7 +162,7 @@ namespace Healthcare_test.VR
                             },
                             model = new
                             {
-                                file = bike,
+                                file = pony,
                                 cullbackfaces = true,
                                 animated = false,
                                 animation = bikeAnim,

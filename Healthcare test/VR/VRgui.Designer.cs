@@ -269,12 +269,12 @@
             // 
             // SpeedSlider
             // 
+            this.SpeedSlider.LargeChange = 0;
             this.SpeedSlider.Location = new System.Drawing.Point(357, 294);
             this.SpeedSlider.Maximum = 100;
             this.SpeedSlider.Name = "SpeedSlider";
             this.SpeedSlider.Size = new System.Drawing.Size(220, 56);
             this.SpeedSlider.TabIndex = 26;
-            this.SpeedSlider.Value = 5;
             this.SpeedSlider.Scroll += new System.EventHandler(this.SpeedSlider_Scroll);
             // 
             // VRgui

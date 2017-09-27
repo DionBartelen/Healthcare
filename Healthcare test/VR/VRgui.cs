@@ -155,13 +155,13 @@ namespace Healthcare_test.VR
         private void terrainWH_Click(object sender, EventArgs e)
         {
             session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "GroundPlane")));
-            Task.Delay(100).Wait();
+           // Task.Delay(100).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.CreateGroundTerrainWithHeights(tunnel)));
-            Task.Delay(100).Wait();
+           // Task.Delay(100).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel, -105, -4, -128,0,"terrain",true,false)));
-            Task.Delay(2000).Wait();
+            Task.Delay(1000).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "terrain")));
-            Task.Delay(2000).Wait();
+            Task.Delay(1000).Wait();
             while(!session.terrain.textureLoaded)
             {
                 Thread.Sleep(100);
@@ -171,11 +171,11 @@ namespace Healthcare_test.VR
             // session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "Head")));
             Task.Delay(1000).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "Camera")));
-            Task.Delay(1000).Wait();
+           //Task.Delay(1000).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel, 0, 0, 0, 0, "MainBike", false,false)));
-            Task.Delay(1000).Wait();
+            Task.Delay(500).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "MainBike")));
-            Task.Delay(1000).Wait();
+            Task.Delay(500).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.UpdateNodeWithParent(tunnel, session.terrain.UuidMainBike, session.terrain.UuidCamera)));
             Task.Delay(500).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.UpdateNode(tunnel, session.terrain.UuidMainBike,0,0,270,0)));
@@ -188,14 +188,21 @@ namespace Healthcare_test.VR
             Task.Delay(500).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.UpdateNode(tunnel, session.terrain.UuidPanel, 1, -0.75, 0, -30)));
             Task.Delay(500).Wait();
-            session.Send(JsonConvert.SerializeObject(Commands.addTextPanel(tunnel, session.terrain.UuidPanel, "Speed: 5")));
+            session.Send(JsonConvert.SerializeObject(Commands.addTextPanel(tunnel, session.terrain.UuidPanel, "Speed: 0")));
             Task.Delay(500).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.SwapPanel(tunnel, session.terrain.UuidPanel)));
-
-
-
-            // session.Send(JsonConvert.SerializeObject(Commands.addSkyBox(tunnel)));
-
+            Task.Delay(500).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.addSkyBox(tunnel)));
+            Task.Delay(500).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.AddRoute(tunnel)));
+            Task.Delay(500).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.AddRoad(tunnel, session.terrain.route.Last().id)));
+            Task.Delay(500).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "Road")));
+            Task.Delay(3000).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.MoveObject(tunnel, session.terrain.UuidCamera, session.terrain.road.Last().id)));
+            Task.Delay(500).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.UpdateSpeed(tunnel, session.terrain.UuidCamera, 0)));
 
 
 
@@ -211,9 +218,10 @@ namespace Healthcare_test.VR
         {
             session.Send(JsonConvert.SerializeObject(Commands.AddRoad(tunnel, session.terrain.route.Last().id)));
             Task.Delay(1000);
-           session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "Road")));
-                
-               
+            session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "Road")));
+           
+
+
 
         }
 
