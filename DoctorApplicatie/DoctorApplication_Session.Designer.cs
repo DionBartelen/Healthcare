@@ -155,7 +155,7 @@
             this.setPowerBtn.BackColor = System.Drawing.SystemColors.Control;
             this.setPowerBtn.Location = new System.Drawing.Point(173, 230);
             this.setPowerBtn.Name = "setPowerBtn";
-            this.setPowerBtn.Size = new System.Drawing.Size(75, 24);
+            this.setPowerBtn.Size = new System.Drawing.Size(84, 24);
             this.setPowerBtn.TabIndex = 11;
             this.setPowerBtn.Text = "setPower";
             this.setPowerBtn.UseVisualStyleBackColor = false;

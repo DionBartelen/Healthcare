@@ -125,6 +125,10 @@ namespace WindowsFormsApp1
                     close();
                 }
             }
+            if(jsonData.id == "client/message")
+            {
+                HandleNewMessageFromDoctor((string)jsonData.data.message);
+            }
 
         }
 
@@ -216,6 +220,11 @@ namespace WindowsFormsApp1
             };
             Send(JsonConvert.SerializeObject(sendlogin));
           }
+
+        public void HandleNewMessageFromDoctor(string message)
+        {
+            //Nog in te vullen met custom actie
+        }
 
         //public dynamic startSession(String usernameid)
         //{

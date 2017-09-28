@@ -45,17 +45,25 @@ namespace DoctorApplicatie
 
         private void sendToClientBtn_Click(object sender, EventArgs e)
         {
-            connection.sendMessageToClient(messageTxt.Text, ConectedSessionsListCombo.SelectedItem.ToString());
+            if (messageTxt.Text != null && ConectedSessionsListCombo.SelectedItem != null)
+            {
+                connection.sendMessageToClient(messageTxt.Text, ConectedSessionsListCombo.SelectedItem.ToString());
+            }
         }
 
         private void toAllBtn_Click(object sender, EventArgs e)
         {
-            connection.sendMessagetoAllClients(messageTxt.Text);
+            if (messageTxt.Text != null)
+            {
+                connection.sendMessagetoAllClients(messageTxt.Text);
+            }
         }
 
         private void setPowerBtn_Click(object sender, EventArgs e)
         {
-            connection.setPower(setPowerTxt.Text, ConectedSessionsListCombo.SelectedItem.ToString());
+            if(setPowerTxt.Text != null && ConectedSessionsListCombo.SelectedItem != null) {
+                connection.setPower(setPowerTxt.Text, ConectedSessionsListCombo.SelectedItem.ToString());
+            }
         }
 
         private void getPastDataBtn_Click(object sender, EventArgs e)

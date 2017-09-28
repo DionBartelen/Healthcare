@@ -173,7 +173,7 @@ namespace Server
                 }
                 else if (jsonObject.id == "doctor/message/toAll")
                 {
-
+                    SendMessageToAllClients(jsonObject);
                 }
                 else if (jsonObject.id == "doctor/setPower")
                 {
@@ -445,6 +445,41 @@ namespace Server
             else
             {
                 NoPermission("session/data/historic");
+            }
+        }
+        #endregion
+
+        //Send message to all clients
+        #region
+        public void SendMessageToAllClients(dynamic jsonObject)
+        {
+            List<Session> sessions = Program.GetAllPatients();
+            foreach (Session s in sessions)
+            {
+                SendMessageToSingleClient(s.username, (string)jsonObject.data.messageId);
+            }
+        }
+        #endregion
+
+        //Send message to single client
+        #region
+        public void SendMessageToSingleClient(string user, string message)
+        {
+            List<Session> sessions = Program.GetAllPatients();
+            foreach (Session s in sessions)
+            {
+                if(s.username == user)
+                {
+                    dynamic answer = new
+                    {
+                        id = "client/message",
+                        data = new
+                        {
+                            message = message
+                        }
+                    };
+                    s.Send(JsonConvert.SerializeObject(answer));
+                }
             }
         }
         #endregion
