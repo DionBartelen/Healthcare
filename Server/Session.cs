@@ -189,6 +189,9 @@ namespace Server
                         };
                         Send(response);
                     }
+                } else if(jsonObject.id == "doctor/sessions/users")
+                {
+                    GetUsernamesInDB();
                 }
             }
             catch (Exception e)
@@ -408,13 +411,30 @@ namespace Server
         }
         #endregion
 
+        //Historic usernames
+        #region
+        public void GetUsernamesInDB()
+        {
+            string[] users = Database.GetUsers();
+            dynamic response = new
+            {
+                id = "doctor/sessions/users",
+                data = new
+                {
+                    users = users
+                }
+            };
+            Send(JsonConvert.SerializeObject(response));
+        }
+        #endregion
+
         //Historic data
         #region
         public void GetDataFromUser(dynamic jsonObject)
         {
             if (IsDoctor)
             {
-                string DataFromUser = Database.GetDataFromUser(jsonObject.data.client);
+                TrainSession[] DataFromUser = Database.GetDataFromUser((string)jsonObject.data.patientID);
                 dynamic response = new
                 {
                     id = "session/data/historic",

@@ -117,16 +117,27 @@ namespace Server
             }
         }
 
-        public static string GetDataFromUser(string username)
+        public static TrainSession[] GetDataFromUser(string username)
         {
             if (TrainSessions.ContainsKey(username))
             {
-                return JsonConvert.SerializeObject(TrainSessions[username]);
+                return TrainSessions[username].ToArray();
             }
             else
             {
-                return "";
+                return null;
             }
+        }
+
+        public static string[] GetUsers()
+        {
+            Dictionary<string, List<TrainSession>>.KeyCollection keyColl = TrainSessions.Keys;
+            List<string> keys = new List<string>();
+            foreach(string s in keyColl)
+            {
+                keys.Add(s.ToString());
+            }
+            return keys.ToArray();
         }
 
         public static void ReadSavedCredentials()

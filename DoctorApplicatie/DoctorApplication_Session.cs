@@ -60,7 +60,7 @@ namespace DoctorApplicatie
 
         private void getPastDataBtn_Click(object sender, EventArgs e)
         {
-
+            connection.getOlderData(OlderDataComboBox.Text);
         }
 
         public void UpdateComboBox(List<String> new_Connected_Sessions)
@@ -82,10 +82,34 @@ namespace DoctorApplicatie
             }
         }
 
+        public void UpdateOlderDataComboBox(List<string> users)
+        {
+            this.BeginInvoke(new MethodInvoker(delegate
+            {
+                OlderDataComboBox.Items.Clear();
+            }));
+
+            foreach (string c in users)
+            {
+                if (c != null)
+                {
+                    this.BeginInvoke(new MethodInvoker(delegate
+                    {
+                        OlderDataComboBox.Items.Add(c);
+                    }));
+                }
+            }
+        }
+
         private void RefreshConnectedButton_Click(object sender, EventArgs e)
         {
             ConectedSessionsListCombo.Text = "";
             connection.getSessions();
+        }
+
+        private void RefreshHistoricUsers_Click(object sender, EventArgs e)
+        {
+            connection.GetUsers();
         }
     }
 }

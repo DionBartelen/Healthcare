@@ -41,9 +41,10 @@
             this.setPowerTxt = new System.Windows.Forms.TextBox();
             this.setPowerBtn = new System.Windows.Forms.Button();
             this.getPastSessions = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.OlderDataComboBox = new System.Windows.Forms.ComboBox();
             this.getPastDataBtn = new System.Windows.Forms.Button();
             this.RefreshConnectedButton = new System.Windows.Forms.Button();
+            this.RefreshHistoricUsers = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ConectedSessionsListCombo
@@ -169,18 +170,18 @@
             this.getPastSessions.TabIndex = 12;
             this.getPastSessions.Text = "Past Sessions:";
             // 
-            // comboBox1
+            // OlderDataComboBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(12, 309);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(123, 24);
-            this.comboBox1.TabIndex = 13;
+            this.OlderDataComboBox.FormattingEnabled = true;
+            this.OlderDataComboBox.Location = new System.Drawing.Point(12, 309);
+            this.OlderDataComboBox.Name = "OlderDataComboBox";
+            this.OlderDataComboBox.Size = new System.Drawing.Size(123, 24);
+            this.OlderDataComboBox.TabIndex = 13;
             // 
             // getPastDataBtn
             // 
             this.getPastDataBtn.BackColor = System.Drawing.SystemColors.Control;
-            this.getPastDataBtn.Location = new System.Drawing.Point(173, 309);
+            this.getPastDataBtn.Location = new System.Drawing.Point(260, 309);
             this.getPastDataBtn.Name = "getPastDataBtn";
             this.getPastDataBtn.Size = new System.Drawing.Size(75, 27);
             this.getPastDataBtn.TabIndex = 14;
@@ -198,15 +199,26 @@
             this.RefreshConnectedButton.UseVisualStyleBackColor = true;
             this.RefreshConnectedButton.Click += new System.EventHandler(this.RefreshConnectedButton_Click);
             // 
+            // RefreshHistoricUsers
+            // 
+            this.RefreshHistoricUsers.Location = new System.Drawing.Point(173, 309);
+            this.RefreshHistoricUsers.Name = "RefreshHistoricUsers";
+            this.RefreshHistoricUsers.Size = new System.Drawing.Size(75, 23);
+            this.RefreshHistoricUsers.TabIndex = 16;
+            this.RefreshHistoricUsers.Text = "Refresh";
+            this.RefreshHistoricUsers.UseVisualStyleBackColor = true;
+            this.RefreshHistoricUsers.Click += new System.EventHandler(this.RefreshHistoricUsers_Click);
+            // 
             // DoctorApplication_Session
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(511, 479);
+            this.Controls.Add(this.RefreshHistoricUsers);
             this.Controls.Add(this.RefreshConnectedButton);
             this.Controls.Add(this.getPastDataBtn);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.OlderDataComboBox);
             this.Controls.Add(this.getPastSessions);
             this.Controls.Add(this.setPowerBtn);
             this.Controls.Add(this.setPowerTxt);
@@ -243,8 +255,9 @@
         private System.Windows.Forms.TextBox setPowerTxt;
         private System.Windows.Forms.Button setPowerBtn;
         private System.Windows.Forms.Label getPastSessions;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox OlderDataComboBox;
         private System.Windows.Forms.Button getPastDataBtn;
         private System.Windows.Forms.Button RefreshConnectedButton;
+        private System.Windows.Forms.Button RefreshHistoricUsers;
     }
 }

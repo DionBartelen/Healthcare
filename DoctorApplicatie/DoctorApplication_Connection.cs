@@ -104,6 +104,17 @@ namespace DoctorApplicatie
                     connected_Sessions.Add((string)d);
                 }
                 doctorApplication_Session.UpdateComboBox(connected_Sessions);
+            } else if(jsonData.id == "doctor/sessions/users")
+            {
+                List<string> users = new List<string>();
+                foreach (dynamic e in jsonData.data.users)
+                {
+                    if (e != null)
+                    {
+                        users.Add((string)e);
+                    }
+                }
+                doctorApplication_Session.UpdateOlderDataComboBox(users);
             }
 
         }
@@ -232,15 +243,32 @@ namespace DoctorApplicatie
             Send(JsonConvert.SerializeObject(getSessions));
         }
 
+        public void GetUsers()
+        {
+            dynamic request = new
+            {
+                id = "doctor/sessions/users"
+            };
+            Send(JsonConvert.SerializeObject(request));
+        }
+
+        public void getOlderData(string username)
+        {
+            dynamic request = new
+            {
+                id = "session/data/historic",
+                data = new
+                {
+                    patientID = username
+                }
+            };
+            Send(JsonConvert.SerializeObject(request));
+        }
+
         public void close()
         {
             stream.Close();
             client.Close();
-        }
-
-        public void getOlderData()
-        {
-
         }
     }
 
