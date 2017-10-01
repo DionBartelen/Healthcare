@@ -119,5 +119,13 @@ namespace DoctorApplicatie
         {
             connection.GetUsers();
         }
+
+        public void RunTrainSessionForm(DoctorApplication_Trainsessions session)
+        {
+            this.BeginInvoke(new MethodInvoker(delegate
+            {
+                session.Show();
+            }));
+        }
     }
 }

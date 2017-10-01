@@ -104,7 +104,8 @@ namespace DoctorApplicatie
                     connected_Sessions.Add((string)d);
                 }
                 doctorApplication_Session.UpdateComboBox(connected_Sessions);
-            } else if(jsonData.id == "doctor/sessions/users")
+            }
+            else if (jsonData.id == "doctor/sessions/users")
             {
                 List<string> users = new List<string>();
                 foreach (dynamic e in jsonData.data.users)
@@ -115,6 +116,10 @@ namespace DoctorApplicatie
                     }
                 }
                 doctorApplication_Session.UpdateOlderDataComboBox(users);
+            }
+            else if (jsonData.id == "session/data/historic")
+            {
+                HandleHistoricData(jsonData);
             }
 
         }
@@ -263,6 +268,24 @@ namespace DoctorApplicatie
                 }
             };
             Send(JsonConvert.SerializeObject(request));
+        }
+
+        public void HandleHistoricData(dynamic jsonObject)
+        {
+            List<TrainSession> trainsessions = new List<TrainSession>();
+            foreach (dynamic tSession in jsonObject.data)
+            {
+                TrainSession trainsession = new TrainSession();
+                foreach (dynamic EData in tSession.data)
+                {
+                    trainsession.AddData(new ErgometerData((int)EData.Pulse, (int)EData.RPM, (double)EData.Speed, (double)EData.Distance, (int)EData.Time, (int)EData.Energy, (int)EData.Actual_Power, (int)EData.Requested_Power));
+                }
+                trainsessions.Add(trainsession);
+            }
+            DoctorApplication_Trainsessions TrainsessionsForm = new DoctorApplication_Trainsessions();
+            TrainsessionsForm.SetAllSessions(trainsessions);
+            doctorApplication_Session.RunTrainSessionForm(TrainsessionsForm);
+
         }
 
         public void close()

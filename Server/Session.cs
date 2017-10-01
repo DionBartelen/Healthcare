@@ -12,6 +12,7 @@ namespace Server
         NetworkStream stream;
         public Boolean IsDoctor = false;
         public string username;
+        List<Session> DoctorsToSendDataTo = new List<Session>();
 
         public Session(TcpClient client)
         {
