@@ -75,5 +75,19 @@ namespace Server
             };
             return Error;
         }
+
+        public static dynamic FollowPatientError(string status)
+        {
+            dynamic Error = new
+            {
+                id = "doctor/FollowPatient",
+                data = new
+                {
+                    status = "Error",
+                    error = status
+                }
+            };
+            return Error;
+        }
     }
 }

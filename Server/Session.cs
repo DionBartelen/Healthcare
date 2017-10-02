@@ -12,12 +12,13 @@ namespace Server
         NetworkStream stream;
         public Boolean IsDoctor = false;
         public string username;
-        List<Session> DoctorsToSendDataTo = new List<Session>();
+        public List<Session> DoctorsToSendDataTo;
 
         public Session(TcpClient client)
         {
             this.client = client;
             stream = client.GetStream();
+            DoctorsToSendDataTo = new List<Session>();
         }
 
         //Send to networkstream
@@ -330,7 +331,8 @@ namespace Server
                 int rpm = jsonObject.data.RPM;
                 double distance = jsonObject.data.distance;
                 int pulse = jsonObject.data.pulse;
-                Boolean added = Database.AddErgometerDataToSession(session, new ErgometerData(pulse, rpm, speed, distance, time, 0, 0, power));
+                ErgometerData data = new ErgometerData(pulse, rpm, speed, distance, time, 0, 0, power);
+                Boolean added = Database.AddErgometerDataToSession(session, data);
                 if (added)
                 {
                     dynamic answer = new
@@ -342,6 +344,18 @@ namespace Server
                         }
                     };
                     Send(JsonConvert.SerializeObject(answer));
+                    dynamic answerToDoctor = new
+                    {
+                        id = "data",
+                        data = new
+                        {
+                            data = JsonConvert.SerializeObject(data)
+                        }
+                    };
+                    foreach(Session s in DoctorsToSendDataTo)
+                    {
+                        s.Send(JsonConvert.SerializeObject(answerToDoctor));
+                    }
                 }
                 else
                 {
@@ -516,6 +530,43 @@ namespace Server
                     client.Send(JsonConvert.SerializeObject(power));
                     return true;
                 }
+            }
+        }
+        #endregion
+
+        //Follow and unfollow a patient session
+        #region
+        public void FolowAPatientSession(string username)
+        {
+            try
+            {
+                Session clientToListenTo = Program.GetSessionWithUsername(username);
+                if (clientToListenTo != null)
+                {
+                    clientToListenTo.DoctorsToSendDataTo.Add(this);
+                }
+            } catch (Exception e)
+            {
+                Send(JsonConvert.SerializeObject(Commands.FollowPatientError(e.Message)));
+            }
+        }
+
+        public void UnFolowAPatientSession(string username)
+        {
+            try
+            {
+                Session clientToListenTo = Program.GetSessionWithUsername(username);
+                if (clientToListenTo != null)
+                {
+                    if (clientToListenTo.DoctorsToSendDataTo.Contains(this))
+                    {
+                        clientToListenTo.DoctorsToSendDataTo.Remove(this);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Send(JsonConvert.SerializeObject(Commands.FollowPatientError(e.Message)));
             }
         }
         #endregion
