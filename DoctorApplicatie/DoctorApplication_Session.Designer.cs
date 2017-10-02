@@ -72,7 +72,6 @@
             this.TrainingLbl.Size = new System.Drawing.Size(60, 17);
             this.TrainingLbl.TabIndex = 2;
             this.TrainingLbl.Text = "Training";
-            this.TrainingLbl.Click += new System.EventHandler(this.TrainingLbl_Click);
             // 
             // startBtn
             // 

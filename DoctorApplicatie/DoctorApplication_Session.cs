@@ -21,18 +21,12 @@ namespace DoctorApplicatie
         {
             InitializeComponent();
             this.connection = connection;
-            connected_clients = new List<string>();
-            
-        }
-
-        private void TrainingLbl_Click(object sender, EventArgs e)
-        {
-
+            connected_clients = new List<string>(); 
         }
 
         private void startBtn_Click(object sender, EventArgs e)
         {
-            if (ConectedSessionsListCombo.SelectedItem != null)
+            if (ConectedSessionsListCombo.SelectedItem != null && ConectedSessionsListCombo.SelectedItem != null)
             {
                 connection.startTraining(ConectedSessionsListCombo.SelectedItem.ToString());
             }
@@ -40,7 +34,10 @@ namespace DoctorApplicatie
 
         private void StopBtn_Click(object sender, EventArgs e)
         {
-            connection.stopTraining(ConectedSessionsListCombo.SelectedItem.ToString());
+            if (connection != null && ConectedSessionsListCombo.SelectedItem != null)
+            {
+                connection.stopTraining(ConectedSessionsListCombo.SelectedItem.ToString());
+            }
         }
 
         private void sendToClientBtn_Click(object sender, EventArgs e)
@@ -53,7 +50,7 @@ namespace DoctorApplicatie
 
         private void toAllBtn_Click(object sender, EventArgs e)
         {
-            if (messageTxt.Text != null)
+            if (messageTxt.Text != null && messageTxt.Text != null)
             {
                 connection.sendMessagetoAllClients(messageTxt.Text);
             }
@@ -68,7 +65,10 @@ namespace DoctorApplicatie
 
         private void getPastDataBtn_Click(object sender, EventArgs e)
         {
-            connection.getOlderData(OlderDataComboBox.Text);
+            if (connection != null && OlderDataComboBox.Text != null)
+            {
+                connection.getOlderData(OlderDataComboBox.Text);
+            }
         }
 
         public void UpdateComboBox(List<String> new_Connected_Sessions)
@@ -111,13 +111,19 @@ namespace DoctorApplicatie
 
         private void RefreshConnectedButton_Click(object sender, EventArgs e)
         {
-            ConectedSessionsListCombo.Text = "";
-            connection.getSessions();
+            if (connection != null)
+            {
+                ConectedSessionsListCombo.Text = "";
+                connection.getSessions();
+            }
         }
 
         private void RefreshHistoricUsers_Click(object sender, EventArgs e)
         {
-            connection.GetUsers();
+            if (connection != null)
+            {
+                connection.GetUsers();
+            }
         }
 
         public void RunTrainSessionForm(DoctorApplication_Trainsessions session)
