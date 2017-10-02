@@ -287,6 +287,38 @@ namespace DoctorApplicatie
             doctorApplication_Session.RunTrainSessionForm(TrainsessionsForm);
 
         }
+            
+        public void FollowPatient(string SessionId)
+        {
+            dynamic followPatient = new
+            {
+                id = "doctor/FollowPatient",
+                data = new
+                {
+                    username = SessionId
+                }
+
+            };
+
+            Send(JsonConvert.SerializeObject(followPatient));
+
+        }
+
+        public void UnFollowPatient(string SessionId)
+        {
+            dynamic unFollowPatient = new
+            {
+                id = "doctor/UnfollowPatient",
+                data = new 
+                {
+                    username = SessionId
+                }
+
+            };
+
+            Send(JsonConvert.SerializeObject(unFollowPatient));
+
+        }
 
         public void close()
         {

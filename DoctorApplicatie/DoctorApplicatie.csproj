@@ -68,6 +68,12 @@
     <Compile Include="DoctorApplication_Session.Designer.cs">
       <DependentUpon>DoctorApplication_Session.cs</DependentUpon>
     </Compile>
+    <Compile Include="DoctorApplication_SessionClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DoctorApplication_SessionClient.Designer.cs">
+      <DependentUpon>DoctorApplication_SessionClient.cs</DependentUpon>
+    </Compile>
     <Compile Include="DoctorApplication_Trainsessions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +92,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DoctorApplication_Session.resx">
       <DependentUpon>DoctorApplication_Session.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DoctorApplication_SessionClient.resx">
+      <DependentUpon>DoctorApplication_SessionClient.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DoctorApplication_Trainsessions.resx">
       <DependentUpon>DoctorApplication_Trainsessions.cs</DependentUpon>

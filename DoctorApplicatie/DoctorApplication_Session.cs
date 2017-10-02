@@ -30,41 +30,8 @@ namespace DoctorApplicatie
 
         }
 
-        private void startBtn_Click(object sender, EventArgs e)
-        {
-            if (ConectedSessionsListCombo.SelectedItem != null)
-            {
-                connection.startTraining(ConectedSessionsListCombo.SelectedItem.ToString());
-            }
-        }
 
-        private void StopBtn_Click(object sender, EventArgs e)
-        {
-            connection.stopTraining(ConectedSessionsListCombo.SelectedItem.ToString());
-        }
-
-        private void sendToClientBtn_Click(object sender, EventArgs e)
-        {
-            if (messageTxt.Text != null && ConectedSessionsListCombo.SelectedItem != null)
-            {
-                connection.sendMessageToClient(messageTxt.Text, ConectedSessionsListCombo.SelectedItem.ToString());
-            }
-        }
-
-        private void toAllBtn_Click(object sender, EventArgs e)
-        {
-            if (messageTxt.Text != null)
-            {
-                connection.sendMessagetoAllClients(messageTxt.Text);
-            }
-        }
-
-        private void setPowerBtn_Click(object sender, EventArgs e)
-        {
-            if(setPowerTxt.Text != null && ConectedSessionsListCombo.SelectedItem != null) {
-                connection.setPower(setPowerTxt.Text, ConectedSessionsListCombo.SelectedItem.ToString());
-            }
-        }
+        
 
         private void getPastDataBtn_Click(object sender, EventArgs e)
         {
@@ -126,6 +93,17 @@ namespace DoctorApplicatie
             {
                 session.Show();
             }));
+        }
+
+        private void followBtn_Click(object sender, EventArgs e)
+        {
+            this.BeginInvoke(new MethodInvoker(delegate
+            {
+                DoctorApplication_SessionClient session = new DoctorApplication_SessionClient(connection, ConectedSessionsListCombo.SelectedItem.ToString());
+                session.Show();  
+            }
+            ));
+            
         }
     }
 }
