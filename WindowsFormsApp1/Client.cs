@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Healthcare_test.test_applicatie;
 using Healthcare_test;
+using System.Net.Security;
 
 namespace WindowsFormsApp1
 {

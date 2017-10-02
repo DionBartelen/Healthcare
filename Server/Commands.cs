@@ -89,5 +89,19 @@ namespace Server
             };
             return Error;
         }
+
+        public static dynamic UnFollowPatientError(string status)
+        {
+            dynamic Error = new
+            {
+                id = "doctor/UnfollowPatient",
+                data = new
+                {
+                    status = "Error",
+                    error = status
+                }
+            };
+            return Error;
+        }
     }
 }
