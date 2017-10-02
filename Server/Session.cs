@@ -3,6 +3,9 @@ using System.Net.Sockets;
 using System.Text;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Net.Security;
+using System.Security.Authentication;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Server
 {
@@ -12,12 +15,13 @@ namespace Server
         NetworkStream stream;
         public Boolean IsDoctor = false;
         public string username;
-        List<Session> DoctorsToSendDataTo = new List<Session>();
+        public List<Session> DoctorsToSendDataTo;
 
         public Session(TcpClient client)
         {
             this.client = client;
             stream = client.GetStream();
+            DoctorsToSendDataTo = new List<Session>();
         }
 
         //Send to networkstream
@@ -31,6 +35,8 @@ namespace Server
             prefixArray.CopyTo(buffer, 0);
             requestArray.CopyTo(buffer, prefixArray.Length);
             stream.Write(buffer, 0, buffer.Length);
+
+            
         }
         #endregion
 
@@ -193,6 +199,25 @@ namespace Server
                 } else if(jsonObject.id == "doctor/sessions/users")
                 {
                     GetUsernamesInDB();
+                } else if (jsonObject.id == "doctor/FollowPatient")
+                {
+                    if(IsDoctor)
+                    {
+                        FolowAPatientSession((string)jsonObject.data.username);
+                    } else
+                    {
+                        NoPermission("doctor/FollowPatient");
+                    }
+                } else if (jsonObject.id == "doctor/UnfollowPatient")
+                {
+                    if (IsDoctor)
+                    {
+                        UnFollowAPatientSession((string)jsonObject.data.username);
+                    }
+                    else
+                    {
+                        NoPermission("doctor/FollowPatient");
+                    }
                 }
             }
             catch (Exception e)
@@ -330,7 +355,8 @@ namespace Server
                 int rpm = jsonObject.data.RPM;
                 double distance = jsonObject.data.distance;
                 int pulse = jsonObject.data.pulse;
-                Boolean added = Database.AddErgometerDataToSession(session, new ErgometerData(pulse, rpm, speed, distance, time, 0, 0, power));
+                ErgometerData data = new ErgometerData(pulse, rpm, speed, distance, time, 0, 0, power);
+                Boolean added = Database.AddErgometerDataToSession(session, data);
                 if (added)
                 {
                     dynamic answer = new
@@ -342,6 +368,18 @@ namespace Server
                         }
                     };
                     Send(JsonConvert.SerializeObject(answer));
+                    dynamic answerToDoctor = new
+                    {
+                        id = "data",
+                        data = new
+                        {
+                            data = JsonConvert.SerializeObject(data)
+                        }
+                    };
+                    foreach(Session s in DoctorsToSendDataTo)
+                    {
+                        s.Send(JsonConvert.SerializeObject(answerToDoctor));
+                    }
                 }
                 else
                 {
@@ -516,6 +554,67 @@ namespace Server
                     client.Send(JsonConvert.SerializeObject(power));
                     return true;
                 }
+            }
+        }
+        #endregion
+
+        //Follow and unfollow a patient session
+        #region
+        public void FolowAPatientSession(string username)
+        {
+            try
+            {
+                Session clientToListenTo = Program.GetSessionWithUsername(username);
+                if (clientToListenTo != null)
+                {
+                    clientToListenTo.DoctorsToSendDataTo.Add(this);
+                    dynamic answer = new
+                    {
+                        id = "doctor/FollowPatient",
+                        data = new
+                        {
+                            status = "ok"
+                        }
+                    };
+                    Send(JsonConvert.SerializeObject(answer));
+                } else
+                {
+                    Send(JsonConvert.SerializeObject(Commands.FollowPatientError("Patient not active")));
+                }
+            } catch (Exception e)
+            {
+                Send(JsonConvert.SerializeObject(Commands.FollowPatientError(e.Message)));
+            }
+        }
+
+        public void UnFollowAPatientSession(string username)
+        {
+            try
+            {
+                Session clientToListenTo = Program.GetSessionWithUsername(username);
+                if (clientToListenTo != null)
+                {
+                    if (clientToListenTo.DoctorsToSendDataTo.Contains(this))
+                    {
+                        clientToListenTo.DoctorsToSendDataTo.Remove(this);
+                        dynamic answer = new
+                        {
+                            id = "doctor/UnfollowPatient",
+                            data = new
+                            {
+                                status = "ok"
+                            }
+                        };
+                        Send(JsonConvert.SerializeObject(answer));
+                    }
+                } else
+                {
+                    Send(JsonConvert.SerializeObject(Commands.UnFollowPatientError("Patient not found")));
+                }
+            }
+            catch (Exception e)
+            {
+                Send(JsonConvert.SerializeObject(Commands.FollowPatientError(e.Message)));
             }
         }
         #endregion
