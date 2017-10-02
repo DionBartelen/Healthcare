@@ -50,17 +50,14 @@ namespace WindowsFormsApp1
             {
                 ErgometerSimulatie ergometersimulatie = new ErgometerSimulatie();
                 Client client = new Client(currentClient, ergometersimulatie, null);
-                SessionGUI sessionGUI = new SessionGUI(client);
-                sessionGUI.Show();
+               
 
             }
             else
             {
                 string comPort = comportCombo.SelectedItem.ToString();
                 Client client = new Client(currentClient, null, comPort);
-                SessionGUI sessionGUI = new SessionGUI(client);
-                sessionGUI.Show();
-
+               
             }
         }
 
