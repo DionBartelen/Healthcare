@@ -55,6 +55,105 @@
             this.ConnectedSessionsListLbl.TabIndex = 1;
             this.ConnectedSessionsListLbl.Text = "Connected Sessions";
             // 
+<<<<<<< HEAD
+=======
+            // TrainingLbl
+            // 
+            this.TrainingLbl.AutoSize = true;
+            this.TrainingLbl.Location = new System.Drawing.Point(16, 76);
+            this.TrainingLbl.Name = "TrainingLbl";
+            this.TrainingLbl.Size = new System.Drawing.Size(60, 17);
+            this.TrainingLbl.TabIndex = 2;
+            this.TrainingLbl.Text = "Training";
+            // 
+            // startBtn
+            // 
+            this.startBtn.BackColor = System.Drawing.SystemColors.Control;
+            this.startBtn.Location = new System.Drawing.Point(173, 76);
+            this.startBtn.Name = "startBtn";
+            this.startBtn.Size = new System.Drawing.Size(75, 23);
+            this.startBtn.TabIndex = 3;
+            this.startBtn.Text = "start";
+            this.startBtn.UseVisualStyleBackColor = false;
+            this.startBtn.Click += new System.EventHandler(this.startBtn_Click);
+            // 
+            // StopBtn
+            // 
+            this.StopBtn.BackColor = System.Drawing.SystemColors.Control;
+            this.StopBtn.Location = new System.Drawing.Point(260, 76);
+            this.StopBtn.Name = "StopBtn";
+            this.StopBtn.Size = new System.Drawing.Size(75, 23);
+            this.StopBtn.TabIndex = 4;
+            this.StopBtn.Text = "stop";
+            this.StopBtn.UseVisualStyleBackColor = false;
+            this.StopBtn.Click += new System.EventHandler(this.StopBtn_Click);
+            // 
+            // messageTxt
+            // 
+            this.messageTxt.Location = new System.Drawing.Point(16, 155);
+            this.messageTxt.Name = "messageTxt";
+            this.messageTxt.Size = new System.Drawing.Size(119, 22);
+            this.messageTxt.TabIndex = 5;
+            // 
+            // messageLbl
+            // 
+            this.messageLbl.AutoSize = true;
+            this.messageLbl.Location = new System.Drawing.Point(16, 136);
+            this.messageLbl.Name = "messageLbl";
+            this.messageLbl.Size = new System.Drawing.Size(69, 17);
+            this.messageLbl.TabIndex = 6;
+            this.messageLbl.Text = "Message:";
+            // 
+            // sendToClientBtn
+            // 
+            this.sendToClientBtn.BackColor = System.Drawing.SystemColors.Control;
+            this.sendToClientBtn.Location = new System.Drawing.Point(173, 154);
+            this.sendToClientBtn.Name = "sendToClientBtn";
+            this.sendToClientBtn.Size = new System.Drawing.Size(75, 25);
+            this.sendToClientBtn.TabIndex = 7;
+            this.sendToClientBtn.Text = "toClient";
+            this.sendToClientBtn.UseVisualStyleBackColor = false;
+            this.sendToClientBtn.Click += new System.EventHandler(this.sendToClientBtn_Click);
+            // 
+            // toAllBtn
+            // 
+            this.toAllBtn.BackColor = System.Drawing.SystemColors.Control;
+            this.toAllBtn.Location = new System.Drawing.Point(260, 156);
+            this.toAllBtn.Name = "toAllBtn";
+            this.toAllBtn.Size = new System.Drawing.Size(75, 23);
+            this.toAllBtn.TabIndex = 8;
+            this.toAllBtn.Text = "AllClients";
+            this.toAllBtn.UseVisualStyleBackColor = false;
+            this.toAllBtn.Click += new System.EventHandler(this.toAllBtn_Click);
+            // 
+            // setPowerLbl
+            // 
+            this.setPowerLbl.AutoSize = true;
+            this.setPowerLbl.Location = new System.Drawing.Point(16, 212);
+            this.setPowerLbl.Name = "setPowerLbl";
+            this.setPowerLbl.Size = new System.Drawing.Size(76, 17);
+            this.setPowerLbl.TabIndex = 9;
+            this.setPowerLbl.Text = "Set Power:";
+            // 
+            // setPowerTxt
+            // 
+            this.setPowerTxt.Location = new System.Drawing.Point(13, 230);
+            this.setPowerTxt.Name = "setPowerTxt";
+            this.setPowerTxt.Size = new System.Drawing.Size(122, 22);
+            this.setPowerTxt.TabIndex = 10;
+            // 
+            // setPowerBtn
+            // 
+            this.setPowerBtn.BackColor = System.Drawing.SystemColors.Control;
+            this.setPowerBtn.Location = new System.Drawing.Point(173, 230);
+            this.setPowerBtn.Name = "setPowerBtn";
+            this.setPowerBtn.Size = new System.Drawing.Size(84, 24);
+            this.setPowerBtn.TabIndex = 11;
+            this.setPowerBtn.Text = "setPower";
+            this.setPowerBtn.UseVisualStyleBackColor = false;
+            this.setPowerBtn.Click += new System.EventHandler(this.setPowerBtn_Click);
+            // 
+>>>>>>> 6a8934c314ec49262e19f6441b5198c8b161665e
             // getPastSessions
             // 
             this.getPastSessions.AutoSize = true;
