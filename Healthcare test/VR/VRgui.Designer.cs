@@ -47,6 +47,11 @@
             this.Routebutton = new System.Windows.Forms.Button();
             this.Showroutebutton = new System.Windows.Forms.Button();
             this.Moving_3D_Ojbect = new System.Windows.Forms.Button();
+            this.GetTerrainButton = new System.Windows.Forms.Button();
+            this.Texture = new System.Windows.Forms.Button();
+            this.Resetbutton = new System.Windows.Forms.Button();
+            this.SpeedSlider = new System.Windows.Forms.TrackBar();
+            ((System.ComponentModel.ISupportInitialize)(this.SpeedSlider)).BeginInit();
             this.SuspendLayout();
             // 
             // connect_Button
@@ -196,9 +201,9 @@
             // 
             this.terrainWH.Location = new System.Drawing.Point(366, 249);
             this.terrainWH.Name = "terrainWH";
-            this.terrainWH.Size = new System.Drawing.Size(88, 24);
+            this.terrainWH.Size = new System.Drawing.Size(100, 24);
             this.terrainWH.TabIndex = 18;
-            this.terrainWH.Text = "terrainWH";
+            this.terrainWH.Text = "setupTerrain";
             this.terrainWH.UseVisualStyleBackColor = true;
             this.terrainWH.Click += new System.EventHandler(this.terrainWH_Click);
             // 
@@ -226,17 +231,61 @@
             // 
             this.Moving_3D_Ojbect.Location = new System.Drawing.Point(357, 128);
             this.Moving_3D_Ojbect.Name = "Moving_3D_Ojbect";
-            this.Moving_3D_Ojbect.Size = new System.Drawing.Size(109, 32);
+            this.Moving_3D_Ojbect.Size = new System.Drawing.Size(156, 32);
             this.Moving_3D_Ojbect.TabIndex = 21;
             this.Moving_3D_Ojbect.Text = "Object moving";
             this.Moving_3D_Ojbect.UseVisualStyleBackColor = true;
             this.Moving_3D_Ojbect.Click += new System.EventHandler(this.Moving_3D_Ojbect_Click);
+            // 
+            // GetTerrainButton
+            // 
+            this.GetTerrainButton.Location = new System.Drawing.Point(604, 349);
+            this.GetTerrainButton.Name = "GetTerrainButton";
+            this.GetTerrainButton.Size = new System.Drawing.Size(92, 23);
+            this.GetTerrainButton.TabIndex = 22;
+            this.GetTerrainButton.Text = "GetTerrain";
+            this.GetTerrainButton.UseVisualStyleBackColor = true;
+            this.GetTerrainButton.Click += new System.EventHandler(this.GetTerrainButton_Click);
+            // 
+            // Texture
+            // 
+            this.Texture.Location = new System.Drawing.Point(519, 249);
+            this.Texture.Name = "Texture";
+            this.Texture.Size = new System.Drawing.Size(75, 23);
+            this.Texture.TabIndex = 23;
+            this.Texture.Text = "Texture";
+            this.Texture.UseVisualStyleBackColor = true;
+            this.Texture.Click += new System.EventHandler(this.Texture_Click);
+            // 
+            // Resetbutton
+            // 
+            this.Resetbutton.Location = new System.Drawing.Point(115, 128);
+            this.Resetbutton.Name = "Resetbutton";
+            this.Resetbutton.Size = new System.Drawing.Size(85, 32);
+            this.Resetbutton.TabIndex = 24;
+            this.Resetbutton.Text = "Reset ";
+            this.Resetbutton.UseVisualStyleBackColor = true;
+            this.Resetbutton.Click += new System.EventHandler(this.Resetbutton_Click);
+            // 
+            // SpeedSlider
+            // 
+            this.SpeedSlider.LargeChange = 0;
+            this.SpeedSlider.Location = new System.Drawing.Point(357, 294);
+            this.SpeedSlider.Maximum = 100;
+            this.SpeedSlider.Name = "SpeedSlider";
+            this.SpeedSlider.Size = new System.Drawing.Size(220, 56);
+            this.SpeedSlider.TabIndex = 26;
+            this.SpeedSlider.Scroll += new System.EventHandler(this.SpeedSlider_Scroll);
             // 
             // VRgui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(708, 384);
+            this.Controls.Add(this.SpeedSlider);
+            this.Controls.Add(this.Resetbutton);
+            this.Controls.Add(this.Texture);
+            this.Controls.Add(this.GetTerrainButton);
             this.Controls.Add(this.Moving_3D_Ojbect);
             this.Controls.Add(this.Showroutebutton);
             this.Controls.Add(this.Routebutton);
@@ -262,6 +311,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.VRgui_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.VRgui_FormClosed);
             this.Load += new System.EventHandler(this.VRgui_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.SpeedSlider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -289,5 +339,9 @@
         private System.Windows.Forms.Button Routebutton;
         private System.Windows.Forms.Button Showroutebutton;
         private System.Windows.Forms.Button Moving_3D_Ojbect;
+        private System.Windows.Forms.Button GetTerrainButton;
+        private System.Windows.Forms.Button Texture;
+        private System.Windows.Forms.Button Resetbutton;
+        private System.Windows.Forms.TrackBar SpeedSlider;
     }
 }
