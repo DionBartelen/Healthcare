@@ -36,5 +36,6 @@ namespace DoctorApplicatie
                 session.Show();
             }));
         }
+
     }
 }

@@ -81,9 +81,6 @@
     <EmbeddedResource Include="ClientGUI.resx">
       <DependentUpon>ClientGUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SessionGUI.resx">
-      <DependentUpon>SessionGUI.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

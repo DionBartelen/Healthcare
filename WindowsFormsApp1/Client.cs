@@ -9,14 +9,17 @@ using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Healthcare_test;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 
 namespace WindowsFormsApp1
 {
     public class Client
     {
-
         VR_Connector vrc;
-        NetworkStream stream;
+        private readonly bool _SSL = false;
+        private readonly SslStream _sslStream;
+        private readonly NetworkStream _stream;
         int port = 1234;
         TcpClient client;
         IPAddress localhost;
@@ -41,7 +44,12 @@ namespace WindowsFormsApp1
             }
 
             client = new TcpClient(localhost.ToString(), port);
-            stream = client.GetStream();
+            _stream = client.GetStream();
+            if (_SSL)
+            {
+                _sslStream = new SslStream(_stream, false, new RemoteCertificateValidationCallback(ValidateCert));
+                _sslStream.AuthenticateAsClient("Healthcare", null, System.Security.Authentication.SslProtocols.Tls12, false);
+            }
             isConnected = true;
             if (comport != null)
             {
@@ -50,9 +58,7 @@ namespace WindowsFormsApp1
 
             read = new Thread(Read);
             read.Start();
-
             sendlogin(clientdata.username, clientdata.password);
-
         }
 
         public void Read()
@@ -62,7 +68,6 @@ namespace WindowsFormsApp1
                 try
                 {
                     StringBuilder response = new StringBuilder();
-                    int numberOfBytesRead = 0;
                     int totalBytesreceived = 0;
                     int lengthMessage = -1;
                     byte[] receiveBuffer = new byte[1024];
@@ -70,7 +75,7 @@ namespace WindowsFormsApp1
 
                     do
                     {
-                        numberOfBytesRead = stream.Read(receiveBuffer, 0, receiveBuffer.Length);
+                        int numberOfBytesRead = _SSL ? _sslStream.Read(receiveBuffer, 0, receiveBuffer.Length) : _stream.Read(receiveBuffer, 0, receiveBuffer.Length);
                         totalBytesreceived += numberOfBytesRead;
                         string received = Encoding.ASCII.GetString(receiveBuffer, 0, numberOfBytesRead);
                         response.AppendFormat("{0}", received);
@@ -93,7 +98,14 @@ namespace WindowsFormsApp1
                         }
                     }
                     while (!messagereceived);
-                    stream.Flush();
+                    if (_SSL)
+                    {
+                        _sslStream.Flush();
+                    }
+                    else
+                    {
+                        _stream.Flush();
+                    }
                     string toReturn = response.ToString().Substring(4);
                     System.Diagnostics.Debug.WriteLine("Received client: \r\n" + toReturn);
                     ProcessAnswer(toReturn);
@@ -143,7 +155,14 @@ namespace WindowsFormsApp1
             byte[] buffer = new Byte[prefixArray.Length + message.Length];
             prefixArray.CopyTo(buffer, 0);
             requestArray.CopyTo(buffer, prefixArray.Length);
-            stream.Write(buffer, 0, buffer.Length);
+            if (_SSL)
+            {
+                _sslStream.Write(buffer, 0, buffer.Length);
+            }
+            else
+            {
+                _stream.Write(buffer, 0, buffer.Length);
+            }
 
 
         }
@@ -265,7 +284,14 @@ namespace WindowsFormsApp1
 
         public void close()
         {
-            stream.Close();
+            if (_SSL)
+            {
+                _sslStream.Close();
+            }
+            else
+            {
+                _stream.Close();
+            }
             client.Close();
             if (ergometerCOM != null)
             {
@@ -278,6 +304,9 @@ namespace WindowsFormsApp1
             read.Abort();
             getData.Abort();
         }
+
+        public static bool ValidateCert(object sender, X509Certificate certificate,
+              X509Chain chain, SslPolicyErrors sslPolicyErrors) => sslPolicyErrors == SslPolicyErrors.None;
     }
 }
 

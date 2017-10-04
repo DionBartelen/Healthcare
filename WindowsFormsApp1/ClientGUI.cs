@@ -54,20 +54,12 @@ namespace WindowsFormsApp1
                 Client client = new Client(currentClient, ergometersimulatie, null);
                 SessionGUI sessionGUI = new SessionGUI(client);
                 sessionGUI.Show();
-                //System.Diagnostics.Process proc = new System.Diagnostics.Process();
-                // proc.StartInfo.FileName = @"C:\Healthcare\WindowsFormsApp1\bin\Debug\NetworkEngine\sim.bat";
-                // proc.StartInfo.WorkingDirectory = @"C:\Healthcare";
-                //  proc.Start();
-                // System.Diagnostics.Process.Start(@"C:\Healthcare\WindowsFormsApp1\bin\Debug\NetworkEngine\sim.bat");
-                
             }
             else
             {
                 string comPort = comportCombo.SelectedItem.ToString();
                 Client client = new Client(currentClient, null, comPort);
-                SessionGUI sessionGUI = new SessionGUI(client);
-                sessionGUI.Show();
-
+               
             }
         }
 

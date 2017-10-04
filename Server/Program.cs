@@ -67,7 +67,7 @@ namespace Server
         {
             foreach (Session s in sessions)
             {
-                if (s.username == username)
+                if (s.Username == username)
                 {
                     return s;
                 }

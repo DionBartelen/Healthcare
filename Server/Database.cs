@@ -3,10 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Server
 {
@@ -94,7 +90,11 @@ namespace Server
         {
             try
             {
+<<<<<<< HEAD
                 string path = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, @"Healthcare\Server\Database\Database.txt");
+=======
+                string path = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, @"HealthCare\Server\Database\Database.txt");
+>>>>>>> DoctorApplication
                 string toWrite = "";
                 foreach (KeyValuePair<string, List<TrainSession>> entry in TrainSessions)
                 {
@@ -142,7 +142,11 @@ namespace Server
 
         public static void ReadSavedCredentials()
         {
+<<<<<<< HEAD
             string path = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, @"Healthcare\Server\Database\Login.txt");
+=======
+            string path = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, @"HealthCare\Server\Database\Login.txt");
+>>>>>>> DoctorApplication
             string AllText = File.ReadAllText(path);
             dynamic jsonObject = JsonConvert.DeserializeObject(AllText);
             foreach (dynamic combination in jsonObject.combinations)
@@ -150,7 +154,11 @@ namespace Server
                 CredentialsClient.Add((string)combination.username, (string)combination.password);
             }
 
+<<<<<<< HEAD
             string path2 = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, @"Healthcare\Server\Database\LoginDoctor.txt");
+=======
+            string path2 = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, @"HealthCare\Server\Database\LoginDoctor.txt");
+>>>>>>> DoctorApplication
             string AllText2 = File.ReadAllText(path2);
             dynamic jsonObject2 = JsonConvert.DeserializeObject(AllText2);
             foreach (dynamic combination2 in jsonObject2.combinations)

@@ -30,21 +30,12 @@
         {
             this.ConectedSessionsListCombo = new System.Windows.Forms.ComboBox();
             this.ConnectedSessionsListLbl = new System.Windows.Forms.Label();
-            this.TrainingLbl = new System.Windows.Forms.Label();
-            this.startBtn = new System.Windows.Forms.Button();
-            this.StopBtn = new System.Windows.Forms.Button();
-            this.messageTxt = new System.Windows.Forms.TextBox();
-            this.messageLbl = new System.Windows.Forms.Label();
-            this.sendToClientBtn = new System.Windows.Forms.Button();
-            this.toAllBtn = new System.Windows.Forms.Button();
-            this.setPowerLbl = new System.Windows.Forms.Label();
-            this.setPowerTxt = new System.Windows.Forms.TextBox();
-            this.setPowerBtn = new System.Windows.Forms.Button();
             this.getPastSessions = new System.Windows.Forms.Label();
             this.OlderDataComboBox = new System.Windows.Forms.ComboBox();
             this.getPastDataBtn = new System.Windows.Forms.Button();
             this.RefreshConnectedButton = new System.Windows.Forms.Button();
             this.RefreshHistoricUsers = new System.Windows.Forms.Button();
+            this.followBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ConectedSessionsListCombo
@@ -64,107 +55,10 @@
             this.ConnectedSessionsListLbl.TabIndex = 1;
             this.ConnectedSessionsListLbl.Text = "Connected Sessions";
             // 
-            // TrainingLbl
-            // 
-            this.TrainingLbl.AutoSize = true;
-            this.TrainingLbl.Location = new System.Drawing.Point(16, 76);
-            this.TrainingLbl.Name = "TrainingLbl";
-            this.TrainingLbl.Size = new System.Drawing.Size(60, 17);
-            this.TrainingLbl.TabIndex = 2;
-            this.TrainingLbl.Text = "Training";
-            this.TrainingLbl.Click += new System.EventHandler(this.TrainingLbl_Click);
-            // 
-            // startBtn
-            // 
-            this.startBtn.BackColor = System.Drawing.SystemColors.Control;
-            this.startBtn.Location = new System.Drawing.Point(173, 76);
-            this.startBtn.Name = "startBtn";
-            this.startBtn.Size = new System.Drawing.Size(75, 23);
-            this.startBtn.TabIndex = 3;
-            this.startBtn.Text = "start";
-            this.startBtn.UseVisualStyleBackColor = false;
-            this.startBtn.Click += new System.EventHandler(this.startBtn_Click);
-            // 
-            // StopBtn
-            // 
-            this.StopBtn.BackColor = System.Drawing.SystemColors.Control;
-            this.StopBtn.Location = new System.Drawing.Point(260, 76);
-            this.StopBtn.Name = "StopBtn";
-            this.StopBtn.Size = new System.Drawing.Size(75, 23);
-            this.StopBtn.TabIndex = 4;
-            this.StopBtn.Text = "stop";
-            this.StopBtn.UseVisualStyleBackColor = false;
-            this.StopBtn.Click += new System.EventHandler(this.StopBtn_Click);
-            // 
-            // messageTxt
-            // 
-            this.messageTxt.Location = new System.Drawing.Point(16, 155);
-            this.messageTxt.Name = "messageTxt";
-            this.messageTxt.Size = new System.Drawing.Size(119, 22);
-            this.messageTxt.TabIndex = 5;
-            // 
-            // messageLbl
-            // 
-            this.messageLbl.AutoSize = true;
-            this.messageLbl.Location = new System.Drawing.Point(16, 136);
-            this.messageLbl.Name = "messageLbl";
-            this.messageLbl.Size = new System.Drawing.Size(69, 17);
-            this.messageLbl.TabIndex = 6;
-            this.messageLbl.Text = "Message:";
-            // 
-            // sendToClientBtn
-            // 
-            this.sendToClientBtn.BackColor = System.Drawing.SystemColors.Control;
-            this.sendToClientBtn.Location = new System.Drawing.Point(173, 154);
-            this.sendToClientBtn.Name = "sendToClientBtn";
-            this.sendToClientBtn.Size = new System.Drawing.Size(75, 25);
-            this.sendToClientBtn.TabIndex = 7;
-            this.sendToClientBtn.Text = "toClient";
-            this.sendToClientBtn.UseVisualStyleBackColor = false;
-            this.sendToClientBtn.Click += new System.EventHandler(this.sendToClientBtn_Click);
-            // 
-            // toAllBtn
-            // 
-            this.toAllBtn.BackColor = System.Drawing.SystemColors.Control;
-            this.toAllBtn.Location = new System.Drawing.Point(260, 156);
-            this.toAllBtn.Name = "toAllBtn";
-            this.toAllBtn.Size = new System.Drawing.Size(75, 23);
-            this.toAllBtn.TabIndex = 8;
-            this.toAllBtn.Text = "AllClients";
-            this.toAllBtn.UseVisualStyleBackColor = false;
-            this.toAllBtn.Click += new System.EventHandler(this.toAllBtn_Click);
-            // 
-            // setPowerLbl
-            // 
-            this.setPowerLbl.AutoSize = true;
-            this.setPowerLbl.Location = new System.Drawing.Point(16, 212);
-            this.setPowerLbl.Name = "setPowerLbl";
-            this.setPowerLbl.Size = new System.Drawing.Size(76, 17);
-            this.setPowerLbl.TabIndex = 9;
-            this.setPowerLbl.Text = "Set Power:";
-            // 
-            // setPowerTxt
-            // 
-            this.setPowerTxt.Location = new System.Drawing.Point(13, 230);
-            this.setPowerTxt.Name = "setPowerTxt";
-            this.setPowerTxt.Size = new System.Drawing.Size(122, 22);
-            this.setPowerTxt.TabIndex = 10;
-            // 
-            // setPowerBtn
-            // 
-            this.setPowerBtn.BackColor = System.Drawing.SystemColors.Control;
-            this.setPowerBtn.Location = new System.Drawing.Point(173, 230);
-            this.setPowerBtn.Name = "setPowerBtn";
-            this.setPowerBtn.Size = new System.Drawing.Size(84, 24);
-            this.setPowerBtn.TabIndex = 11;
-            this.setPowerBtn.Text = "setPower";
-            this.setPowerBtn.UseVisualStyleBackColor = false;
-            this.setPowerBtn.Click += new System.EventHandler(this.setPowerBtn_Click);
-            // 
             // getPastSessions
             // 
             this.getPastSessions.AutoSize = true;
-            this.getPastSessions.Location = new System.Drawing.Point(13, 289);
+            this.getPastSessions.Location = new System.Drawing.Point(17, 117);
             this.getPastSessions.Name = "getPastSessions";
             this.getPastSessions.Size = new System.Drawing.Size(101, 17);
             this.getPastSessions.TabIndex = 12;
@@ -173,7 +67,7 @@
             // OlderDataComboBox
             // 
             this.OlderDataComboBox.FormattingEnabled = true;
-            this.OlderDataComboBox.Location = new System.Drawing.Point(12, 309);
+            this.OlderDataComboBox.Location = new System.Drawing.Point(16, 137);
             this.OlderDataComboBox.Name = "OlderDataComboBox";
             this.OlderDataComboBox.Size = new System.Drawing.Size(123, 24);
             this.OlderDataComboBox.TabIndex = 13;
@@ -181,7 +75,7 @@
             // getPastDataBtn
             // 
             this.getPastDataBtn.BackColor = System.Drawing.SystemColors.Control;
-            this.getPastDataBtn.Location = new System.Drawing.Point(260, 309);
+            this.getPastDataBtn.Location = new System.Drawing.Point(264, 137);
             this.getPastDataBtn.Name = "getPastDataBtn";
             this.getPastDataBtn.Size = new System.Drawing.Size(75, 27);
             this.getPastDataBtn.TabIndex = 14;
@@ -191,7 +85,7 @@
             // 
             // RefreshConnectedButton
             // 
-            this.RefreshConnectedButton.Location = new System.Drawing.Point(364, 31);
+            this.RefreshConnectedButton.Location = new System.Drawing.Point(352, 31);
             this.RefreshConnectedButton.Name = "RefreshConnectedButton";
             this.RefreshConnectedButton.Size = new System.Drawing.Size(75, 23);
             this.RefreshConnectedButton.TabIndex = 15;
@@ -201,7 +95,7 @@
             // 
             // RefreshHistoricUsers
             // 
-            this.RefreshHistoricUsers.Location = new System.Drawing.Point(173, 309);
+            this.RefreshHistoricUsers.Location = new System.Drawing.Point(177, 137);
             this.RefreshHistoricUsers.Name = "RefreshHistoricUsers";
             this.RefreshHistoricUsers.Size = new System.Drawing.Size(75, 23);
             this.RefreshHistoricUsers.TabIndex = 16;
@@ -209,27 +103,28 @@
             this.RefreshHistoricUsers.UseVisualStyleBackColor = true;
             this.RefreshHistoricUsers.Click += new System.EventHandler(this.RefreshHistoricUsers_Click);
             // 
+            // followBtn
+            // 
+            this.followBtn.Location = new System.Drawing.Point(433, 31);
+            this.followBtn.Name = "followBtn";
+            this.followBtn.Size = new System.Drawing.Size(75, 23);
+            this.followBtn.TabIndex = 17;
+            this.followBtn.Text = "Follow";
+            this.followBtn.UseVisualStyleBackColor = true;
+            this.followBtn.Click += new System.EventHandler(this.followBtn_Click);
+            // 
             // DoctorApplication_Session
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(511, 479);
+            this.Controls.Add(this.followBtn);
             this.Controls.Add(this.RefreshHistoricUsers);
             this.Controls.Add(this.RefreshConnectedButton);
             this.Controls.Add(this.getPastDataBtn);
             this.Controls.Add(this.OlderDataComboBox);
             this.Controls.Add(this.getPastSessions);
-            this.Controls.Add(this.setPowerBtn);
-            this.Controls.Add(this.setPowerTxt);
-            this.Controls.Add(this.setPowerLbl);
-            this.Controls.Add(this.toAllBtn);
-            this.Controls.Add(this.sendToClientBtn);
-            this.Controls.Add(this.messageLbl);
-            this.Controls.Add(this.messageTxt);
-            this.Controls.Add(this.StopBtn);
-            this.Controls.Add(this.startBtn);
-            this.Controls.Add(this.TrainingLbl);
             this.Controls.Add(this.ConnectedSessionsListLbl);
             this.Controls.Add(this.ConectedSessionsListCombo);
             this.ForeColor = System.Drawing.SystemColors.HotTrack;
@@ -244,20 +139,11 @@
 
         private System.Windows.Forms.ComboBox ConectedSessionsListCombo;
         private System.Windows.Forms.Label ConnectedSessionsListLbl;
-        private System.Windows.Forms.Label TrainingLbl;
-        private System.Windows.Forms.Button startBtn;
-        private System.Windows.Forms.Button StopBtn;
-        private System.Windows.Forms.TextBox messageTxt;
-        private System.Windows.Forms.Label messageLbl;
-        private System.Windows.Forms.Button sendToClientBtn;
-        private System.Windows.Forms.Button toAllBtn;
-        private System.Windows.Forms.Label setPowerLbl;
-        private System.Windows.Forms.TextBox setPowerTxt;
-        private System.Windows.Forms.Button setPowerBtn;
         private System.Windows.Forms.Label getPastSessions;
         private System.Windows.Forms.ComboBox OlderDataComboBox;
         private System.Windows.Forms.Button getPastDataBtn;
         private System.Windows.Forms.Button RefreshConnectedButton;
         private System.Windows.Forms.Button RefreshHistoricUsers;
+        private System.Windows.Forms.Button followBtn;
     }
 }
