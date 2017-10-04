@@ -52,8 +52,6 @@ namespace WindowsFormsApp1
             {
                 ErgometerSimulatie ergometersimulatie = new ErgometerSimulatie();
                 Client client = new Client(currentClient, ergometersimulatie, null);
-                SessionGUI sessionGUI = new SessionGUI(client);
-                sessionGUI.Show();
             }
             else
             {
