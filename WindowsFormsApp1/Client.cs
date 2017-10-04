@@ -86,9 +86,9 @@ namespace WindowsFormsApp1
                                 Byte[] lengthMessageArray = new Byte[4];
                                 Array.Copy(receiveBuffer, 0, lengthMessageArray, 0, 3);
                                 lengthMessage = BitConverter.ToInt32(lengthMessageArray, 0);
-                                if((totalBytesreceived - 4 ) == lengthMessage)
+                                if ((totalBytesreceived - 4) == lengthMessage)
                                 {
-                                    messagereceived = true; 
+                                    messagereceived = true;
                                 }
                             }
                         }
@@ -109,7 +109,7 @@ namespace WindowsFormsApp1
                     string toReturn = response.ToString().Substring(4);
                     System.Diagnostics.Debug.WriteLine("Received client: \r\n" + toReturn);
                     ProcessAnswer(toReturn);
-         
+
                 }
                 catch (Exception e)
                 {
@@ -133,21 +133,26 @@ namespace WindowsFormsApp1
                 isConnected = false;
                 close();
             }
-            if(jsonData.id == "log in")
+            if (jsonData.id == "log in")
             {
-                if(jsonData.data.status != "ok")
+                if (jsonData.data.status != "ok")
                 {
                     close();
                 }
             }
-            if(jsonData.id == "client/message")
+            if (jsonData.id == "client/message")
             {
                 HandleNewMessageFromDoctor((string)jsonData.data.message);
+            }
+            if (jsonData.id == "client/SetPower")
+            {
+                ergometerCOM?.SetPower((int)jsonData.data.power);
+                simulation?.SetPower((int)jsonData.data.power);
             }
 
         }
 
-            public void Send(string message)
+        public void Send(string message)
         {
             System.Diagnostics.Debug.WriteLine("Send: \r\n" + message);
             byte[] prefixArray = BitConverter.GetBytes(message.Length);
@@ -202,7 +207,7 @@ namespace WindowsFormsApp1
                         measurement = 0;
                     }
                 }
-                else if(simulation!= null)
+                else if (simulation != null)
                 {
                     System.Diagnostics.Debug.WriteLine(isConnected);
                     Healthcare_test.ErgometerData ergometerData2 = simulation.GetData();
@@ -246,41 +251,12 @@ namespace WindowsFormsApp1
                 }
             };
             Send(JsonConvert.SerializeObject(sendlogin));
-          }
+        }
 
         public void HandleNewMessageFromDoctor(string message)
         {
-            //Nog in te vullen met custom actie
+            vrc.HandeMessageFromDoctor(message);
         }
-
-        //public dynamic startSession(String usernameid)
-        //{
-        //    dynamic startSession = new
-        //    {
-        //        id = "session/start",
-        //        data = new
-        //        {
-        //            username = usernameid
-        //        }
-
-        //    };
-        //    return JsonConvert.SerializeObject(startSession);
-        //}
-
-        //public void closesession()
-        //{
-        //    dynamic closesession = new
-        //    {
-        //        id = "session/end",
-        //        data = new
-        //        {
-        //            session = sessionid
-        //        }
-
-        //    };
-        //    send(jsonconvert.serializeobject(closesession));
-        //}
-
 
         public void close()
         {
@@ -297,7 +273,7 @@ namespace WindowsFormsApp1
             {
                 ergometerCOM.Close();
             }
-            if(simulation != null)
+            if (simulation != null)
             {
                 simulation.Close();
             }

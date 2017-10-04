@@ -28,6 +28,24 @@ namespace WindowsFormsApp1
         public static string carcartoon2 = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\cars\cartoon\Pony_cartoon2.obj");
         public static string house1 = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\houses\set1\house1.obj");
 
+        public static void AdjustPaths(string neFolder)
+        {
+            tree1 = Path.Combine(neFolder, @"NetwerkEngineData\models\trees\fantasy\tree1.obj");
+            tree2 = Path.Combine(neFolder, @"NetwerkEngineData\models\trees\fantasy\tree2.obj");
+            tree3 = Path.Combine(neFolder, @"NetwerkEngineData\models\trees\fantasy\tree3.obj");
+            tree4 = Path.Combine(neFolder, @"NetwerkEngineData\models\trees\fantasy\tree4.obj");
+            tree5 = Path.Combine(neFolder, @"NetwerkEngineData\models\trees\fantasy\tree5.obj");
+            tree6 = Path.Combine(neFolder, @"NetwerkEngineData\models\trees\fantasy\tree6.obj");
+            tree7 = Path.Combine(neFolder, @"NetwerkEngineData\models\trees\fantasy\tree7.obj");
+            tree10 = Path.Combine(neFolder, @"NetwerkEngineData\models\trees\fantasy\tree10.obj");
+
+            pony = Path.Combine(neFolder, @"NetwerkEngineData\models\pony.obj");
+            bike = Path.Combine(neFolder, @"NetwerkEngineData\models\bike\bike.fbx");
+            bikeAnim = Path.Combine(neFolder, @"NetwerkEngineData\models\bike\bike_anim.fbx");
+            carcartoon = Path.Combine(neFolder, @"NetwerkEngineData\models\cars\cartoon\Pony_cartoon.obj");
+            carcartoon2 = Path.Combine(neFolder, @"NetwerkEngineData\models\cars\cartoon\Pony_cartoon2.obj");
+            house1 = Path.Combine(neFolder, @"NetwerkEngineData\models\houses\set1\house1.obj");
+        }
 
 
         public static dynamic SessionList()
@@ -82,7 +100,7 @@ namespace WindowsFormsApp1
         }
 
 
-        public static dynamic AddObject(string tunnel, int xPos, int yPos, int zPos, int rotY,double sizeX,double sizeY, string nameNode, bool needTerrain, bool needPanel)
+        public static dynamic AddObject(string tunnel, int xPos, int yPos, int zPos, int rotY, double sizeX, double sizeY, string nameNode, bool needTerrain, bool needPanel)
         {
             int[] aPosition = new int[3] { xPos, yPos, zPos };
             int[] aRotation = new int[3] { 0, rotY, 0 };
@@ -137,7 +155,7 @@ namespace WindowsFormsApp1
                             {
                                 size = aPanelSize,
                                 resolution = new int[2] { 512, 1024 },
-                                background = new double[4] { 1, 1, 1, 0.1 }
+                                background = new double[4] { 0, 0, 0, 0.5 }
                             }
                         }
                     }
@@ -209,7 +227,6 @@ namespace WindowsFormsApp1
                     id = uuid
                 }
             };
-            // System.Diagnostics.Debug.WriteLine(uuid + " test " + tunnel);
             return Commands.SendTunnel(tunnel, NodeToDelete);
         }
 
@@ -259,7 +276,7 @@ namespace WindowsFormsApp1
             return Commands.SendTunnel(tunnel, groundTerrain);
         }
 
-        public static dynamic addTextureTerrain(string tunnel, string uuid, string normal, double min, double max, int fade)
+        public static dynamic addTextureTerrain(string tunnel, string uuid, string folder, string normal, double min, double max, int fade)
         {
 
 
@@ -269,8 +286,8 @@ namespace WindowsFormsApp1
                 data = new
                 {
                     id = uuid,
-                    diffuse = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\textures\terrain\" + normal),
-                    normal = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\textures\terrain\" + normal),
+                    diffuse = Path.Combine(folder, @"NetwerkEngineData\textures\terrain\" + normal),
+                    normal = Path.Combine(folder, @"NetwerkEngineData\textures\terrain\" + normal),
                     minHeight = min,
                     maxHeight = max,
                     fadeDist = fade
@@ -321,7 +338,7 @@ namespace WindowsFormsApp1
                 data = new
                 {
                     id = uuidPanel,
-                    color = new double[4] {1,1,1,0.2}
+                    color = new double[4] { 0, 0, 0, 0.5 }
 
                 }
             };
@@ -339,7 +356,7 @@ namespace WindowsFormsApp1
                     text = Text,
                     position = new int[2] { 32, 64 },
                     size = 64,
-                    color = new int[4] { 0, 0, 0, 1 },
+                    color = new double[4] { 1, 1, 1, 1 },
                     font = "segoeui"
                 }
             };

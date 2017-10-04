@@ -18,6 +18,7 @@ namespace WindowsFormsApp1
         public string tunnel { get; set; }
         Thread Reading;
         bool TunnelIsMade;
+        private string messageDoctor;
 
         public VR_Connector()
         {
@@ -35,6 +36,8 @@ namespace WindowsFormsApp1
             {
                 connectToEngine();
             }
+            Commands.AdjustPaths(currentClient.Folder);
+            session.folder = currentClient.Folder;
             SetupTerrain();
 
         }
@@ -60,12 +63,19 @@ namespace WindowsFormsApp1
 
         public void UpdateBikePanelInVR(ErgometerData ed)
         {
-            string text = "Power: " + ed.Actual_Power + "\\n" + "Speed: " + ed.Speed + "\\n" + "Time: " + ed.Time + "\\n" + "RPM: " + ed.RPM + "\\n" + "Distance: " + Math.Round(ed.Distance, 2) + "\\n" + "Pulse: " + ed.Pulse;
+            if (ed.Actual_Power != null && ed.Speed != null && ed.Time != null && ed.RPM != null && ed.Distance != null && ed.Distance != null)
+            {
+                string text = "Power: " + ed.Actual_Power + "\\n" + "Speed: " + ed.Speed + "\\n" + "Time: " + ed.Time +
+                              "\\n" + "RPM: " + ed.RPM + "\\n" + "Distance: " + Math.Round(ed.Distance, 2) + "\\n" +
+                              "Pulse: " + ed.Pulse;
 
-            session.Send(JsonConvert.SerializeObject(Commands.UpdateSpeed(tunnel, session.terrain.UuidCamera, (int)ed.Speed/2)));
-            session.Send(JsonConvert.SerializeObject(Commands.clearPanel(tunnel, session.terrain.UuidStatsPanel)));
-            session.Send(JsonConvert.SerializeObject(Commands.addTextPanel(tunnel, session.terrain.UuidStatsPanel, text)));
-            session.Send(JsonConvert.SerializeObject(Commands.SwapPanel(tunnel, session.terrain.UuidStatsPanel)));
+                session.Send(JsonConvert.SerializeObject(Commands.UpdateSpeed(tunnel, session.terrain.UuidCamera,
+                    (int) ed.Speed / 2)));
+                session.Send(JsonConvert.SerializeObject(Commands.clearPanel(tunnel, session.terrain.UuidStatsPanel)));
+                session.Send(
+                    JsonConvert.SerializeObject(Commands.addTextPanel(tunnel, session.terrain.UuidStatsPanel, text)));
+                session.Send(JsonConvert.SerializeObject(Commands.SwapPanel(tunnel, session.terrain.UuidStatsPanel)));
+            }
         }
 
 
@@ -75,8 +85,9 @@ namespace WindowsFormsApp1
             foreach (ClientInfo c in clients)
             {
                
-                if (c.HostName.ToLower() == CurrentPcName.ToLower())
+                //if (c.HostName.ToLower() == CurrentPcName.ToLower())
                 //if (c.HostName == "CAVE-Control")
+                if (c.HostName == "DESKTOP-M48E3PG")
                 {
                     currentClient = c;
                     System.Diagnostics.Debug.WriteLine("current client = " + c.ID);
@@ -144,10 +155,14 @@ namespace WindowsFormsApp1
             session.Send(JsonConvert.SerializeObject(Commands.MoveObject(tunnel, session.terrain.UuidCamera, session.terrain.road.Last().id)));
             Task.Delay(500).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.UpdateSpeed(tunnel, session.terrain.UuidCamera, 0)));
+        }
 
-
-
-
+        public void HandeMessageFromDoctor(string message)
+        {
+            messageDoctor = message + "\\n" + messageDoctor;
+            session.Send(JsonConvert.SerializeObject(Commands.clearPanel(tunnel, session.terrain.UuidMessagePanel)));
+            session.Send(JsonConvert.SerializeObject(Commands.addTextPanel(tunnel, session.terrain.UuidMessagePanel, messageDoctor)));
+            session.Send(JsonConvert.SerializeObject(Commands.SwapPanel(tunnel, session.terrain.UuidMessagePanel)));
         }
     }
 

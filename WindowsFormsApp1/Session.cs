@@ -17,6 +17,7 @@ namespace WindowsFormsApp1
         TcpClient client;
         NetworkStream stream;
         public Terrain terrain;
+        public string folder = "";
         
 
     
@@ -114,7 +115,6 @@ namespace WindowsFormsApp1
                 {
 
                 }
-                //System.Diagnostics.Debug.WriteLine(terrain.ToString());
             }
         }
 
@@ -257,17 +257,17 @@ namespace WindowsFormsApp1
         {
             //desert_wet_n.jpg = og water texture
             //Task.Delay(1000);
-            Send(JsonConvert.SerializeObject(Commands.addTextureTerrain(vrc.tunnel, uuid, "water.jpg",0,1,1 )));
+            Send(JsonConvert.SerializeObject(Commands.addTextureTerrain(vrc.tunnel, uuid, folder, "water.jpg",0,1,1 )));
             //Task.Delay(1000);
-            Send(JsonConvert.SerializeObject(Commands.addTextureTerrain(vrc.tunnel, uuid, "grass_ground2y_d.jpg", 1, 5, 0)));
+            Send(JsonConvert.SerializeObject(Commands.addTextureTerrain(vrc.tunnel, uuid, folder, "grass_ground2y_d.jpg", 1, 5, 0)));
             //Task.Delay(1000);
-            Send(JsonConvert.SerializeObject(Commands.addTextureTerrain(vrc.tunnel, uuid, "snow_mud_d.jpg", 5, 15, 0)));
+            Send(JsonConvert.SerializeObject(Commands.addTextureTerrain(vrc.tunnel, uuid, folder, "snow_mud_d.jpg", 5, 15, 0)));
             //Task.Delay(1000);
-            Send(JsonConvert.SerializeObject(Commands.addTextureTerrain(vrc.tunnel, uuid, "mntn_x2_d.jpg", 15, 28, 0)));
+            Send(JsonConvert.SerializeObject(Commands.addTextureTerrain(vrc.tunnel, uuid, folder, "mntn_x2_d.jpg", 15, 28, 0)));
             //Task.Delay(1000);
-            Send(JsonConvert.SerializeObject(Commands.addTextureTerrain(vrc.tunnel, uuid, "snow_rough_s.jpg", 28, 40, 0)));
+            Send(JsonConvert.SerializeObject(Commands.addTextureTerrain(vrc.tunnel, uuid, folder, "snow_rough_s.jpg", 28, 40, 0)));
             //Task.Delay(1000);
-            Send(JsonConvert.SerializeObject(Commands.addTextureTerrain(vrc.tunnel, uuid, "snow2ice_d.jpg", 40, 100, 0)));
+            Send(JsonConvert.SerializeObject(Commands.addTextureTerrain(vrc.tunnel, uuid, folder, "snow2ice_d.jpg", 40, 100, 0)));
             //Task.Delay(1000);
             terrain.textureLoaded = true;
         }
@@ -278,7 +278,7 @@ namespace WindowsFormsApp1
             List<ClientInfo> clientinfoList = new List<ClientInfo>();
             foreach (dynamic d in sessions)
             {
-                clientinfoList.Add(new ClientInfo((string)d.clientinfo.host, (string)d.id));
+                clientinfoList.Add(new ClientInfo((string)d.clientinfo.host, (string)d.id, (string) d.clientinfo.file));
             }
             vrc.AddOptions(clientinfoList);
         }

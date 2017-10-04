@@ -193,7 +193,9 @@ namespace Server
                 }
                 else if (jsonObject.id == "doctor/message/toClient")
                 {
-
+                    string patientId = (string) jsonObject.data.patientiD;
+                    string message = (string) jsonObject.data.messageId;
+                    SendMessageToSingleClient(patientId, message);
                 }
                 else if (jsonObject.id == "doctor/message/toAll")
                 {

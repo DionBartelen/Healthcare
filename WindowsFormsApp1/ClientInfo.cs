@@ -10,11 +10,13 @@ namespace WindowsFormsApp1
     {
         public String HostName { get; }
         public String ID { get; }
+        public string Folder { get; }
 
-        public ClientInfo(String HostName, String ID)
+        public ClientInfo(String HostName, String ID, string Folder)
         {
             this.HostName = HostName;
             this.ID = ID;
+            this.Folder = Folder.Substring(0, Folder.Length-18);
         }
     }
 }
