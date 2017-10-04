@@ -55,11 +55,11 @@
     <Compile Include="dataGUI.Designer.cs">
       <DependentUpon>dataGUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="DcotorApplication_Login.cs">
+    <Compile Include="DoctorApplication_Login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DcotorApplication_Login.Designer.cs">
-      <DependentUpon>DcotorApplication_Login.cs</DependentUpon>
+    <Compile Include="DoctorApplication_Login.Designer.cs">
+      <DependentUpon>DoctorApplication_Login.cs</DependentUpon>
     </Compile>
     <Compile Include="DoctorApplication_Connection.cs" />
     <Compile Include="DoctorApplication_Session.cs">
@@ -81,8 +81,8 @@
     <EmbeddedResource Include="dataGUI.resx">
       <DependentUpon>dataGUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DcotorApplication_Login.resx">
-      <DependentUpon>DcotorApplication_Login.cs</DependentUpon>
+    <EmbeddedResource Include="DoctorApplication_Login.resx">
+      <DependentUpon>DoctorApplication_Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DoctorApplication_Session.resx">
       <DependentUpon>DoctorApplication_Session.cs</DependentUpon>

@@ -8,13 +8,14 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Healthcare_test.test_applicatie;
 using Healthcare_test;
 
 namespace WindowsFormsApp1
 {
     public class Client
     {
+
+        VR_Connector vrc;
         NetworkStream stream;
         int port = 1234;
         TcpClient client;
@@ -26,10 +27,12 @@ namespace WindowsFormsApp1
         Thread getData;
         Boolean isConnected;
         ErgometerSimulatie simulation;
+        int measurement = 0;
 
 
         public Client(ClientData clientdata, ErgometerSimulatie simulation, string comport)
         {
+            vrc = new VR_Connector();
             this.simulation = simulation;
             bool ipIsOk = IPAddress.TryParse("127.0.0.1", out localhost);
             if (!ipIsOk)
@@ -153,12 +156,12 @@ namespace WindowsFormsApp1
             }
             while (isConnected)
             {
+                measurement++;
                 if (simulation == null && ergometerCOM != null)
                 {
                     System.Diagnostics.Debug.WriteLine(isConnected);
                     Healthcare_test.ErgometerData ergometerData = ergometerCOM.GetData();
-                    //String ergometerData2 = ergometerData.ToString();
-                    //System.Diagnostics.Debug.WriteLine(ergometerData2);
+                    vrc.UpdateBikePanelInVR(ergometerData);
                     dynamic ergometerdata = new
                     {
                         id = "data",
@@ -174,14 +177,17 @@ namespace WindowsFormsApp1
                         }
 
                     };
-                    Send(JsonConvert.SerializeObject(ergometerdata));
+                    if (measurement >= 10)
+                    {
+                        Send(JsonConvert.SerializeObject(ergometerdata));
+                        measurement = 0;
+                    }
                 }
                 else if(simulation!= null)
                 {
                     System.Diagnostics.Debug.WriteLine(isConnected);
-                    Healthcare_test.ErgometerData ergometerData2 = simulation.GetData(); 
-                    //String ergometerData2 = ergometerData.ToString();
-                    //System.Diagnostics.Debug.WriteLine(ergometerData2);
+                    Healthcare_test.ErgometerData ergometerData2 = simulation.GetData();
+                    vrc.UpdateBikePanelInVR(ergometerData2);
                     dynamic ergometerdata2 = new
                     {
                         id = "data",
@@ -197,11 +203,13 @@ namespace WindowsFormsApp1
                         }
 
                     };
-                    Send(JsonConvert.SerializeObject(ergometerdata2));
-
-
+                    if (measurement >= 10)
+                    {
+                        Send(JsonConvert.SerializeObject(ergometerdata2));
+                        measurement = 0;
+                    }
                 }
-                Thread.Sleep(1000);
+                Thread.Sleep(100);
             }
 
 
