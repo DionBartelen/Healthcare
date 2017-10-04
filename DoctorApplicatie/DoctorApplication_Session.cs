@@ -16,59 +16,22 @@ namespace DoctorApplicatie
     {
         DoctorApplication_Connection connection;
         List<String> connected_clients;
+       public  List<DoctorApplication_SessionClient> followed_sessions;
 
         public DoctorApplication_Session(DoctorApplication_Connection connection)
         {
             InitializeComponent();
             this.connection = connection;
             connected_clients = new List<string>();
-            
-        }
-
-        private void TrainingLbl_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void startBtn_Click(object sender, EventArgs e)
-        {
-            if (ConectedSessionsListCombo.SelectedItem != null)
-            {
-                connection.startTraining(ConectedSessionsListCombo.SelectedItem.ToString());
-            }
-        }
-
-        private void StopBtn_Click(object sender, EventArgs e)
-        {
-            connection.stopTraining(ConectedSessionsListCombo.SelectedItem.ToString());
-        }
-
-        private void sendToClientBtn_Click(object sender, EventArgs e)
-        {
-            if (messageTxt.Text != null && ConectedSessionsListCombo.SelectedItem != null)
-            {
-                connection.sendMessageToClient(messageTxt.Text, ConectedSessionsListCombo.SelectedItem.ToString());
-            }
-        }
-
-        private void toAllBtn_Click(object sender, EventArgs e)
-        {
-            if (messageTxt.Text != null)
-            {
-                connection.sendMessagetoAllClients(messageTxt.Text);
-            }
-        }
-
-        private void setPowerBtn_Click(object sender, EventArgs e)
-        {
-            if(setPowerTxt.Text != null && ConectedSessionsListCombo.SelectedItem != null) {
-                connection.setPower(setPowerTxt.Text, ConectedSessionsListCombo.SelectedItem.ToString());
-            }
+            followed_sessions = new List<DoctorApplication_SessionClient>();
         }
 
         private void getPastDataBtn_Click(object sender, EventArgs e)
         {
-            connection.getOlderData(OlderDataComboBox.Text);
+            if (connection != null && OlderDataComboBox.Text != null)
+            {
+                connection.getOlderData(OlderDataComboBox.Text);
+            }
         }
 
         public void UpdateComboBox(List<String> new_Connected_Sessions)
@@ -111,13 +74,19 @@ namespace DoctorApplicatie
 
         private void RefreshConnectedButton_Click(object sender, EventArgs e)
         {
-            ConectedSessionsListCombo.Text = "";
-            connection.getSessions();
+            if (connection != null)
+            {
+                ConectedSessionsListCombo.Text = "";
+                connection.getSessions();
+            }
         }
 
         private void RefreshHistoricUsers_Click(object sender, EventArgs e)
         {
-            connection.GetUsers();
+            if (connection != null)
+            {
+                connection.GetUsers();
+            }
         }
 
         public void RunTrainSessionForm(DoctorApplication_Trainsessions session)
@@ -126,6 +95,19 @@ namespace DoctorApplicatie
             {
                 session.Show();
             }));
+        }
+
+        private void followBtn_Click(object sender, EventArgs e)
+        {
+            connection.FollowPatient(ConectedSessionsListCombo.SelectedItem.ToString());
+            this.BeginInvoke(new MethodInvoker(delegate
+            {
+                DoctorApplication_SessionClient session = new DoctorApplication_SessionClient(connection, ConectedSessionsListCombo.SelectedItem.ToString());
+                followed_sessions.Add(session);
+                session.Show();  
+            }
+            ));
+            
         }
     }
 }

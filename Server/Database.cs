@@ -17,7 +17,7 @@ namespace Server
         {
             try
             {
-                string path = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, @"HealthCare-app\Server\Database\Database.txt");
+                string path = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, @"HealthCare\Server\Database\Database.txt");
                 string AllText = File.ReadAllText(path);
                 List<string> lines = AllText.Split('&').ToList();
                 Dictionary<string, List<TrainSession>> dictionary = new Dictionary<string, List<TrainSession>>();
@@ -90,7 +90,7 @@ namespace Server
         {
             try
             {
-                string path = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, @"HealthCare-app\Server\Database\Database.txt");
+                string path = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, @"HealthCare\Server\Database\Database.txt");
                 string toWrite = "";
                 foreach (KeyValuePair<string, List<TrainSession>> entry in TrainSessions)
                 {
@@ -138,7 +138,7 @@ namespace Server
 
         public static void ReadSavedCredentials()
         {
-            string path = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, @"HealthCare-app\Server\Database\Login.txt");
+            string path = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, @"HealthCare\Server\Database\Login.txt");
             string AllText = File.ReadAllText(path);
             dynamic jsonObject = JsonConvert.DeserializeObject(AllText);
             foreach (dynamic combination in jsonObject.combinations)
@@ -146,7 +146,7 @@ namespace Server
                 CredentialsClient.Add((string)combination.username, (string)combination.password);
             }
 
-            string path2 = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, @"HealthCare-app\Server\Database\LoginDoctor.txt");
+            string path2 = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, @"HealthCare\Server\Database\LoginDoctor.txt");
             string AllText2 = File.ReadAllText(path2);
             dynamic jsonObject2 = JsonConvert.DeserializeObject(AllText2);
             foreach (dynamic combination2 in jsonObject2.combinations)

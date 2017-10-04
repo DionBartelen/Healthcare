@@ -104,6 +104,7 @@ namespace DoctorApplicatie
         }
         public void ProcessAnswer(string information)
         {
+            
             dynamic jsonData = JsonConvert.DeserializeObject(information);
             if (jsonData.id == "doctor/login")
             {
@@ -137,6 +138,24 @@ namespace DoctorApplicatie
             else if (jsonData.id == "session/data/historic")
             {
                 HandleHistoricData(jsonData);
+            }
+            else if(jsonData.id == "data")
+            {
+
+                string session = (string)jsonData.sessionId;
+                int power = jsonData.data.data.Requested_Power;
+                double speed = jsonData.data.data.Speed;
+                int time = jsonData.data.data.Time;
+                int rpm = jsonData.data.data.RPM;
+                double distance = jsonData.data.data.Distance;
+                int pulse = jsonData.data.data.Pulse;
+                ErgometerData data = new ErgometerData(pulse, rpm, speed, distance, time, 0, 0, power);
+                checkData(session, data);
+
+            }
+            else if(jsonData.id == "doctor/UnfollowPatient")
+            {
+                
             }
 
         }
@@ -255,7 +274,7 @@ namespace DoctorApplicatie
                 data = new
                 {
                     power = power,
-                    patientId = patientID
+                    patientID = patientID
                 }
 
             };
@@ -312,6 +331,38 @@ namespace DoctorApplicatie
             doctorApplication_Session.RunTrainSessionForm(TrainsessionsForm);
 
         }
+            
+        public void FollowPatient(string SessionId)
+        {
+            dynamic followPatient = new
+            {
+                id = "doctor/FollowPatient",
+                data = new
+                {
+                    username = SessionId
+                }
+
+            };
+
+            Send(JsonConvert.SerializeObject(followPatient));
+
+        }
+
+        public void UnFollowPatient(string SessionId)
+        {
+            dynamic unFollowPatient = new
+            {
+                id = "doctor/UnfollowPatient",
+                data = new 
+                {
+                    username = SessionId
+                }
+
+            };
+
+            Send(JsonConvert.SerializeObject(unFollowPatient));
+
+        }
 
         public void close()
         {
@@ -320,8 +371,22 @@ namespace DoctorApplicatie
             client.Close();
         }
 
+
         public static bool ValidateCert(object sender, X509Certificate certificate,
               X509Chain chain, SslPolicyErrors sslPolicyErrors) => sslPolicyErrors == SslPolicyErrors.None;
+
+        public void checkData(string dataSessionId, ErgometerData data)
+        { 
+            
+            foreach (DoctorApplication_SessionClient s in doctorApplication_Session.followed_sessions)
+            {
+                if(s.sessionID == dataSessionId)
+                {
+                    s.currentData.Add(data);
+                    s.updateChart();
+                }
+            }
+        }
     }
 
 }
