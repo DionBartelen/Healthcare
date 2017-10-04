@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.setPowerBtn = new System.Windows.Forms.Button();
             this.setPowerTxt = new System.Windows.Forms.TextBox();
             this.setPowerLbl = new System.Windows.Forms.Label();
@@ -47,6 +47,9 @@
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.unFollowBtn = new System.Windows.Forms.Button();
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.label1 = new System.Windows.Forms.Label();
+            this.Distancelbl = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             this.SuspendLayout();
@@ -54,9 +57,9 @@
             // setPowerBtn
             // 
             this.setPowerBtn.BackColor = System.Drawing.SystemColors.Control;
-            this.setPowerBtn.Location = new System.Drawing.Point(169, 182);
+            this.setPowerBtn.Location = new System.Drawing.Point(168, 112);
             this.setPowerBtn.Name = "setPowerBtn";
-            this.setPowerBtn.Size = new System.Drawing.Size(84, 24);
+            this.setPowerBtn.Size = new System.Drawing.Size(84, 29);
             this.setPowerBtn.TabIndex = 18;
             this.setPowerBtn.Text = "setPower";
             this.setPowerBtn.UseVisualStyleBackColor = false;
@@ -64,7 +67,7 @@
             // 
             // setPowerTxt
             // 
-            this.setPowerTxt.Location = new System.Drawing.Point(9, 182);
+            this.setPowerTxt.Location = new System.Drawing.Point(8, 119);
             this.setPowerTxt.Name = "setPowerTxt";
             this.setPowerTxt.Size = new System.Drawing.Size(122, 22);
             this.setPowerTxt.TabIndex = 17;
@@ -72,7 +75,7 @@
             // setPowerLbl
             // 
             this.setPowerLbl.AutoSize = true;
-            this.setPowerLbl.Location = new System.Drawing.Point(12, 164);
+            this.setPowerLbl.Location = new System.Drawing.Point(11, 101);
             this.setPowerLbl.Name = "setPowerLbl";
             this.setPowerLbl.Size = new System.Drawing.Size(76, 17);
             this.setPowerLbl.TabIndex = 16;
@@ -81,9 +84,9 @@
             // toAllBtn
             // 
             this.toAllBtn.BackColor = System.Drawing.SystemColors.Control;
-            this.toAllBtn.Location = new System.Drawing.Point(256, 108);
+            this.toAllBtn.Location = new System.Drawing.Point(255, 65);
             this.toAllBtn.Name = "toAllBtn";
-            this.toAllBtn.Size = new System.Drawing.Size(75, 23);
+            this.toAllBtn.Size = new System.Drawing.Size(75, 26);
             this.toAllBtn.TabIndex = 15;
             this.toAllBtn.Text = "AllClients";
             this.toAllBtn.UseVisualStyleBackColor = false;
@@ -92,9 +95,9 @@
             // sendToClientBtn
             // 
             this.sendToClientBtn.BackColor = System.Drawing.SystemColors.Control;
-            this.sendToClientBtn.Location = new System.Drawing.Point(169, 106);
+            this.sendToClientBtn.Location = new System.Drawing.Point(168, 65);
             this.sendToClientBtn.Name = "sendToClientBtn";
-            this.sendToClientBtn.Size = new System.Drawing.Size(75, 25);
+            this.sendToClientBtn.Size = new System.Drawing.Size(75, 26);
             this.sendToClientBtn.TabIndex = 14;
             this.sendToClientBtn.Text = "toClient";
             this.sendToClientBtn.UseVisualStyleBackColor = false;
@@ -103,7 +106,7 @@
             // messageLbl
             // 
             this.messageLbl.AutoSize = true;
-            this.messageLbl.Location = new System.Drawing.Point(12, 88);
+            this.messageLbl.Location = new System.Drawing.Point(11, 48);
             this.messageLbl.Name = "messageLbl";
             this.messageLbl.Size = new System.Drawing.Size(69, 17);
             this.messageLbl.TabIndex = 13;
@@ -111,7 +114,7 @@
             // 
             // messageTxt
             // 
-            this.messageTxt.Location = new System.Drawing.Point(12, 107);
+            this.messageTxt.Location = new System.Drawing.Point(11, 67);
             this.messageTxt.Name = "messageTxt";
             this.messageTxt.Size = new System.Drawing.Size(119, 22);
             this.messageTxt.TabIndex = 12;
@@ -119,9 +122,9 @@
             // StopBtn
             // 
             this.StopBtn.BackColor = System.Drawing.SystemColors.Control;
-            this.StopBtn.Location = new System.Drawing.Point(256, 53);
+            this.StopBtn.Location = new System.Drawing.Point(255, 13);
             this.StopBtn.Name = "StopBtn";
-            this.StopBtn.Size = new System.Drawing.Size(75, 23);
+            this.StopBtn.Size = new System.Drawing.Size(108, 28);
             this.StopBtn.TabIndex = 19;
             this.StopBtn.Text = "stop";
             this.StopBtn.UseVisualStyleBackColor = false;
@@ -130,9 +133,9 @@
             // startBtn
             // 
             this.startBtn.BackColor = System.Drawing.SystemColors.Control;
-            this.startBtn.Location = new System.Drawing.Point(169, 53);
+            this.startBtn.Location = new System.Drawing.Point(168, 13);
             this.startBtn.Name = "startBtn";
-            this.startBtn.Size = new System.Drawing.Size(75, 23);
+            this.startBtn.Size = new System.Drawing.Size(75, 28);
             this.startBtn.TabIndex = 21;
             this.startBtn.Text = "start";
             this.startBtn.UseVisualStyleBackColor = false;
@@ -141,7 +144,7 @@
             // TrainingLbl
             // 
             this.TrainingLbl.AutoSize = true;
-            this.TrainingLbl.Location = new System.Drawing.Point(12, 53);
+            this.TrainingLbl.Location = new System.Drawing.Point(11, 13);
             this.TrainingLbl.Name = "TrainingLbl";
             this.TrainingLbl.Size = new System.Drawing.Size(60, 17);
             this.TrainingLbl.TabIndex = 20;
@@ -149,26 +152,26 @@
             // 
             // chart1
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chart1.Legends.Add(legend3);
+            chartArea5.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea5);
+            legend5.Name = "Legend1";
+            this.chart1.Legends.Add(legend5);
             this.chart1.Location = new System.Drawing.Point(0, 210);
             this.chart1.Name = "chart1";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chart1.Series.Add(series3);
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series5.Legend = "Legend1";
+            series5.Name = "Series1";
+            this.chart1.Series.Add(series5);
             this.chart1.Size = new System.Drawing.Size(714, 642);
             this.chart1.TabIndex = 22;
             this.chart1.Text = "chart1";
             // 
             // unFollowBtn
             // 
-            this.unFollowBtn.Location = new System.Drawing.Point(370, 53);
+            this.unFollowBtn.Location = new System.Drawing.Point(369, 13);
             this.unFollowBtn.Name = "unFollowBtn";
-            this.unFollowBtn.Size = new System.Drawing.Size(75, 23);
+            this.unFollowBtn.Size = new System.Drawing.Size(89, 28);
             this.unFollowBtn.TabIndex = 23;
             this.unFollowBtn.Text = "unFollow";
             this.unFollowBtn.UseVisualStyleBackColor = true;
@@ -176,26 +179,56 @@
             // 
             // chart2
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chart2.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chart2.Legends.Add(legend4);
+            chartArea6.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea6);
+            legend6.Name = "Legend1";
+            this.chart2.Legends.Add(legend6);
             this.chart2.Location = new System.Drawing.Point(720, 210);
             this.chart2.Name = "chart2";
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.chart2.Series.Add(series4);
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series6.Legend = "Legend1";
+            series6.Name = "Series1";
+            this.chart2.Series.Add(series6);
             this.chart2.Size = new System.Drawing.Size(742, 650);
             this.chart2.TabIndex = 24;
             this.chart2.Text = "chart2";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(11, 163);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(71, 17);
+            this.label1.TabIndex = 25;
+            this.label1.Text = "Distance: ";
+            // 
+            // Distancelbl
+            // 
+            this.Distancelbl.AutoSize = true;
+            this.Distancelbl.Location = new System.Drawing.Point(100, 163);
+            this.Distancelbl.Name = "Distancelbl";
+            this.Distancelbl.Size = new System.Drawing.Size(0, 17);
+            this.Distancelbl.TabIndex = 26;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(262, 163);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(28, 17);
+            this.label2.TabIndex = 27;
+            this.label2.Text = "KM";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // DoctorApplication_SessionClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1465, 872);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.Distancelbl);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.chart2);
             this.Controls.Add(this.unFollowBtn);
             this.Controls.Add(this.chart1);
@@ -234,5 +267,8 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.Button unFollowBtn;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label Distancelbl;
+        private System.Windows.Forms.Label label2;
     }
 }

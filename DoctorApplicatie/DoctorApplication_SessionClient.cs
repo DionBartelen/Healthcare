@@ -24,6 +24,7 @@ namespace DoctorApplicatie
             this.sessionID = sessionID;
             this.Text = sessionID;
             sessionStarted = false;
+            Distancelbl.Text = "0.00";
             currentData = new List<ErgometerData>();
         }
 
@@ -76,6 +77,8 @@ namespace DoctorApplicatie
 
         public void updateChart()
         {
+
+          
             this.BeginInvoke(new MethodInvoker(delegate
             {
                 chart1.Series.Clear();
@@ -84,19 +87,16 @@ namespace DoctorApplicatie
                 chart1.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
                 chart1.Series.Add(@"RPM");
                 chart1.Series[1].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-                chart1.Series.Add(@"Distance in KM");
-                chart1.Series[2].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
                 chart2.Series.Add(@"Power in Watt");
                 chart2.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
                 chart2.Series.Add(@"heart pulse");
                 chart2.Series[1].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-                //chart2.Series.Add(@"");
-                //chart2.Series[1].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+                Distancelbl.Text = Math.Round(currentData.Last().Distance/3600, 3) + "";
                 foreach (ErgometerData data in currentData)
                 {
                     chart1.Series[0].Points.AddXY(data.Time, data.Speed);
                     chart1.Series[1].Points.AddXY(data.Time, data.RPM);
-                    chart1.Series[2].Points.AddXY(data.Time, data.Distance);
+                    
                     chart2.Series[0].Points.AddXY(data.Time, data.Requested_Power);
                     chart2.Series[1].Points.AddXY(data.Time, data.Pulse);
                 }
@@ -105,6 +105,11 @@ namespace DoctorApplicatie
         }
 
         private void DoctorApplication_SessionClient_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }
