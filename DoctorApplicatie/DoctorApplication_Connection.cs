@@ -87,6 +87,7 @@ namespace DoctorApplicatie
         }
         public void ProcessAnswer(string information)
         {
+            
             dynamic jsonData = JsonConvert.DeserializeObject(information);
             if (jsonData.id == "doctor/login")
             {
@@ -120,6 +121,24 @@ namespace DoctorApplicatie
             else if (jsonData.id == "session/data/historic")
             {
                 HandleHistoricData(jsonData);
+            }
+            else if(jsonData.id == "data")
+            {
+
+                string session = (string)jsonData.sessionId;
+                int power = jsonData.data.data.Requested_Power;
+                double speed = jsonData.data.data.Speed;
+                int time = jsonData.data.data.Time;
+                int rpm = jsonData.data.data.RPM;
+                double distance = jsonData.data.data.Distance;
+                int pulse = jsonData.data.data.Pulse;
+                ErgometerData data = new ErgometerData(pulse, rpm, speed, distance, time, 0, 0, power);
+                checkData(session, data);
+
+            }
+            else if(jsonData.id == "doctor/UnfollowPatient")
+            {
+                
             }
 
         }
@@ -230,7 +249,7 @@ namespace DoctorApplicatie
                 data = new
                 {
                     power = power,
-                    patientId = patientID
+                    patientID = patientID
                 }
 
             };
@@ -324,6 +343,19 @@ namespace DoctorApplicatie
         {
             stream.Close();
             client.Close();
+        }
+
+        public void checkData(string dataSessionId, ErgometerData data)
+        { 
+            
+            foreach (DoctorApplication_SessionClient s in doctorApplication_Session.followed_sessions)
+            {
+                if(s.sessionID == dataSessionId)
+                {
+                    s.currentData.Add(data);
+                    s.updateChart();
+                }
+            }
         }
     }
 

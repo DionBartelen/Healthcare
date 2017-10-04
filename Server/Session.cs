@@ -348,7 +348,7 @@ namespace Server
         {
             try
             {
-                string session = jsonObject.session;
+                string session = (string) jsonObject.session;
                 int power = jsonObject.data.power;
                 double speed = jsonObject.data.speed;
                 int time = jsonObject.data.time;
@@ -371,9 +371,10 @@ namespace Server
                     dynamic answerToDoctor = new
                     {
                         id = "data",
+                        sessionId = session,
                         data = new
-                        {
-                            data = JsonConvert.SerializeObject(data)
+                        {     
+                            data = data
                         }
                     };
                     foreach(Session s in DoctorsToSendDataTo)
