@@ -84,10 +84,10 @@ namespace WindowsFormsApp1
             string CurrentPcName = Environment.MachineName;
             foreach (ClientInfo c in clients)
             {
-               
-                //if (c.HostName.ToLower() == CurrentPcName.ToLower())
+                System.Diagnostics.Debug.WriteLine(c.HostName.ToLower() + "   " + CurrentPcName.ToLower());
+                if (c.HostName.ToLower() == CurrentPcName.ToLower())
                 //if (c.HostName == "CAVE-Control")
-                if (c.HostName == "DESKTOP-M48E3PG")
+                //if (c.HostName == "DESKTOP-M48E3PG")
                 {
                     currentClient = c;
                     System.Diagnostics.Debug.WriteLine("current client = " + c.ID);

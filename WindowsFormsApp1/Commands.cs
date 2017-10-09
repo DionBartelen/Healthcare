@@ -11,7 +11,7 @@ namespace WindowsFormsApp1
     public class Commands
     {
         static int terainOffSet = 0;
-
+        static string folder = "";
         public static string tree1 = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\trees\fantasy\tree1.obj");
         public static string tree2 = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\trees\fantasy\tree2.obj");
         public static string tree3 = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\trees\fantasy\tree3.obj");
@@ -30,6 +30,8 @@ namespace WindowsFormsApp1
 
         public static void AdjustPaths(string neFolder)
         {
+            System.Diagnostics.Debug.WriteLine(neFolder);
+            folder = neFolder;
             tree1 = Path.Combine(neFolder, @"NetwerkEngineData\models\trees\fantasy\tree1.obj");
             tree2 = Path.Combine(neFolder, @"NetwerkEngineData\models\trees\fantasy\tree2.obj");
             tree3 = Path.Combine(neFolder, @"NetwerkEngineData\models\trees\fantasy\tree3.obj");
@@ -417,12 +419,12 @@ namespace WindowsFormsApp1
                     type = "static",
                     files = new
                     {
-                        xpos = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\textures\SkyBoxes\interstellar\interstellar_rt.png"),
-                        xneg = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\textures\SkyBoxes\interstellar\interstellar_lf.png"),
-                        ypos = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\textures\SkyBoxes\interstellar\interstellar_up.png"),
-                        yneg = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\textures\SkyBoxes\interstellar\interstellar_dn.png"),
-                        zpos = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\textures\SkyBoxes\interstellar\interstellar_bk.png"),
-                        zneg = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\textures\SkyBoxes\interstellar\interstellar_ft.png")
+                        xpos = Path.Combine(folder, @"NetwerkEngineData\textures\SkyBoxes\interstellar\interstellar_rt.png"),
+                        xneg = Path.Combine(folder, @"NetwerkEngineData\textures\SkyBoxes\interstellar\interstellar_lf.png"),
+                        ypos = Path.Combine(folder, @"NetwerkEngineData\textures\SkyBoxes\interstellar\interstellar_up.png"),
+                        yneg = Path.Combine(folder, @"NetwerkEngineData\textures\SkyBoxes\interstellar\interstellar_dn.png"),
+                        zpos = Path.Combine(folder, @"NetwerkEngineData\textures\SkyBoxes\interstellar\interstellar_bk.png"),
+                        zneg = Path.Combine(folder, @"NetwerkEngineData\textures\SkyBoxes\interstellar\interstellar_ft.png")
 
 
                     }
@@ -590,7 +592,7 @@ namespace WindowsFormsApp1
 
         public static double[] GenerateTerrainFromPicture()
         {
-            Bitmap terrainBitmap = (Bitmap)Bitmap.FromFile(Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\HeightMaps\HeightmapBW4.jpg"));
+            Bitmap terrainBitmap = (Bitmap)Bitmap.FromFile(Path.Combine(folder, @"NetwerkEngineData\HeightMaps\HeightmapBW4.jpg"));
             double[] toReturn = new double[terrainBitmap.Width * terrainBitmap.Height];
             for (int x = 0; x < terrainBitmap.Width; x++)
             {

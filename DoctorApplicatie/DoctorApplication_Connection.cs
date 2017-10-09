@@ -28,7 +28,7 @@ namespace DoctorApplicatie
         public DoctorApplication_Connection(string username, string password, DoctorAplicatie application)
         {
             this.application = application;
-            bool ipIsOk = IPAddress.TryParse("127.0.0.1", out localhost);
+            bool ipIsOk = IPAddress.TryParse("169.254.6.100", out localhost);
             if (!ipIsOk) { Console.WriteLine("ip adres kan niet geparsed worden."); Environment.Exit(1); }
             client = new TcpClient(localhost.ToString(), port);
             _stream = client.GetStream();
@@ -112,6 +112,10 @@ namespace DoctorApplicatie
                 {
                     doctorApplication_Session = new DoctorApplication_Session(this);
                     application.RunSessionForm(doctorApplication_Session);
+                }
+                else
+                {
+                    MessageBox.Show("username or password was incorrect");
                 }
             }
             else if (jsonData.id == "doctor/sessions")

@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using Healthcare_test;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
+using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
@@ -37,13 +38,13 @@ namespace WindowsFormsApp1
         {
             vrc = new VR_Connector();
             this.simulation = simulation;
-            bool ipIsOk = IPAddress.TryParse("127.0.0.1", out localhost);
+            bool ipIsOk = IPAddress.TryParse("169.254.6.100", out localhost);
             if (!ipIsOk)
             {
                 Console.WriteLine("ip adres kan niet geparsed worden."); Environment.Exit(1);
             }
 
-            client = new TcpClient(localhost.ToString(), port);
+            client = new TcpClient("169.254.6.100", port);
             _stream = client.GetStream();
             if (_SSL)
             {
@@ -59,6 +60,7 @@ namespace WindowsFormsApp1
             read = new Thread(Read);
             read.Start();
             sendlogin(clientdata.username, clientdata.password);
+            
         }
 
         public void Read()
@@ -137,8 +139,9 @@ namespace WindowsFormsApp1
             {
                 if (jsonData.data.status != "ok")
                 {
-                    close();
+                    MessageBox.Show("username or password is incorrect");
                 }
+                
             }
             if (jsonData.id == "client/message")
             {
@@ -275,7 +278,7 @@ namespace WindowsFormsApp1
             }
             if (simulation != null)
             {
-                simulation.Close();
+                simulation.s.Hide();
             }
             read.Abort();
             getData.Abort();
