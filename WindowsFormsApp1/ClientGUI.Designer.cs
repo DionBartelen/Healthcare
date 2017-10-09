@@ -46,6 +46,8 @@
             this.usernameTxt.Name = "usernameTxt";
             this.usernameTxt.Size = new System.Drawing.Size(275, 22);
             this.usernameTxt.TabIndex = 0;
+            this.usernameTxt.Text = "test1";
+           // this.usernameTxt.TextChanged += new System.EventHandler(this.usernameTxt_TextChanged);
             // 
             // passwordTxt
             // 
@@ -54,6 +56,7 @@
             this.passwordTxt.Name = "passwordTxt";
             this.passwordTxt.Size = new System.Drawing.Size(275, 22);
             this.passwordTxt.TabIndex = 1;
+            this.passwordTxt.Text = "test2";
             // 
             // usernameLbl
             // 
@@ -149,6 +152,7 @@
             this.Name = "ClientGUI";
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            //this.Load += new System.EventHandler(this.ClientGUI_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

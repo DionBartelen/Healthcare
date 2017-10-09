@@ -10,6 +10,8 @@ namespace WindowsFormsApp1
 {
     public class Commands
     {
+        public static string NetworkEngineFolder;
+
         static int terainOffSet = 0;
 
         public static string tree1 = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\models\trees\fantasy\tree1.obj");
@@ -30,6 +32,7 @@ namespace WindowsFormsApp1
 
         public static void AdjustPaths(string neFolder)
         {
+            NetworkEngineFolder = neFolder;
             tree1 = Path.Combine(neFolder, @"NetwerkEngineData\models\trees\fantasy\tree1.obj");
             tree2 = Path.Combine(neFolder, @"NetwerkEngineData\models\trees\fantasy\tree2.obj");
             tree3 = Path.Combine(neFolder, @"NetwerkEngineData\models\trees\fantasy\tree3.obj");
@@ -39,7 +42,7 @@ namespace WindowsFormsApp1
             tree7 = Path.Combine(neFolder, @"NetwerkEngineData\models\trees\fantasy\tree7.obj");
             tree10 = Path.Combine(neFolder, @"NetwerkEngineData\models\trees\fantasy\tree10.obj");
 
-            pony = Path.Combine(neFolder, @"NetwerkEngineData\models\pony.obj");
+            //pony = Path.Combine(neFolder, @"NetwerkEngineData\models\pony.obj");
             bike = Path.Combine(neFolder, @"NetwerkEngineData\models\bike\bike.fbx");
             bikeAnim = Path.Combine(neFolder, @"NetwerkEngineData\models\bike\bike_anim.fbx");
             carcartoon = Path.Combine(neFolder, @"NetwerkEngineData\models\cars\cartoon\Pony_cartoon.obj");
@@ -175,15 +178,15 @@ namespace WindowsFormsApp1
                             transform = new
                             {
                                 position = aPosition,
-                                scale = 1,
+                                scale = (double) 3,
                                 rotation = aRotation
                             },
                             model = new
                             {
-                                file = bike,
-                                cullbackfaces = true,
-                                animated = false,
-                                animation = bikeAnim,
+                                file = bikeAnim,
+                                cullbackfaces = false,
+                                animated = true,
+                                animation = "Armature|Fietsen",
                             }
                         }
                     }
@@ -248,6 +251,7 @@ namespace WindowsFormsApp1
 
         public static dynamic CreateGroundTerrainWithHeights(string tunnel)
         {
+            System.Diagnostics.Debug.WriteLine(NetworkEngineFolder + @"NetwerkEngineData\HeightMaps\HeightmapBW4.jpg PATH PATH");
 
             double[] heightsGround = new double[256 * 256];
             try
@@ -286,8 +290,8 @@ namespace WindowsFormsApp1
                 data = new
                 {
                     id = uuid,
-                    diffuse = Path.Combine(folder, @"NetwerkEngineData\textures\terrain\" + normal),
-                    normal = Path.Combine(folder, @"NetwerkEngineData\textures\terrain\" + normal),
+                    diffuse = Path.Combine(NetworkEngineFolder, @"NetwerkEngineData\textures\terrain\" + normal),
+                    normal = Path.Combine(NetworkEngineFolder, @"NetwerkEngineData\textures\terrain\" + normal),
                     minHeight = min,
                     maxHeight = max,
                     fadeDist = fade
@@ -417,12 +421,12 @@ namespace WindowsFormsApp1
                     type = "static",
                     files = new
                     {
-                        xpos = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\textures\SkyBoxes\interstellar\interstellar_rt.png"),
-                        xneg = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\textures\SkyBoxes\interstellar\interstellar_lf.png"),
-                        ypos = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\textures\SkyBoxes\interstellar\interstellar_up.png"),
-                        yneg = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\textures\SkyBoxes\interstellar\interstellar_dn.png"),
-                        zpos = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\textures\SkyBoxes\interstellar\interstellar_bk.png"),
-                        zneg = Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\textures\SkyBoxes\interstellar\interstellar_ft.png")
+                        xpos = Path.Combine(NetworkEngineFolder, @"NetwerkEngineData\textures\SkyBoxes\interstellar\interstellar_rt.png"),
+                        xneg = Path.Combine(NetworkEngineFolder, @"NetwerkEngineData\textures\SkyBoxes\interstellar\interstellar_lf.png"),
+                        ypos = Path.Combine(NetworkEngineFolder, @"NetwerkEngineData\textures\SkyBoxes\interstellar\interstellar_up.png"),
+                        yneg = Path.Combine(NetworkEngineFolder, @"NetwerkEngineData\textures\SkyBoxes\interstellar\interstellar_dn.png"),
+                        zpos = Path.Combine(NetworkEngineFolder, @"NetwerkEngineData\textures\SkyBoxes\interstellar\interstellar_bk.png"),
+                        zneg = Path.Combine(NetworkEngineFolder, @"NetwerkEngineData\textures\SkyBoxes\interstellar\interstellar_ft.png")
 
 
                     }
@@ -553,6 +557,32 @@ namespace WindowsFormsApp1
             return Commands.SendTunnel(tunnel, request);
         }
 
+        public static dynamic play(string tunnel)
+        {
+            dynamic play = new
+            {
+                id = "play",
+                data = new
+                {
+
+                }
+            };
+            return Commands.SendTunnel(tunnel, play);
+        }
+
+        public static dynamic pause(string tunnel)
+        {
+            dynamic pause = new
+            {
+                id = "pause",
+                data = new
+                {
+
+                }
+            };
+            return Commands.SendTunnel(tunnel, pause);
+        }
+
         public static dynamic UpdateSpeed(String tunnel, String uuid, int speed)
         {
             dynamic Speed = new
@@ -588,9 +618,37 @@ namespace WindowsFormsApp1
             return Commands.SendTunnel(tunnel, moveObject);
         }
 
+        public static dynamic LoadTerrain(String tunnel)
+        {
+            dynamic Load = new
+            {
+                id = "scene/load",
+                data = new
+                {
+                   filename = Path.Combine(NetworkEngineFolder, @"NetwerkEngineData\Terrains\terrain1.json")
+                }
+            };
+            return Commands.SendTunnel(tunnel, Load);
+        }
+
+        public static dynamic SaveTerrain(String tunnel)
+        {
+            dynamic Save = new
+            {
+                id = "scene/save",
+                data = new
+                {
+                    filename = Path.Combine(NetworkEngineFolder, @"NetwerkEngineData\Terrains\terrain1.json"),
+                    overwrite = false
+                }
+            };
+            return Commands.SendTunnel(tunnel, Save);
+        }
+
         public static double[] GenerateTerrainFromPicture()
         {
-            Bitmap terrainBitmap = (Bitmap)Bitmap.FromFile(Path.Combine(Directory.GetCurrentDirectory(), @"NetwerkEngineData\HeightMaps\HeightmapBW4.jpg"));
+            Bitmap terrainBitmap = (Bitmap)Bitmap.FromFile(Path.Combine(NetworkEngineFolder, @"NetwerkEngineData\HeightMaps\HeightmapBW4.jpg"));
+
             double[] toReturn = new double[terrainBitmap.Width * terrainBitmap.Height];
             for (int x = 0; x < terrainBitmap.Width; x++)
             {
@@ -604,6 +662,11 @@ namespace WindowsFormsApp1
             }
             return toReturn;
         }
+
+
+
+
+
 
     }
 }

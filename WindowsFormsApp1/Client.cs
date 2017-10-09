@@ -35,7 +35,7 @@ namespace WindowsFormsApp1
 
         public Client(ClientData clientdata, ErgometerSimulatie simulation, string comport)
         {
-            vrc = new VR_Connector();
+            //vrc = new VR_Connector();
             this.simulation = simulation;
             bool ipIsOk = IPAddress.TryParse("127.0.0.1", out localhost);
             if (!ipIsOk)
@@ -135,7 +135,11 @@ namespace WindowsFormsApp1
             }
             if (jsonData.id == "log in")
             {
-                if (jsonData.data.status != "ok")
+                if (jsonData.data.status == "ok")
+                {
+                    vrc = new VR_Connector();
+                }
+                else
                 {
                     close();
                 }

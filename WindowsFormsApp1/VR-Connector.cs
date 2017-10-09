@@ -37,6 +37,7 @@ namespace WindowsFormsApp1
                 connectToEngine();
             }
             Commands.AdjustPaths(currentClient.Folder);
+            System.Diagnostics.Debug.WriteLine(currentClient.Folder);
             session.folder = currentClient.Folder;
             SetupTerrain();
 
@@ -85,9 +86,9 @@ namespace WindowsFormsApp1
             foreach (ClientInfo c in clients)
             {
                
-                //if (c.HostName.ToLower() == CurrentPcName.ToLower())
+                if (c.HostName.ToLower() == CurrentPcName.ToLower())
                 //if (c.HostName == "CAVE-Control")
-                if (c.HostName == "DESKTOP-M48E3PG")
+                //if (c.HostName == "DESKTOP-M48E3PG")
                 {
                     currentClient = c;
                     System.Diagnostics.Debug.WriteLine("current client = " + c.ID);
@@ -95,6 +96,77 @@ namespace WindowsFormsApp1
                     CreateTunnel();
                 }
             }
+        }
+
+        private void SetupTerrainV2()
+        {
+            while (tunnel == null)
+            {
+                Thread.Sleep(10);
+            }
+            session.Send(JsonConvert.SerializeObject(Commands.pause(tunnel)));
+            Task.Delay(1000).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "GroundPlane")));
+            Task.Delay(100).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.CreateGroundTerrainWithHeights(tunnel)));
+            Task.Delay(100).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel, -105, -4, -128, 0,0,0, "terrain", true, false)));
+            Task.Delay(100).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "terrain")));
+            Task.Delay(100).Wait();
+
+             Task.Delay(100).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "Camera")));
+            Task.Delay(100).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel, 0, 0, 0, 0, 0, 0, "MainBike", false, false)));
+            Task.Delay(100).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "MainBike")));
+             Task.Delay(100).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.UpdateNodeWithParent(tunnel, session.terrain.UuidMainBike, session.terrain.UuidCamera)));
+            Task.Delay(100).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.UpdateNode(tunnel, session.terrain.UuidMainBike,0, 0, 0, 270, 0)));
+             Task.Delay(100).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel, 10, 0, 0, 0, 0.5, 0.4, "BikePanel", false, true)));
+            Task.Delay(100).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "BikePanel")));
+            Task.Delay(100).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.UpdateNodeWithParent(tunnel, session.terrain.UuidStatsPanel, session.terrain.UuidCamera)));
+            Task.Delay(500).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.UpdateNode(tunnel, session.terrain.UuidStatsPanel, 0,1, -0.75, 0, -30)));
+            Task.Delay(100).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel, 10, 0, 0, 0, 1, 0.5, "MessagePanel", false, true)));
+            Task.Delay(100).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "MessagePanel")));
+             Task.Delay(100).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.UpdateNodeWithParent(tunnel, session.terrain.UuidMessagePanel, session.terrain.UuidCamera)));
+             Task.Delay(100).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.UpdateNode(tunnel, session.terrain.UuidMessagePanel,0.9,1.5, -1.4, -30, 0)));
+            Task.Delay(100).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.addSkyBox(tunnel)));
+             Task.Delay(100).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.AddRoute(tunnel)));
+            Task.Delay(100).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.AddRoad(tunnel, session.terrain.route.Last().id)));
+            Task.Delay(100).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "Road")));
+             Task.Delay(100).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.MoveObject(tunnel, session.terrain.UuidCamera, session.terrain.road.Last().id)));
+            Task.Delay(100).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.UpdateSpeed(tunnel, session.terrain.UuidCamera, 0)));
+            session.Send(JsonConvert.SerializeObject(Commands.SwapPanel(tunnel, session.terrain.UuidStatsPanel)));
+            session.Send(JsonConvert.SerializeObject(Commands.SwapPanel(tunnel, session.terrain.UuidMessagePanel)));
+            session.Send(JsonConvert.SerializeObject(Commands.play(tunnel)));
+            session.Send(JsonConvert.SerializeObject(Commands.SaveTerrain(tunnel)));
+        }
+
+        private void SetupTerrainV3()
+        {
+            while (tunnel == null)
+            {
+                Thread.Sleep(10);
+            }
+           
+            session.Send(JsonConvert.SerializeObject(Commands.LoadTerrain(tunnel)));
         }
 
         private void SetupTerrain()
@@ -107,8 +179,8 @@ namespace WindowsFormsApp1
             Task.Delay(100).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.CreateGroundTerrainWithHeights(tunnel)));
             Task.Delay(100).Wait();
-            session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel, -105, -4, -128, 0,0,0, "terrain", true, false)));
-            Task.Delay(1000).Wait();
+            session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel, -105, -4, -128, 0, 0, 0, "terrain", true, false)));
+            Task.Delay(1500).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "terrain")));
             Task.Delay(1000).Wait();
             while (!session.terrain.textureLoaded)
@@ -124,17 +196,15 @@ namespace WindowsFormsApp1
             Task.Delay(500).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.UpdateNodeWithParent(tunnel, session.terrain.UuidMainBike, session.terrain.UuidCamera)));
             Task.Delay(500).Wait();
-            session.Send(JsonConvert.SerializeObject(Commands.UpdateNode(tunnel, session.terrain.UuidMainBike,0, 0, 0, 270, 0)));
+            session.Send(JsonConvert.SerializeObject(Commands.UpdateNode(tunnel, session.terrain.UuidMainBike, 0, 0, 0, 270, 0)));
             Task.Delay(500).Wait();
-            session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel, 10, 0, 0, 0, 0.5, 1, "BikePanel", false, true)));
+            session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel, 10, 0, 0, 0, 0.5, 0.4, "BikePanel", false, true)));
             Task.Delay(500).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.GetNodeByName(tunnel, "BikePanel")));
             Task.Delay(500).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.UpdateNodeWithParent(tunnel, session.terrain.UuidStatsPanel, session.terrain.UuidCamera)));
             Task.Delay(500).Wait();
-            session.Send(JsonConvert.SerializeObject(Commands.UpdateNode(tunnel, session.terrain.UuidStatsPanel, 0,1, -0.75, 0, -30)));
-            Task.Delay(500).Wait();
-            session.Send(JsonConvert.SerializeObject(Commands.SetClearColor(tunnel, session.terrain.UuidStatsPanel)));
+            session.Send(JsonConvert.SerializeObject(Commands.UpdateNode(tunnel, session.terrain.UuidStatsPanel, 0, 1, -0.75, 0, -30)));
             Task.Delay(500).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel, 10, 0, 0, 0, 1, 0.5, "MessagePanel", false, true)));
             Task.Delay(500).Wait();
@@ -142,7 +212,7 @@ namespace WindowsFormsApp1
             Task.Delay(500).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.UpdateNodeWithParent(tunnel, session.terrain.UuidMessagePanel, session.terrain.UuidCamera)));
             Task.Delay(500).Wait();
-            session.Send(JsonConvert.SerializeObject(Commands.UpdateNode(tunnel, session.terrain.UuidMessagePanel,0.9,1.5, -1.4, -30, 0)));
+            session.Send(JsonConvert.SerializeObject(Commands.UpdateNode(tunnel, session.terrain.UuidMessagePanel, 0.9, 1.5, -1.4, -30, 0)));
             Task.Delay(500).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.addSkyBox(tunnel)));
             Task.Delay(500).Wait();
@@ -155,6 +225,9 @@ namespace WindowsFormsApp1
             session.Send(JsonConvert.SerializeObject(Commands.MoveObject(tunnel, session.terrain.UuidCamera, session.terrain.road.Last().id)));
             Task.Delay(500).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.UpdateSpeed(tunnel, session.terrain.UuidCamera, 0)));
+            session.Send(JsonConvert.SerializeObject(Commands.SwapPanel(tunnel, session.terrain.UuidStatsPanel)));
+            session.Send(JsonConvert.SerializeObject(Commands.SwapPanel(tunnel, session.terrain.UuidMessagePanel)));
+            session.Send(JsonConvert.SerializeObject(Commands.SaveTerrain(tunnel)));
         }
 
         public void HandeMessageFromDoctor(string message)
