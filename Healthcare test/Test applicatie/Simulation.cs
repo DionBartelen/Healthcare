@@ -113,6 +113,7 @@ namespace Healthcare_test.test_applicatie
                 IsRunning = false;
                  CountThread.Suspend();
             }
+            
         }
 
         private void StartButton_Click(object sender, EventArgs e)
@@ -122,6 +123,14 @@ namespace Healthcare_test.test_applicatie
                 IsRunning = true;
                 CountThread.Resume();
             }
+        }
+
+        public void End()
+        {
+            this.BeginInvoke(new MethodInvoker(() =>
+            {
+                this.Close();
+            }));
         }
     }
 }

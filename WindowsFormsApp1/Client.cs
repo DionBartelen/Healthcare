@@ -29,14 +29,14 @@ namespace WindowsFormsApp1
         string sessionID;
         Thread read;
         Thread getData;
-        Boolean isConnected;
+        public Boolean isConnected;
         ErgometerSimulatie simulation;
         int measurement = 0;
 
 
         public Client(ClientData clientdata, ErgometerSimulatie simulation, string comport)
         {
-            vrc = new VR_Connector();
+
             this.simulation = simulation;
             bool ipIsOk = IPAddress.TryParse("169.254.6.100", out localhost);
             if (!ipIsOk)
@@ -60,7 +60,7 @@ namespace WindowsFormsApp1
             read = new Thread(Read);
             read.Start();
             sendlogin(clientdata.username, clientdata.password);
-            
+
         }
 
         public void Read()
@@ -139,9 +139,15 @@ namespace WindowsFormsApp1
             {
                 if (jsonData.data.status != "ok")
                 {
-                    MessageBox.Show("username or password is incorrect");
+                    new Thread(() => { MessageBox.Show("username or password is incorrect"); }).Start();
+                    close();
                 }
-                
+                else
+                {
+                    vrc = new VR_Connector();
+                    new Thread(() => { MessageBox.Show("you are now connected, please put on VR glasses on now"); }).Start();
+                }
+
             }
             if (jsonData.id == "client/message")
             {
@@ -181,6 +187,7 @@ namespace WindowsFormsApp1
             {
                 Thread.Sleep(100);
             }
+            Thread.Sleep(1000);
             while (isConnected)
             {
                 measurement++;
@@ -263,25 +270,56 @@ namespace WindowsFormsApp1
 
         public void close()
         {
-            if (_SSL)
+            if (simulation != null)
             {
-                _sslStream.Close();
+                simulation.Close();
             }
-            else
-            {
-                _stream.Close();
-            }
-            client.Close();
             if (ergometerCOM != null)
             {
                 ergometerCOM.Close();
             }
-            if (simulation != null)
+            try
             {
-                simulation.s.Hide();
+                read.Abort();
             }
-            read.Abort();
-            getData.Abort();
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("error: " + e.Message);
+            }
+            try
+            {
+                getData.Abort();
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("error: " + e.Message);
+            }
+            try
+            {
+                if (_SSL)
+                {
+                    _sslStream.Close();
+                }
+                else
+                {
+                    _stream.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("error: " + e.Message);
+            }
+            try
+            {
+                client.Close();
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("error: " + e.Message);
+            }
+
+
+
         }
 
         public static bool ValidateCert(object sender, X509Certificate certificate,

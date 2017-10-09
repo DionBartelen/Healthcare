@@ -46,6 +46,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.PauseButton = new System.Windows.Forms.Button();
             this.StartButton = new System.Windows.Forms.Button();
+            this.stop = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PowerTrackbar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SpeedTrackbar)).BeginInit();
             this.SuspendLayout();
@@ -221,11 +222,22 @@
             this.StartButton.UseVisualStyleBackColor = true;
             this.StartButton.Click += new System.EventHandler(this.StartButton_Click);
             // 
+            // stop
+            // 
+            this.stop.Location = new System.Drawing.Point(153, 420);
+            this.stop.Name = "stop";
+            this.stop.Size = new System.Drawing.Size(10, 10);
+            this.stop.TabIndex = 20;
+            this.stop.Text = "stop";
+            this.stop.UseVisualStyleBackColor = true;
+            this.stop.Visible = false;
+            // 
             // Simulation
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(376, 483);
+            this.Controls.Add(this.stop);
             this.Controls.Add(this.StartButton);
             this.Controls.Add(this.PauseButton);
             this.Controls.Add(this.label6);
@@ -274,5 +286,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button PauseButton;
         private System.Windows.Forms.Button StartButton;
+        private System.Windows.Forms.Button stop;
     }
 }

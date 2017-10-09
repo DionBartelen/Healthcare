@@ -36,6 +36,7 @@
             this.RefreshConnectedButton = new System.Windows.Forms.Button();
             this.RefreshHistoricUsers = new System.Windows.Forms.Button();
             this.followBtn = new System.Windows.Forms.Button();
+            this.informationBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ConectedSessionsListCombo
@@ -113,12 +114,23 @@
             this.followBtn.UseVisualStyleBackColor = true;
             this.followBtn.Click += new System.EventHandler(this.followBtn_Click);
             // 
+            // informationBtn
+            // 
+            this.informationBtn.Location = new System.Drawing.Point(13, 13);
+            this.informationBtn.Name = "informationBtn";
+            this.informationBtn.Size = new System.Drawing.Size(75, 23);
+            this.informationBtn.TabIndex = 18;
+            this.informationBtn.Text = "Info";
+            this.informationBtn.UseVisualStyleBackColor = true;
+            this.informationBtn.Click += new System.EventHandler(this.informationBtn_Click);
+            // 
             // DoctorApplication_Session
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(511, 479);
+            this.Controls.Add(this.informationBtn);
             this.Controls.Add(this.followBtn);
             this.Controls.Add(this.RefreshHistoricUsers);
             this.Controls.Add(this.RefreshConnectedButton);
@@ -145,5 +157,6 @@
         private System.Windows.Forms.Button RefreshConnectedButton;
         private System.Windows.Forms.Button RefreshHistoricUsers;
         private System.Windows.Forms.Button followBtn;
+        private System.Windows.Forms.Button informationBtn;
     }
 }
