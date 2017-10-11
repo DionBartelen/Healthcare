@@ -72,6 +72,7 @@
             this.passwordTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.passwordTxt.Location = new System.Drawing.Point(183, 141);
             this.passwordTxt.Name = "passwordTxt";
+            this.passwordTxt.PasswordChar = '*';
             this.passwordTxt.Size = new System.Drawing.Size(220, 22);
             this.passwordTxt.TabIndex = 3;
             // 

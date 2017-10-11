@@ -136,17 +136,17 @@ namespace DoctorApplicatie
             
             MessageBox.Show("Usage of the buttons: \r\n" +
                 "\r\n" + "\r\n" + 
-                "start: this button will start the session of the client, after this button is pressed, charts will be presented. \r\n" +
+                "Start: this button will start the session of the client, after this button is pressed, charts will be presented. \r\n" +
                 "\r\n" +
-                "stop: this button will stop the session of the client. \r\n" +
+                "Stop: this button will stop the session of the client. \r\n" +
                 "\r\n" +
-                "to client: this button wil send a message to the selected client,this message will be presented to a panel which is shown in the VR. \r\n" +
+                "To client: this button wil send a message to the selected client,this message will be presented to a panel which is shown in the VR. \r\n" +
                 "\r\n" +
                 "All clients: this button will send a message to all clients the server is connected to, this will also be presented to a panel which is presented in the VR \r\n" +
                 "\r\n" +
-                "setPower: this button will send a requested power to the client, this will change the requested power on the bike \r\n" +
+                "Set Power: this button will send a requested power to the client, this will change the requested power on the bike \r\n" +
                 "\r\n" +
-                "unfollow: this button will close this form, be advised the the session of the patiënt is still running"
+                "Unfollow: this button will close this form, be advised the the session of the patiënt is still running"
                 );
 
         }

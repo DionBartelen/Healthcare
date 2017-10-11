@@ -62,7 +62,7 @@
             this.setPowerBtn.Name = "setPowerBtn";
             this.setPowerBtn.Size = new System.Drawing.Size(84, 29);
             this.setPowerBtn.TabIndex = 18;
-            this.setPowerBtn.Text = "setPower";
+            this.setPowerBtn.Text = "Set Power";
             this.setPowerBtn.UseVisualStyleBackColor = false;
             this.setPowerBtn.Click += new System.EventHandler(this.setPowerBtn_Click);
             // 
@@ -87,9 +87,9 @@
             this.toAllBtn.BackColor = System.Drawing.SystemColors.Control;
             this.toAllBtn.Location = new System.Drawing.Point(255, 65);
             this.toAllBtn.Name = "toAllBtn";
-            this.toAllBtn.Size = new System.Drawing.Size(75, 26);
+            this.toAllBtn.Size = new System.Drawing.Size(108, 26);
             this.toAllBtn.TabIndex = 15;
-            this.toAllBtn.Text = "AllClients";
+            this.toAllBtn.Text = "All Clients";
             this.toAllBtn.UseVisualStyleBackColor = false;
             this.toAllBtn.Click += new System.EventHandler(this.toAllBtn_Click);
             // 
@@ -100,7 +100,7 @@
             this.sendToClientBtn.Name = "sendToClientBtn";
             this.sendToClientBtn.Size = new System.Drawing.Size(75, 26);
             this.sendToClientBtn.TabIndex = 14;
-            this.sendToClientBtn.Text = "toClient";
+            this.sendToClientBtn.Text = "To Client";
             this.sendToClientBtn.UseVisualStyleBackColor = false;
             this.sendToClientBtn.Click += new System.EventHandler(this.sendToClientBtn_Click);
             // 
@@ -128,7 +128,7 @@
             this.StopBtn.Name = "StopBtn";
             this.StopBtn.Size = new System.Drawing.Size(108, 28);
             this.StopBtn.TabIndex = 19;
-            this.StopBtn.Text = "stop";
+            this.StopBtn.Text = "Stop";
             this.StopBtn.UseVisualStyleBackColor = false;
             this.StopBtn.Click += new System.EventHandler(this.StopBtn_Click);
             // 
@@ -139,7 +139,7 @@
             this.startBtn.Name = "startBtn";
             this.startBtn.Size = new System.Drawing.Size(75, 28);
             this.startBtn.TabIndex = 21;
-            this.startBtn.Text = "start";
+            this.startBtn.Text = "Start";
             this.startBtn.UseVisualStyleBackColor = false;
             this.startBtn.Click += new System.EventHandler(this.startBtn_Click);
             // 
@@ -176,7 +176,7 @@
             this.unFollowBtn.Name = "unFollowBtn";
             this.unFollowBtn.Size = new System.Drawing.Size(89, 28);
             this.unFollowBtn.TabIndex = 23;
-            this.unFollowBtn.Text = "unFollow";
+            this.unFollowBtn.Text = "Unfollow";
             this.unFollowBtn.UseVisualStyleBackColor = true;
             this.unFollowBtn.Click += new System.EventHandler(this.unFollowBtn_Click);
             // 

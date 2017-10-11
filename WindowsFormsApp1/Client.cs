@@ -127,12 +127,8 @@ namespace WindowsFormsApp1
                 System.Diagnostics.Debug.WriteLine("sessionID: " + sessionID);
                 getData = new Thread(GetData);
                 getData.Start();
-                Thread.Sleep(1000);
-                if (simulation != null)
-                {
-                    simulation.s.startSession();
-                }
-
+                Thread.Sleep(2000);
+                simulation?.s.startSession();
             }
             if (jsonData.id == "session/end")
             {
@@ -142,7 +138,7 @@ namespace WindowsFormsApp1
             }
             if (jsonData.id == "log in")
             {
-                if (jsonData.data.status == "ok")
+                if (jsonData.data.status != "ok")
                 {
                     new Thread(() => { MessageBox.Show("Username or password is incorrect"); }).Start();
                     close();

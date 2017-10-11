@@ -113,6 +113,10 @@ namespace DoctorApplicatie
                     doctorApplication_Session = new DoctorApplication_Session(this);
                     application.RunSessionForm(doctorApplication_Session);
                 }
+                else
+                {
+                    new Thread(() => { MessageBox.Show("Wrong username and password"); }).Start();
+                }
             }
             else if (jsonData.id == "doctor/sessions")
             {
