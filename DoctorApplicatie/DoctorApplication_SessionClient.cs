@@ -34,6 +34,8 @@ namespace DoctorApplicatie
             {
                 connection.startTraining(sessionID);
                 sessionStarted = true;
+                startBtn.Enabled = false;
+                StopBtn.Enabled = true;
 
             }
         }
@@ -65,7 +67,20 @@ namespace DoctorApplicatie
         {
             if (setPowerTxt.Text != null && sessionID != null)
             {
-                connection.setPower(setPowerTxt.Text, sessionID);
+                bool isNumber = int.TryParse(setPowerTxt.Text, out int Power);
+                if (isNumber)
+                {
+                    if (Power >= 25 && Power <= 400)
+                        connection.setPower(setPowerTxt.Text, sessionID);
+                    else
+                    {
+                        MessageBox.Show("the input was either too high or too low, please insert a number between 25 and 400");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("the input has not been reconised as a number, please put in a number");
+                }
             }
         }
 
@@ -83,14 +98,16 @@ namespace DoctorApplicatie
             {
                 chart1.Series.Clear();
                 chart2.Series.Clear();
+                chart1.ChartAreas[0].AxisX.Minimum = 0;
+                chart2.ChartAreas[0].AxisX.Minimum = 0;
                 chart1.Series.Add(@"Speed in KM/h");
-                chart1.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+                chart1.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
                 chart1.Series.Add(@"RPM");
-                chart1.Series[1].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+                chart1.Series[1].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
                 chart2.Series.Add(@"Power in Watt");
-                chart2.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+                chart2.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
                 chart2.Series.Add(@"heart pulse");
-                chart2.Series[1].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+                chart2.Series[1].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
                 Distancelbl.Text = Math.Round(currentData.Last().Distance/3600, 3) + "";
                 foreach (ErgometerData data in currentData)
                 {
@@ -111,6 +128,26 @@ namespace DoctorApplicatie
 
         private void label2_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void InformationBtn_Click(object sender, EventArgs e)
+        {
+            
+            MessageBox.Show("Usage of the buttons: \r\n" +
+                "\r\n" + "\r\n" + 
+                "start: this button will start the session of the client, after this button is pressed, charts will be presented. \r\n" +
+                "\r\n" +
+                "stop: this button will stop the session of the client. \r\n" +
+                "\r\n" +
+                "to client: this button wil send a message to the selected client,this message will be presented to a panel which is shown in the VR. \r\n" +
+                "\r\n" +
+                "All clients: this button will send a message to all clients the server is connected to, this will also be presented to a panel which is presented in the VR \r\n" +
+                "\r\n" +
+                "setPower: this button will send a requested power to the client, this will change the requested power on the bike \r\n" +
+                "\r\n" +
+                "unfollow: this button will close this form, be advised the the session of the patiënt is still running"
+                );
 
         }
     }

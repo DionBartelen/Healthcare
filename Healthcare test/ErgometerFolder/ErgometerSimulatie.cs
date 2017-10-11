@@ -19,8 +19,20 @@ namespace Healthcare_test
 
         public override void Close()
         {
-            s.CountThread.Abort();
-            s.Close();
+            try
+            {
+                s.CountThread.Abort();
+            } catch
+            {
+            }
+            try
+            {
+                s.End();
+            } catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.StackTrace);
+            }
+            System.Diagnostics.Debug.WriteLine("Kut zooi");
         }
 
         public override void ErgometerCommandMode()
