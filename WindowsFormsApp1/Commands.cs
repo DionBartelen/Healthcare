@@ -178,19 +178,19 @@ namespace WindowsFormsApp1
                             transform = new
                             {
                                 position = aPosition,
-                                scale = (double) 3,
+                                scale = (double) 1,
                                 rotation = aRotation
                             },
                             model = new
                             {
-                                file = bikeAnim,
+                                file = bike,
                                 cullbackfaces = false,
-                                animated = true,
-                                animation = "Armature|Fietsen",
+                                animated = false,
+                                animation = "",
                             }
                         }
                     }
-                };
+                };//Armature|Fietsen
                 return Commands.SendTunnel(tunnel, request);
             }
 
@@ -251,8 +251,6 @@ namespace WindowsFormsApp1
 
         public static dynamic CreateGroundTerrainWithHeights(string tunnel)
         {
-            System.Diagnostics.Debug.WriteLine(NetworkEngineFolder + @"NetwerkEngineData\HeightMaps\HeightmapBW4.jpg PATH PATH");
-
             double[] heightsGround = new double[256 * 256];
             try
             {

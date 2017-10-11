@@ -16,7 +16,8 @@ namespace WindowsFormsApp1
 {
     public class Client
     {
-        VR_Connector vrc;
+        //VR_Connector vrc;
+        private VRConnector2 vrc;
         private readonly bool _SSL = false;
         private readonly SslStream _sslStream;
         private readonly NetworkStream _stream;
@@ -137,7 +138,8 @@ namespace WindowsFormsApp1
             {
                 if (jsonData.data.status == "ok")
                 {
-                    vrc = new VR_Connector();
+                    //vrc = new VR_Connector();
+                    vrc = new VRConnector2();
                 }
                 else
                 {

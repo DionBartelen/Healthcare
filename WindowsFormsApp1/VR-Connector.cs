@@ -25,7 +25,7 @@ namespace WindowsFormsApp1
             TunnelIsMade = false;
             session = new Session("145.48.6.10", 6666, this);
             Reading = new Thread(session.Read);
-            Reading.IsBackground = true;
+           Reading.IsBackground = true;
             Reading.Start();
             GetClientList();
             while (clients == null)

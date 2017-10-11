@@ -14,11 +14,17 @@ namespace WindowsFormsApp1
         public List<Road> road;
         public List<Route> route;
         public Boolean textureLoaded = false;
+        public Boolean pauze = false;
+        public Boolean terainAdded = false;
         public String UuidHead;
         public String UuidMainBike;
         public String UuidCamera;
         public String UuidStatsPanel;
         public String UuidMessagePanel;
+        public String UuidGroundPlane;
+        public String UuidTerrainNode;
+        public String UuidRoute;
+        public String UuidRoadNode;
 
         public Terrain(int[] size, int[] heights)
         {

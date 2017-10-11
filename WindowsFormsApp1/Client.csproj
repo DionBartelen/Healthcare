@@ -64,8 +64,10 @@
     <Compile Include="Session.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Session2.cs" />
     <Compile Include="Terrain.cs" />
     <Compile Include="VR-Connector.cs" />
+    <Compile Include="VRConnector2.cs" />
     <Compile Include="VRgui.cs">
       <SubType>Form</SubType>
     </Compile>
