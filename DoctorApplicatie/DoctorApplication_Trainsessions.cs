@@ -44,5 +44,16 @@ namespace DoctorApplicatie
                 dataGUI.Show();
             }));
         }
+
+        private void infoBtn_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("usage buttons and form:" + "\r\n" + "\r\n" +
+                "this form is used for getting data from past sessions with one certain patiënt \r\n" +
+                "\r\n" +
+                "the combo box is used to select one training session from before. \r\n" +
+                "\r\n" +
+                "the button will open a new form, in this form a few charts will be shown" +
+                "this form will only show these charts, there are no additional functions, so there will be no other functions screen \r\n");
+        }
     }
 }

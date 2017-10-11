@@ -34,6 +34,8 @@ namespace DoctorApplicatie
             {
                 connection.startTraining(sessionID);
                 sessionStarted = true;
+                startBtn.Enabled = false;
+                StopBtn.Enabled = true;
 
             }
         }
@@ -96,6 +98,8 @@ namespace DoctorApplicatie
             {
                 chart1.Series.Clear();
                 chart2.Series.Clear();
+                chart1.ChartAreas[0].AxisX.Minimum = 0;
+                chart2.ChartAreas[0].AxisX.Minimum = 0;
                 chart1.Series.Add(@"Speed in KM/h");
                 chart1.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
                 chart1.Series.Add(@"RPM");

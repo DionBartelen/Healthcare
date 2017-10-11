@@ -30,6 +30,7 @@
         {
             this.ShowComboBox = new System.Windows.Forms.ComboBox();
             this.ShowTrainSessionButton = new System.Windows.Forms.Button();
+            this.infoBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ShowComboBox
@@ -50,11 +51,22 @@
             this.ShowTrainSessionButton.UseVisualStyleBackColor = true;
             this.ShowTrainSessionButton.Click += new System.EventHandler(this.ShowTrainSessionButton_Click);
             // 
+            // infoBtn
+            // 
+            this.infoBtn.Location = new System.Drawing.Point(208, 0);
+            this.infoBtn.Name = "infoBtn";
+            this.infoBtn.Size = new System.Drawing.Size(75, 23);
+            this.infoBtn.TabIndex = 2;
+            this.infoBtn.Text = "info";
+            this.infoBtn.UseVisualStyleBackColor = true;
+            this.infoBtn.Click += new System.EventHandler(this.infoBtn_Click);
+            // 
             // DoctorApplication_Trainsessions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 257);
+            this.Controls.Add(this.infoBtn);
             this.Controls.Add(this.ShowTrainSessionButton);
             this.Controls.Add(this.ShowComboBox);
             this.Name = "DoctorApplication_Trainsessions";
@@ -67,5 +79,6 @@
 
         private System.Windows.Forms.ComboBox ShowComboBox;
         private System.Windows.Forms.Button ShowTrainSessionButton;
+        private System.Windows.Forms.Button infoBtn;
     }
 }

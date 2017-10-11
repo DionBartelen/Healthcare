@@ -21,7 +21,7 @@ namespace Server
             SetConsoleCtrlHandler(_handler, true);
             sessions = new List<Session>();
             IPAddress localhost;
-            if (IPAddress.TryParse("169.254.6.100", out localhost))
+            if (IPAddress.TryParse("127.0.0.1", out localhost))
             {
                 TcpListener listener = new TcpListener(localhost, port);
                 listener.Start();

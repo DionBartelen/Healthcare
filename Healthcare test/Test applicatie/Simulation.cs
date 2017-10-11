@@ -36,8 +36,6 @@ namespace Healthcare_test.test_applicatie
             RPM = 0;
             Actual_Energy = 0;
             Requested_Energy = 0;
-            CountThread = new Thread(new ThreadStart(Count));
-            CountThread.Start();
         }
 
         private void PowerTrackbar_Scroll(object sender, EventArgs e)
@@ -131,6 +129,13 @@ namespace Healthcare_test.test_applicatie
             {
                 this.Close();
             }));
+        }
+
+        public void startSession()
+        {
+            CountThread = new Thread(new ThreadStart(Count));
+            CountThread.Start();
+
         }
     }
 }

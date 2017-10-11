@@ -123,6 +123,7 @@
             // StopBtn
             // 
             this.StopBtn.BackColor = System.Drawing.SystemColors.Control;
+            this.StopBtn.Enabled = false;
             this.StopBtn.Location = new System.Drawing.Point(255, 13);
             this.StopBtn.Name = "StopBtn";
             this.StopBtn.Size = new System.Drawing.Size(108, 28);

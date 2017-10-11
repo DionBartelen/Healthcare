@@ -38,13 +38,13 @@ namespace WindowsFormsApp1
         {
 
             this.simulation = simulation;
-            bool ipIsOk = IPAddress.TryParse("169.254.6.100", out localhost);
+            bool ipIsOk = IPAddress.TryParse("127.0.0.1", out localhost);
             if (!ipIsOk)
             {
                 Console.WriteLine("ip adres kan niet geparsed worden."); Environment.Exit(1);
             }
 
-            client = new TcpClient("169.254.6.100", port);
+            client = new TcpClient("127.0.0.1", port);
             _stream = client.GetStream();
             if (_SSL)
             {
@@ -128,6 +128,12 @@ namespace WindowsFormsApp1
                 System.Diagnostics.Debug.WriteLine("sessionID: " + sessionID);
                 getData = new Thread(GetData);
                 getData.Start();
+                Thread.Sleep(1000);
+                if (simulation != null)
+                {
+                    simulation.s.startSession();
+                }
+
             }
             if (jsonData.id == "session/end")
             {
@@ -139,13 +145,13 @@ namespace WindowsFormsApp1
             {
                 if (jsonData.data.status != "ok")
                 {
-                    new Thread(() => { MessageBox.Show("username or password is incorrect"); }).Start();
+                    new Thread(() => { MessageBox.Show("Username or password is incorrect"); }).Start();
                     close();
                 }
                 else
                 {
                     vrc = new VR_Connector();
-                    new Thread(() => { MessageBox.Show("you are now connected, please put on VR glasses on now"); }).Start();
+                    new Thread(() => { MessageBox.Show("You are now connected, please put on VR glasses on now"); }).Start();
                 }
 
             }
@@ -187,7 +193,6 @@ namespace WindowsFormsApp1
             {
                 Thread.Sleep(100);
             }
-            Thread.Sleep(1000);
             while (isConnected)
             {
                 measurement++;
