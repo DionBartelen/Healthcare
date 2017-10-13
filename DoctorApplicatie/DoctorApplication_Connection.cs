@@ -324,6 +324,9 @@ namespace DoctorApplicatie
             foreach (dynamic tSession in jsonObject.data)
             {
                 TrainSession trainsession = new TrainSession();
+                trainsession.BeginTime = (string)tSession.BeginTime;
+                trainsession.EndTime = (string) tSession.EndTime;
+                System.Diagnostics.Debug.WriteLine((string)tSession.BeginTime + "   " + (string)tSession.EndTime);
                 foreach (dynamic EData in tSession.data)
                 {
                     trainsession.AddData(new ErgometerData((int)EData.Pulse, (int)EData.RPM, (double)EData.Speed, (double)EData.Distance, (int)EData.Time, (int)EData.Energy, (int)EData.Actual_Power, (int)EData.Requested_Power));

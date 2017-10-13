@@ -38,12 +38,12 @@
             this.ShowComboBox.FormattingEnabled = true;
             this.ShowComboBox.Location = new System.Drawing.Point(28, 39);
             this.ShowComboBox.Name = "ShowComboBox";
-            this.ShowComboBox.Size = new System.Drawing.Size(121, 24);
+            this.ShowComboBox.Size = new System.Drawing.Size(244, 24);
             this.ShowComboBox.TabIndex = 0;
             // 
             // ShowTrainSessionButton
             // 
-            this.ShowTrainSessionButton.Location = new System.Drawing.Point(197, 39);
+            this.ShowTrainSessionButton.Location = new System.Drawing.Point(278, 39);
             this.ShowTrainSessionButton.Name = "ShowTrainSessionButton";
             this.ShowTrainSessionButton.Size = new System.Drawing.Size(75, 23);
             this.ShowTrainSessionButton.TabIndex = 1;
@@ -53,7 +53,7 @@
             // 
             // infoBtn
             // 
-            this.infoBtn.Location = new System.Drawing.Point(208, 0);
+            this.infoBtn.Location = new System.Drawing.Point(278, 10);
             this.infoBtn.Name = "infoBtn";
             this.infoBtn.Size = new System.Drawing.Size(75, 23);
             this.infoBtn.TabIndex = 2;
@@ -65,7 +65,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 257);
+            this.ClientSize = new System.Drawing.Size(365, 140);
             this.Controls.Add(this.infoBtn);
             this.Controls.Add(this.ShowTrainSessionButton);
             this.Controls.Add(this.ShowComboBox);

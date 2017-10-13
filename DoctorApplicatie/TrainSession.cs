@@ -9,6 +9,8 @@ namespace DoctorApplicatie
     [Serializable]
     public class TrainSession
     {
+        public string BeginTime { get; set; }
+        public string EndTime { get; set; }
         public List<ErgometerData> data;
 
         public TrainSession()

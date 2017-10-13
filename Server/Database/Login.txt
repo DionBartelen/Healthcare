@@ -1,3 +1,0 @@
-{
-	"combinations":[{"username":"Jan Jansen","password":"JJ"}, {"username":"Jantien Jansen","password":"JJ"}]
-}

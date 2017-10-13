@@ -1,8 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace Server
 {
@@ -17,8 +19,9 @@ namespace Server
         {
             try
             {
-                string path = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, @"Healthcare\Server\Database\Database.txt");
+                string path = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, @"Healthcare\Server\Database\Database.db");
                 string AllText = File.ReadAllText(path);
+                AllText = Base64Decode(AllText);
                 List<string> lines = AllText.Split('&').ToList();
                 Dictionary<string, List<TrainSession>> dictionary = new Dictionary<string, List<TrainSession>>();
                 foreach (string s in lines)
@@ -37,6 +40,8 @@ namespace Server
                             }
                             TrainSession trainingsession = new TrainSession();
                             trainingsession.SetData(ergoData);
+                            trainingsession.BeginTime = (string)training.BeginTime;
+                            trainingsession.EndTime = (string)training.EndTime;
                             sessions.Add(trainingsession);
                         }
                         dictionary.Add(username, sessions);
@@ -54,7 +59,9 @@ namespace Server
         {
             if (!ActiveTrainSessions.ContainsKey(username))
             {
-                ActiveTrainSessions.Add(username, new TrainSession());
+                TrainSession session = new TrainSession();
+                session.BeginTime = DateTime.Now.ToString(CultureInfo.InvariantCulture);
+                ActiveTrainSessions.Add(username, session);
                 return true;
             }
             return false;
@@ -73,10 +80,11 @@ namespace Server
         public static void CloseActiveSession(string username)
         {
             TrainSession sessionToClose = ActiveTrainSessions[username];
+            sessionToClose.EndTime = DateTime.Now.ToString(CultureInfo.InvariantCulture);
             ActiveTrainSessions.Remove(username);
             if (TrainSessions.ContainsKey(username))
             {
-                ((List<TrainSession>)TrainSessions[username]).Add(sessionToClose);
+                (TrainSessions[username]).Add(sessionToClose);
             }
             else
             {
@@ -90,7 +98,7 @@ namespace Server
         {
             try
             {
-                string path = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, @"Healthcare\Server\Database\Database.txt");
+                string path = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, @"Healthcare\Server\Database\Database.db");
                 string toWrite = "";
                 foreach (KeyValuePair<string, List<TrainSession>> entry in TrainSessions)
                 {
@@ -105,6 +113,8 @@ namespace Server
                     };
                     toWrite += JsonConvert.SerializeObject(keyValuePair) + "&";
                 }
+                toWrite = Base64Encode(toWrite);
+                System.Diagnostics.Debug.WriteLine(toWrite);
                 File.WriteAllText(path, toWrite);
             }
             catch (Exception e)
@@ -138,16 +148,18 @@ namespace Server
 
         public static void ReadSavedCredentials()
         {
-            string path = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, @"Healthcare\Server\Database\Login.txt");
+            string path = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, @"Healthcare\Server\Database\Login.db");
             string AllText = File.ReadAllText(path);
+            AllText = Base64Decode(AllText);
             dynamic jsonObject = JsonConvert.DeserializeObject(AllText);
             foreach (dynamic combination in jsonObject.combinations)
             {
                 CredentialsClient.Add((string)combination.username, (string)combination.password);
             }
 
-            string path2 = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, @"Healthcare\Server\Database\LoginDoctor.txt");
+            string path2 = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, @"Healthcare\Server\Database\LoginDoctor.db");
             string AllText2 = File.ReadAllText(path2);
+            AllText2 = Base64Decode(AllText2);
             dynamic jsonObject2 = JsonConvert.DeserializeObject(AllText2);
             foreach (dynamic combination2 in jsonObject2.combinations)
             {
@@ -176,6 +188,18 @@ namespace Server
             public static Boolean IsDoctor(string username)
         {
             return CredentialsDoctor.ContainsKey(username);
+        }
+
+        public static string Base64Encode(string plainText)
+        {
+            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+            return System.Convert.ToBase64String(plainTextBytes);
+        }
+
+        public static string Base64Decode(string base64EncodedData)
+        {
+            var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
+            return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
         }
     }
 }

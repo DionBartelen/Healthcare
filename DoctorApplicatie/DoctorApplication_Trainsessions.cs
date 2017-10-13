@@ -26,15 +26,29 @@ namespace DoctorApplicatie
             ShowComboBox.Items.Clear();
             foreach(TrainSession s in AllSessions)
             {
-                ShowComboBox.Items.Add(s);
+                if (s.BeginTime != null)
+                {
+                    ShowComboBox.Items.Add(s.BeginTime);
+                }
             }
         }
 
         private void ShowTrainSessionButton_Click(object sender, EventArgs e)
         {
             dataGUI dataGui = new dataGUI();
-            dataGui.SetTrainSession((TrainSession)ShowComboBox.SelectedItem);
-            RunDataGUI(dataGui);
+            TrainSession session = null;
+            foreach (TrainSession s in AllSessions)
+            {
+                if (s.BeginTime == ShowComboBox.SelectedItem)
+                {
+                    session = s;
+                }
+            }
+            if (session != null)
+            {
+                dataGui.SetTrainSession(session);
+                RunDataGUI(dataGui);
+            }
         }
 
         public void RunDataGUI(dataGUI dataGUI)
