@@ -42,7 +42,7 @@ namespace WindowsFormsApp1
             tree7 = Path.Combine(neFolder, @"NetwerkEngineData\models\trees\fantasy\tree7.obj");
             tree10 = Path.Combine(neFolder, @"NetwerkEngineData\models\trees\fantasy\tree10.obj");
 
-            //pony = Path.Combine(neFolder, @"NetwerkEngineData\models\pony.obj");
+            pony = Path.Combine(neFolder, @"NetwerkEngineData\models\pony\pony.fbx");
             bike = Path.Combine(neFolder, @"NetwerkEngineData\models\bike\bike.fbx");
             bikeAnim = Path.Combine(neFolder, @"NetwerkEngineData\models\bike\bike_anim.fbx");
             carcartoon = Path.Combine(neFolder, @"NetwerkEngineData\models\cars\cartoon\Pony_cartoon.obj");
@@ -178,12 +178,12 @@ namespace WindowsFormsApp1
                             transform = new
                             {
                                 position = aPosition,
-                                scale = (double) 1,
+                                scale = (double) 0.5,
                                 rotation = aRotation
                             },
                             model = new
                             {
-                                file = bike,
+                                file = pony,
                                 cullbackfaces = false,
                                 animated = false,
                                 animation = "",
@@ -365,7 +365,7 @@ namespace WindowsFormsApp1
             return Commands.SendTunnel(tunnel, TextOnPanel);
         }
 
-        public static dynamic UpdateNode(string tunnel, string uuid, double transformX, double transformY, double transformZ, int RotateY, int RotateX)
+        public static dynamic UpdateNode(string tunnel, string uuid, double transformX, double transformY, double transformZ, int RotateY, int RotateX, double scale)
         {
             dynamic Update = new
             {
@@ -376,7 +376,7 @@ namespace WindowsFormsApp1
                     transform = new
                     {
                         position = new double[3] { transformX, transformY, transformZ },
-                        scale = 1,
+                        scale = scale,
                         rotation = new double[3] { RotateX, RotateY, 0 }
 
                     }
@@ -461,7 +461,7 @@ namespace WindowsFormsApp1
 
 
             int[] dir1 = new int[3] { 5, terainOffSet, -5 };
-            int[] dir2 = new int[3] { 5, terainOffSet, 5 };
+            int[] dir2 = new int[3] { 30, terainOffSet, 30 };
             int[] dir3 = new int[3] { 5, terainOffSet, 5 };
             int[] dir4 = new int[3] { -5, terainOffSet, -5 };
             int[] dir5 = new int[3] { -5, terainOffSet, -5 };
@@ -645,8 +645,7 @@ namespace WindowsFormsApp1
 
         public static double[] GenerateTerrainFromPicture()
         {
-            Bitmap terrainBitmap = (Bitmap)Bitmap.FromFile(Path.Combine(NetworkEngineFolder, @"NetwerkEngineData\HeightMaps\HeightmapBW4.jpg"));
-
+            Bitmap terrainBitmap = (Bitmap)Bitmap.FromFile(Path.Combine(Directory.GetCurrentDirectory(), @"HeightMaps\HeightmapBW4.jpg"));
             double[] toReturn = new double[terrainBitmap.Width * terrainBitmap.Height];
             for (int x = 0; x < terrainBitmap.Width; x++)
             {

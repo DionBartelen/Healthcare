@@ -217,7 +217,7 @@ namespace WindowsFormsApp1
                     else if (jsonData.data.data.data[0].name == "Road")
                     {
 
-                        Send(JsonConvert.SerializeObject(Commands.UpdateNode(vrc.tunnel, uuid, 0,-3.99,0,0,0)));
+                        Send(JsonConvert.SerializeObject(Commands.UpdateNode(vrc.tunnel, uuid, 0,-3.99,0,0,0,1)));
 
                     }
                     else if (jsonData.data.data.data[0].name == "MainBike")
