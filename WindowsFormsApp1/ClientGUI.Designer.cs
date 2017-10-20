@@ -150,7 +150,7 @@
             this.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "ClientGUI";
-            this.Text = "Form1";
+            this.Text = "Remote Healthcare Login";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -105,7 +105,7 @@
             this.Controls.Add(this.usernameLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "DoctorAplicatie";
-            this.Text = "doctor aplicatie ";
+            this.Text = "Remote Healthcare Login";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.ResumeLayout(false);
             this.PerformLayout();
