@@ -124,7 +124,7 @@ namespace WindowsFormsApp1
              Task.Delay(100).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.UpdateNodeWithParent(tunnel, session.terrain.UuidMainBike, session.terrain.UuidCamera)));
             Task.Delay(100).Wait();
-            session.Send(JsonConvert.SerializeObject(Commands.UpdateNode(tunnel, session.terrain.UuidMainBike,0, 0, 0, 270, 0)));
+            session.Send(JsonConvert.SerializeObject(Commands.UpdateNode(tunnel, session.terrain.UuidMainBike,0, 0, 0, 270, 0,1)));
              Task.Delay(100).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel, 10, 0, 0, 0, 0.5, 0.4, "BikePanel", false, true)));
             Task.Delay(100).Wait();
@@ -132,7 +132,7 @@ namespace WindowsFormsApp1
             Task.Delay(100).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.UpdateNodeWithParent(tunnel, session.terrain.UuidStatsPanel, session.terrain.UuidCamera)));
             Task.Delay(500).Wait();
-            session.Send(JsonConvert.SerializeObject(Commands.UpdateNode(tunnel, session.terrain.UuidStatsPanel, 0,1, -0.75, 0, -30)));
+            session.Send(JsonConvert.SerializeObject(Commands.UpdateNode(tunnel, session.terrain.UuidStatsPanel, 0,1, -0.75, 0, -30,1)));
             Task.Delay(100).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel, 10, 0, 0, 0, 1, 0.5, "MessagePanel", false, true)));
             Task.Delay(100).Wait();
@@ -140,7 +140,7 @@ namespace WindowsFormsApp1
              Task.Delay(100).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.UpdateNodeWithParent(tunnel, session.terrain.UuidMessagePanel, session.terrain.UuidCamera)));
              Task.Delay(100).Wait();
-            session.Send(JsonConvert.SerializeObject(Commands.UpdateNode(tunnel, session.terrain.UuidMessagePanel,0.9,1.5, -1.4, -30, 0)));
+            session.Send(JsonConvert.SerializeObject(Commands.UpdateNode(tunnel, session.terrain.UuidMessagePanel,0.9,1.5, -1.4, -30, 0,1)));
             Task.Delay(100).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.addSkyBox(tunnel)));
              Task.Delay(100).Wait();
@@ -196,7 +196,7 @@ namespace WindowsFormsApp1
             Task.Delay(500).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.UpdateNodeWithParent(tunnel, session.terrain.UuidMainBike, session.terrain.UuidCamera)));
             Task.Delay(500).Wait();
-            session.Send(JsonConvert.SerializeObject(Commands.UpdateNode(tunnel, session.terrain.UuidMainBike, 0, 0, 0, 270, 0)));
+            session.Send(JsonConvert.SerializeObject(Commands.UpdateNode(tunnel, session.terrain.UuidMainBike, 0, 0, 0, 270, 0,1)));
             Task.Delay(500).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel, 10, 0, 0, 0, 0.5, 0.4, "BikePanel", false, true)));
             Task.Delay(500).Wait();
@@ -204,7 +204,7 @@ namespace WindowsFormsApp1
             Task.Delay(500).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.UpdateNodeWithParent(tunnel, session.terrain.UuidStatsPanel, session.terrain.UuidCamera)));
             Task.Delay(500).Wait();
-            session.Send(JsonConvert.SerializeObject(Commands.UpdateNode(tunnel, session.terrain.UuidStatsPanel, 0, 1, -0.75, 0, -30)));
+            session.Send(JsonConvert.SerializeObject(Commands.UpdateNode(tunnel, session.terrain.UuidStatsPanel, 0, 1, -0.75, 0, -30,1)));
             Task.Delay(500).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.AddObject(tunnel, 10, 0, 0, 0, 1, 0.5, "MessagePanel", false, true)));
             Task.Delay(500).Wait();
@@ -212,7 +212,7 @@ namespace WindowsFormsApp1
             Task.Delay(500).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.UpdateNodeWithParent(tunnel, session.terrain.UuidMessagePanel, session.terrain.UuidCamera)));
             Task.Delay(500).Wait();
-            session.Send(JsonConvert.SerializeObject(Commands.UpdateNode(tunnel, session.terrain.UuidMessagePanel, 0.9, 1.5, -1.4, -30, 0)));
+            session.Send(JsonConvert.SerializeObject(Commands.UpdateNode(tunnel, session.terrain.UuidMessagePanel, 0.9, 1.5, -1.4, -30, 0,1)));
             Task.Delay(500).Wait();
             session.Send(JsonConvert.SerializeObject(Commands.addSkyBox(tunnel)));
             Task.Delay(500).Wait();

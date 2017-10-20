@@ -54,6 +54,7 @@
             this.usernameTxt.Name = "usernameTxt";
             this.usernameTxt.Size = new System.Drawing.Size(220, 22);
             this.usernameTxt.TabIndex = 1;
+            this.usernameTxt.Text = "Dokter van de Steen";
             // 
             // passwordLbl
             // 
@@ -75,6 +76,7 @@
             this.passwordTxt.PasswordChar = '*';
             this.passwordTxt.Size = new System.Drawing.Size(220, 22);
             this.passwordTxt.TabIndex = 3;
+            this.passwordTxt.Text = "Doktervds123";
             // 
             // sign_in_btn
             // 
@@ -103,7 +105,7 @@
             this.Controls.Add(this.usernameLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "DoctorAplicatie";
-            this.Text = "doctor aplicatie ";
+            this.Text = "Remote Healthcare Login";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.ResumeLayout(false);
             this.PerformLayout();
