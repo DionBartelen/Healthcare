@@ -160,6 +160,10 @@ namespace DoctorApplicatie
             else if(jsonData.id == "doctor/UnfollowPatient")
             {
                 
+            } else if (jsonData.id == "exit")
+            {
+                string user = (string)jsonData.sessionId;
+                MessageBox.Show("Er is een fout opgetreden bij patient: " + user);
             }
 
         }

@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -200,6 +201,19 @@ namespace Server
         {
             var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
             return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+        }
+
+        public static void ErrorWithUser(string user)
+        {
+            if (ActiveTrainSessions.ContainsKey(user))
+            {
+                System.Diagnostics.Debug.WriteLine("Verwijderen");
+                ActiveTrainSessions.Remove(user);
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("niet gevonden");
+            }
         }
     }
 }
