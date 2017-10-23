@@ -259,6 +259,8 @@
             this.ForeColor = System.Drawing.Color.DarkBlue;
             this.Name = "Simulation";
             this.Text = "Simulation";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Simulation_FormClosing);
+            this.Load += new System.EventHandler(this.Simulation_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PowerTrackbar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SpeedTrackbar)).EndInit();
             this.ResumeLayout(false);

@@ -12,10 +12,11 @@ using Healthcare_test;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
+using Healthcare_test.ErgometerFolder;
 
 namespace WindowsFormsApp1
 {
-    public class Client
+    public class Client : CloseNotify
     {
         //VR_Connector vrc;
         private VRConnector2 vrc;
@@ -64,6 +65,7 @@ namespace WindowsFormsApp1
 
         public void Read()
         {
+            simulation.SetClientToNotify(this);
             while (isConnected)
             {
                 try
@@ -193,6 +195,11 @@ namespace WindowsFormsApp1
                 measurement++;
                 if (simulation == null && ergometerCOM != null)
                 {
+                    if (!ergometerCOM.IsConnected())
+                    {
+                        Notify();
+                        return;
+                    }
                     System.Diagnostics.Debug.WriteLine(isConnected);
                     Healthcare_test.ErgometerData ergometerData = ergometerCOM.GetData();
                     vrc.UpdateBikePanelInVR(ergometerData);
@@ -219,6 +226,11 @@ namespace WindowsFormsApp1
                 }
                 else if (simulation != null)
                 {
+                    if (!simulation.IsConnected())
+                    {
+                        Notify();
+                        return;
+                    }
                     System.Diagnostics.Debug.WriteLine(isConnected);
                     Healthcare_test.ErgometerData ergometerData2 = simulation.GetData();
                     vrc.UpdateBikePanelInVR(ergometerData2);
@@ -272,15 +284,15 @@ namespace WindowsFormsApp1
         {
             if (simulation != null)
             {
-                simulation.Close();
+                simulation?.Close();
             }
             if (ergometerCOM != null)
             {
-                ergometerCOM.Close();
+                ergometerCOM?.Close();
             }
             try
             {
-                read.Abort();
+                read?.Abort();
             }
             catch (Exception e)
             {
@@ -288,7 +300,7 @@ namespace WindowsFormsApp1
             }
             try
             {
-                getData.Abort();
+                getData?.Abort();
             }
             catch (Exception e)
             {
@@ -298,11 +310,11 @@ namespace WindowsFormsApp1
             {
                 if (_SSL)
                 {
-                    _sslStream.Close();
+                    _sslStream?.Close();
                 }
                 else
                 {
-                    _stream.Close();
+                    _stream?.Close();
                 }
             }
             catch (Exception e)
@@ -324,6 +336,21 @@ namespace WindowsFormsApp1
 
         public static bool ValidateCert(object sender, X509Certificate certificate,
               X509Chain chain, SslPolicyErrors sslPolicyErrors) => sslPolicyErrors == SslPolicyErrors.None;
+
+        public void Notify()
+        {
+            if (sessionID != null)
+            {
+                dynamic request = new
+                {
+                    id = "exit",
+                    sessionId = sessionID
+                };
+                Send(JsonConvert.SerializeObject(request));
+                System.Diagnostics.Debug.WriteLine("Verzonden");
+            }
+            close();
+        }
     }
 }
 

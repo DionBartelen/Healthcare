@@ -239,7 +239,16 @@ namespace Server
                     }
                     else
                     {
-                        NoPermission("doctor/FollowPatient");
+                        NoPermission("doctor/UnFollowPatient");
+                    }
+                } else if (jsonObject.id == "exit")
+                {
+                    string user = (string)jsonObject.sessionId;
+                    Database.ErrorWithUser(user);
+                    Program.ErrorWithSession(this);
+                    foreach (Session s in DoctorsToSendDataTo)
+                    {
+                        s.Send(JsonConvert.SerializeObject(jsonObject));
                     }
                 }
             }

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Healthcare_test.ErgometerFolder;
 using Healthcare_test.test_applicatie;
 
 namespace Healthcare_test
@@ -10,6 +7,7 @@ namespace Healthcare_test
     public class ErgometerSimulatie : Ergometer
     {
         public Simulation s;
+        public CloseNotify clientToNotify;
 
         public ErgometerSimulatie()
         {
@@ -19,6 +17,7 @@ namespace Healthcare_test
 
         public override void Close()
         {
+            clientToNotify?.Notify();
             try
             {
                 s.CountThread.Abort();
@@ -32,7 +31,6 @@ namespace Healthcare_test
             {
                 System.Diagnostics.Debug.WriteLine(e.StackTrace);
             }
-            System.Diagnostics.Debug.WriteLine("Kut zooi");
         }
 
         public override void ErgometerCommandMode()
@@ -69,6 +67,11 @@ namespace Healthcare_test
         {
             s.CurrentTime.Minute = time / 100;
             s.CurrentTime.Second = time % 100;
+        }
+
+        public void SetClientToNotify(CloseNotify client)
+        {
+            s.ClientCloseNotify = client;
         }
     }
 }

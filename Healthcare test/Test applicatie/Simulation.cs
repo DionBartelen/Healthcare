@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Healthcare_test.ErgometerFolder;
 
 namespace Healthcare_test.test_applicatie
 {
@@ -24,6 +25,7 @@ namespace Healthcare_test.test_applicatie
         public Thread CountThread;
         private Boolean ShouldCount = true;
         private Boolean IsRunning = true;
+        public CloseNotify ClientCloseNotify { get; set; }
 
         public Simulation()
         {
@@ -136,6 +138,16 @@ namespace Healthcare_test.test_applicatie
             CountThread = new Thread(new ThreadStart(Count));
             CountThread.Start();
 
+        }
+
+        private void Simulation_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Simulation_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ClientCloseNotify?.Notify();
         }
     }
 }
