@@ -203,7 +203,7 @@ namespace WindowsFormsApp1
         {
             if (ed.Actual_Power != null && ed.Speed != null && ed.Time != null && ed.RPM != null && ed.Distance != null && ed.Distance != null)
             {
-                string text = "Power: " + ed.Actual_Power + "\\n" + "Speed: " + ed.Speed + "\\n" + "Time: " + ed.Time +
+                string text = "Power: " + ed.Actual_Power + "\\n" + "Speed: " + ed.Speed + "Km/h" + "\\n" + "Time: " + ed.Time +
                               "\\n" + "RPM: " + ed.RPM + "\\n" + "Distance: " + Math.Round(ed.Distance, 2) + "\\n" +
                               "Pulse: " + ed.Pulse;
 

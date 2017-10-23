@@ -463,14 +463,14 @@ namespace WindowsFormsApp1
             int[] dir1 = new int[3] { 5, terainOffSet, -5 };
             int[] dir2 = new int[3] { 30, terainOffSet, 30 };
             int[] dir3 = new int[3] { 5, terainOffSet, 5 };
-            int[] dir4 = new int[3] { -5, terainOffSet, -5 };
-            int[] dir5 = new int[3] { -5, terainOffSet, -5 };
-            int[] dir6 = new int[3] { 0, terainOffSet, 0 };
-            int[] dir7 = new int[3] { -5, terainOffSet, -5 };
+            int[] dir4 = new int[3] { -15, terainOffSet, -15 };
+            int[] dir5 = new int[3] { -15, terainOffSet, -15 };
+            int[] dir6 = new int[3] { -5, terainOffSet, -5 };
+            int[] dir7 = new int[3] { 0, terainOffSet, 0 };
             int[] dir8 = new int[3] { 0, terainOffSet, 0 };
             int[] dir9 = new int[3] { 0, terainOffSet, 0 };
-            int[] dir10 = new int[3] { 5, terainOffSet, 5 };
-            int[] dir11 = new int[3] { 0, terainOffSet, 0 };
+            int[] dir10 = new int[3] { -0, terainOffSet,-0 };
+            int[] dir11 = new int[3] { 10, terainOffSet, 10 };
             dynamic node1 = new
             {
                 pos = pos1,

@@ -24,6 +24,11 @@ namespace DoctorApplicatie
             this.connection = connection;
             connected_clients = new List<string>();
             followed_sessions = new List<DoctorApplication_SessionClient>();
+            if (connection != null)
+            {
+                ConectedSessionsListCombo.Text = "";
+                connection.getSessions();
+            }
         }
 
         private void getPastDataBtn_Click(object sender, EventArgs e)
